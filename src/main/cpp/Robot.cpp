@@ -5,8 +5,16 @@
 #include "Robot.h"
 
 #include <frc2/command/CommandScheduler.h>
+#include <iostream>
+void Robot::RobotInit() 
+{
+ //*************************** INIT ******************************
+  
+  std::cout<<"RobotInit"<<std::endl;
+  std::cout<<"FRC2023: ChargedUp"<<std::endl;
+  std::cout<<"Version: " << __DATE__ <<"  "<<__TIME__<<std::endl<<std::endl; 
 
-void Robot::RobotInit() {}
+}
 
 /**
  * This function is called every 20 ms, no matter the mode. Use
@@ -16,7 +24,8 @@ void Robot::RobotInit() {}
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {
+void Robot::RobotPeriodic()
+ {
   frc2::CommandScheduler::GetInstance().Run();
 }
 
@@ -25,33 +34,38 @@ void Robot::RobotPeriodic() {
  * can use it to reset any subsystem information you want to clear when the
  * robot is disabled.
  */
-void Robot::DisabledInit() {}
-
+void Robot::DisabledInit() 
+{
+  std::cout<<"Disabled Init"<<std::endl;
+ }
+ 
 void Robot::DisabledPeriodic() {}
 
 /**
  * This autonomous runs the autonomous command selected by your {@link
  * RobotContainer} class.
  */
-void Robot::AutonomousInit() {
+void Robot::AutonomousInit() 
+{
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand) {
     m_autonomousCommand->Schedule();
   }
+
+   std::cout<<" **** Auto Init ******"<<std::endl;
+  
 }
 
 void Robot::AutonomousPeriodic() {}
 
-void Robot::TeleopInit() {
-  // This makes sure that the autonomous stops running when
-  // teleop starts running. If you want the autonomous to
-  // continue until interrupted by another command, remove
-  // this line or comment it out.
+void Robot::TeleopInit() 
+{
+   std::cout<<"Teleop Init"<<std::endl;
   if (m_autonomousCommand) {
     m_autonomousCommand->Cancel();
   }
-}
+ }
 
 /**
  * This function is called periodically during operator control.
