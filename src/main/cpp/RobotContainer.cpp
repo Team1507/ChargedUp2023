@@ -3,13 +3,15 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "RobotContainer.h"
-
+#include "commands/CmdDriverFeedbackDefault.h"
 #include <frc2/command/button/Trigger.h>
 
 #include "commands/Autos.h"
 #include "commands/ExampleCommand.h"
 
-RobotContainer::RobotContainer() {
+RobotContainer::RobotContainer() 
+{
+  m_driverfeedback.SetDefaultCommand(CmdDriverFeedbackDefault(&m_driverfeedback, &m_topDriver));
   // Initialize all of your commands and subsystems here
 
   // Configure the button bindings

@@ -6,20 +6,24 @@
 
 #include <frc2/command/SubsystemBase.h>
 
-class Drivefeedback : public frc2::SubsystemBase {
+#include <frc/XboxController.h>
+class DriverFeedback : public frc2::SubsystemBase {
  public:
-  Drivefeedback();
+  DriverFeedback(frc::XboxController *topDriver);
 
-  /**
+ /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
-void Rumble(float power);
-void UnderGlow(int r, int g, int b);
-void DriverFeedbackLED(int r, int g, int b);
+  void Rumble(float power);
+  void UnderGlow(int r, int g, int b);
+  void DriverFeedbackLED(int r, int g, int b);
 
 
- private:
+  private:
+  frc::XboxController *m_topDriver;
+  
+
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };

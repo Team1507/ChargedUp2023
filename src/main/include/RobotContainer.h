@@ -6,9 +6,13 @@
 
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
-
+#include "subsystems/DriverFeedback.h"
+#include "subsystems/Arm.h"
+#include "subsystems/Claw.h"
+#include "subsystems/Pouch.h"
 #include "Constants.h"
 #include "subsystems/ExampleSubsystem.h"
+#include <frc/XboxController.h>
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -17,11 +21,19 @@
  * scheduler calls).  Instead, the structure of the robot (including subsystems,
  * commands, and trigger mappings) should be declared here.
  */
-class RobotContainer {
+class RobotContainer 
+{
  public:
   RobotContainer();
 
   frc2::CommandPtr GetAutonomousCommand();
+  frc::XboxController m_botDriver{0};
+  frc::XboxController m_topDriver{1};
+  DriverFeedback m_driverfeedback {&m_topDriver};
+  Arm m_arm;
+  Claw m_claw;
+  Pouch m_pouch;
+
 
  private:
   // Replace with CommandPS4Controller or CommandJoystick if needed
