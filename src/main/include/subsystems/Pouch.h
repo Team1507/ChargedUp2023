@@ -9,7 +9,12 @@
 class Pouch : public frc2::SubsystemBase {
  public:
   Pouch();
-
+  enum Intake {Inner,Outer};
+  void SetIntakePower(float power,Intake type);
+  float ReadSensorState(void);
+  void SetRampPosition(float position);
+  void DeployIntake(Intake type);
+  void RetractIntake(Intake type);
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */

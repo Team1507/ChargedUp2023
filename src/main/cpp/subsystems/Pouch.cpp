@@ -6,5 +6,47 @@
 
 Pouch::Pouch() = default;
 
+void Pouch::SetIntakePower(float power,Intake type)
+{
+    if(Intake::Inner == type)
+    {
+        
+    } 
+    else if (Intake::Outer == type)
+    {
+    
+    }
+}
+float Pouch::ReadSensorState(void)
+{
+
+}
+void Pouch::SetRampPosition(float position)
+{
+
+}
+void Pouch::DeployIntake(Intake type)
+{
+   if(Intake::Inner == type)
+    {
+        
+    } 
+    else if (Intake::Outer == type)
+    {
+    
+    }
+}
+void Pouch::RetractIntake(Intake type)
+{
+    if(Intake::Inner == type)
+    {
+        
+    } 
+    else if (Intake::Outer == type)
+    {
+    
+    }
+}
+
 // This method will be called once per scheduler run
 void Pouch::Periodic() {}

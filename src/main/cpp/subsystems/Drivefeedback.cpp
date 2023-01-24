@@ -8,3 +8,15 @@ Drivefeedback::Drivefeedback() = default;
 
 // This method will be called once per scheduler run
 void Drivefeedback::Periodic() {}
+void Rumble(float power) 
+{
+
+}
+void UnderGlow(int r, int g, int b)
+{
+
+}
+void DriverFeedbackLED(int r, int g, int b)
+{
+    
+}

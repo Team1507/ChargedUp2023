@@ -14,6 +14,10 @@ class Drivefeedback : public frc2::SubsystemBase {
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
+void Rumble(float power);
+void UnderGlow(int r, int g, int b);
+void DriverFeedbackLED(int r, int g, int b);
+
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be
