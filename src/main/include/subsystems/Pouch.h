@@ -9,6 +9,7 @@
 class Pouch : public frc2::SubsystemBase {
  public:
   Pouch();
+  
   enum Intake {Inner,Outer};
   void SetIntakePower(float power,Intake type);
   float ReadSensorState(void);

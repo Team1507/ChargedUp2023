@@ -10,18 +10,21 @@ class Arm : public frc2::SubsystemBase
 {
  public:
   Arm();
+  void Periodic() override;
+  //**********************************Turret******************************
   void TurretSetAngle(float angle);
   void TurretSetPower(float power);
   void TurretSetEncoder(float encoder);
+  
   float TurretGetPower(void);
   float TurretGetAngle(void);
   float TurretGetEncoder(void);
+  //***********************************ARM*********************************
   void ElevationArmSetPosition(int position);
   void EleveationExtensionArm(int position);
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
-  void Periodic() override;
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be

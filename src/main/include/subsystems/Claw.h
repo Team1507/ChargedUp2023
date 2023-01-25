@@ -9,18 +9,21 @@
 class Claw : public frc2::SubsystemBase {
  public:
   Claw();
-  void ClawSetPower(float power);
-  void WristSetPosition(float position);
-  float ClawGetCurrent(void);
-  float WristGetPosition(void);
-  float ClawGetPower(void);
-  void SensorReadState(void); //Change Return Type Later
-  
-  
   /**
-   * Will be called periodically whenever the CommandScheduler runs.
-   */
+  * Will be called periodically whenever the CommandScheduler runs.
+  */
   void Periodic() override;
+
+  //************************************CLAW******************************************
+  void  ClawSetPower(float power);
+  float ClawGetPower(void);
+  float ClawGetCurrent(void);
+
+  //***********************************Wrist*******************************************
+  void  WristSetPosition(float position);
+  float WristGetPosition(void);
+
+  void SensorReadState(void); //Change Return Type Later
 
  private:
   // Components (e.g. motor controllers and sensors) should generally be

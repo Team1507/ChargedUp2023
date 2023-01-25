@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-
+#define CAN_LED_UNDERGLOW 10
 /**
  * The Constants header provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants.  This should not be used for any other
@@ -14,7 +14,9 @@
  * they are needed.
  */
 
-namespace OperatorConstants {
+
+namespace OperatorConstants 
+{
 
 constexpr int kDriverControllerPort = 0;
 

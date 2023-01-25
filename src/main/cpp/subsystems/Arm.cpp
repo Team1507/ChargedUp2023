@@ -5,6 +5,12 @@
 #include "subsystems/Arm.h"
 
 Arm::Arm() = default;
+
+// This method will be called once per scheduler run
+void Arm::Periodic() {}
+
+//**********************************Turret******************************
+
 void Arm::TurretSetAngle(float angle) 
 {
 
@@ -28,7 +34,10 @@ float Arm::TurretGetAngle(void)
 float Arm::TurretGetEncoder(void) 
 {
 
-} 
+}
+ 
+//***********************************ARM*********************************
+
 void Arm::ElevationArmSetPosition(int position) 
 {
 
@@ -39,5 +48,3 @@ void Arm::EleveationExtensionArm(int position)
 } 
 
 
-// This method will be called once per scheduler run
-void Arm::Periodic() {}

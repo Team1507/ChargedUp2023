@@ -22,16 +22,23 @@ void CmdDriverFeedbackDefault::Execute()
   if(XButton == true)
   {
     m_driverfeedback->Rumble(1.0);
+    m_driverfeedback->UnderGlow(1,1,0);
   }
 
   else
   {
     m_driverfeedback->Rumble(0.0);
+    m_driverfeedback->UnderGlow(0,0,1);
   }
+  m_driverfeedback->Delete(m_xboxcontroller->GetLeftTriggerAxis());
 }
 
 // Called once the command ends or is interrupted.
-void CmdDriverFeedbackDefault::End(bool interrupted) {}
+void CmdDriverFeedbackDefault::End(bool interrupted) 
+{
+  m_driverfeedback->UnderGlow(0,0,0);
+  m_driverfeedback->Delete(0.0);
+}
 
 // Returns true when the command should end.
 bool CmdDriverFeedbackDefault::IsFinished() {

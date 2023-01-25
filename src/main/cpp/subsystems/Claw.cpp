@@ -5,11 +5,12 @@
 #include "subsystems/Claw.h"
 
 Claw::Claw() = default;
-void Claw::ClawSetPower(float power) 
-{
+// This method will be called once per scheduler run
+void Claw::Periodic() {}
+  
+//************************************CLAW******************************************
 
-}
-void Claw::WristSetPosition(float position) 
+void Claw::ClawSetPower(float power) 
 {
 
 }
@@ -17,18 +18,25 @@ float Claw::ClawGetCurrent(void)
 {
 
 }
-float Claw::WristGetPosition(void)
-{
-
-}
 float Claw::ClawGetPower(void)
 {
 
 }
+
+//***********************************Wrist*******************************************
+
+void Claw::WristSetPosition(float position) 
+{
+
+}
+float Claw::WristGetPosition(void)
+{
+
+}
+
 void Claw::SensorReadState(void)  //Change Later
 {
 
 }
 
-// This method will be called once per scheduler run
-void Claw::Periodic() {}
+

@@ -5,8 +5,11 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-
 #include <frc/XboxController.h>
+#include <frc/AddressableLED.h>
+#include "Constants.h"
+#include "ctre/Phoenix.h"
+
 class DriverFeedback : public frc2::SubsystemBase {
  public:
   DriverFeedback(frc::XboxController *topDriver);
@@ -18,10 +21,13 @@ class DriverFeedback : public frc2::SubsystemBase {
   void Rumble(float power);
   void UnderGlow(int r, int g, int b);
   void DriverFeedbackLED(int r, int g, int b);
+  void Delete(double power);
 
 
   private:
   frc::XboxController *m_topDriver;
+  CANifier m_underGlow{CAN_LED_UNDERGLOW};
+  TalonFX m_deleteMe{1};//Change later
   
 
   // Components (e.g. motor controllers and sensors) should generally be
