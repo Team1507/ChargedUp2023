@@ -8,10 +8,16 @@
 
 #include "commands/Autos.h"
 #include "commands/ExampleCommand.h"
-
+#include "commands/CmdClawDefault.h"
+#include "commands/CmdArmDefault.h"
+#include "commands/CmdPouchDefault.h"
 RobotContainer::RobotContainer() 
 {
   m_driverfeedback.SetDefaultCommand(CmdDriverFeedbackDefault(&m_driverfeedback, &m_topDriver));
+  m_claw.SetDefaultCommand(CmdClawDefault(&m_claw));
+  m_arm.SetDefaultCommand(CmdArmDefault(&m_arm));
+  m_pouch.SetDefaultCommand(CmdPouchDefault(&m_pouch));
+  m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
   // Initialize all of your commands and subsystems here
 
   // Configure the button bindings
@@ -31,7 +37,7 @@ void RobotContainer::ConfigureBindings() {
   m_driverController.B().WhileTrue(m_subsystem.ExampleMethodCommand());
 }
 
-frc2::CommandPtr RobotContainer::GetAutonomousCommand() {
-  // An example command will be run in autonomous
-  return autos::ExampleAuto(&m_subsystem);
-}
+frc2::Command* RobotContainer::GetAutonomousCommand() 
+{
+  return m_chooser.GetSelected();
+  }
