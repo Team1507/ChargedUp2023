@@ -13,27 +13,27 @@ void Arm::Periodic() {}
 
 void Arm::TurretSetAngle(float angle) 
 {
-
+    //m_turret.Set(ControlMode::Position, angle);
 }
 void Arm::TurretSetPower(float power) 
 {
-
+    //m_turret.Set(ControlMode::PercentOutput, power);
 }
 void Arm::TurretSetEncoder(float encoder) 
 {
-
+    //m_turret.Set(ControlMode::Position, encoder);
 }
 float Arm::TurretGetPower(void) 
 {
-
+    //m_turret.GetMotorOutputPercent();
 } 
 float Arm::TurretGetAngle(void) 
 {
-
+   // m_turret.GetSelectedSensorPosition();
 } 
 float Arm::TurretGetEncoder(void) 
 {
-
+   // m_turret.GetSelectedSensorPosition();
 }
  
 //***********************************ARM*********************************
