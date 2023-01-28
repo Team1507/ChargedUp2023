@@ -18,6 +18,7 @@ RobotContainer::RobotContainer()
   m_arm.SetDefaultCommand(CmdArmDefault(&m_arm));
   m_pouch.SetDefaultCommand(CmdPouchDefault(&m_pouch));
   m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
+  frc::SmartDashboard::PutData("Auto",&m_chooser);
   // Initialize all of your commands and subsystems here
 
   // Configure the button bindings
