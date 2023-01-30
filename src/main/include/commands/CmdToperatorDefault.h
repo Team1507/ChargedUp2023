@@ -38,6 +38,9 @@ class CmdToperatorDefault
     DriverFeedback *m_driverFeedback;
 
     bool m_isIntaking;
+    bool m_isOuttaking;
+
+    float m_wristPosition;
 
 
 };

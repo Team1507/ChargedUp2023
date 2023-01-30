@@ -16,6 +16,7 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
 void CmdToperatorDefault::Initialize() 
 {
   m_isIntaking = false;
+  m_isOuttaking = false;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -94,6 +95,7 @@ void CmdToperatorDefault::Execute()
       }
     }
   }
+  //******************CLAW*******************
   if(ClawIntake)
   {
     m_claw->ClawSetPower(.3);
@@ -104,6 +106,23 @@ void CmdToperatorDefault::Execute()
     m_claw->ClawSetPower(0);
     m_isIntaking = false;
   }
+
+  if(ClawOutake)
+  {
+    m_claw->ClawSetPower(.3);
+    m_isOuttaking = true;
+  }
+  if(!ClawOutake && m_isOuttaking)
+  {
+    m_claw->ClawSetPower(0);
+    m_isOuttaking = false;
+  }
+  //******************WRIST**********************
+  if(WristManual > .6)
+  {
+    //TODO
+  }
+  
 
     
 }
