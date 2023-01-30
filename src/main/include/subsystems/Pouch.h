@@ -3,25 +3,31 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
-
+#include "rev/CANSparkMax.h"
+#include "Constants.h"
 #include <frc2/command/SubsystemBase.h>
+#include <frc/DigitalInput.h>
 
 class Pouch : public frc2::SubsystemBase {
  public:
   Pouch();
   
-  enum Intake {Inner,Outer};
-  void SetIntakePower(float power,Intake type);
-  float ReadSensorState(void);
+  enum WhatIntake {Inner,Outer};
+  void SetIntakePower(float power,WhatIntake type);
+  bool ReadSensorState(void);
   void SetRampPosition(float position);
-  void DeployIntake(Intake type);
-  void RetractIntake(Intake type);
+  void DeployIntake(WhatIntake type);
+  void RetractIntake(WhatIntake type);
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
   void Periodic() override;
 
  private:
+    rev::CANSparkMax m_OuterLeft {CAN_ID_POUCH_OUTTER_LEFT, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    rev::CANSparkMax m_OuterRight {CAN_ID_POUCH_OUTTER_RIGHT, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    rev::CANSparkMax m_Inner {CAN_ID_POUCH_INNER, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    frc::DigitalInput m_GamePieceDetect{GAME_PIECE_DETECT_ID};
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };

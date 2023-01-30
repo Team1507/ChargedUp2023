@@ -6,43 +6,44 @@
 
 Pouch::Pouch() = default;
 
-void Pouch::SetIntakePower(float power,Intake type)
+void Pouch::SetIntakePower(float power,WhatIntake type)
 {
-    if(Intake::Inner == type)
+    if(WhatIntake::Inner == type)
     {
-        
+      m_Inner.Set(power);  
     } 
-    else if (Intake::Outer == type)
+    else if (WhatIntake::Outer == type)
     {
-    
+      m_OuterLeft.Set(power);
+      m_OuterRight.Set(power);
     }
 }
-float Pouch::ReadSensorState(void)
+bool Pouch::ReadSensorState(void)
 {
-
+    return m_GamePieceDetect.Get();
 }
 void Pouch::SetRampPosition(float position)
 {
 
 }
-void Pouch::DeployIntake(Intake type)
+void Pouch::DeployIntake(WhatIntake type)
 {
-   if(Intake::Inner == type)
+   if(WhatIntake::Inner == type)
     {
         
     } 
-    else if (Intake::Outer == type)
+    else if (WhatIntake::Outer == type)
     {
     
     }
 }
-void Pouch::RetractIntake(Intake type)
+void Pouch::RetractIntake(WhatIntake type)
 {
-    if(Intake::Inner == type)
+    if(WhatIntake::Inner == type)
     {
         
     } 
-    else if (Intake::Outer == type)
+    else if (WhatIntake::Outer == type)
     {
     
     }

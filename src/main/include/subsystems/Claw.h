@@ -5,6 +5,8 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
+#include "rev/CANSparkMax.h"
+#include "Constants.h"
 
 class Claw : public frc2::SubsystemBase {
  public:
@@ -26,6 +28,12 @@ class Claw : public frc2::SubsystemBase {
   void SensorReadState(void); //Change Return Type Later
 
  private:
+  rev::CANSparkMax m_claw {CAN_ID_CLAW, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+  rev::CANSparkMax m_wrist {CAN_ID_WRIST, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
+
+  // Shoe
+
 };
