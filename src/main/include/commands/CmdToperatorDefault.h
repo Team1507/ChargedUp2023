@@ -9,6 +9,8 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
+#include "commands/GrpScoringSetPosition.h"
+
 /**
  * An example command.
  *
@@ -41,6 +43,18 @@ class CmdToperatorDefault
     bool m_isOuttaking;
 
     float m_wristPosition;
+
+    //ScoringPosition{Home, Ready, HighLeft, HighShelf, HighRight, MidLeft, MidShelf, MidRight};
+
+    GrpScoringSetPosition *m_scoringHome;
+    GrpScoringSetPosition *m_scoringReady;
+    GrpScoringSetPosition *m_scoringHighLeft;
+    GrpScoringSetPosition *m_scoringHighShelf;
+    GrpScoringSetPosition *m_scoringHighRight;
+    GrpScoringSetPosition *m_scoringMidLeft;
+    GrpScoringSetPosition *m_scoringMidShelf;
+    GrpScoringSetPosition *m_scoringMidRight;
+    
 
 
 };

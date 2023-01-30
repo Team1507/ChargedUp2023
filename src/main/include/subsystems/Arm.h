@@ -7,7 +7,7 @@
 #include <frc2/command/SubsystemBase.h>
 #include "CTRE/Phoenix.h"
 #include "Constants.h"
-
+enum ArmLevel{Level_Pouch, Low, Mid, High};
 class Arm : public frc2::SubsystemBase 
 {
  public:

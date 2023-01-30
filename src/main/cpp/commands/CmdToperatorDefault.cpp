@@ -10,6 +10,17 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_arm = arm;
   m_pouch = pouch;
   m_driverFeedback = driverfeedback;
+
+  m_scoringHome  = new GrpScoringSetPosition(m_arm, Home);
+  m_scoringReady = new GrpScoringSetPosition(m_arm, Ready);
+
+  m_scoringHighLeft  = new GrpScoringSetPosition(m_arm, HighLeft );
+  m_scoringHighShelf = new GrpScoringSetPosition(m_arm, HighShelf);
+  m_scoringHighRight = new GrpScoringSetPosition(m_arm, HighRight);
+
+  m_scoringMidLeft  = new GrpScoringSetPosition(m_arm, MidLeft );
+  m_scoringMidShelf = new GrpScoringSetPosition(m_arm, MidShelf);
+  m_scoringMidRight = new GrpScoringSetPosition(m_arm, MidRight);
 }
 
 // Called when the command is initially scheduled.
@@ -57,12 +68,16 @@ void CmdToperatorDefault::Execute()
       switch(DpadState)
       {
         case 0 : // up
+          m_scoringHighShelf;
           break;
         case 90: // right
+          m_scoringHighRight;
           break;
         case 180: // down
+          m_scoringHome;
           break;
         case 270: // left
+          m_scoringHighLeft;
           break;
       }
     }
@@ -118,10 +133,7 @@ void CmdToperatorDefault::Execute()
     m_isOuttaking = false;
   }
   //******************WRIST**********************
-  if(WristManual > .6)
-  {
-    //TODO
-  }
+
   
 
     
