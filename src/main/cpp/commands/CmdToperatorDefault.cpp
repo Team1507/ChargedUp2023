@@ -4,12 +4,18 @@
 CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxController *topDriver, Claw *claw, Arm *arm, Pouch *pouch, DriverFeedback *driverfeedback) 
 {
   AddRequirements(toperator);
-  m_toperator = toperator;
-  m_topDriver = topDriver;
-  m_claw = claw;
-  m_arm = arm;
-  m_pouch = pouch;
+  m_toperator      = toperator;
+  m_topDriver      = topDriver;
+  m_claw           = claw;
+  m_arm            = arm;
+  m_pouch          = pouch;
   m_driverFeedback = driverfeedback;
+
+
+  m_isIntaking       = false;
+  m_isOuttaking      = false;
+  m_isDpadCenter     = false;
+
 
   m_scoringHome      = new GrpScoringSetPosition(m_arm, Home     );
   m_scoringReady     = new GrpScoringSetPosition(m_arm, Ready    );
@@ -26,9 +32,7 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
 // Called when the command is initially scheduled.
 void CmdToperatorDefault::Initialize() 
 {
-  m_isIntaking = false;
-  m_isOuttaking = false;
-  m_isWristFwdManual = false;
+
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -58,12 +62,11 @@ void CmdToperatorDefault::Execute()
     int   DpadState        = m_topDriver->GetPOV();
   //************************************************************
   //*******************SCORING POSITIONS************************
-  static bool isDpadCenter = false;
   if(DpadState == -1)
   {
-    isDpadCenter = true;
+    m_isDpadCenter = true;
   }
-  if(isDpadCenter)
+  if(m_isDpadCenter)
   {
     if(YButtonPressed)
     {
@@ -71,15 +74,19 @@ void CmdToperatorDefault::Execute()
       {
         case 0 : // up
           m_scoringHighShelf->Schedule();
+          m_isDpadCenter = false;
           break;
         case 90: // right
           m_scoringHighRight->Schedule();
+          m_isDpadCenter = false;
           break;
         case 180: // down
           m_scoringHome->Schedule();
+          m_isDpadCenter = false;
           break;
         case 270: // left
           m_scoringHighLeft->Schedule();
+          m_isDpadCenter = false;
           break;
       }
     }
@@ -89,15 +96,19 @@ void CmdToperatorDefault::Execute()
       {
         case 0 : // up
           m_scoringMidShelf->Schedule();
+          m_isDpadCenter = false;
           break;
         case 90: // right
           m_scoringMidRight->Schedule();
+          m_isDpadCenter = false;
           break;
         case 180: // down
           m_scoringHome->Schedule();
+          m_isDpadCenter = false;
           break;
         case 270: // left
           m_scoringMidLeft->Schedule();
+          m_isDpadCenter = false;
           break;
       }
     }
@@ -106,12 +117,16 @@ void CmdToperatorDefault::Execute()
       switch(DpadState)
       {
         case 0 : // up
+          m_isDpadCenter = false;
           break;
         case 90: // right
+          m_isDpadCenter = false;
           break;
         case 180: // down
+          m_isDpadCenter = false;
           break;
         case 270: // left
+          m_isDpadCenter = false;
           break;
       }
     }
@@ -121,7 +136,7 @@ void CmdToperatorDefault::Execute()
     m_scoringReady->Schedule();
   }
   //******************CLAW*******************
-  if(ClawIntake)
+  if(ClawIntake && !m_isIntaking)
   {
     m_claw->ClawSetPower(.3);
     m_isIntaking = true;
@@ -132,7 +147,7 @@ void CmdToperatorDefault::Execute()
     m_isIntaking = false;
   }
 
-  if(ClawOutake)
+  if(ClawOutake && !m_isOuttaking)
   {
     m_claw->ClawSetPower(.3);
     m_isOuttaking = true;
@@ -143,29 +158,18 @@ void CmdToperatorDefault::Execute()
     m_isOuttaking = false;
   }
   //******************WRIST**********************
+  const float WRIST_DELTA = 100;
   if(WristManual > .6)
   {
-    m_isWristFwdManual = true;
+    float wristPosition = m_claw->WristGetPosition();
+    m_claw->WristSetPosition(wristPosition + WRIST_DELTA); 
   }
-  else m_isWristFwdManual = false;
 
   if(WristManual < -.6)
   {
-    m_isWristBkwrdManual = true;
+    float wristPosition = m_claw->WristGetPosition();
+    m_claw->WristSetPosition(wristPosition + WRIST_DELTA);
   }
-  else m_isWristBkwrdManual = false;
-
-  if(m_isWristFwdManual)
-  {
-    m_wristPosition = m_claw->WristGetPosition();
-    m_claw->WristSetPosition(m_wristPosition++);
-  }
-  else if(m_isWristBkwrdManual)
-  {
-    m_wristPosition = m_claw->WristGetPosition();
-    m_claw->WristSetPosition(m_wristPosition++);
-  }
-
   
 
     

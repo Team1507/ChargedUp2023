@@ -38,9 +38,28 @@ float Arm::TurretGetEncoder(void)
  
 //***********************************ARM*********************************
 
-void Arm::ElevationArmSetPosition(int position) 
+void Arm::ElevationArmSetPosition(ArmLevel position) 
 {
-
+if(position == ArmLevel::Level_Pouch)
+{
+m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+m_upperArm.Set(frc::DoubleSolenoid::kForward);
+}
+else if(position == ArmLevel::Low)
+{
+m_upperArm.Set(frc::DoubleSolenoid::kReverse);
+m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+}
+else if(position == ArmLevel::Mid)
+{
+m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+m_upperArm.Set(frc::DoubleSolenoid::kReverse);
+}
+else if(position == ArmLevel::High)
+{
+m_lowerArm.Set(frc::DoubleSolenoid::kReverse);
+m_upperArm.Set(frc::DoubleSolenoid::kReverse);
+}
 } 
 void Arm::ExtensionSetPosition(bool position) 
 {

@@ -25,8 +25,9 @@ scoringPosition_t scoringPositionTable[] = {{0, false, ArmLevel::Level_Pouch},
 
 GrpScoringSetPosition::GrpScoringSetPosition(Arm *arm, ScoringPosition scoringPosition) 
 {
-  CmdArmLevelSetPosition(arm, scoringPositionTable[scoringPosition].armLevel);
-  CmdArmExtensionSetPosition(arm, scoringPositionTable[scoringPosition].extension);
-  CmdTurretSetAngle(arm, scoringPositionTable[scoringPosition].turretAngle);
-  
+  AddCommands(
+  CmdArmLevelSetPosition(arm, scoringPositionTable[scoringPosition].armLevel),
+  CmdArmExtensionSetPosition(arm, scoringPositionTable[scoringPosition].extension),
+  CmdTurretSetAngle(arm, scoringPositionTable[scoringPosition].turretAngle)
+  );
 }

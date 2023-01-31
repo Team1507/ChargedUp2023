@@ -10,6 +10,7 @@
 #include "subsystems/Arm.h"
 #include "subsystems/Claw.h"
 #include "subsystems/Pouch.h"
+#include "subsystems/Toperator.h"
 #include "Constants.h"
 #include "subsystems/ExampleSubsystem.h"
 #include <frc/XboxController.h>
@@ -37,6 +38,7 @@ ExampleSubsystem m_subsystem;
   Arm m_arm;
   Claw m_claw;
   Pouch m_pouch;
+  Toperator m_toperator;
   frc2::Command* GetAutonomousCommand();
 
 

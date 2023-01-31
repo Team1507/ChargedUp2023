@@ -41,10 +41,9 @@ class CmdToperatorDefault
 
     bool m_isIntaking;
     bool m_isOuttaking;
-    bool m_isWristFwdManual;
-    bool m_isWristBkwrdManual;
+    bool m_isDpadCenter;
 
-    float m_wristPosition;
+  
 
     //ScoringPosition{Home, Ready, HighLeft, HighShelf, HighRight, MidLeft, MidShelf, MidRight};
 

@@ -8,5 +8,6 @@ CmdArmExtensionSetPosition::CmdArmExtensionSetPosition(Arm *arm, bool extension)
 
 void CmdArmExtensionSetPosition::Initialize() 
 {
+ m_arm->ExtensionSetPosition(m_isExtension);
 
 }

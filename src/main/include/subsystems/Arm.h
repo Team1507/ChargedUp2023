@@ -26,7 +26,7 @@ class Arm : public frc2::SubsystemBase
   float TurretGetAngle(void);
   float TurretGetEncoder(void);
   //***********************************ARM*********************************
-  void ElevationArmSetPosition(int position);
+  void ElevationArmSetPosition(ArmLevel position);
   void ExtensionSetPosition(bool position);
   /**
   * Will be called periodically whenever the CommandScheduler runs.

@@ -14,4 +14,5 @@ class CmdArmLevelSetPosition
 
   private:
     Arm *m_arm;
+    ArmLevel m_armLevel;
 };

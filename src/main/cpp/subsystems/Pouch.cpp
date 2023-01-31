@@ -22,8 +22,16 @@ bool Pouch::ReadSensorState(void)
 {
     return m_GamePieceDetect.Get();
 }
-void Pouch::SetRampPosition(float position)
+void Pouch::SetRampPosition(bool deploy)
 {
+if( deploy == true )
+{
+  m_ramp.Set(frc::DoubleSolenoid::kForward);
+}
+if( deploy == false)
+{
+  m_ramp.Set(frc::DoubleSolenoid::kReverse);
+}
 
 }
 void Pouch::DeployIntake(WhatIntake type)
@@ -34,7 +42,8 @@ void Pouch::DeployIntake(WhatIntake type)
     } 
     else if (WhatIntake::Outer == type)
     {
-    
+      m_leftOuterIntake.Set(frc::DoubleSolenoid::kForward);
+      m_rightOuterIntake.Set(frc::DoubleSolenoid::kForward);
     }
 }
 void Pouch::RetractIntake(WhatIntake type)
@@ -45,7 +54,8 @@ void Pouch::RetractIntake(WhatIntake type)
     } 
     else if (WhatIntake::Outer == type)
     {
-    
+      m_leftOuterIntake.Set(frc::DoubleSolenoid::kReverse);
+      m_rightOuterIntake.Set(frc::DoubleSolenoid::kReverse);
     }
 }
 
