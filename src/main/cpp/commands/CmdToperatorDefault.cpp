@@ -11,16 +11,16 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_pouch = pouch;
   m_driverFeedback = driverfeedback;
 
-  m_scoringHome  = new GrpScoringSetPosition(m_arm, Home);
-  m_scoringReady = new GrpScoringSetPosition(m_arm, Ready);
+  m_scoringHome      = new GrpScoringSetPosition(m_arm, Home     );
+  m_scoringReady     = new GrpScoringSetPosition(m_arm, Ready    );
 
   m_scoringHighLeft  = new GrpScoringSetPosition(m_arm, HighLeft );
   m_scoringHighShelf = new GrpScoringSetPosition(m_arm, HighShelf);
   m_scoringHighRight = new GrpScoringSetPosition(m_arm, HighRight);
 
-  m_scoringMidLeft  = new GrpScoringSetPosition(m_arm, MidLeft );
-  m_scoringMidShelf = new GrpScoringSetPosition(m_arm, MidShelf);
-  m_scoringMidRight = new GrpScoringSetPosition(m_arm, MidRight);
+  m_scoringMidLeft   = new GrpScoringSetPosition(m_arm, MidLeft  );
+  m_scoringMidShelf  = new GrpScoringSetPosition(m_arm, MidShelf );
+  m_scoringMidRight  = new GrpScoringSetPosition(m_arm, MidRight );
 }
 
 // Called when the command is initially scheduled.
@@ -28,6 +28,7 @@ void CmdToperatorDefault::Initialize()
 {
   m_isIntaking = false;
   m_isOuttaking = false;
+  m_isWristFwdManual = false;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -56,6 +57,7 @@ void CmdToperatorDefault::Execute()
 
     int   DpadState        = m_topDriver->GetPOV();
   //************************************************************
+  //*******************SCORING POSITIONS************************
   static bool isDpadCenter = false;
   if(DpadState == -1)
   {
@@ -68,16 +70,16 @@ void CmdToperatorDefault::Execute()
       switch(DpadState)
       {
         case 0 : // up
-          m_scoringHighShelf;
+          m_scoringHighShelf->Schedule();
           break;
         case 90: // right
-          m_scoringHighRight;
+          m_scoringHighRight->Schedule();
           break;
         case 180: // down
-          m_scoringHome;
+          m_scoringHome->Schedule();
           break;
         case 270: // left
-          m_scoringHighLeft;
+          m_scoringHighLeft->Schedule();
           break;
       }
     }
@@ -86,12 +88,16 @@ void CmdToperatorDefault::Execute()
       switch(DpadState)
       {
         case 0 : // up
+          m_scoringMidShelf->Schedule();
           break;
         case 90: // right
+          m_scoringMidRight->Schedule();
           break;
         case 180: // down
+          m_scoringHome->Schedule();
           break;
         case 270: // left
+          m_scoringMidLeft->Schedule();
           break;
       }
     }
@@ -109,6 +115,10 @@ void CmdToperatorDefault::Execute()
           break;
       }
     }
+  }
+  if(ReadyPosition)
+  {
+    m_scoringReady->Schedule();
   }
   //******************CLAW*******************
   if(ClawIntake)
@@ -133,6 +143,28 @@ void CmdToperatorDefault::Execute()
     m_isOuttaking = false;
   }
   //******************WRIST**********************
+  if(WristManual > .6)
+  {
+    m_isWristFwdManual = true;
+  }
+  else m_isWristFwdManual = false;
+
+  if(WristManual < -.6)
+  {
+    m_isWristBkwrdManual = true;
+  }
+  else m_isWristBkwrdManual = false;
+
+  if(m_isWristFwdManual)
+  {
+    m_wristPosition = m_claw->WristGetPosition();
+    m_claw->WristSetPosition(m_wristPosition++);
+  }
+  else if(m_isWristBkwrdManual)
+  {
+    m_wristPosition = m_claw->WristGetPosition();
+    m_claw->WristSetPosition(m_wristPosition++);
+  }
 
   
 

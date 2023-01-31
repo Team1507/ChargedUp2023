@@ -41,6 +41,8 @@ class CmdToperatorDefault
 
     bool m_isIntaking;
     bool m_isOuttaking;
+    bool m_isWristFwdManual;
+    bool m_isWristBkwrdManual;
 
     float m_wristPosition;
 
