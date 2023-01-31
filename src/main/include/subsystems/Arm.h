@@ -26,7 +26,7 @@ class Arm : public frc2::SubsystemBase
   float TurretGetEncoder(void);
   //***********************************ARM*********************************
   void ElevationArmSetPosition(int position);
-  void EleveationExtensionArm(int position);
+  void ExtensionSetPosition(bool position);
   /**
   * Will be called periodically whenever the CommandScheduler runs.
    */
@@ -34,8 +34,11 @@ class Arm : public frc2::SubsystemBase
   // [:P] \\
 
  private:
-   rev::CANSparkMax m_turret {CAN_ID_TURRET, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-  frc::DoubleSolenoid  m_doublesolinoid {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, FRONT_INTAKE_DEPLOY_PCM, FRONT_INTAKE_RETRACT_PCM};
+  rev::CANSparkMax m_turret {CAN_ID_TURRET, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+  frc::DoubleSolenoid  m_lowerArm {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, LOWER_ARM_DEPLOY_PCM, LOWER_ARM_RETRACT_PCM};
+  frc::DoubleSolenoid m_upperArm {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, UPPER_ARM_DEPLOY_PCM, UPPER_ARM_RETRACT_PCM};
+  frc::DoubleSolenoid m_armExtension {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, ARM_EXTENSION_DEPLOY_PCM, ARM_EXTENSION_RETRACT_PCM};
+
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
   //TalonFX m_turret{CAN_TURRET_ID};

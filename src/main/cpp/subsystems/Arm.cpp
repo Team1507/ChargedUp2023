@@ -42,9 +42,16 @@ void Arm::ElevationArmSetPosition(int position)
 {
 
 } 
-void Arm::EleveationExtensionArm(int position) 
+void Arm::ExtensionSetPosition(bool position) 
 {
-
+if(position == true)
+{
+    m_armExtension.Set(frc::DoubleSolenoid::kForward);
+}
+if(position == false)
+{
+    m_armExtension.Set(frc::DoubleSolenoid::kReverse);
+}
 } 
 
 
