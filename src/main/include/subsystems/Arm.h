@@ -11,6 +11,7 @@
 #include <frc/DoubleSolenoid.h>
 #include <frc/PneumaticsModuleType.h>
 
+enum ArmLevel{Level_Pouch, Low, Mid, High};
 class Arm : public frc2::SubsystemBase 
 {
  public:
