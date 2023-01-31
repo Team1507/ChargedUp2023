@@ -20,6 +20,8 @@ class Pouch : public frc2::SubsystemBase {
   void SetRampPosition(bool deploy);
   void DeployIntake(WhatIntake type);
   void RetractIntake(WhatIntake type);
+  void OpenOuterIntake(void);
+  void CloseOuterIntake(void);
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
@@ -33,7 +35,7 @@ class Pouch : public frc2::SubsystemBase {
     frc::DoubleSolenoid m_rightOuterIntake {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, RIGHT_OUTER_INTAKE_DEPLOY_PCM, RIGHT_OUTER_INTAKE_RETRACT_PCM};
     frc::DoubleSolenoid m_leftOuterIntakeClose {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, LEFT_OUTER_INTAKE_CLOSE_DEPLOY_PCM, LEFT_OUTER_INTAKE_CLOSE_RETRACT_PCM};
     frc::DoubleSolenoid m_rightOuterIntakeClose {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, RIGHT_OUTER_INTAKE_CLOSE_DEPLOY_PCM, RIGHT_OUTER_INTAKE_CLOSE_RETRACT_PCM};
-        frc::DoubleSolenoid m_ramp {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, RAMP_DEPLOY_PCM, RAMP_RETRACT_PCM};
+    frc::DoubleSolenoid m_ramp {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, RAMP_DEPLOY_PCM, RAMP_RETRACT_PCM};
 
 
 

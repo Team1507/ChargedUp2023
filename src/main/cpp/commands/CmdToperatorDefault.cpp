@@ -12,9 +12,12 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_driverFeedback = driverfeedback;
 
 
-  m_isIntaking       = false;
-  m_isOuttaking      = false;
-  m_isDpadCenter     = false;
+  m_isIntaking          = false;
+  m_isOuttaking         = false;
+  m_isDpadCenter        = false;
+  m_isInnerIntaking     = false;
+  m_isOuterIntakeClosed = false;
+  m_isRampActivated     = false;
 
 
   m_scoringHome      = new GrpScoringSetPosition(m_arm, Home     );
@@ -49,6 +52,7 @@ void CmdToperatorDefault::Execute()
 
     bool  InnerIntake      = m_topDriver->GetLeftBumper();
     bool  OuterIntake      = m_topDriver->GetRightBumper();
+    bool  PouchRamp        = m_topDriver->GetRightStickButtonPressed();
 
     bool  ClawOutake       = m_topDriver->GetRightTriggerAxis() > .9;
     bool  ClawIntake       = m_topDriver->GetLeftTriggerAxis() < -.9;
@@ -170,6 +174,68 @@ void CmdToperatorDefault::Execute()
     float wristPosition = m_claw->WristGetPosition();
     m_claw->WristSetPosition(wristPosition + WRIST_DELTA);
   }
+//***********************ARM LEVEL MANUAL***********************
+if(XButtonPressed)
+{
+  m_arm->ElevationArmSetPosition(ArmLevel::High);
+}
+else if(BButtonPressed)
+{
+  m_arm->ElevationArmSetPosition(ArmLevel::Level_Pouch);
+}
+//*******************ARM EXTENSION MANUAL************************
+if(ArmExtention)
+{
+  m_arm->ExtensionSetPosition(true);
+}
+else if(ArmRetract)
+{
+  m_arm->ExtensionSetPosition(false);
+}
+//***********************INTAKES*********************************
+if(InnerIntake && !m_isInnerIntaking)
+{
+  m_pouch->SetIntakePower(.3, Pouch::WhatIntake::Inner);
+  m_isInnerIntaking = true;
+}
+else if(!InnerIntake && m_isInnerIntaking)
+  m_pouch->SetIntakePower(0, Pouch::WhatIntake::Inner);
+  m_isInnerIntaking = false;
+
+if(OuterIntake && !m_isOuterIntaking)
+{
+  m_pouch->DeployIntake(Pouch::WhatIntake::Outer);
+  m_pouch->SetIntakePower(.3, Pouch::WhatIntake::Outer);
+  m_isOuterIntaking = false;
+}
+else if(!OuterIntake && m_isInnerIntaking)
+{
+  m_pouch->RetractIntake(Pouch::WhatIntake::Outer);
+  m_pouch->SetIntakePower(0, Pouch::WhatIntake::Outer);
+  m_isOuterIntaking = true;
+}
+
+if(CloseOuterIntake && !m_isOuterIntakeClosed)
+{
+  m_pouch->CloseOuterIntake();
+  m_isOuterIntakeClosed = true;
+}
+else if (!CloseOuterIntake && m_isOuterIntakeClosed)
+{
+  m_pouch->OpenOuterIntake();
+  m_isOuterIntakeClosed = false;
+}
+
+if(PouchRamp && !m_isRampActivated)
+{
+  m_pouch->SetRampPosition(true);
+  m_isRampActivated = true;
+}
+else if(PouchRamp && m_isRampActivated)
+{
+  m_pouch->SetRampPosition(false);
+  m_isRampActivated = false;
+}
   
 
     

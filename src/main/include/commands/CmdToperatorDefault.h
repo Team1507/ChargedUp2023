@@ -42,6 +42,10 @@ class CmdToperatorDefault
     bool m_isIntaking;
     bool m_isOuttaking;
     bool m_isDpadCenter;
+    bool m_isInnerIntaking; 
+    bool m_isOuterIntaking;
+    bool m_isOuterIntakeClosed;
+    bool m_isRampActivated;
 
   
 

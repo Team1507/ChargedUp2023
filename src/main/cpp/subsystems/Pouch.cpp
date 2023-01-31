@@ -58,6 +58,15 @@ void Pouch::RetractIntake(WhatIntake type)
       m_rightOuterIntake.Set(frc::DoubleSolenoid::kReverse);
     }
 }
-
+void Pouch::OpenOuterIntake(void)
+{
+  m_leftOuterIntakeClose.Set(frc::DoubleSolenoid::kReverse);
+  m_rightOuterIntakeClose.Set(frc::DoubleSolenoid::kReverse);
+}
+void Pouch::CloseOuterIntake(void)
+{
+  m_leftOuterIntakeClose.Set(frc::DoubleSolenoid::kForward);
+  m_rightOuterIntakeClose.Set(frc::DoubleSolenoid::kForward);
+}
 // This method will be called once per scheduler run
 void Pouch::Periodic() {}
