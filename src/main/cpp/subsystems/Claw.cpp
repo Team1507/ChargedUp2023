@@ -12,7 +12,7 @@ void Claw::Periodic() {}
 
 void Claw::ClawSetPower(float power) 
 {
-
+    m_claw.Set(power);
 }
 float Claw::ClawGetCurrent(void)
 {
@@ -20,7 +20,7 @@ float Claw::ClawGetCurrent(void)
 }
 float Claw::ClawGetPower(void)
 {
-
+   return m_claw.Get();
 }
 
 //***********************************Wrist*******************************************
@@ -34,9 +34,15 @@ float Claw::WristGetPosition(void)
 
 }
 
-void Claw::SensorReadState(void)  //Change Later
+bool Claw::ReadSensorState(void)  //Change Later
 {
-
+    return m_ClawGamePiece.Get();
 }
-
-
+void Claw::WristSetPower(float power)     //for Debug use Only 
+{
+    m_wrist.Set(power);
+}
+float Claw::WristGetPower(void)           //for Debug use Only 
+{
+    return m_wrist.Get();
+}

@@ -32,7 +32,7 @@
 #define RAMP_RETRACT_PCM 928532
 
 
-
+#define CLAW_GAME_PIECE_ID 4
 #define GAME_PIECE_DETECT_ID 47
 
 namespace OperatorConstants 
