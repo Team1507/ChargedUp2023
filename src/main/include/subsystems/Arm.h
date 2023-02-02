@@ -35,10 +35,10 @@ class Arm : public frc2::SubsystemBase
   // [:P] \\
 
  private:
-  rev::CANSparkMax m_turret {CAN_ID_TURRET, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-  frc::DoubleSolenoid  m_lowerArm {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, LOWER_ARM_DEPLOY_PCM, LOWER_ARM_RETRACT_PCM};
-  frc::DoubleSolenoid m_upperArm {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, UPPER_ARM_DEPLOY_PCM, UPPER_ARM_RETRACT_PCM};
-  frc::DoubleSolenoid m_armExtension {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, ARM_EXTENSION_DEPLOY_PCM, ARM_EXTENSION_RETRACT_PCM};
+  rev::CANSparkMax m_turret {CAN_TURRET_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+  frc::DoubleSolenoid  m_lowerArm {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LOWER_ARM_DEPLOY_ID, PCM_LOWER_ARM_RETRACT_ID};
+  frc::DoubleSolenoid m_upperArm {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_UPPER_ARM_DEPLOY_ID, PCM_UPPER_ARM_RETRACT_ID};
+  frc::DoubleSolenoid m_armExtension {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_ARM_EXTENSION_DEPLOY_ID, PCM_ARM_EXTENSION_RETRACT_ID};
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

@@ -28,20 +28,20 @@ class Pouch : public frc2::SubsystemBase {
   void Periodic() override;
 
  private:
-    rev::CANSparkMax m_OuterLeft {CAN_ID_POUCH_OUTTER_LEFT, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-    rev::CANSparkMax m_OuterRight {CAN_ID_POUCH_OUTTER_RIGHT, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-    rev::CANSparkMax m_Inner {CAN_ID_POUCH_INNER, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-    frc::DoubleSolenoid m_leftOuterIntake {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, LEFT_OUTER_INTAKE_DEPLOY_PCM, LEFT_OUTER_INTAKE_RETRACT_PCM};
-    frc::DoubleSolenoid m_rightOuterIntake {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, RIGHT_OUTER_INTAKE_DEPLOY_PCM, RIGHT_OUTER_INTAKE_RETRACT_PCM};
-    frc::DoubleSolenoid m_leftOuterIntakeClose {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, LEFT_OUTER_INTAKE_CLOSE_DEPLOY_PCM, LEFT_OUTER_INTAKE_CLOSE_RETRACT_PCM};
-    frc::DoubleSolenoid m_rightOuterIntakeClose {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, RIGHT_OUTER_INTAKE_CLOSE_DEPLOY_PCM, RIGHT_OUTER_INTAKE_CLOSE_RETRACT_PCM};
-    frc::DoubleSolenoid m_ramp {PCM_CAN_ID, frc::PneumaticsModuleType::CTREPCM, RAMP_DEPLOY_PCM, RAMP_RETRACT_PCM};
+    rev::CANSparkMax m_OuterLeft {CAN_POUCH_OUTER_LEFT_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    rev::CANSparkMax m_OuterRight {CAN_POUCH_OUTER_RIGHT_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    rev::CANSparkMax m_Inner {CAN_POUCH_INNER_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    frc::DoubleSolenoid m_leftOuterIntake {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LEFT_OUTER_INTAKE_DEPLOY_ID, PCM_LEFT_OUTER_INTAKE_RETRACT_ID};
+    frc::DoubleSolenoid m_rightOuterIntake {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RIGHT_OUTER_INTAKE_DEPLOY_ID, PCM_RIGHT_OUTER_INTAKE_RETRACT_ID};
+    frc::DoubleSolenoid m_leftOuterIntakeClose {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LEFT_OUTER_INTAKE_CLOSE_DEPLOY_ID, PCM_LEFT_OUTER_INTAKE_CLOSE_RETRACT_ID};
+    frc::DoubleSolenoid m_rightOuterIntakeClose {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RIGHT_OUTER_INTAKE_CLOSE_DEPLOY_ID, PCM_RIGHT_OUTER_INTAKE_CLOSE_RETRACT_ID};
+    frc::DoubleSolenoid m_ramp {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RAMP_DEPLOY_ID, PCM_RAMP_RETRACT_ID};
 
 
 
 
 
-    frc::DigitalInput m_GamePieceDetect{GAME_PIECE_DETECT_ID};
+    frc::DigitalInput m_GamePieceDetect{DIO_GAME_PIECE_DETECT_ID};
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };
