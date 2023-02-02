@@ -32,7 +32,6 @@ class Arm : public frc2::SubsystemBase
   * Will be called periodically whenever the CommandScheduler runs.
    */
 
-  // [:P] \\
 
  private:
   rev::CANSparkMax m_turret {CAN_TURRET_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
