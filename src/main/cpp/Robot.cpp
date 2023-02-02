@@ -27,6 +27,8 @@ void Robot::RobotInit()
 void Robot::RobotPeriodic()
  {
   frc2::CommandScheduler::GetInstance().Run();
+  WriteToSmartDashboard();
+
 }
 
 /**
@@ -71,6 +73,12 @@ void Robot::TeleopInit()
  * This function is called periodically during operator control.
  */
 void Robot::TeleopPeriodic() {}
+
+void Robot::WriteToSmartDashboard(void)
+{
+
+}
+
 
 /**
  * This function is called periodically during test mode.
