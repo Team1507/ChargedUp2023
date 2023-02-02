@@ -8,7 +8,6 @@
 #include <frc2/command/InstantCommand.h>
 #include "subsystems/Claw.h"
 
-
 class CmdWristSetPosition
     : public frc2::CommandHelper<frc2::InstantCommand,
                                  CmdWristSetPosition> {
@@ -18,6 +17,6 @@ class CmdWristSetPosition
   void Initialize() override;
 
   private:
-Claw *m_claw;
-float m_position;
+    Claw *m_claw;
+    float m_position;
 };

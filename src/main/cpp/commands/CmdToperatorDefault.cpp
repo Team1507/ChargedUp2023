@@ -20,16 +20,16 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_isRampActivated     = false;
 
 
-  m_scoringHome      = new GrpScoringSetPosition(m_arm, Home     );
-  m_scoringReady     = new GrpScoringSetPosition(m_arm, Ready    );
+  m_scoringHome      = new GrpScoringSetPosition(m_arm, m_claw, Home     );
+  m_scoringReady     = new GrpScoringSetPosition(m_arm, m_claw, Ready    );
 
-  m_scoringHighLeft  = new GrpScoringSetPosition(m_arm, HighLeft );
-  m_scoringHighShelf = new GrpScoringSetPosition(m_arm, HighShelf);
-  m_scoringHighRight = new GrpScoringSetPosition(m_arm, HighRight);
+  m_scoringHighLeft  = new GrpScoringSetPosition(m_arm, m_claw, HighLeft );
+  m_scoringHighShelf = new GrpScoringSetPosition(m_arm, m_claw, HighShelf);
+  m_scoringHighRight = new GrpScoringSetPosition(m_arm, m_claw, HighRight);
 
-  m_scoringMidLeft   = new GrpScoringSetPosition(m_arm, MidLeft  );
-  m_scoringMidShelf  = new GrpScoringSetPosition(m_arm, MidShelf );
-  m_scoringMidRight  = new GrpScoringSetPosition(m_arm, MidRight );
+  m_scoringMidLeft   = new GrpScoringSetPosition(m_arm, m_claw, MidLeft  );
+  m_scoringMidShelf  = new GrpScoringSetPosition(m_arm, m_claw, MidShelf );
+  m_scoringMidRight  = new GrpScoringSetPosition(m_arm, m_claw, MidRight );
 }
 
 // Called when the command is initially scheduled.
