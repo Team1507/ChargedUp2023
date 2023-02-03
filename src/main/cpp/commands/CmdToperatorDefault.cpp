@@ -165,6 +165,12 @@ void CmdToperatorDefault::Execute()
     m_wristPosition = m_claw->WristGetPosition();
     m_claw->WristSetPosition(m_wristPosition++);
   }
+  //*****************TURRET***********************
+  if(TurretManual > .5)
+  {
+    m_arm->TurretSetPower(.9); // high speed to make up for the massive gear ratio on the Neo
+  }
+    
 
   
 
