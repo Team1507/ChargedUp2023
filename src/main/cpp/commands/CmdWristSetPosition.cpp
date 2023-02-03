@@ -4,8 +4,8 @@
 
 CmdWristSetPosition::CmdWristSetPosition(Claw *claw, float position) 
 {
- m_claw = claw;
-m_position = position;
+  m_claw = claw;
+  m_position = position;
 
 }
 
