@@ -16,15 +16,15 @@ typedef struct
 } scoringPosition_t;
 
 
-scoringPosition_t scoringPositionTable[] = {{0, false, 0, ArmLevel::Level_Pouch},
-                                            {0, false, 0, ArmLevel::Low  },
-                                            {0, false, 0, ArmLevel::High },
-                                            {0, false, 0, ArmLevel::High },
-                                            {0, false, 0, ArmLevel::High },
-                                            {0, false, 0, ArmLevel::Mid  },
-                                            {0, false, 0, ArmLevel::Mid  },
-                                            {0, false, 0, ArmLevel::Mid  }};
-
+scoringPosition_t scoringPositionTable[] = {{0,   false,  0,   ArmLevel::Level_Pouch},
+                                            {0,   false,  0,   ArmLevel::Low        },
+                                            {55,  true,   0,   ArmLevel::High       },
+                                            {90,  true,   0,   ArmLevel::High       },
+                                            {135, true,   0,   ArmLevel::High       },
+                                            {55,  false,  0,   ArmLevel::Mid        },
+                                            {90,  false,  0,   ArmLevel::Mid        },
+                                            {135, false,  0,   ArmLevel::Mid        }};
+ 
 GrpScoringSetPosition::GrpScoringSetPosition(Arm *arm, Claw *claw, ScoringPosition scoringPosition) 
 {
   AddCommands(

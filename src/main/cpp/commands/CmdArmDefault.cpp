@@ -14,7 +14,7 @@ CmdArmDefault::CmdArmDefault(Arm *arm)
 // Called when the command is initially scheduled.
 void CmdArmDefault::Initialize() 
 {
-  std::cout<<"Arm uwu"<<std::endl;
+  std::cout<<"Arm"<<std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run

@@ -8,6 +8,7 @@
 #include <frc2/command/CommandHelper.h>
 #include "subsystems/DriverFeedback.h"
 #include <frc/XboxController.h>
+#include "subsystems/Claw.h"
 
 /**
  * An example command.
@@ -19,7 +20,7 @@
 class CmdDriverFeedbackDefault
     : public frc2::CommandHelper<frc2::CommandBase, CmdDriverFeedbackDefault> {
  public:
-  CmdDriverFeedbackDefault(DriverFeedback *driverfeedback, frc::XboxController *xboxcontroller);
+  CmdDriverFeedbackDefault(DriverFeedback *driverfeedback, frc::XboxController *xboxcontroller, Claw *claw);
 
   void Initialize() override;
 
@@ -27,8 +28,12 @@ class CmdDriverFeedbackDefault
 
   void End(bool interrupted) override;
 
+  int m_delay;
+  bool m_isPieceCollected;
+ 
   bool IsFinished() override;
   private:
   DriverFeedback *m_driverfeedback;
   frc::XboxController *m_xboxcontroller;
+  Claw *m_claw;
 };

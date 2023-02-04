@@ -28,6 +28,8 @@ class Arm : public frc2::SubsystemBase
   //***********************************ARM*********************************
   void ElevationArmSetPosition(ArmLevel position);
   void ExtensionSetPosition(bool position);
+
+
   /**
   * Will be called periodically whenever the CommandScheduler runs.
    */

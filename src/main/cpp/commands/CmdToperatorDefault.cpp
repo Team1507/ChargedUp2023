@@ -1,6 +1,9 @@
 #include "commands/CmdToperatorDefault.h"
 #include "Constants.h"
 
+#define POUCH_TURRET_LIMIT 5
+
+
 CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxController *topDriver, Claw *claw, Arm *arm, Pouch *pouch, DriverFeedback *driverfeedback) 
 {
   AddRequirements(toperator);
@@ -18,6 +21,7 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_isInnerIntaking     = false;
   m_isOuterIntakeClosed = false;
   m_isRampActivated     = false;
+  m_isTurret            = false;
 
 
   m_scoringHome      = new GrpScoringSetPosition(m_arm, m_claw, Home     );
@@ -237,6 +241,24 @@ else if(PouchRamp && m_isRampActivated)
   m_isRampActivated = false;
 }
   
+//***************************TURRET MANUAL*******************
+
+  if(TurretManual > .5)
+  {
+    m_arm->TurretSetPower(.9); // High speed to make up for the large gear ratio on the Neo
+    m_isTurret = true;
+  }
+  else if(TurretManual < -.5)
+  {
+    m_arm->TurretSetPower(-.9); // High speed to make up for the large gear ratio on the Neo
+    m_isTurret = true;
+  }
+  else if (TurretManual < .5 && TurretManual > -.5 && m_isTurret)
+  {
+    m_arm->TurretSetPower(0);
+    m_isTurret = false;
+  }
+
 
     
 }

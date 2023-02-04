@@ -40,26 +40,46 @@ float Arm::TurretGetEncoder(void)
 
 void Arm::ElevationArmSetPosition(ArmLevel position) 
 {
-if(position == ArmLevel::Level_Pouch)
-{
-m_lowerArm.Set(frc::DoubleSolenoid::kForward);
-m_upperArm.Set(frc::DoubleSolenoid::kForward);
-}
-else if(position == ArmLevel::Low)
-{
-m_upperArm.Set(frc::DoubleSolenoid::kReverse);
-m_lowerArm.Set(frc::DoubleSolenoid::kForward);
-}
-else if(position == ArmLevel::Mid)
-{
-m_lowerArm.Set(frc::DoubleSolenoid::kForward);
-m_upperArm.Set(frc::DoubleSolenoid::kReverse);
-}
-else if(position == ArmLevel::High)
-{
-m_lowerArm.Set(frc::DoubleSolenoid::kReverse);
-m_upperArm.Set(frc::DoubleSolenoid::kReverse);
-}
+    switch(position)
+    {
+        case ArmLevel::Level_Pouch :
+            m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+            m_upperArm.Set(frc::DoubleSolenoid::kForward);
+            break;
+        case ArmLevel::Low : 
+            m_upperArm.Set(frc::DoubleSolenoid::kReverse);
+            m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+            break;
+        case ArmLevel::Mid :
+            m_lowerArm.Set(frc::DoubleSolenoid::kReverse);
+            m_upperArm.Set(frc::DoubleSolenoid::kForward);
+            break;
+
+         case ArmLevel::High :
+            m_lowerArm.Set(frc::DoubleSolenoid::kReverse);
+            m_upperArm.Set(frc::DoubleSolenoid::kReverse);
+            break;
+    }
+// if(position == ArmLevel::Level_Pouch)
+// {
+// m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+// m_upperArm.Set(frc::DoubleSolenoid::kForward);
+// }
+// else if(position == ArmLevel::Low)
+// {
+// m_upperArm.Set(frc::DoubleSolenoid::kReverse);
+// m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+// }
+// else if(position == ArmLevel::Mid)
+// {
+// m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+// m_upperArm.Set(frc::DoubleSolenoid::kReverse);
+// }
+// else if(position == ArmLevel::High)
+// {
+// m_lowerArm.Set(frc::DoubleSolenoid::kReverse);
+// m_upperArm.Set(frc::DoubleSolenoid::kReverse);
+// }
 } 
 void Arm::ExtensionSetPosition(bool position) 
 {
@@ -72,5 +92,4 @@ if(position == false)
     m_armExtension.Set(frc::DoubleSolenoid::kReverse);
 }
 } 
-
 
