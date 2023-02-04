@@ -203,9 +203,10 @@ if(InnerIntake && !m_isInnerIntaking)
   m_isInnerIntaking = true;
 }
 else if(!InnerIntake && m_isInnerIntaking)
+{
   m_pouch->SetIntakePower(0, Pouch::WhatIntake::Inner);
   m_isInnerIntaking = false;
-
+}
 if(OuterIntake && !m_isOuterIntaking)
 {
   m_pouch->DeployIntake(Pouch::WhatIntake::Outer);
