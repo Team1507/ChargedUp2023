@@ -36,6 +36,8 @@
 
 #define DIO_CLAW_GAME_PIECE_ID 4
 #define DIO_GAME_PIECE_DETECT_ID 47
+#define DIO_ELEVATION_HOME_LIMIT_SWITCH_ID 129549
+
 
 namespace OperatorConstants 
 {

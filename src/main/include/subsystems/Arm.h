@@ -10,6 +10,7 @@
 #include "Constants.h"
 #include <frc/DoubleSolenoid.h>
 #include <frc/PneumaticsModuleType.h>
+#include <frc/DigitalInput.h>
 
 enum ArmLevel{Level_Pouch, Low, Mid, High};
 class Arm : public frc2::SubsystemBase 
@@ -25,11 +26,16 @@ class Arm : public frc2::SubsystemBase
   float TurretGetPower(void);
   float TurretGetAngle(void);
   float TurretGetEncoder(void);
+  bool   GetLeftTurretLimitSW(void); 
+  bool   GetRightTurretLimitSW(void);
   //***********************************ARM*********************************
   void ElevationArmSetPosition(ArmLevel position);
   void ExtensionSetPosition(bool position);
+  bool ElevationHomeLimitSwitch(void);
 
  private:
+  frc::DigitalInput m_elevationHomeLimitSwitch{DIO_ELEVATION_HOME_LIMIT_SWITCH_ID};
+
   rev::CANSparkMax             m_turret {CAN_TURRET_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
   rev::SparkMaxRelativeEncoder m_turretEncoder = m_turret.GetEncoder();
   rev::SparkMaxPIDController   m_turretPID = m_turret.GetPIDController();
