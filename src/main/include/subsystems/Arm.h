@@ -26,8 +26,8 @@ class Arm : public frc2::SubsystemBase
   float TurretGetPower(void);
   float TurretGetAngle(void);
   float TurretGetEncoder(void);
-  bool   GetLeftTurretLimitSW(void); 
-  bool   GetRightTurretLimitSW(void);
+  bool  TurretGetLeftLimitSW(void); 
+  bool  TurretGetRightLimitSW(void);
   //***********************************ARM*********************************
   void ElevationArmSetPosition(ArmLevel position);
   void ExtensionSetPosition(bool position);

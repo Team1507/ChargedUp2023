@@ -30,7 +30,16 @@ void Arm::TurretTurn2Angle(float angle)
 }
 void Arm::TurretSetPower(float power) 
 {
-    m_turret.Set(power);
+    
+    if(m_elevationHomeLimitSwitch.Get() == true)
+    {
+        m_turret.Set(0.0);
+    }
+    else
+    {
+        m_turret.Set(power);
+    }
+
 }
 void Arm::TurretSetEncoder(float encoder) 
 {
@@ -48,11 +57,11 @@ float Arm::TurretGetEncoder(void)
 {
     return m_turretEncoder.GetPosition();
 }
-bool Arm::GetLeftTurretLimitSW(void)
+bool Arm::TurretGetLeftLimitSW(void)
 {
     return m_turretREVLimit.Get();
 }
-bool Arm::GetRightTurretLimitSW(void)
+bool Arm::TurretGetRightLimitSW(void)
 {
     return m_turretFWDLimit.Get();
 }
