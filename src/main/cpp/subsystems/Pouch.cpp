@@ -43,29 +43,16 @@ if( deploy == false)
 }
 
 }
-void Pouch::DeployIntake(WhatIntake type)
+void Pouch::DeployIntake(void)
 {
-   if(WhatIntake::Inner == type)
-    {
-        
-    } 
-    else if (WhatIntake::Outer == type)
-    {
-      m_leftOuterIntake.Set(frc::DoubleSolenoid::kForward);
-      m_rightOuterIntake.Set(frc::DoubleSolenoid::kForward);
-    }
+  m_leftOuterIntake.Set(frc::DoubleSolenoid::kForward);
+  m_rightOuterIntake.Set(frc::DoubleSolenoid::kForward);
+    
 }
-void Pouch::RetractIntake(WhatIntake type)
+void Pouch::RetractIntake(void)
 {
-    if(WhatIntake::Inner == type)
-    {
-        
-    } 
-    else if (WhatIntake::Outer == type)
-    {
-      m_leftOuterIntake.Set(frc::DoubleSolenoid::kReverse);
-      m_rightOuterIntake.Set(frc::DoubleSolenoid::kReverse);
-    }
+  m_leftOuterIntake.Set(frc::DoubleSolenoid::kReverse);
+  m_rightOuterIntake.Set(frc::DoubleSolenoid::kReverse);
 }
 void Pouch::OpenOuterIntake(void)
 {

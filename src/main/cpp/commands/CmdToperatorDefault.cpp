@@ -206,13 +206,13 @@ else if(!InnerIntake && m_isInnerIntaking)
 }
 if(OuterIntake && !m_isOuterIntaking)
 {
-  m_pouch->DeployIntake(Pouch::WhatIntake::Outer);
+  m_pouch->DeployIntake();
   m_pouch->SetIntakePower(.3, Pouch::WhatIntake::Outer);
   m_isOuterIntaking = false;
 }
 else if(!OuterIntake && m_isInnerIntaking)
 {
-  m_pouch->RetractIntake(Pouch::WhatIntake::Outer);
+  m_pouch->RetractIntake();
   m_pouch->SetIntakePower(0, Pouch::WhatIntake::Outer);
   m_isOuterIntaking = true;
 }
