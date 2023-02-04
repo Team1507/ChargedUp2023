@@ -4,23 +4,32 @@
 
 #include "subsystems/Pouch.h"
 
-Pouch::Pouch() = default;
+Pouch::Pouch() 
+{
+  m_inner.RestoreFactoryDefaults(); 
+  m_innerEncoder.SetPosition(0.0); 
+  m_innerPIDController.SetP(0.0); // change later
+  m_innerPIDController.SetI(0.0); // change later
+  m_innerPIDController.SetD(0.0); // change later
+  m_innerPIDController.SetSmartMotionAllowedClosedLoopError(0.0); // change later
+  m_inner.SetOpenLoopRampRate(0.0); // change later
+}
 
 void Pouch::SetIntakePower(float power,WhatIntake type)
 {
     if(WhatIntake::Inner == type)
     {
-      m_Inner.Set(power);  
+      m_inner.Set(power);  
     } 
     else if (WhatIntake::Outer == type)
     {
-      m_OuterLeft.Set(power);
-      m_OuterRight.Set(power);
+      m_outerLeft.Set(power);
+      m_outerRight.Set(power);
     }
 }
 bool Pouch::ReadSensorState(void)
 {
-    return m_GamePieceDetect.Get();
+    return m_gamePieceDetect.Get();
 }
 void Pouch::SetRampPosition(bool deploy)
 {

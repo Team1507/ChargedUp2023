@@ -3,43 +3,47 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Arm.h"
-
+// #define Velocity2RPM(velocity) ((600 * velocity) / (2048))
+#define Ticks2Angle(ticks) (ticks) 
+#define Angle2Ticks(angle) (angle)
 Arm::Arm() 
 {
-    m_turretEncoder = m_turret.GetEncoder();
+    m_turret.RestoreFactoryDefaults(); 
+    m_turretEncoder.SetPosition(0.0); 
+    m_turretPID.SetP(0.0); // change later
+    m_turretPID.SetI(0.0); // change later
+    m_turretPID.SetD(0.0); // change later
+    m_turretPID.SetSmartMotionAllowedClosedLoopError(0.0); // change later
+    m_turret.SetOpenLoopRampRate(0.0); // change later
 }
 
-// This method will be called once per scheduler run
 void Arm::Periodic() {}
 
 //**********************************Turret******************************
 
-void Arm::TurretSetAngle(float angle) 
+void Arm::TurretTurn2Angle(float angle) 
 {
-    //m_turret.Set(ControlMode::Position, angle);
+    m_turretPID.SetReference(angle, rev::CANSparkMax::ControlType::kPosition);
 }
 void Arm::TurretSetPower(float power) 
 {
-    //m_turret.Set(ControlMode::PercentOutput, power);
+    m_turret.Set(power);
 }
 void Arm::TurretSetEncoder(float encoder) 
 {
-    //m_turret.Set(ControlMode::Position, encoder);
+    m_turretEncoder.SetPosition(encoder);
 }
 float Arm::TurretGetPower(void) 
 {
-    //m_turret.GetMotorOutputPercent();
-    return 0;
+    return m_turret.Get();
 } 
 float Arm::TurretGetAngle(void) 
 {
-   // m_turret.GetSelectedSensorPosition();
-   return 0;
+    return Ticks2Angle(m_turretEncoder.GetPosition());
 } 
 float Arm::TurretGetEncoder(void) 
 {
-   // m_turret.GetSelectedSensorPosition();
-   return 0;
+    return m_turretEncoder.GetPosition();
 }
  
 //***********************************ARM*********************************
@@ -66,36 +70,16 @@ void Arm::ElevationArmSetPosition(ArmLevel position)
             m_upperArm.Set(frc::DoubleSolenoid::kReverse);
             break;
     }
-// if(position == ArmLevel::Level_Pouch)
-// {
-// m_lowerArm.Set(frc::DoubleSolenoid::kForward);
-// m_upperArm.Set(frc::DoubleSolenoid::kForward);
-// }
-// else if(position == ArmLevel::Low)
-// {
-// m_upperArm.Set(frc::DoubleSolenoid::kReverse);
-// m_lowerArm.Set(frc::DoubleSolenoid::kForward);
-// }
-// else if(position == ArmLevel::Mid)
-// {
-// m_lowerArm.Set(frc::DoubleSolenoid::kForward);
-// m_upperArm.Set(frc::DoubleSolenoid::kReverse);
-// }
-// else if(position == ArmLevel::High)
-// {
-// m_lowerArm.Set(frc::DoubleSolenoid::kReverse);
-// m_upperArm.Set(frc::DoubleSolenoid::kReverse);
-// }
 } 
 void Arm::ExtensionSetPosition(bool position) 
 {
-if(position == true)
-{
-    m_armExtension.Set(frc::DoubleSolenoid::kForward);
-}
-if(position == false)
-{
-    m_armExtension.Set(frc::DoubleSolenoid::kReverse);
-}
+    if(position == true)
+    {
+        m_armExtension.Set(frc::DoubleSolenoid::kForward);
+    }
+    if(position == false)
+    {
+        m_armExtension.Set(frc::DoubleSolenoid::kReverse);
+    }
 } 
 
