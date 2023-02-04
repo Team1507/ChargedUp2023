@@ -9,6 +9,7 @@
 #include <frc/DigitalInput.h>
 #include <frc/DoubleSolenoid.h>
 #include <frc/PneumaticsModuleType.h>
+#include "ctre/Phoenix.h"
 
 class Pouch : public frc2::SubsystemBase {
  public:
@@ -28,20 +29,26 @@ class Pouch : public frc2::SubsystemBase {
   void Periodic() override;
 
  private:
-    rev::CANSparkMax m_OuterLeft {CAN_POUCH_OUTER_LEFT_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-    rev::CANSparkMax m_OuterRight {CAN_POUCH_OUTER_RIGHT_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-    rev::CANSparkMax m_Inner {CAN_POUCH_INNER_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+   WPI_VictorSPX m_outerLeft {CAN_POUCH_OUTER_LEFT_ID};
+   WPI_VictorSPX m_outerRight {CAN_POUCH_OUTER_RIGHT_ID};
+ 
+    
+    rev::CANSparkMax m_inner {CAN_POUCH_INNER_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+    rev::SparkMaxRelativeEncoder m_innerEncoder = m_inner.GetEncoder();
+    rev::SparkMaxPIDController   m_innerPIDController = m_inner.GetPIDController();
+
     frc::DoubleSolenoid m_leftOuterIntake {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LEFT_OUTER_INTAKE_DEPLOY_ID, PCM_LEFT_OUTER_INTAKE_RETRACT_ID};
     frc::DoubleSolenoid m_rightOuterIntake {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RIGHT_OUTER_INTAKE_DEPLOY_ID, PCM_RIGHT_OUTER_INTAKE_RETRACT_ID};
     frc::DoubleSolenoid m_leftOuterIntakeClose {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LEFT_OUTER_INTAKE_CLOSE_DEPLOY_ID, PCM_LEFT_OUTER_INTAKE_CLOSE_RETRACT_ID};
     frc::DoubleSolenoid m_rightOuterIntakeClose {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RIGHT_OUTER_INTAKE_CLOSE_DEPLOY_ID, PCM_RIGHT_OUTER_INTAKE_CLOSE_RETRACT_ID};
+    
     frc::DoubleSolenoid m_ramp {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RAMP_DEPLOY_ID, PCM_RAMP_RETRACT_ID};
 
 
 
 
 
-    frc::DigitalInput m_GamePieceDetect{DIO_GAME_PIECE_DETECT_ID};
+    frc::DigitalInput m_gamePieceDetect{DIO_GAME_PIECE_DETECT_ID};
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };

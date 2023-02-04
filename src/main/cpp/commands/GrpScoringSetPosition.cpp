@@ -1,7 +1,7 @@
 #include "commands/GrpScoringSetPosition.h"
 #include "commands/CmdArmLevelSetPosition.h"
 #include "commands/CmdArmExtensionSetPosition.h"
-#include "commands/CmdTurretSetAngle.h"
+#include "commands/CmdTurretTurn2Angle.h"
 #include "commands/CmdWristSetPosition.h"
 //ScoringPosition{Home, Ready, HighLeft, HighShelf, HighRight, MidLeft, MidShelf, MidRight};
 //ArmLevel{Level_Pouch, Low, Mid, High};
@@ -30,7 +30,7 @@ GrpScoringSetPosition::GrpScoringSetPosition(Arm *arm, Claw *claw, ScoringPositi
   AddCommands(
   CmdArmLevelSetPosition(arm, scoringPositionTable[scoringPosition].armLevel),
   CmdArmExtensionSetPosition(arm, scoringPositionTable[scoringPosition].extension),
-  CmdTurretSetAngle(arm, scoringPositionTable[scoringPosition].turretAngle),
+  CmdTurretTurn2Angle(arm, scoringPositionTable[scoringPosition].turretAngle),
   CmdWristSetPosition(claw, scoringPositionTable[scoringPosition].wristAngle)
   );
 }

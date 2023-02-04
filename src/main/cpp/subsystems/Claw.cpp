@@ -7,11 +7,27 @@
 Claw::Claw() 
 {
     m_intakeEnabled = false;
+    
+    m_wrist.RestoreFactoryDefaults();
+    m_wrist.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
+    m_wristEncoder.SetPosition(0);
+    m_wristPID.SetP(0.0); //!!! CHANGE LATER !!!
+    m_wristPID.SetI(0.0); //!!! CHANGE LATER !!!
+    m_wristPID.SetD(0.0); //!!! CHANGE LATER !!!
+    m_wristPID.SetSmartMotionAllowedClosedLoopError(0.0); //!!! CHANGE LATER !!!
+
+    m_claw.RestoreFactoryDefaults();
+    m_claw.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
 }
 // This method will be called once per scheduler run
-void Claw::Periodic() {}
+void Claw::Periodic() 
+{
+    frc::SmartDashboard::PutNumber("Wrist Position", m_wristEncoder.GetPosition());
+    frc::SmartDashboard::PutBoolean("Forward Limit Switch", m_wristFWDLimit.Get());
+    frc::SmartDashboard::PutBoolean("Reverse Limit Switch", m_wristREVLimit.Get());
+}
   
-//************************************CLAW******************************************
+//************************************Claw******************************************
 
 void Claw::ClawSetPower(float power) 
 {
@@ -19,7 +35,7 @@ void Claw::ClawSetPower(float power)
 }
 float Claw::ClawGetCurrent(void)
 {
-    return 0;
+    return m_claw.GetOutputCurrent();
 }
 float Claw::ClawGetPower(void)
 {
@@ -34,16 +50,16 @@ void Claw::ClawIntakeEnable(bool enable)
 
 void Claw::WristSetPosition(float position) 
 {
-
+    m_wristEncoder.SetPosition(position);
 }
 float Claw::WristGetPosition(void)
 {
-    return 0;
+    return m_wristEncoder.GetPosition();
 }
 
 bool Claw::ReadSensorState(void)  //Change Later
 {
-    return m_ClawGamePiece.Get();
+    return m_clawGamePiece.Get();
 }
 void Claw::WristSetPower(float power)     //for Debug use Only 
 {

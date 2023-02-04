@@ -18,7 +18,7 @@ class Arm : public frc2::SubsystemBase
   Arm();
   void Periodic() override;
   //**********************************Turret******************************
-  void TurretSetAngle(float angle);
+  void TurretTurn2Angle(float angle);
   void TurretSetPower(float power);
   void TurretSetEncoder(float encoder);
   
@@ -29,24 +29,14 @@ class Arm : public frc2::SubsystemBase
   void ElevationArmSetPosition(ArmLevel position);
   void ExtensionSetPosition(bool position);
 
-
-  /**
-  * Will be called periodically whenever the CommandScheduler runs.
-   */
-
-
  private:
-  rev::CANSparkMax m_turret {CAN_TURRET_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+  rev::CANSparkMax             m_turret {CAN_TURRET_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
   rev::SparkMaxRelativeEncoder m_turretEncoder = m_turret.GetEncoder();
+  rev::SparkMaxPIDController   m_turretPID = m_turret.GetPIDController();
+  rev::SparkMaxLimitSwitch     m_turretFWDLimit = m_turret.GetForwardLimitSwitch(rev::SparkMaxLimitSwitch::Type::kNormallyOpen);
+  rev::SparkMaxLimitSwitch     m_turretREVLimit = m_turret.GetReverseLimitSwitch(rev::SparkMaxLimitSwitch::Type::kNormallyOpen);
 
-  rev::SparkMaxPIDController *m_turretPID;
-  rev::SparkMaxLimitSwitch *m_turretFWDLimit;
-  rev::SparkMaxLimitSwitch *m_turretREVLimit;
-  frc::DoubleSolenoid  m_lowerArm {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LOWER_ARM_DEPLOY_ID, PCM_LOWER_ARM_RETRACT_ID};
-  frc::DoubleSolenoid m_upperArm {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_UPPER_ARM_DEPLOY_ID, PCM_UPPER_ARM_RETRACT_ID};
-  frc::DoubleSolenoid m_armExtension {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_ARM_EXTENSION_DEPLOY_ID, PCM_ARM_EXTENSION_RETRACT_ID};
-
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
-  //TalonFX m_turret{CAN_TURRET_ID};
+  frc::DoubleSolenoid          m_lowerArm {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LOWER_ARM_DEPLOY_ID, PCM_LOWER_ARM_RETRACT_ID};
+  frc::DoubleSolenoid          m_upperArm {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_UPPER_ARM_DEPLOY_ID, PCM_UPPER_ARM_RETRACT_ID};
+  frc::DoubleSolenoid          m_armExtension {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_ARM_EXTENSION_DEPLOY_ID, PCM_ARM_EXTENSION_RETRACT_ID};
 };

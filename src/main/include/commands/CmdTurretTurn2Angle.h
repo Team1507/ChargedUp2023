@@ -3,18 +3,20 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #pragma once
+
 #include <frc2/command/CommandHelper.h>
 #include <frc2/command/InstantCommand.h>
 #include "subsystems/Arm.h"
-class CmdTurretSetAngle
+
+class CmdTurretTurn2Angle
     : public frc2::CommandHelper<frc2::InstantCommand,
-                                 CmdTurretSetAngle> {
+                                 CmdTurretTurn2Angle> {
  public:
-  CmdTurretSetAngle(Arm *arm, float angle);
+  CmdTurretTurn2Angle(Arm *arm, double angle);
 
   void Initialize() override;
 
   private:
-  Arm *m_arm;
-  float m_angle; 
+    Arm *m_arm;
+    double m_angle;
 };

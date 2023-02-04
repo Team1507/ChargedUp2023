@@ -8,6 +8,7 @@
 #include "rev/CANSparkMax.h"
 #include "Constants.h"
 #include <frc/DigitalInput.h> 
+#include <frc/smartdashboard/SmartDashboard.h>
 
 class Claw : public frc2::SubsystemBase {
  public:
@@ -35,10 +36,14 @@ class Claw : public frc2::SubsystemBase {
  private:
   rev::CANSparkMax m_claw {CAN_CLAW_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
   rev::CANSparkMax m_wrist {CAN_WRIST_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-  frc::DigitalInput m_ClawGamePiece {DIO_CLAW_GAME_PIECE_ID};
-  rev::SparkMaxLimitSwitch *m_wristFWDLimit;
-  rev::SparkMaxLimitSwitch *m_wristREVLimit;
+  rev::SparkMaxRelativeEncoder m_wristEncoder = m_wrist.GetEncoder();
+  rev::SparkMaxPIDController m_wristPID = m_wrist.GetPIDController();
+  rev::SparkMaxLimitSwitch m_wristFWDLimit = m_wrist.GetForwardLimitSwitch(rev::SparkMaxLimitSwitch::Type::kNormallyOpen);
+  rev::SparkMaxLimitSwitch m_wristREVLimit = m_wrist.GetReverseLimitSwitch(rev::SparkMaxLimitSwitch::Type::kNormallyClosed);
+  frc::DigitalInput m_clawGamePiece {DIO_CLAW_GAME_PIECE_ID};
   bool m_intakeEnabled;
+  #define CLAW_INTAKE_POWER 0.0; //!!! CHANGE LATER !!!
+  #define CLAW_EJECT_POWER 0.0; //!!! CHANGE LATER !!!
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
