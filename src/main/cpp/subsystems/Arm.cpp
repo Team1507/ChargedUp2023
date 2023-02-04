@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Arm.h"
-// #define Velocity2RPM(velocity) ((600 * velocity) / (2048))
+#include <frc/smartdashboard/SmartDashboard.h>
 #define Ticks2Angle(ticks) (ticks) 
 #define Angle2Ticks(angle) (angle)
 Arm::Arm() 
@@ -17,7 +17,10 @@ Arm::Arm()
     m_turret.SetOpenLoopRampRate(0.0); // change later
 }
 
-void Arm::Periodic() {}
+void Arm::Periodic() 
+{
+    frc::SmartDashboard::PutBoolean("Elevation Home Limit Switch", ElevationHomeLimitSwitch());
+}
 
 //**********************************Turret******************************
 
@@ -45,7 +48,15 @@ float Arm::TurretGetEncoder(void)
 {
     return m_turretEncoder.GetPosition();
 }
- 
+bool Arm::GetLeftTurretLimitSW(void)
+{
+    return m_turretREVLimit.Get();
+}
+bool Arm::GetRightTurretLimitSW(void)
+{
+    return m_turretFWDLimit.Get();
+}
+
 //***********************************ARM*********************************
 
 void Arm::ElevationArmSetPosition(ArmLevel position) 
@@ -82,4 +93,7 @@ void Arm::ExtensionSetPosition(bool position)
         m_armExtension.Set(frc::DoubleSolenoid::kReverse);
     }
 } 
-
+bool Arm::ElevationHomeLimitSwitch(void)
+{
+    return m_elevationHomeLimitSwitch.Get();
+}
