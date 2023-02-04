@@ -34,6 +34,8 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_scoringMidLeft   = new GrpScoringSetPosition(m_arm, m_claw, MidLeft  );
   m_scoringMidShelf  = new GrpScoringSetPosition(m_arm, m_claw, MidShelf );
   m_scoringMidRight  = new GrpScoringSetPosition(m_arm, m_claw, MidRight );
+
+  m_clawEject        = new CmdClawEject(m_claw);
 }
 
 // Called when the command is initially scheduled.
@@ -146,26 +148,19 @@ void CmdToperatorDefault::Execute()
   //******************CLAW*******************
   if(ClawIntake && !m_isIntaking)
   {
-    m_claw->ClawSetPower(.3);
     m_claw->ClawIntakeEnable(true);
     m_isIntaking = true;
   }
   else if(!ClawIntake && m_isIntaking)
   {
-    m_claw->ClawSetPower(0);
     m_claw->ClawIntakeEnable(false);
     m_isIntaking = false;
   }
 
   if(ClawOutake && !m_isOuttaking)
   {
-    m_claw->ClawSetPower(.3);
+    m_clawEject->Schedule();
     m_isOuttaking = true;
-  }
-  if(!ClawOutake && m_isOuttaking)
-  {
-    m_claw->ClawSetPower(0);
-    m_isOuttaking = false;
   }
   //******************WRIST**********************
   const float WRIST_DELTA = 100;

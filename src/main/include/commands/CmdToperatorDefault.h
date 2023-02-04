@@ -9,7 +9,10 @@
 #include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
 
+
 #include "commands/GrpScoringSetPosition.h"
+#include "commands/CmdClawEject.h"
+#include "commands/CmdClawIntakeEnable.h"
 
 /**
  * An example command.
@@ -60,7 +63,8 @@ class CmdToperatorDefault
     GrpScoringSetPosition *m_scoringMidLeft;
     GrpScoringSetPosition *m_scoringMidShelf;
     GrpScoringSetPosition *m_scoringMidRight;
-    
+
+    CmdClawEject          *m_clawEject;
 
 
 };
