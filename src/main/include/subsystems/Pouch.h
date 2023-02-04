@@ -19,8 +19,8 @@ class Pouch : public frc2::SubsystemBase {
   void SetIntakePower(float power,WhatIntake type);
   bool ReadSensorState(void);
   void SetRampPosition(bool deploy);
-  void DeployIntake(WhatIntake type);
-  void RetractIntake(WhatIntake type);
+  void DeployIntake(void);
+  void RetractIntake(void);
   void OpenOuterIntake(void);
   void CloseOuterIntake(void);
   /**
