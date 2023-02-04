@@ -14,12 +14,12 @@
 #include "commands/CmdToperatorDefault.h"
 RobotContainer::RobotContainer() 
 {
-  m_driverfeedback.SetDefaultCommand(CmdDriverFeedbackDefault(&m_driverfeedback, &m_topDriver, &m_claw));
   m_claw.SetDefaultCommand(CmdClawDefault(&m_claw));
   m_arm.SetDefaultCommand(CmdArmDefault(&m_arm));
   m_pouch.SetDefaultCommand(CmdPouchDefault(&m_pouch));
   m_toperator.SetDefaultCommand(CmdToperatorDefault(&m_toperator, &m_topDriver, &m_claw, &m_arm, &m_pouch, &m_driverfeedback));
   m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
+  m_driverfeedback.SetDefaultCommand(CmdDriverFeedbackDefault(&m_driverfeedback, &m_topDriver, &m_claw));
   frc::SmartDashboard::PutData("Auto",&m_chooser);
   // Initialize all of your commands and subsystems here
 

@@ -13,7 +13,10 @@
 #define CAN_EXTEND_ID 123
 #define CAN_RETRACT_ID 231
 #define CAN_PCM_ID 12356
+#define CAN_PDH_ID 10
 
+#define PDH_CLAW_PORT 10
+#define PDH_WRIST_PORT 10
 
 
 #define PCM_LOWER_ARM_DEPLOY_ID 3211

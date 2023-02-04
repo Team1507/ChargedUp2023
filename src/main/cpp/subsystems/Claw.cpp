@@ -4,7 +4,7 @@
 
 #include "subsystems/Claw.h"
 
-Claw::Claw() 
+Claw::Claw(frc::PowerDistribution *m_pdh) 
 {
     m_intakeEnabled = false;
     
@@ -27,7 +27,7 @@ void Claw::Periodic()
     frc::SmartDashboard::PutBoolean("Reverse Limit Switch", m_wristREVLimit.Get());
 }
   
-//************************************Claw******************************************
+//************************************CLAW******************************************
 
 void Claw::ClawSetPower(float power) 
 {
@@ -35,7 +35,7 @@ void Claw::ClawSetPower(float power)
 }
 float Claw::ClawGetCurrent(void)
 {
-    return m_claw.GetOutputCurrent();
+    return m_pdh->GetCurrent(PDH_CLAW_PORT);
 }
 float Claw::ClawGetPower(void)
 {
@@ -46,7 +46,7 @@ void Claw::ClawIntakeEnable(bool enable)
     m_intakeEnabled = enable;
 }
 
-//***********************************Wrist*******************************************
+//***********************************WRIST*******************************************
 
 void Claw::WristSetPosition(float position) 
 {
@@ -56,8 +56,12 @@ float Claw::WristGetPosition(void)
 {
     return m_wristEncoder.GetPosition();
 }
+float Claw::WristGetCurrent(void)
+{
+    return m_pdh->GetCurrent(PDH_WRIST_PORT);
+}
 
-bool Claw::ReadSensorState(void)  //Change Later
+bool Claw::ReadSensorState(void)          //Change Later
 {
     return m_clawGamePiece.Get();
 }
@@ -68,4 +72,12 @@ void Claw::WristSetPower(float power)     //for Debug use Only
 float Claw::WristGetPower(void)           //for Debug use Only 
 {
     return m_wrist.Get();
+}
+bool  Claw::WristLimitSwitchForward(void)
+{
+    return m_wristFWDLimit.Get();
+}
+bool  Claw::WristLimitSwitchReverse(void)
+{
+    return m_wristREVLimit.Get();
 }

@@ -9,10 +9,11 @@
 #include "Constants.h"
 #include <frc/DigitalInput.h> 
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <frc/PowerDistribution.h>
 
 class Claw : public frc2::SubsystemBase {
  public:
-  Claw();
+  Claw(frc::PowerDistribution *m_pdh);
   /**
   * Will be called periodically whenever the CommandScheduler runs.
   */
@@ -28,9 +29,12 @@ class Claw : public frc2::SubsystemBase {
   //***********************************Wrist*******************************************
   void  WristSetPosition(float position);
   float WristGetPosition(void);
+  float WristGetCurrent(void);
   void  WristSetPower(float power);     //for Debug use Only 
   float WristGetPower(void);            //for Debug use Only 
   bool  ReadSensorState(void);         //Change Return Type Later
+  bool  WristLimitSwitchForward(void);
+  bool  WristLimitSwitchReverse(void);
 
 
  private:
@@ -44,6 +48,7 @@ class Claw : public frc2::SubsystemBase {
   bool m_intakeEnabled;
   #define CLAW_INTAKE_POWER 0.0; //!!! CHANGE LATER !!!
   #define CLAW_EJECT_POWER 0.0; //!!! CHANGE LATER !!!
+  frc::PowerDistribution *m_pdh;
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

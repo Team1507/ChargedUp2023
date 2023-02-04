@@ -17,6 +17,7 @@
 #include "commands/AutoDoNothing.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/smartdashboard/SendableChooser.h>
+#include <frc/PowerDistribution.h>
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -32,14 +33,17 @@ class RobotContainer
 
 ExampleSubsystem m_subsystem;
     // The robot's subsystems are defined here...
+
+  frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev};
   frc::XboxController m_botDriver{0};
   frc::XboxController m_topDriver{1};
   DriverFeedback m_driverfeedback {&m_topDriver};
   Arm m_arm;
-  Claw m_claw;
+  Claw m_claw{&m_pdh};
   Pouch m_pouch;
   Toperator m_toperator;
   frc2::Command* GetAutonomousCommand();
+
 
 
 
