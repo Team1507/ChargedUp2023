@@ -21,6 +21,8 @@ class Claw : public frc2::SubsystemBase {
   void  ClawSetPower(float power);
   float ClawGetPower(void);
   float ClawGetCurrent(void);
+  void ClawIntakeEnable(bool enable);
+
 
   //***********************************Wrist*******************************************
   void  WristSetPosition(float position);
@@ -34,6 +36,9 @@ class Claw : public frc2::SubsystemBase {
   rev::CANSparkMax m_claw {CAN_CLAW_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
   rev::CANSparkMax m_wrist {CAN_WRIST_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
   frc::DigitalInput m_ClawGamePiece {DIO_CLAW_GAME_PIECE_ID};
+  rev::SparkMaxLimitSwitch *m_wristFWDLimit;
+  rev::SparkMaxLimitSwitch *m_wristREVLimit;
+  bool m_intakeEnabled;
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

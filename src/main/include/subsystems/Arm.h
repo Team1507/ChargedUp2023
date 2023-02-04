@@ -37,6 +37,11 @@ class Arm : public frc2::SubsystemBase
 
  private:
   rev::CANSparkMax m_turret {CAN_TURRET_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+  rev::SparkMaxRelativeEncoder m_turretEncoder = m_turret.GetEncoder();
+
+  rev::SparkMaxPIDController *m_turretPID;
+  rev::SparkMaxLimitSwitch *m_turretFWDLimit;
+  rev::SparkMaxLimitSwitch *m_turretREVLimit;
   frc::DoubleSolenoid  m_lowerArm {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LOWER_ARM_DEPLOY_ID, PCM_LOWER_ARM_RETRACT_ID};
   frc::DoubleSolenoid m_upperArm {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_UPPER_ARM_DEPLOY_ID, PCM_UPPER_ARM_RETRACT_ID};
   frc::DoubleSolenoid m_armExtension {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_ARM_EXTENSION_DEPLOY_ID, PCM_ARM_EXTENSION_RETRACT_ID};

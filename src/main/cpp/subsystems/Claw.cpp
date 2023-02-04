@@ -4,7 +4,10 @@
 
 #include "subsystems/Claw.h"
 
-Claw::Claw() = default;
+Claw::Claw() 
+{
+    m_intakeEnabled = false;
+}
 // This method will be called once per scheduler run
 void Claw::Periodic() {}
   
@@ -21,6 +24,10 @@ float Claw::ClawGetCurrent(void)
 float Claw::ClawGetPower(void)
 {
    return m_claw.Get();
+}
+void Claw::ClawIntakeEnable(bool enable)
+{
+    m_intakeEnabled = enable;
 }
 
 //***********************************Wrist*******************************************

@@ -4,7 +4,10 @@
 
 #include "subsystems/Arm.h"
 
-Arm::Arm() = default;
+Arm::Arm() 
+{
+    m_turretEncoder = m_turret.GetEncoder();
+}
 
 // This method will be called once per scheduler run
 void Arm::Periodic() {}
