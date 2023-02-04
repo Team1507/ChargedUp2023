@@ -26,7 +26,18 @@ void Arm::Periodic()
 
 void Arm::TurretTurn2Angle(float angle) 
 {
-    m_turretPID.SetReference(angle, rev::CANSparkMax::ControlType::kPosition);
+    
+        
+    if(m_elevationHomeLimitSwitch.Get() == true)
+    {
+        m_turretPID.SetReference(0.0, rev::CANSparkMax::ControlType::kPosition);
+    }
+    else
+    {
+        m_turretPID.SetReference(angle, rev::CANSparkMax::ControlType::kPosition);
+    }
+
+   
 }
 void Arm::TurretSetPower(float power) 
 {
