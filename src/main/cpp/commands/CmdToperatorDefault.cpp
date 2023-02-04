@@ -147,11 +147,13 @@ void CmdToperatorDefault::Execute()
   if(ClawIntake && !m_isIntaking)
   {
     m_claw->ClawSetPower(.3);
+    m_claw->ClawIntakeEnable(true);
     m_isIntaking = true;
   }
   else if(!ClawIntake && m_isIntaking)
   {
     m_claw->ClawSetPower(0);
+    m_claw->ClawIntakeEnable(false);
     m_isIntaking = false;
   }
 

@@ -19,7 +19,7 @@ void Claw::ClawSetPower(float power)
 }
 float Claw::ClawGetCurrent(void)
 {
-
+    return 0;
 }
 float Claw::ClawGetPower(void)
 {
@@ -38,7 +38,7 @@ void Claw::WristSetPosition(float position)
 }
 float Claw::WristGetPosition(void)
 {
-
+    return 0;
 }
 
 bool Claw::ReadSensorState(void)  //Change Later

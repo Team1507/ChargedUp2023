@@ -29,14 +29,17 @@ void Arm::TurretSetEncoder(float encoder)
 float Arm::TurretGetPower(void) 
 {
     //m_turret.GetMotorOutputPercent();
+    return 0;
 } 
 float Arm::TurretGetAngle(void) 
 {
    // m_turret.GetSelectedSensorPosition();
+   return 0;
 } 
 float Arm::TurretGetEncoder(void) 
 {
    // m_turret.GetSelectedSensorPosition();
+   return 0;
 }
  
 //***********************************ARM*********************************
