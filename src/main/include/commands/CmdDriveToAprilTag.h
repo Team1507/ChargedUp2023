@@ -8,7 +8,7 @@
 class CmdDriveToAprilTag
     : public frc2::CommandHelper<frc2::CommandBase, CmdDriveToAprilTag> {
  public:
-  CmdDriveToAprilTag(Drivetrain *drivetrain, Camera *camera,float power);
+  CmdDriveToAprilTag(Drivetrain *drivetrain, Camera *Camera,float power);
 
   void Initialize() override;
 
@@ -30,5 +30,5 @@ class CmdDriveToAprilTag
     bool m_fwrdMovementComplete;
 
     Drivetrain *m_drivetrain;
-    Camera *m_camera;
+    Camera *m_Camera;
 };

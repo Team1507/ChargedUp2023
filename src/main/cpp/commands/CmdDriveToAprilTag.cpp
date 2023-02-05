@@ -3,11 +3,11 @@
 
 #define ERROR 2
 
-CmdDriveToAprilTag::CmdDriveToAprilTag(Drivetrain *drivetrain, Camera *camera, float power) 
+CmdDriveToAprilTag::CmdDriveToAprilTag(Drivetrain *drivetrain, Camera *Camera, float power) 
 {
   m_power = power;
   m_drivetrain = drivetrain;
-  m_camera = camera;
+  m_Camera = Camera;
 
   AddRequirements({ drivetrain });
 }
@@ -16,7 +16,7 @@ CmdDriveToAprilTag::CmdDriveToAprilTag(Drivetrain *drivetrain, Camera *camera, f
 void CmdDriveToAprilTag::Initialize() 
 {
     
-    m_tagAngle = m_camera->TargetGetYaw();
+    m_tagAngle = m_Camera->TargetGetYaw();
     m_turnComplete = false;
     m_sideMoveComplete = false;
     m_fwrdMovementComplete = false;
@@ -26,7 +26,7 @@ void CmdDriveToAprilTag::Initialize()
 
 void CmdDriveToAprilTag::Execute() 
 {
-  if(m_camera->IsTarget())
+  if(m_Camera->IsTarget())
   {
   //********************************TURN TO GYRO******************************
     if(!m_turnComplete)
@@ -61,7 +61,7 @@ void CmdDriveToAprilTag::Execute()
       std::cout<<"ahhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh"<<std::endl;
       std::cout<<m_tagAngle<<std::endl;
       std::cout<<m_power<<std::endl;
-      m_tagAngle = m_camera->TargetGetYaw();
+      m_tagAngle = m_Camera->TargetGetYaw();
       if(m_tagAngle > 0 && !m_sideMoveComplete)
       {
         m_drivetrain->RobotcentricDrive(-m_power, 0, 0);
@@ -86,7 +86,7 @@ void CmdDriveToAprilTag::Execute()
     //****************************MOVE TOWARDS TARGET***********************
     if(m_sideMoveComplete)
     {
-      float m_distance = m_camera->TargetGetDistance();
+      float m_distance = m_Camera->TargetGetDistance();
       if(m_distance > .53)
       {
         m_drivetrain->RobotcentricDrive(0,m_power,0);

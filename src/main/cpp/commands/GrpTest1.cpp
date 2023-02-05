@@ -14,7 +14,7 @@
 #include "commands/CmdDriveStraightVelocity.h"
 
 
-GrpTest1::GrpTest1(Drivetrain *drivetrain) {
+GrpTest1::GrpTest1( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) {
   // AddCommands(FooCommand(), BarCommand());
 
   AddCommands

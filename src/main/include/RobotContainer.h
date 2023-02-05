@@ -54,12 +54,11 @@ class RobotContainer
   Camera         m_camera;
 
 
-
   frc2::Command* GetAutonomousCommand();
 
 
 //*********************AUTO**********************
- AutoDoNothing m_autoDoNothing {/*&m_drivetrain*/};
+ AutoDoNothing m_autoDoNothing {&m_drivetrain};
 
 
 

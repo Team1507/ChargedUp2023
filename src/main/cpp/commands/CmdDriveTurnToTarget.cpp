@@ -4,11 +4,11 @@
 #include <iostream>
 #include <math.h>
 
-CmdDriveTurnToTarget::CmdDriveTurnToTarget(Drivetrain *drivetrain, Camera *camera,float power) 
+CmdDriveTurnToTarget::CmdDriveTurnToTarget(Drivetrain *drivetrain, Camera *Camera,float power) 
 {
   m_power = power;
   m_drivetrain = drivetrain;
-  m_camera     = camera;
+  m_Camera     = Camera;
 
   AddRequirements({ drivetrain });
 }
@@ -16,7 +16,7 @@ CmdDriveTurnToTarget::CmdDriveTurnToTarget(Drivetrain *drivetrain, Camera *camer
 
 void CmdDriveTurnToTarget::Initialize() 
 {
-    m_angle     = m_camera->TargetGetYaw();
+    m_angle     = m_Camera->TargetGetYaw();
     m_calcAngle = m_angle + m_drivetrain->GetGyroAngle();
 }
 

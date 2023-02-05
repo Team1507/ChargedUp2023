@@ -13,9 +13,9 @@
 #include "subsystems/Claw.h"
 #include "subsystems/Pouch.h"
 
-class GrpTest2
+class AutoOverAndBack
     : public frc2::CommandHelper<frc2::SequentialCommandGroup,
-                                 GrpTest2> {
+                                 AutoOverAndBack> {
  public:
-  GrpTest2( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch );
+  AutoOverAndBack( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch );
 };

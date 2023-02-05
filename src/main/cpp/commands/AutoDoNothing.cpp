@@ -1,24 +1,18 @@
  #include "commands/AutoDoNothing.h"
  #include "commands/Autos.h"
  #include "commands/CmdPrintText.h"
- //#include "commands/CmdDriveClearAll.h"
+ #include "commands/CmdDriveClearAll.h"
 
- AutoDoNothing::AutoDoNothing(/*Drivetrain *drivetrain*/)
+ AutoDoNothing::AutoDoNothing(Drivetrain *drivetrain)
  {
    AddCommands(
 
-     //Auto Setup 
-      CmdPrintText("****** AutoDoNothing ******"),
-//     CmdDriveClearAll(drivetrain),
-
-     //Auto Commands here
+    //Auto Setup 
+    CmdPrintText("****** AutoDoNothing ******"),
+    CmdDriveClearAll(drivetrain),
 
 
-
-
-     //Clean up
-     CmdPrintText("AutoDoNothing Complete")
-
+    CmdPrintText("AutoDoNothing Complete")
    );
 
  }

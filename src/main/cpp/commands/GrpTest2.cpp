@@ -13,7 +13,7 @@
 #include "commands/CmdDriveTurn2Angle.h"
 
 
-GrpTest2::GrpTest2(Drivetrain *drivetrain) {
+GrpTest2::GrpTest2( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) {
   // AddCommands(FooCommand(), BarCommand());
 
   AddCommands

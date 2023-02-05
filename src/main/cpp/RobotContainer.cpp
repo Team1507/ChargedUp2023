@@ -42,8 +42,8 @@ RobotContainer::RobotContainer()
 
   //********************************Smart Dashboard Buttons**************************************
 
-  frc::SmartDashboard::PutData( "GrpTest1", new GrpTest1(&m_drivetrain));
-  frc::SmartDashboard::PutData( "GrpTest2", new GrpTest2(&m_drivetrain));
+  frc::SmartDashboard::PutData( "GrpTest1", new GrpTest1(&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch));
+  frc::SmartDashboard::PutData( "GrpTest2", new GrpTest2(&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch));
   frc::SmartDashboard::PutData( "CmdDriveClearAll",   new CmdDriveClearAll(&m_drivetrain));
 
   frc::SmartDashboard::PutData( "CmdDriveTypeToggle", new CmdDriveTypeToggle(&m_drivetrain));
