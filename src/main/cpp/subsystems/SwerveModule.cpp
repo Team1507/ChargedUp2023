@@ -21,7 +21,7 @@
 #define DRIVE_ENCODER_TICKS_PER_INCH      (1100)            //Needs to be verified
 
 
-//Drive PID
+//Drive Velocity PID
 const double DRIVE_PID_kF = 0.0475;
 const double DRIVE_PID_kP = 0.05;
 const double DRIVE_PID_kI = 0.0;

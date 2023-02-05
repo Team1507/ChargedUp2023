@@ -76,6 +76,29 @@ void Robot::TeleopPeriodic() {}
 
 void Robot::WriteToSmartDashboard(void)
 {
+
+  //XBox Controllers
+  frc::SmartDashboard::PutNumber("Xbox Left-Y",   (double)m_container.m_botDriver.GetLeftY()    ); 
+  frc::SmartDashboard::PutNumber("Xbox Left-X",   (double)m_container.m_botDriver.GetLeftX()    ); 
+  frc::SmartDashboard::PutNumber("Xbox Right-X",  (double)m_container.m_botDriver.GetRightX()   ); 
+  frc::SmartDashboard::PutBoolean("DriveType",    (bool)m_container.m_drivetrain.GetDriveType() ); 
+  //Nax-X
+  frc::SmartDashboard::PutBoolean("navx_IsConn",  m_container.m_drivetrain.IsGyroConnected() );
+  frc::SmartDashboard::PutNumber("navx_Yaw",      m_container.m_drivetrain.GetGyroYaw()      );
+  frc::SmartDashboard::PutNumber("navx_Angle",    m_container.m_drivetrain.GetGyroAngle()    );
+  frc::SmartDashboard::PutNumber("navx_Pitch",    m_container.m_drivetrain.GetGyroPitch()    );
+  frc::SmartDashboard::PutNumber("navx_Roll",     m_container.m_drivetrain.GetGyroRoll()     );
+  //Odometry
+  frc::SmartDashboard::PutNumber("odo_X",         m_container.m_drivetrain.GetOdometryX()    );
+  frc::SmartDashboard::PutNumber("odo_Y",         m_container.m_drivetrain.GetOdometryY()    );
+
+
+
+
+
+
+
+
   frc::SmartDashboard::PutBoolean("Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());
   frc::SmartDashboard::PutBoolean("Left Limit Switch", m_container.m_arm.TurretGetLeftLimitSW());
   frc::SmartDashboard::PutNumber("Turret Encoder", m_container.m_arm.TurretGetEncoder());

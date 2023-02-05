@@ -14,12 +14,16 @@
 #include "commands/CmdToperatorDefault.h"
 #include "commands/CmdDriveWithGamepad.h"
 
+#include "commands/CmdCalibrateSwerveEncoders.h"
+#include "commands/CmdDriveClearAll.h"
+#include "commands/CmdDriveTypeToggle.h"
+#include "commands/CmdDriveForceSteerAngle.h"
 
 RobotContainer::RobotContainer() 
 {
 
   //**************************** Subsystem Defaults****************************************
-  m_drivetrain.SetDefaultCommand(CmdDriveWithGamepad(& m_drivetrain, &m_botDriver));
+  m_drivetrain.SetDefaultCommand(CmdDriveWithGamepad(&m_drivetrain, &m_botDriver));
   m_claw.SetDefaultCommand(CmdClawDefault(&m_claw));
   m_arm.SetDefaultCommand(CmdArmDefault(&m_arm));
   m_pouch.SetDefaultCommand(CmdPouchDefault(&m_pouch));
@@ -37,6 +41,16 @@ RobotContainer::RobotContainer()
   //********************************Smart Dashboard Buttons**************************************
 
 
+  frc::SmartDashboard::PutData( "CmdDriveClearAll",   new CmdDriveClearAll(&m_drivetrain));
+
+  frc::SmartDashboard::PutData( "CmdDriveTypeToggle", new CmdDriveTypeToggle(&m_drivetrain));
+
+
+  //Smartdashboard SwerveDrive test/calibration buttons
+  frc::SmartDashboard::PutData( "SteerAngle=0",       new CmdDriveForceSteerAngle(&m_drivetrain,0.0));
+  frc::SmartDashboard::PutData( "SteerAngle=90",      new CmdDriveForceSteerAngle(&m_drivetrain,90.0));
+  frc::SmartDashboard::PutData( "CmdCalSwerveEnc_1",  new CmdCalibrateSwerveEncoders(&m_drivetrain,1));
+  frc::SmartDashboard::PutData( "CmdCalSwerveEnc_2",  new CmdCalibrateSwerveEncoders(&m_drivetrain,2));
 
 
   // Configure the button bindings

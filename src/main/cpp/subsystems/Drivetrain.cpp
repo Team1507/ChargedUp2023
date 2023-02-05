@@ -72,7 +72,7 @@ const vector_t moduleRotationVector[] = {
 
 Drivetrain::Drivetrain()
 {
-    frc::SmartDashboard::PutNumber("NORMALIZATION_POWER",0.9);
+    frc::SmartDashboard::PutNumber("NORMALIZATION_POWER",NORMALIZATION_POWER);
     m_driveType = ROBOTCENTRIC;
 
     //Setup module list
