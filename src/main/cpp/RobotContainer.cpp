@@ -12,16 +12,32 @@
 #include "commands/CmdArmDefault.h"
 #include "commands/CmdPouchDefault.h"
 #include "commands/CmdToperatorDefault.h"
+#include "commands/CmdDriveWithGamepad.h"
+
+
 RobotContainer::RobotContainer() 
 {
+
+  //**************************** Subsystem Defaults****************************************
+  m_drivetrain.SetDefaultCommand(CmdDriveWithGamepad(& m_drivetrain, &m_botDriver));
   m_claw.SetDefaultCommand(CmdClawDefault(&m_claw));
   m_arm.SetDefaultCommand(CmdArmDefault(&m_arm));
   m_pouch.SetDefaultCommand(CmdPouchDefault(&m_pouch));
   m_toperator.SetDefaultCommand(CmdToperatorDefault(&m_toperator, &m_topDriver, &m_claw, &m_arm, &m_pouch, &m_driverfeedback));
-  m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
   m_driverfeedback.SetDefaultCommand(CmdDriverFeedbackDefault(&m_driverfeedback, &m_topDriver, &m_claw));
+
+  //*************************************Auto**********************************************
+
+  m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
+
+  //m_chooser.AddOption("Auto Shoot Two Ball", &m_autoTwoBall);
+
   frc::SmartDashboard::PutData("Auto",&m_chooser);
-  // Initialize all of your commands and subsystems here
+
+  //********************************Smart Dashboard Buttons**************************************
+
+
+
 
   // Configure the button bindings
   ConfigureBindings();

@@ -11,6 +11,7 @@
 #include "subsystems/Claw.h"
 #include "subsystems/Pouch.h"
 #include "subsystems/Toperator.h"
+#include "subsystems/Drivetrain.h"
 #include "Constants.h"
 #include "subsystems/ExampleSubsystem.h"
 #include <frc/XboxController.h>
@@ -31,20 +32,26 @@ class RobotContainer
  public:
   RobotContainer();
 
-ExampleSubsystem m_subsystem;
-    // The robot's subsystems are defined here...
+  ExampleSubsystem m_subsystem;
 
-  frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev};
+  //****************Controllers*******************
   frc::XboxController m_botDriver{0};
   frc::XboxController m_topDriver{1};
+
+
+  frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev};
+
+  //****************Subsystems*******************
+  Drivetrain     m_drivetrain;
   DriverFeedback m_driverfeedback {&m_topDriver};
-  Arm m_arm;
-  Claw m_claw{&m_pdh};
-  Pouch m_pouch;
-  Toperator m_toperator;
+  Arm            m_arm;
+  Claw           m_claw{&m_pdh};
+  Pouch          m_pouch;
+  Toperator      m_toperator;
+
+
+
   frc2::Command* GetAutonomousCommand();
-
-
 
 
 //*********************AUTO**********************
