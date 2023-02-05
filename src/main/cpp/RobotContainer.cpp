@@ -18,6 +18,8 @@
 #include "commands/CmdDriveClearAll.h"
 #include "commands/CmdDriveTypeToggle.h"
 #include "commands/CmdDriveForceSteerAngle.h"
+#include "commands/GrpTest1.h"
+#include "commands/GrpTest2.h"
 
 RobotContainer::RobotContainer() 
 {
@@ -40,7 +42,8 @@ RobotContainer::RobotContainer()
 
   //********************************Smart Dashboard Buttons**************************************
 
-
+  frc::SmartDashboard::PutData( "GrpTest1", new GrpTest1(&m_drivetrain));
+  frc::SmartDashboard::PutData( "GrpTest2", new GrpTest2(&m_drivetrain));
   frc::SmartDashboard::PutData( "CmdDriveClearAll",   new CmdDriveClearAll(&m_drivetrain));
 
   frc::SmartDashboard::PutData( "CmdDriveTypeToggle", new CmdDriveTypeToggle(&m_drivetrain));
