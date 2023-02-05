@@ -12,13 +12,16 @@
 #include "subsystems/Pouch.h"
 #include "subsystems/Toperator.h"
 #include "subsystems/Drivetrain.h"
+#include "subsystems/Camera.h"
 #include "Constants.h"
 #include "subsystems/ExampleSubsystem.h"
 #include <frc/XboxController.h>
-#include "commands/AutoDoNothing.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/PowerDistribution.h>
+
+//Autos
+#include "commands/AutoDoNothing.h"
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -48,6 +51,7 @@ class RobotContainer
   Claw           m_claw{&m_pdh};
   Pouch          m_pouch;
   Toperator      m_toperator;
+  Camera         m_camera;
 
 
 
