@@ -29,7 +29,7 @@ const double DRIVE_PID_kD = 0.0;
 
 //Steer PID
 const double STEER_PID_kF = 0.0;
-const double STEER_PID_kP = 0.075;
+const double STEER_PID_kP = 0.125;      //0.075;
 const double STEER_PID_kI = 0.0;
 const double STEER_PID_kD = 0.0;
 
@@ -77,7 +77,7 @@ SwerveModule::SwerveModule(int driveMotorCanID, int steerMotorCanID, int steerEn
     m_steerMotor.Config_kI(0, STEER_PID_kI, 10);
     m_steerMotor.Config_kD(0, STEER_PID_kD, 10);
 
-    //m_steerMotor.ConfigAllowableClosedloopError( 0, 0.25 * STEER_ENCODER_TICKS_PER_DEGREE, 10 );
+    m_steerMotor.ConfigAllowableClosedloopError( 0, 0.25 * STEER_ENCODER_TICKS_PER_DEGREE, 10 );
 
 
 

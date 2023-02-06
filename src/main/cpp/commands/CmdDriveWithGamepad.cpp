@@ -8,7 +8,7 @@
 
 #include <iostream>
 
-//#define VELOCITY_CONTROL_MODE    //Uncomment for Velocity Control Mode
+#define VELOCITY_CONTROL_MODE    //Uncomment for Velocity Control Mode
 
 CmdDriveWithGamepad::CmdDriveWithGamepad(Drivetrain *drivetrain, frc::XboxController *botDriver)
 {
