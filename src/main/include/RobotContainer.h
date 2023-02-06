@@ -14,7 +14,6 @@
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Camera.h"
 #include "Constants.h"
-#include "subsystems/ExampleSubsystem.h"
 #include <frc/XboxController.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/smartdashboard/SendableChooser.h>
@@ -39,7 +38,6 @@ class RobotContainer
  public:
   RobotContainer();
 
-  ExampleSubsystem m_subsystem;
 
   //****************Controllers*******************
   frc::XboxController m_botDriver{0};
@@ -76,9 +74,6 @@ class RobotContainer
 
 
  private:
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  frc2::CommandXboxController m_driverController{
-  OperatorConstants::kDriverControllerPort};
   frc::SendableChooser<frc2::Command*> m_chooser;
 
   void ConfigureBindings();

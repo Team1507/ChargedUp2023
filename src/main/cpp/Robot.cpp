@@ -26,14 +26,7 @@ void Robot::RobotInit()
 
 }
 
-/**
- * This function is called every 20 ms, no matter the mode. Use
- * this for items like diagnostics that you want to run during disabled,
- * autonomous, teleoperated and test.
- *
- * <p> This runs after the mode specific periodic functions, but before
- * LiveWindow and SmartDashboard integrated updating.
- */
+
 void Robot::RobotPeriodic()
  {
   frc2::CommandScheduler::GetInstance().Run();
@@ -41,11 +34,7 @@ void Robot::RobotPeriodic()
 
 }
 
-/**
- * This function is called once each time the robot enters Disabled mode. You
- * can use it to reset any subsystem information you want to clear when the
- * robot is disabled.
- */
+
 void Robot::DisabledInit() 
 {
   std::cout<<"Disabled Init"<<std::endl;
@@ -53,36 +42,31 @@ void Robot::DisabledInit()
  
 void Robot::DisabledPeriodic() {}
 
-/**
- * This autonomous runs the autonomous command selected by your {@link
- * RobotContainer} class.
- */
+
 void Robot::AutonomousInit() 
 {
+   std::cout<<" **** Auto Init ******"<<std::endl;
+
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand) {
     m_autonomousCommand->Schedule();
   }
-
-   std::cout<<" **** Auto Init ******"<<std::endl;
-  
 }
 
 void Robot::AutonomousPeriodic() {}
 
 void Robot::TeleopInit() 
 {
-   std::cout<<"Teleop Init"<<std::endl;
+  std::cout<<"Teleop Init"<<std::endl;
   if (m_autonomousCommand) {
     m_autonomousCommand->Cancel();
   }
  }
 
-/**
- * This function is called periodically during operator control.
- */
+
 void Robot::TeleopPeriodic() {}
+
 
 void Robot::WriteToSmartDashboard(void)
 {
