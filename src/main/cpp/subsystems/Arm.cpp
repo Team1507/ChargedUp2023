@@ -113,6 +113,21 @@ void Arm::ExtensionSetPosition(bool position)
         m_armExtension.Set(frc::DoubleSolenoid::kReverse);
     }
 } 
+
+
+void Arm::AirSpringSetPosition(bool position)
+{
+    if(position == true)
+    {
+        m_airSpring.Set(frc::DoubleSolenoid::kForward);
+    }
+    if(position == false)
+    {
+        m_airSpring.Set(frc::DoubleSolenoid::kReverse);
+    }
+}
+
+
 bool Arm::ElevationHomeLimitSwitch(void)
 {
     return m_elevationHomeLimitSwitch.Get();

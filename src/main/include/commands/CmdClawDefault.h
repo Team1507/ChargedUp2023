@@ -31,5 +31,6 @@ class CmdClawDefault
 
 Claw *m_claw;
 
+bool m_isIntaking;
 
 };

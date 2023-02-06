@@ -56,8 +56,8 @@
 #define PCM_LOWER_ARM_RETRACT_ID        3
 #define PCM_UPPER_ARM_EXTEND_ID         4
 #define PCM_UPPER_ARM_RETRACT_ID        5
-
-
+#define PCM_AIR_SPRING_EXTEND_ID        6
+#define PCM_AIR_SPRING_RETRACT_ID       7
 
 //********** DIO Ports **********
 #define DIO_CLAW_DETECT_ID                  0   //Cube

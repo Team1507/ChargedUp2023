@@ -45,7 +45,10 @@ void Claw::ClawIntakeEnable(bool enable)
 {
     m_intakeEnabled = enable;
 }
-
+bool Claw::ClawIntakeGetEnable(void)
+{
+    return m_intakeEnabled; 
+}
 //***********************************WRIST*******************************************
 
 void Claw::WristSetPosition(float position) 

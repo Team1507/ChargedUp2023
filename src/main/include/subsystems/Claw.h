@@ -24,6 +24,7 @@ class Claw : public frc2::SubsystemBase {
   float ClawGetPower(void);
   float ClawGetCurrent(void);
   void ClawIntakeEnable(bool enable);
+  bool ClawIntakeGetEnable(void);
 
 
   //***********************************Wrist*******************************************
