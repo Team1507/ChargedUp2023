@@ -26,11 +26,13 @@ RobotContainer::RobotContainer()
 
   //**************************** Subsystem Defaults****************************************
   m_drivetrain.SetDefaultCommand(CmdDriveWithGamepad(&m_drivetrain, &m_botDriver));
+#ifndef DRIVETRAIN_ONLY
   m_claw.SetDefaultCommand(CmdClawDefault(&m_claw));
   m_arm.SetDefaultCommand(CmdArmDefault(&m_arm));
   m_pouch.SetDefaultCommand(CmdPouchDefault(&m_pouch));
   m_toperator.SetDefaultCommand(CmdToperatorDefault(&m_toperator, &m_topDriver, &m_claw, &m_arm, &m_pouch, &m_driverfeedback));
   m_driverfeedback.SetDefaultCommand(CmdDriverFeedbackDefault(&m_driverfeedback, &m_topDriver, &m_claw));
+#endif
 
   //*************************************Auto**********************************************
 
@@ -41,13 +43,15 @@ RobotContainer::RobotContainer()
   frc::SmartDashboard::PutData("Auto",&m_chooser);
 
   //********************************Smart Dashboard Buttons**************************************
-
+#ifndef DRIVETRAIN_ONLY
   frc::SmartDashboard::PutData( "GrpTest1", new GrpTest1(&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch));
   frc::SmartDashboard::PutData( "GrpTest2", new GrpTest2(&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch));
+#endif
+
+
+
   frc::SmartDashboard::PutData( "CmdDriveClearAll",   new CmdDriveClearAll(&m_drivetrain));
-
   frc::SmartDashboard::PutData( "CmdDriveTypeToggle", new CmdDriveTypeToggle(&m_drivetrain));
-
 
   //Smartdashboard SwerveDrive test/calibration buttons
   frc::SmartDashboard::PutData( "SteerAngle=0",       new CmdDriveForceSteerAngle(&m_drivetrain,0.0));

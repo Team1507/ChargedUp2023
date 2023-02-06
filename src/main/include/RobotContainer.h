@@ -23,6 +23,10 @@
 //Autos
 #include "commands/AutoDoNothing.h"
 
+
+//Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
+#define DRIVETRAIN_ONLY
+
 /**
  * This class is where the bulk of the robot should be declared.  Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -39,20 +43,23 @@ class RobotContainer
 
   //****************Controllers*******************
   frc::XboxController m_botDriver{0};
+
+#ifndef DRIVETRAIN_ONLY
   frc::XboxController m_topDriver{1};
-
-
   frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev};
+#endif
 
   //****************Subsystems*******************
   Drivetrain     m_drivetrain;
+
+#ifndef DRIVETRAIN_ONLY
   DriverFeedback m_driverfeedback {&m_topDriver};
   Arm            m_arm;
   Claw           m_claw{&m_pdh};
   Pouch          m_pouch;
   Toperator      m_toperator;
   Camera         m_camera;
-
+#endif
 
   frc2::Command* GetAutonomousCommand();
 

@@ -98,11 +98,12 @@ void Robot::WriteToSmartDashboard(void)
 
 
 
-
+#ifndef DRIVETRAIN_ONLY
   frc::SmartDashboard::PutBoolean("Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());
   frc::SmartDashboard::PutBoolean("Left Limit Switch", m_container.m_arm.TurretGetLeftLimitSW());
   frc::SmartDashboard::PutNumber("Turret Encoder", m_container.m_arm.TurretGetEncoder());
   frc::SmartDashboard::PutNumber("Turret Angle", m_container.m_arm.TurretGetAngle());
+#endif
 }
 
 
