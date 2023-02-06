@@ -21,8 +21,8 @@ class Pouch : public frc2::SubsystemBase {
   void SetRampPosition(bool deploy);
   void DeployIntake(void);
   void RetractIntake(void);
-  void OpenOuterIntake(void);
-  void CloseOuterIntake(void);
+
+
   /**
    * Will be called periodically whenever the CommandScheduler runs.
    */
@@ -37,18 +37,16 @@ class Pouch : public frc2::SubsystemBase {
     rev::SparkMaxRelativeEncoder m_innerEncoder = m_inner.GetEncoder();
     rev::SparkMaxPIDController   m_innerPIDController = m_inner.GetPIDController();
 
-    frc::DoubleSolenoid m_leftOuterIntake {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LEFT_OUTER_INTAKE_DEPLOY_ID, PCM_LEFT_OUTER_INTAKE_RETRACT_ID};
-    frc::DoubleSolenoid m_rightOuterIntake {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RIGHT_OUTER_INTAKE_DEPLOY_ID, PCM_RIGHT_OUTER_INTAKE_RETRACT_ID};
-    frc::DoubleSolenoid m_leftOuterIntakeClose {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LEFT_OUTER_INTAKE_CLOSE_DEPLOY_ID, PCM_LEFT_OUTER_INTAKE_CLOSE_RETRACT_ID};
-    frc::DoubleSolenoid m_rightOuterIntakeClose {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RIGHT_OUTER_INTAKE_CLOSE_DEPLOY_ID, PCM_RIGHT_OUTER_INTAKE_CLOSE_RETRACT_ID};
-    
-    frc::DoubleSolenoid m_ramp {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RAMP_DEPLOY_ID, PCM_RAMP_RETRACT_ID};
+
+
+    frc::DoubleSolenoid m_OuterIntake {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_OUTER_INTAKE_DEPLOY_ID, PCM_OUTER_INTAKE_RETRACT_ID};
+    frc::DoubleSolenoid m_ramp        {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RAMP_DEPLOY_ID, PCM_RAMP_RETRACT_ID};
 
 
 
 
 
-    frc::DigitalInput m_gamePieceDetect{DIO_GAME_PIECE_DETECT_ID};
+    frc::DigitalInput m_gamePieceDetect{DIO_POUCH_DETECT_ID};
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };

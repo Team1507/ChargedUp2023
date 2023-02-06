@@ -45,24 +45,12 @@ if( deploy == false)
 }
 void Pouch::DeployIntake(void)
 {
-  m_leftOuterIntake.Set(frc::DoubleSolenoid::kForward);
-  m_rightOuterIntake.Set(frc::DoubleSolenoid::kForward);
-    
+  m_OuterIntake.Set(frc::DoubleSolenoid::kForward);   
 }
 void Pouch::RetractIntake(void)
 {
-  m_leftOuterIntake.Set(frc::DoubleSolenoid::kReverse);
-  m_rightOuterIntake.Set(frc::DoubleSolenoid::kReverse);
+  m_OuterIntake.Set(frc::DoubleSolenoid::kReverse);
 }
-void Pouch::OpenOuterIntake(void)
-{
-  m_leftOuterIntakeClose.Set(frc::DoubleSolenoid::kReverse);
-  m_rightOuterIntakeClose.Set(frc::DoubleSolenoid::kReverse);
-}
-void Pouch::CloseOuterIntake(void)
-{
-  m_leftOuterIntakeClose.Set(frc::DoubleSolenoid::kForward);
-  m_rightOuterIntakeClose.Set(frc::DoubleSolenoid::kForward);
-}
+
 // This method will be called once per scheduler run
 void Pouch::Periodic() {}

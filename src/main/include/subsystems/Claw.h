@@ -44,7 +44,7 @@ class Claw : public frc2::SubsystemBase {
   rev::SparkMaxPIDController m_wristPID = m_wrist.GetPIDController();
   rev::SparkMaxLimitSwitch m_wristFWDLimit = m_wrist.GetForwardLimitSwitch(rev::SparkMaxLimitSwitch::Type::kNormallyOpen);
   rev::SparkMaxLimitSwitch m_wristREVLimit = m_wrist.GetReverseLimitSwitch(rev::SparkMaxLimitSwitch::Type::kNormallyClosed);
-  frc::DigitalInput m_clawGamePiece {DIO_CLAW_GAME_PIECE_ID};
+  frc::DigitalInput m_clawGamePiece {DIO_CLAW_DETECT_ID};
   bool m_intakeEnabled;
   #define CLAW_INTAKE_POWER 0.0; //!!! CHANGE LATER !!!
   #define CLAW_EJECT_POWER 0.0; //!!! CHANGE LATER !!!

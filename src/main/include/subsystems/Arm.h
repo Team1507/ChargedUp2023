@@ -42,7 +42,7 @@ class Arm : public frc2::SubsystemBase
   rev::SparkMaxLimitSwitch     m_turretFWDLimit = m_turret.GetForwardLimitSwitch(rev::SparkMaxLimitSwitch::Type::kNormallyOpen);
   rev::SparkMaxLimitSwitch     m_turretREVLimit = m_turret.GetReverseLimitSwitch(rev::SparkMaxLimitSwitch::Type::kNormallyOpen);
 
-  frc::DoubleSolenoid          m_lowerArm {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LOWER_ARM_DEPLOY_ID, PCM_LOWER_ARM_RETRACT_ID};
-  frc::DoubleSolenoid          m_upperArm {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_UPPER_ARM_DEPLOY_ID, PCM_UPPER_ARM_RETRACT_ID};
-  frc::DoubleSolenoid          m_armExtension {CAN_PCM_ID, frc::PneumaticsModuleType::CTREPCM, PCM_ARM_EXTENSION_DEPLOY_ID, PCM_ARM_EXTENSION_RETRACT_ID};
+  frc::DoubleSolenoid          m_lowerArm {CAN_PCM2_ID, frc::PneumaticsModuleType::CTREPCM, PCM_LOWER_ARM_EXTEND_ID, PCM_LOWER_ARM_RETRACT_ID};
+  frc::DoubleSolenoid          m_upperArm {CAN_PCM2_ID, frc::PneumaticsModuleType::CTREPCM, PCM_UPPER_ARM_EXTEND_ID, PCM_UPPER_ARM_RETRACT_ID};
+  frc::DoubleSolenoid          m_armExtension {CAN_PCM2_ID, frc::PneumaticsModuleType::CTREPCM, PCM_ARM_EXTENSION_EXTEND_ID, PCM_ARM_EXTENSION_RETRACT_ID};
 };
