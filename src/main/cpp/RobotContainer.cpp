@@ -26,6 +26,7 @@ RobotContainer::RobotContainer()
 
   //**************************** Subsystem Defaults****************************************
   m_drivetrain.SetDefaultCommand(CmdDriveWithGamepad(&m_drivetrain, &m_botDriver));
+  
 #ifndef DRIVETRAIN_ONLY
   m_claw.SetDefaultCommand(CmdClawDefault(&m_claw));
   m_arm.SetDefaultCommand(CmdArmDefault(&m_arm));

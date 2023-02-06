@@ -15,9 +15,9 @@
 #define FRONT_RIGHT_STEER_MOTOR_CAN_ID     5
 #define FRONT_RIGHT_STEER_ENCODER_CAN_ID   6
 //------------------------------------------
-#define REAR_LEFT_DRIVE_MOTOR_CAN_ID       6
-#define REAR_LEFT_STEER_MOTOR_CAN_ID       7
-#define REAR_LEFT_STEER_ENCODER_CAN_ID     8
+#define REAR_LEFT_DRIVE_MOTOR_CAN_ID       7
+#define REAR_LEFT_STEER_MOTOR_CAN_ID       8
+#define REAR_LEFT_STEER_ENCODER_CAN_ID     9
 //------------------------------------------
 #define REAR_RIGHT_DRIVE_MOTOR_CAN_ID      10
 #define REAR_RIGHT_STEER_MOTOR_CAN_ID      11

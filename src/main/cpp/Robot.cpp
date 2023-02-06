@@ -14,6 +14,16 @@ void Robot::RobotInit()
   std::cout<<"FRC2023: ChargedUp"<<std::endl;
   std::cout<<"Version: " << __DATE__ <<"  "<<__TIME__<<std::endl<<std::endl; 
 
+  //Subsystem Initialization
+  m_container.m_drivetrain.Stop();
+  m_container.m_drivetrain.HardResetDriveEncoders();
+  //m_container.m_drivetrain.ResetDriveEncoders();
+  m_container.m_drivetrain.ResetSteerEncoders();
+  m_container.m_drivetrain.ZeroGyro(); 
+  m_container.m_drivetrain.ResetOdometry();
+
+
+
 }
 
 /**
@@ -94,10 +104,6 @@ void Robot::WriteToSmartDashboard(void)
 
 
 
-
-
-
-
 #ifndef DRIVETRAIN_ONLY
   frc::SmartDashboard::PutBoolean("Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());
   frc::SmartDashboard::PutBoolean("Left Limit Switch", m_container.m_arm.TurretGetLeftLimitSW());
@@ -107,19 +113,10 @@ void Robot::WriteToSmartDashboard(void)
 }
 
 
-/**
- * This function is called periodically during test mode.
- */
+
+
 void Robot::TestPeriodic() {}
-
-/**
- * This function is called once when the robot is first started up.
- */
 void Robot::SimulationInit() {}
-
-/**
- * This function is called periodically whilst in simulation.
- */
 void Robot::SimulationPeriodic() {}
 
 #ifndef RUNNING_FRC_TESTS
