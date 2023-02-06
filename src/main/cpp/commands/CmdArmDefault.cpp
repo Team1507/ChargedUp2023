@@ -18,7 +18,13 @@ void CmdArmDefault::Initialize()
 }
 
 // Called repeatedly when this Command is scheduled to run
-void CmdArmDefault::Execute() {}
+void CmdArmDefault::Execute() 
+{
+  if (m_arm->TurretGetLeftLimitSW())
+  {
+    m_arm->TurretSetEncoder(0);
+  }
+}
 
 // Called once the command ends or is interrupted.
 void CmdArmDefault::End(bool interrupted) {}
