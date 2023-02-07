@@ -21,7 +21,7 @@ class Camera : public frc2::SubsystemBase {
 
   int AprilTagGetID(void);
 
-  void PipelineSetIndex(int index);
+  void PipelineSetIndex(CameraIndex index);
   int PipelineGetIndex(void);
 
  private:
