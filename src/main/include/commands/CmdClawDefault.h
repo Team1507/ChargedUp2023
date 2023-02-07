@@ -32,5 +32,6 @@ class CmdClawDefault
 Claw *m_claw;
 
 bool m_isIntaking;
+int m_delay;
 
 };
