@@ -7,6 +7,8 @@
 #include <iostream>
 #define CLAW_INTAKE_POWER 0.5
 
+#define CLAW_STALL_CURRENT 5 //To Be changed
+
 
 CmdClawDefault::CmdClawDefault(Claw *claw) 
 {
@@ -18,6 +20,7 @@ CmdClawDefault::CmdClawDefault(Claw *claw)
 void CmdClawDefault::Initialize() 
 {
  std::cout<<"Claw :3"<<std::endl;
+ m_delay = 50; // To Be Changed
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -27,8 +30,22 @@ void CmdClawDefault::Execute()
   {
     m_claw->ClawSetPower(CLAW_INTAKE_POWER);
     m_isIntaking = true;
+    m_delay = 50;
   }
   else if(!m_claw->ClawIntakeGetEnable() && m_isIntaking)
+  {
+    m_claw->ClawSetPower(0.0);
+    m_isIntaking = false;
+  }
+  else if(m_claw->ClawGetCurrent() > CLAW_STALL_CURRENT)
+  {
+    m_claw->ClawIntakeEnable(false);
+  }
+  else if(m_claw->ReadSensorState() && m_delay > 0)
+  {
+    m_delay--;
+  }
+  else if(m_claw->ReadSensorState() && m_delay <= 0)
   {
     m_claw->ClawSetPower(0.0);
     m_isIntaking = false;

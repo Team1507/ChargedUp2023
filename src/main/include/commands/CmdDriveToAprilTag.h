@@ -25,9 +25,11 @@ class CmdDriveToAprilTag
 
     float m_calcAngle;
     int m_delay;
-    bool m_turnComplete;
-    bool m_sideMoveComplete;
-    bool m_fwrdMovementComplete;
+    // bool m_turnComplete;
+    // bool m_sideMoveComplete;
+    // bool m_fwrdMovementComplete;
+
+    int m_currState;
 
     Drivetrain *m_drivetrain;
     Camera *m_Camera;

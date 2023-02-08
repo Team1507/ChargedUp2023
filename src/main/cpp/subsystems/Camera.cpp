@@ -45,7 +45,7 @@ int Camera::AprilTagGetID(void)
     return target.GetFiducialId();
 }
 
-void Camera::PipelineSetIndex(int index)
+void Camera::PipelineSetIndex(CameraIndex index)
 {
     camera.SetPipelineIndex(index); //Cube = 1  AprilTag = 0  Cone = 2
 }

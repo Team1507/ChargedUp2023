@@ -4,7 +4,7 @@
 #define POUCH_TURRET_LIMIT 5
 
 
-CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxController *topDriver, Claw *claw, Arm *arm, Pouch *pouch, DriverFeedback *driverfeedback) 
+CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxController *topDriver, Claw *claw, Arm *arm, Pouch *pouch, Camera *camera, DriverFeedback *driverfeedback) 
 {
   AddRequirements(toperator);
   m_toperator      = toperator;
@@ -13,6 +13,7 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_arm            = arm;
   m_pouch          = pouch;
   m_driverFeedback = driverfeedback;
+  m_Camera         = camera;
 
 
   m_isIntaking          = false;
@@ -127,15 +128,19 @@ void CmdToperatorDefault::Execute()
       switch(DpadState)
       {
         case 0 : // up
+          m_Camera->PipelineSetIndex(CameraIndex::AprilTag);
           m_isDpadCenter = false;
           break;
         case 90: // right
+          m_Camera->PipelineSetIndex(CameraIndex::Cone);
           m_isDpadCenter = false;
           break;
         case 180: // down
+          m_scoringHome->Schedule();
           m_isDpadCenter = false;
           break;
         case 270: // left
+          m_Camera->PipelineSetIndex(CameraIndex::Cube);
           m_isDpadCenter = false;
           break;
       }
