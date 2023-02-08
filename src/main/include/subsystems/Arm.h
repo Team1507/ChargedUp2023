@@ -18,10 +18,11 @@ class Arm : public frc2::SubsystemBase
  public:
   Arm();
   void Periodic() override;
+  bool m_isInPouch;
   //**********************************Turret******************************
-  void TurretTurn2Angle(float angle);
-  void TurretSetPower(float power);
-  void TurretSetEncoder(float encoder);
+  void  TurretTurn2Angle(float angle);
+  void  TurretSetPower(float power);
+  void  TurretSetEncoder(float encoder);
   
   float TurretGetPower(void);
   float TurretGetAngle(void);
@@ -29,10 +30,13 @@ class Arm : public frc2::SubsystemBase
   bool  TurretGetLeftLimitSW(void); 
   bool  TurretGetRightLimitSW(void);
   //***********************************ARM*********************************
-  void ElevationArmSetPosition(ArmLevel position);
-  void ExtensionSetPosition(bool position);
-  void AirSpringSetPosition(bool position);
-  bool ElevationHomeLimitSwitch(void);
+  void  ElevationArmSetPosition(ArmLevel position);
+  void  ExtensionSetPosition(bool position);
+  void  AirSpringSetPosition(bool position);
+  bool  ElevationHomeLimitSwitch(void);
+  ArmLevel ElevationArmGetPosition(void);
+
+
 
  private:
   frc::DigitalInput m_elevationHomeLimitSwitch{DIO_ELEVATION_HOME_LIMIT_SWITCH_ID};
@@ -48,5 +52,5 @@ class Arm : public frc2::SubsystemBase
   frc::DoubleSolenoid          m_armExtension {CAN_PCM2_ID, frc::PneumaticsModuleType::CTREPCM, PCM_ARM_EXTENSION_EXTEND_ID, PCM_ARM_EXTENSION_RETRACT_ID};
 
   frc::DoubleSolenoid          m_airSpring {CAN_PCM2_ID, frc::PneumaticsModuleType::CTREPCM,  PCM_AIR_SPRING_EXTEND_ID, PCM_AIR_SPRING_RETRACT_ID}; // WRITE CODE FOR LATER THING
-
+  
 };

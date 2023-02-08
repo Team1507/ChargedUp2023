@@ -4,6 +4,8 @@
 #include <units/angle.h>
 #include <units/length.h>
 
+enum CameraIndex{AprilTag, Cube, Cone};
+
 class Camera : public frc2::SubsystemBase {
  public:
   Camera();
@@ -19,7 +21,7 @@ class Camera : public frc2::SubsystemBase {
 
   int AprilTagGetID(void);
 
-  void PipelineSetIndex(int index);
+  void PipelineSetIndex(CameraIndex index);
   int PipelineGetIndex(void);
 
  private:

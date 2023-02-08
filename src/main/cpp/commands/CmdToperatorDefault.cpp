@@ -4,7 +4,7 @@
 #define POUCH_TURRET_LIMIT 5
 
 
-CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxController *topDriver, Claw *claw, Arm *arm, Pouch *pouch, DriverFeedback *driverfeedback) 
+CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxController *topDriver, Claw *claw, Arm *arm, Pouch *pouch, Camera *camera, DriverFeedback *driverfeedback) 
 {
   AddRequirements(toperator);
   m_toperator      = toperator;
@@ -13,6 +13,7 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_arm            = arm;
   m_pouch          = pouch;
   m_driverFeedback = driverfeedback;
+  m_Camera         = camera;
 
 
   m_isIntaking          = false;
@@ -127,15 +128,19 @@ void CmdToperatorDefault::Execute()
       switch(DpadState)
       {
         case 0 : // up
+          m_Camera->PipelineSetIndex(CameraIndex::AprilTag);
           m_isDpadCenter = false;
           break;
         case 90: // right
+          m_Camera->PipelineSetIndex(CameraIndex::Cone);
           m_isDpadCenter = false;
           break;
         case 180: // down
+          m_scoringHome->Schedule();
           m_isDpadCenter = false;
           break;
         case 270: // left
+          m_Camera->PipelineSetIndex(CameraIndex::Cube);
           m_isDpadCenter = false;
           break;
       }
@@ -242,24 +247,28 @@ else if(PouchRamp && m_isRampActivated)
   
 //***************************TURRET MANUAL*******************
 
-  if(TurretManual > .5)
-  {
-    m_arm->TurretSetPower(.9); // High speed to make up for the large gear ratio on the Neo
-    m_isTurret = true;
-  }
-  else if(TurretManual < -.5)
-  {
-    m_arm->TurretSetPower(-.9); // High speed to make up for the large gear ratio on the Neo
-    m_isTurret = true;
-  }
-  else if (TurretManual < .5 && TurretManual > -.5 && m_isTurret)
+  if (m_arm->ElevationArmGetPosition() == Level_Pouch)
   {
     m_arm->TurretSetPower(0);
-    m_isTurret = false;
   }
-
-
-    
+  else
+  {
+    if(TurretManual > .5)
+    {
+      m_arm->TurretSetPower(.9); // High speed to make up for the large gear ratio on the Neo
+      m_isTurret = true;
+    }
+    else if(TurretManual < -.5)
+    {
+      m_arm->TurretSetPower(-.9); // High speed to make up for the large gear ratio on the Neo
+      m_isTurret = true;
+    }
+    else if (TurretManual < .5 && TurretManual > -.5 && m_isTurret)
+    {
+      m_arm->TurretSetPower(0);
+      m_isTurret = false;
+    }
+  }
 }
 
 // Called once the command ends or is interrupted.

@@ -129,9 +129,31 @@ void Arm::AirSpringSetPosition(bool position)
         m_airSpring.Set(frc::DoubleSolenoid::kReverse);
     }
 }
-
+ 
 
 bool Arm::ElevationHomeLimitSwitch(void)
 {
     return m_elevationHomeLimitSwitch.Get();
+}
+
+ArmLevel Arm::ElevationArmGetPosition(void)
+{
+    if (m_lowerArm.Get() == frc::DoubleSolenoid::kForward && m_upperArm.Get() == frc::DoubleSolenoid::kForward)
+    {
+       return ArmLevel::Level_Pouch;
+    }
+    else if (m_lowerArm.Get() == frc::DoubleSolenoid::kReverse && m_upperArm.Get() == frc::DoubleSolenoid::kReverse)
+    {
+        return ArmLevel::High;
+    }
+    else if (m_lowerArm.Get() == frc::DoubleSolenoid::kReverse && m_upperArm.Get() == frc::DoubleSolenoid::kForward)
+    {
+        return ArmLevel::Mid;
+    }
+    else if (m_lowerArm.Get() == frc::DoubleSolenoid::kForward && m_upperArm.Get() == frc::DoubleSolenoid::kReverse)
+    {
+        return ArmLevel::Low;
+    }
+    
+    return ArmLevel::Level_Pouch;
 }
