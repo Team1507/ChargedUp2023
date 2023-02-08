@@ -11,6 +11,8 @@
 
 #include "Constants.h"
 
+
+
 class Drivetrain : public frc2::SubsystemBase {
  public:
   Drivetrain();
@@ -47,6 +49,7 @@ class Drivetrain : public frc2::SubsystemBase {
   bool   IsGyroBusy(void);            //Busy Calibrating
   float  GetGyroPitch(void);
   float  GetGyroRoll(void);
+  void   SetGyroOffset(float angle);
 
   //Odometry
   void   ResetOdometry(void);

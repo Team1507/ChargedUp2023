@@ -21,6 +21,7 @@ void Robot::RobotInit()
   m_container.m_drivetrain.ResetSteerEncoders();
   m_container.m_drivetrain.ZeroGyro(); 
   m_container.m_drivetrain.ResetOdometry();
+  m_container.m_drivetrain.SetGyroOffset(0); // CHANGE LATER!!!
 
 
 
@@ -52,6 +53,10 @@ void Robot::AutonomousInit()
   if (m_autonomousCommand) {
     m_autonomousCommand->Schedule();
   }
+    m_container.m_drivetrain.SetGyroOffset(0); // CHANGE LATER!!!
+
+
+
 }
 
 void Robot::AutonomousPeriodic() {}

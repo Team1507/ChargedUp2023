@@ -378,6 +378,12 @@ float Drivetrain::GetGyroPitch(void)
 float Drivetrain::GetGyroRoll(void)
 {
     return m_ahrs.GetRoll();
+    
+}
+
+void Drivetrain::SetGyroOffset(float angle)
+{
+    m_ahrs.SetAngleAdjustment(angle);
 }
 
 
