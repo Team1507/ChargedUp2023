@@ -11,5 +11,5 @@ CmdPouchIntakeSetPower::CmdPouchIntakeSetPower(Pouch *pouch, Pouch::WhatIntake t
 
 void CmdPouchIntakeSetPower::Initialize() 
 {
-  m_pouch->SetIntakePower(m_power, m_type);
+  m_pouch->IntakeSetPower(m_power, m_type);
 }

@@ -13,7 +13,7 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_arm            = arm;
   m_pouch          = pouch;
   m_driverFeedback = driverfeedback;
-  m_Camera         = camera;
+  m_camera         = camera;
 
 
   m_isIntaking          = false;
@@ -128,11 +128,11 @@ void CmdToperatorDefault::Execute()
       switch(DpadState)
       {
         case 0 : // up
-          m_Camera->PipelineSetIndex(CameraIndex::AprilTag);
+          m_camera->PipelineSetIndex(CameraIndex::AprilTag);
           m_isDpadCenter = false;
           break;
         case 90: // right
-          m_Camera->PipelineSetIndex(CameraIndex::Cone);
+          m_camera->PipelineSetIndex(CameraIndex::Cone);
           m_isDpadCenter = false;
           break;
         case 180: // down
@@ -140,7 +140,7 @@ void CmdToperatorDefault::Execute()
           m_isDpadCenter = false;
           break;
         case 270: // left
-          m_Camera->PipelineSetIndex(CameraIndex::Cube);
+          m_camera->PipelineSetIndex(CameraIndex::Cube);
           m_isDpadCenter = false;
           break;
       }
@@ -201,24 +201,24 @@ else if(ArmRetract)
 //***********************INTAKES*********************************
 if(InnerIntake && !m_isInnerIntaking)
 {
-  m_pouch->SetIntakePower(.3, Pouch::WhatIntake::Inner);
+  m_pouch->IntakeSetPower(.3, Pouch::WhatIntake::Inner);
   m_isInnerIntaking = true;
 }
 else if(!InnerIntake && m_isInnerIntaking)
 {
-  m_pouch->SetIntakePower(0, Pouch::WhatIntake::Inner);
+  m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Inner);
   m_isInnerIntaking = false;
 }
 if(OuterIntake && !m_isOuterIntaking)
 {
-  m_pouch->DeployIntake();
-  m_pouch->SetIntakePower(.3, Pouch::WhatIntake::Outer);
+  m_pouch->IntakeDeploy();
+  m_pouch->IntakeSetPower(.3, Pouch::WhatIntake::Outer);
   m_isOuterIntaking = false;
 }
 else if(!OuterIntake && m_isInnerIntaking)
 {
-  m_pouch->RetractIntake();
-  m_pouch->SetIntakePower(0, Pouch::WhatIntake::Outer);
+  m_pouch->IntakeRetract();
+  m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Outer);
   m_isOuterIntaking = true;
 }
 

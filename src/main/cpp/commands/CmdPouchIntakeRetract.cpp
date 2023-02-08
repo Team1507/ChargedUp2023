@@ -8,5 +8,5 @@ CmdPouchIntakeRetract::CmdPouchIntakeRetract(Pouch *pouch)
 
 void CmdPouchIntakeRetract::Initialize() 
 {
-  m_pouch->RetractIntake();
+  m_pouch->IntakeRetract();
 }

@@ -42,7 +42,7 @@ class CmdToperatorDefault
     Arm *m_arm;
     Pouch *m_pouch;
     DriverFeedback *m_driverFeedback;
-    Camera *m_Camera;
+    Camera *m_camera;
 
     bool m_isIntaking;
     bool m_isOuttaking;

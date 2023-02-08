@@ -6,6 +6,7 @@
 
 Pouch::Pouch() 
 {
+  m_isIntaking = false;
   m_inner.RestoreFactoryDefaults(); 
   m_innerEncoder.SetPosition(0.0); 
   m_innerPIDController.SetP(0.0); // change later
@@ -15,41 +16,55 @@ Pouch::Pouch()
   m_inner.SetOpenLoopRampRate(0.0); // change later
 }
 
-void Pouch::SetIntakePower(float power,WhatIntake type)
+void Pouch::IntakeSetPower(float power,WhatIntake type)
 {
-    if(WhatIntake::Inner == type)
-    {
-      m_inner.Set(power);  
-    } 
-    else if (WhatIntake::Outer == type)
-    {
-      m_outerLeft.Set(power);
-      m_outerRight.Set(power);
-    }
-}
-bool Pouch::ReadSensorState(void)
-{
-    return m_gamePieceDetect.Get();
-}
-void Pouch::SetRampPosition(bool deploy)
-{
-if( deploy == true )
-{
-  m_ramp.Set(frc::DoubleSolenoid::kForward);
-}
-if( deploy == false)
-{
-  m_ramp.Set(frc::DoubleSolenoid::kReverse);
+  if(WhatIntake::Inner == type)
+  {
+    m_inner.Set(power);  
+  } 
+  else if (WhatIntake::Outer == type)
+  {
+    m_outerLeft.Set(power);
+    m_outerRight.Set(power);
+  }
 }
 
-}
-void Pouch::DeployIntake(void)
+void Pouch::IntakeDeploy(void)
 {
   m_OuterIntake.Set(frc::DoubleSolenoid::kForward);   
 }
-void Pouch::RetractIntake(void)
+
+void Pouch::IntakeRetract(void)
 {
   m_OuterIntake.Set(frc::DoubleSolenoid::kReverse);
+}
+
+void Pouch::SetRampPosition(bool deploy)
+{
+  if( deploy == true )
+  {
+    m_ramp.Set(frc::DoubleSolenoid::kForward);
+  }
+  if( deploy == false)
+  {
+    m_ramp.Set(frc::DoubleSolenoid::kReverse);
+  }
+}
+
+bool Pouch::ReadSensorState(void)
+{
+  return m_gamePieceDetect.Get();
+}
+
+
+void Pouch::IntakeEnable(bool enable)
+{
+  m_isIntaking=enable;
+}
+
+bool Pouch::IntakeIsEnable(void)
+{
+  return m_isIntaking;
 }
 
 // This method will be called once per scheduler run

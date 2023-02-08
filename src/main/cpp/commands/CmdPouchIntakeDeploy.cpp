@@ -9,5 +9,5 @@ CmdPouchIntakeDeploy::CmdPouchIntakeDeploy(Pouch *pouch)
 // Called when the command is initially scheduled.
 void CmdPouchIntakeDeploy::Initialize() 
 {
-  m_pouch->DeployIntake();
+  m_pouch->IntakeDeploy();
 }

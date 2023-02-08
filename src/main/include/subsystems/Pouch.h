@@ -16,37 +16,32 @@ class Pouch : public frc2::SubsystemBase {
   Pouch();
   
   enum WhatIntake {Inner,Outer};
-  void SetIntakePower(float power,WhatIntake type);
-  bool ReadSensorState(void);
+  void IntakeSetPower(float power,WhatIntake type);
+  void IntakeEnable(bool enable);
+  bool IntakeIsEnable(void);
+
+  void IntakeDeploy(void);
+  void IntakeRetract(void);
+
   void SetRampPosition(bool deploy);
-  void DeployIntake(void);
-  void RetractIntake(void);
+  bool ReadSensorState(void);
 
-
-  /**
-   * Will be called periodically whenever the CommandScheduler runs.
-   */
   void Periodic() override;
 
  private:
-   WPI_VictorSPX m_outerLeft {CAN_POUCH_OUTER_LEFT_ID};
-   WPI_VictorSPX m_outerRight {CAN_POUCH_OUTER_RIGHT_ID};
- 
+  WPI_VictorSPX m_outerLeft {CAN_POUCH_OUTER_LEFT_ID};
+  WPI_VictorSPX m_outerRight {CAN_POUCH_OUTER_RIGHT_ID};
     
-    rev::CANSparkMax m_inner {CAN_POUCH_INNER_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
-    rev::SparkMaxRelativeEncoder m_innerEncoder = m_inner.GetEncoder();
-    rev::SparkMaxPIDController   m_innerPIDController = m_inner.GetPIDController();
+  rev::CANSparkMax m_inner {CAN_POUCH_INNER_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+  rev::SparkMaxRelativeEncoder m_innerEncoder = m_inner.GetEncoder();
+  rev::SparkMaxPIDController   m_innerPIDController = m_inner.GetPIDController();
 
+  frc::DoubleSolenoid m_OuterIntake {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_OUTER_INTAKE_DEPLOY_ID, PCM_OUTER_INTAKE_RETRACT_ID};
+  frc::DoubleSolenoid m_ramp        {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RAMP_DEPLOY_ID, PCM_RAMP_RETRACT_ID};
 
+  frc::DigitalInput m_gamePieceDetect{DIO_POUCH_DETECT_ID};
 
-    frc::DoubleSolenoid m_OuterIntake {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_OUTER_INTAKE_DEPLOY_ID, PCM_OUTER_INTAKE_RETRACT_ID};
-    frc::DoubleSolenoid m_ramp        {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RAMP_DEPLOY_ID, PCM_RAMP_RETRACT_ID};
-
-
-
-
-
-    frc::DigitalInput m_gamePieceDetect{DIO_POUCH_DETECT_ID};
+  bool m_isIntaking;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.
 };
