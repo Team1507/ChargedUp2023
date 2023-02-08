@@ -36,7 +36,6 @@ void CmdDriverFeedbackDefault::Execute()
     m_driverfeedback->Rumble(0.0);
     m_driverfeedback->UnderGlow(0,0,1);
   }
-  m_driverfeedback->Delete(m_xboxcontroller->GetLeftTriggerAxis());
 
   
 
@@ -60,7 +59,6 @@ void CmdDriverFeedbackDefault::Execute()
 void CmdDriverFeedbackDefault::End(bool interrupted) 
 {
   m_driverfeedback->UnderGlow(0,0,0);
-  m_driverfeedback->Delete(0.0);
 }
 
 // Returns true when the command should end.

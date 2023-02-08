@@ -28,7 +28,3 @@ void DriverFeedback::DriverFeedbackLED(int r, int g, int b)
 {
     
 }
-void DriverFeedback::Delete(double power)
-{
-    m_deleteMe.Set(ControlMode::PercentOutput,power);
-}

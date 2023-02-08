@@ -4,6 +4,7 @@
 
 #include "subsystems/Arm.h"
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <iostream>
 #define Ticks2Angle(ticks) (ticks) 
 #define Angle2Ticks(angle) (angle)
 Arm::Arm() 
@@ -30,7 +31,8 @@ void Arm::TurretTurn2Angle(float angle)
         
     if(m_elevationHomeLimitSwitch.Get() == true)
     {
-        m_turretPID.SetReference(0.0, rev::CANSparkMax::ControlType::kPosition);
+        m_turret.Set(0);
+        std::cout <<"elevation home limit swtich is pressed"<< std::endl;
     }
     else
     {
@@ -45,6 +47,7 @@ void Arm::TurretSetPower(float power)
     if(m_elevationHomeLimitSwitch.Get() == true)
     {
         m_turret.Set(0.0);
+        std::cout <<"elevation home limit swtich is pressed"<< std::endl;
     }
     else
     {

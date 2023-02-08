@@ -64,7 +64,7 @@ float Claw::WristGetCurrent(void)
     return m_pdh->GetCurrent(PDH_WRIST_PORT);
 }
 
-bool Claw::ReadSensorState(void)          //Change Later
+bool Claw::ReadSensorState(void) 
 {
     return m_clawGamePiece.Get();
 }

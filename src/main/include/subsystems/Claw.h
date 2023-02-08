@@ -11,6 +11,9 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/PowerDistribution.h>
 
+#define CLAW_INTAKE_POWER 0.0; //!!! CHANGE LATER !!!
+#define CLAW_EJECT_POWER 0.0; //!!! CHANGE LATER !!!
+
 class Claw : public frc2::SubsystemBase {
  public:
   Claw(frc::PowerDistribution *m_pdh);
@@ -47,8 +50,6 @@ class Claw : public frc2::SubsystemBase {
   rev::SparkMaxLimitSwitch m_wristREVLimit = m_wrist.GetReverseLimitSwitch(rev::SparkMaxLimitSwitch::Type::kNormallyClosed);
   frc::DigitalInput m_clawGamePiece {DIO_CLAW_DETECT_ID};
   bool m_intakeEnabled;
-  #define CLAW_INTAKE_POWER 0.0; //!!! CHANGE LATER !!!
-  #define CLAW_EJECT_POWER 0.0; //!!! CHANGE LATER !!!
   frc::PowerDistribution *m_pdh;
 
   // Components (e.g. motor controllers and sensors) should generally be
