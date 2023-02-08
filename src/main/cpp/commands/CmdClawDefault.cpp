@@ -5,8 +5,6 @@
 #include "commands/CmdClawDefault.h"
 #include "subsystems/Claw.h"
 #include <iostream>
-#define CLAW_INTAKE_POWER 0.5
-
 #define CLAW_STALL_CURRENT 5 //To Be changed
 
 

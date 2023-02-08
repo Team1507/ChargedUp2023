@@ -11,8 +11,8 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/PowerDistribution.h>
 
-#define CLAW_INTAKE_POWER 0.0; //!!! CHANGE LATER !!!
-#define CLAW_EJECT_POWER 0.0; //!!! CHANGE LATER !!!
+#define CLAW_INTAKE_POWER 0.0 //!!! CHANGE LATER !!!
+#define CLAW_EJECT_POWER 0.0 //!!! CHANGE LATER !!!
 
 class Claw : public frc2::SubsystemBase {
  public:

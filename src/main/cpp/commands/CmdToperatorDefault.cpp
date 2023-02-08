@@ -178,7 +178,7 @@ void CmdToperatorDefault::Execute()
   if(WristManual < -.6)
   {
     float wristPosition = m_claw->WristGetPosition();
-    m_claw->WristSetPosition(wristPosition + WRIST_DELTA);
+    m_claw->WristSetPosition(wristPosition - WRIST_DELTA);
   }
 //***********************ARM LEVEL MANUAL***********************
 if(XButtonPressed)
