@@ -54,7 +54,7 @@ class RobotContainer
   DriverFeedback m_driverfeedback {&m_topDriver};
   Arm            m_arm;
   Claw           m_claw{&m_pdh};
-  Pouch          m_pouch;
+  Pouch          m_pouch{&m_pdh};
   Toperator      m_toperator;
   Camera         m_camera;
 #endif

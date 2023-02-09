@@ -10,10 +10,13 @@
 #include <frc/DoubleSolenoid.h>
 #include <frc/PneumaticsModuleType.h>
 #include "ctre/Phoenix.h"
+#include <frc/PowerDistribution.h>
+#define INNER_INTAKE_POWER 0.3
+#define INNER_INTAKE_CURRENT_LIMIT 2
 
 class Pouch : public frc2::SubsystemBase {
  public:
-  Pouch();
+  Pouch(frc::PowerDistribution *pdh);
   
   enum WhatIntake {Inner,Outer};
   void IntakeSetPower(float power,WhatIntake type);
@@ -25,13 +28,13 @@ class Pouch : public frc2::SubsystemBase {
 
   void SetRampPosition(bool deploy);
   bool ReadSensorState(void);
-
+  
   void Periodic() override;
-
+  double IntakeGetCurrent(void);
  private:
   WPI_VictorSPX m_outerLeft {CAN_POUCH_OUTER_LEFT_ID};
   WPI_VictorSPX m_outerRight {CAN_POUCH_OUTER_RIGHT_ID};
-    
+
   rev::CANSparkMax m_inner {CAN_POUCH_INNER_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
   rev::SparkMaxRelativeEncoder m_innerEncoder = m_inner.GetEncoder();
   rev::SparkMaxPIDController   m_innerPIDController = m_inner.GetPIDController();
@@ -40,7 +43,7 @@ class Pouch : public frc2::SubsystemBase {
   frc::DoubleSolenoid m_ramp        {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RAMP_DEPLOY_ID, PCM_RAMP_RETRACT_ID};
 
   frc::DigitalInput m_gamePieceDetect{DIO_POUCH_DETECT_ID};
-
+  frc::PowerDistribution *m_pdh;
   bool m_isIntaking;
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

@@ -1,15 +1,14 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 #include "commands/CmdIntakeSetEnable.h"
 
-// NOTE:  Consider using this command inline, rather than writing a subclass.
-// For more information, see:
-// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-CmdIntakeSetEnable::CmdIntakeSetEnable(Pouch *pouch) {
-  // Use addRequirements() here to declare subsystem dependencies.
+
+CmdIntakeSetEnable::CmdIntakeSetEnable(Pouch *pouch, bool enable) 
+{
+  m_pouch = pouch;
+  m_enable = enable;
 }
 
 // Called when the command is initially scheduled.
-void CmdIntakeSetEnable::Initialize() {}
+void CmdIntakeSetEnable::Initialize() 
+{
+  m_pouch->IntakeEnable(m_enable);
+}

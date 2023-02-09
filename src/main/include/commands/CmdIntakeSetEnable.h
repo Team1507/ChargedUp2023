@@ -12,10 +12,11 @@ class CmdIntakeSetEnable
     : public frc2::CommandHelper<frc2::InstantCommand,
                                  CmdIntakeSetEnable> {
  public:
-  CmdIntakeSetEnable(Pouch *pouch);
+  CmdIntakeSetEnable(Pouch *pouch, bool enable );
 
   void Initialize() override;
 
   private:
   Pouch *m_pouch;
+  bool m_enable;
 };

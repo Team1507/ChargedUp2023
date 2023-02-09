@@ -4,7 +4,7 @@
 
 #include "subsystems/Pouch.h"
 
-Pouch::Pouch() 
+Pouch::Pouch(frc::PowerDistribution *pdh) 
 {
   m_isIntaking = false;
   m_inner.RestoreFactoryDefaults(); 
@@ -14,8 +14,10 @@ Pouch::Pouch()
   m_innerPIDController.SetD(0.0); // change later
   m_innerPIDController.SetSmartMotionAllowedClosedLoopError(0.0); // change later
   m_inner.SetOpenLoopRampRate(0.0); // change later
-}
+  m_pdh = pdh;
 
+}
+// Crocs
 void Pouch::IntakeSetPower(float power,WhatIntake type)
 {
   if(WhatIntake::Inner == type)
@@ -28,7 +30,10 @@ void Pouch::IntakeSetPower(float power,WhatIntake type)
     m_outerRight.Set(power);
   }
 }
-
+double Pouch::IntakeGetCurrent(void)
+{
+  return m_pdh->GetCurrent(PDH_INNER_INTAKE_PORT);
+}
 void Pouch::IntakeDeploy(void)
 {
   m_OuterIntake.Set(frc::DoubleSolenoid::kForward);   

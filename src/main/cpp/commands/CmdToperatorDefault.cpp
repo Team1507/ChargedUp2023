@@ -201,12 +201,12 @@ else if(ArmRetract)
 //***********************INTAKES*********************************
 if(InnerIntake && !m_isInnerIntaking)
 {
-  m_pouch->IntakeSetPower(.3, Pouch::WhatIntake::Inner);
+  m_pouch->IntakeEnable(true);
   m_isInnerIntaking = true;
 }
 else if(!InnerIntake && m_isInnerIntaking)
 {
-  m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Inner);
+  m_pouch->IntakeEnable(false);
   m_isInnerIntaking = false;
 }
 if(OuterIntake && !m_isOuterIntaking)
