@@ -12,7 +12,7 @@
 #include <frc/PneumaticsModuleType.h>
 #include <frc/DigitalInput.h>
 
-enum ArmLevel{Level_Pouch, Low, Mid, High};
+enum ArmLevel{Level_Pouch, Low, Mid, High, None};
 class Arm : public frc2::SubsystemBase 
 {
  public:
