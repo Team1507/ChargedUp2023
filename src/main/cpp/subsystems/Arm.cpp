@@ -156,7 +156,7 @@ ArmLevel Arm::ElevationArmGetPosition(void)
     }
     else
     {
-        return ArmLevel::None;
+        return ArmLevel::Level_Pouch;
     }
     
 }
