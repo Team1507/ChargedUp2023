@@ -24,7 +24,7 @@
 
 
 //Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
-// #define DRIVETRAIN_ONLY
+#define DRIVETRAIN_ONLY
 
 /**
  * This class is where the bulk of the robot should be declared.  Since

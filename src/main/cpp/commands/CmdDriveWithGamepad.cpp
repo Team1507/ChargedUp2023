@@ -107,12 +107,46 @@ void CmdDriveWithGamepad::Execute()
 
 //***** VELOCITY CONTROL MODE ******
 
-  const float xyMaxVelocity = 13000; //
-  const float rMaxVelocity  = 10000; //
+  const float xyMaxVelocity = 19600; //
+  const float rMaxVelocity  = 13000; //
 
-  yL *= -xyMaxVelocity;    //Invert Axis, make positive forward
-  xL *=  xyMaxVelocity;    
-  xR *= -rMaxVelocity;     //Invert Axis, make positive CCW
+
+ //Limiters
+  float xyScaleValue;
+  float rScaleValue;
+  float combTranslation      =  frc::SmartDashboard::GetNumber("Comb the desert Translation Speed Max",0.2);
+  float combRotational       =  frc::SmartDashboard::GetNumber("Comb the desert Rotational Speed Max",0.2);  
+
+  float normalTranslation    =  frc::SmartDashboard::GetNumber("Normal Translation Speed Max",0.5);
+  float normalRotational     =  frc::SmartDashboard::GetNumber("Normal Rotational Speed Max",0.3);
+
+  float ludicrousTranslation =  frc::SmartDashboard::GetNumber("Ludicrous Translation Speed Max",0.8);
+  float ludicrousRotational  =  frc::SmartDashboard::GetNumber("Ludicrous Rotational Speed Max",0.4);
+
+
+  bool ludicrous = m_botDriver->GetLeftTriggerAxis()>0.5;
+  bool comb      = m_botDriver->GetRightTriggerAxis()>0.5;
+  if(comb)
+  {
+    xyScaleValue = combTranslation;
+    rScaleValue  = combRotational;
+  }
+  else if(ludicrous)
+  {
+    xyScaleValue = ludicrousTranslation;
+    rScaleValue  = ludicrousRotational;
+  }
+  else
+  {
+    xyScaleValue = normalTranslation;
+    rScaleValue  = normalRotational;
+  }
+
+
+
+  yL *= -(xyMaxVelocity * xyScaleValue);    //Invert Axis, make positive forward
+  xL *=  (xyMaxVelocity * xyScaleValue);    
+  xR *= -(rMaxVelocity  * rScaleValue);     //Invert Axis, make positive CCW
 
   if( m_drivetrain->GetDriveType() == Drivetrain::ROBOTCENTRIC )
     m_drivetrain->RobotcentricDriveVelocity( yL,  xL,  xR );
