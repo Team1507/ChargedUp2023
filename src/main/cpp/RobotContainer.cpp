@@ -62,6 +62,7 @@ RobotContainer::RobotContainer()
   frc::SmartDashboard::PutData( "CmdDriveTypeToggle", new CmdDriveTypeToggle(&m_drivetrain));
   frc::SmartDashboard::PutData( "CmdGyroSetAngleOffset", new CmdGyroSetAngleOffset(&m_drivetrain,90.0));
 
+  frc::SmartDashboard::PutData( "CmdDriveTurnTo90", new CmdDriveTurnTo90(&m_drivetrain,0.3));
 
 
   //Smartdashboard SwerveDrive test/calibration buttons
@@ -78,6 +79,7 @@ RobotContainer::RobotContainer()
 void RobotContainer::ConfigureBindings() 
 {
   m_botDriver_START.OnTrue(new CmdResetGyro(&m_drivetrain));
+  m_botDriver_A.WhileTrue(new CmdDriveTurnTo90(&m_drivetrain, .3));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() 

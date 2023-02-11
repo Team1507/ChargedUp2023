@@ -14,7 +14,7 @@
 class CmdDriveTurnTo90
     : public frc2::CommandHelper<frc2::CommandBase, CmdDriveTurnTo90> {
  public:
-  CmdDriveTurnTo90(Drivetrain *drivetrain, float power, float angle);
+  CmdDriveTurnTo90(Drivetrain *drivetrain, float power);
 
   void Initialize() override;
 
@@ -30,6 +30,7 @@ class CmdDriveTurnTo90
     float m_power;
     float m_angle;
     float m_calcAngle;
+    float m_errorAngle;
 
 
 };

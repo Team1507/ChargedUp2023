@@ -21,6 +21,7 @@
 #include <frc2/command/button/JoystickButton.h>
 
 #define GAMEPADMAP_BUTTON_START 8
+#define GAMEPADMAP_BUTTON_A     1
 
 //Autos
 #include "commands/AutoDoNothing.h"
@@ -82,6 +83,7 @@ class RobotContainer
   void ConfigureBindings();
 
   frc2::JoystickButton m_botDriver_START {&m_botDriver, GAMEPADMAP_BUTTON_START};
+  frc2::JoystickButton m_botDriver_A     {&m_botDriver, GAMEPADMAP_BUTTON_A};
 
 
 
