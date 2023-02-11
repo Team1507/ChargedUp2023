@@ -31,6 +31,8 @@ class Pouch : public frc2::SubsystemBase {
   
   void Periodic() override;
   double IntakeGetCurrent(void);
+  void OuterIntakeClose();
+  void OuterIntakeOpen();
  private:
   WPI_VictorSPX m_outerLeft {CAN_POUCH_OUTER_LEFT_ID};
   WPI_VictorSPX m_outerRight {CAN_POUCH_OUTER_RIGHT_ID};
@@ -41,6 +43,7 @@ class Pouch : public frc2::SubsystemBase {
 
   frc::DoubleSolenoid m_OuterIntake {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_OUTER_INTAKE_DEPLOY_ID, PCM_OUTER_INTAKE_RETRACT_ID};
   frc::DoubleSolenoid m_ramp        {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RAMP_DEPLOY_ID, PCM_RAMP_RETRACT_ID};
+  frc::DoubleSolenoid m_outerIntakeClose {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_OUTER_INTAKE_CLOSE_ID, PCM_OUTER_INTAKE_OPEN_ID};
 
   frc::DigitalInput m_gamePieceDetect{DIO_POUCH_DETECT_ID};
   frc::PowerDistribution *m_pdh;

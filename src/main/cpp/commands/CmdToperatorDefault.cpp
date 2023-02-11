@@ -65,7 +65,7 @@ void CmdToperatorDefault::Execute()
     bool  ClawIntake       = m_topDriver->GetLeftTriggerAxis() < -.9;
 
     bool  ReadyPosition    = m_topDriver->GetBackButtonPressed();
-  //bool  CloseOuterIntake = m_topDriver->GetStartButton();
+    bool  CloseOuterIntake = m_topDriver->GetStartButton();
 
     float WristManual      = m_topDriver->GetRightY();
     float TurretManual     = m_topDriver->GetRightX();
@@ -222,17 +222,17 @@ else if(!OuterIntake && m_isInnerIntaking)
   m_isOuterIntaking = true;
 }
 
-// REMOVED - KS
-// if(CloseOuterIntake && !m_isOuterIntakeClosed)
-// {
-//   m_pouch->CloseOuterIntake();
-//   m_isOuterIntakeClosed = true;
-// }
-// else if (!CloseOuterIntake && m_isOuterIntakeClosed)
-// {
-//   m_pouch->OpenOuterIntake();
-//   m_isOuterIntakeClosed = false;
-// }
+
+ if(CloseOuterIntake && !m_isOuterIntakeClosed)
+ {
+   m_pouch->OuterIntakeClose();
+   m_isOuterIntakeClosed = true;
+ }
+ else if (!CloseOuterIntake && m_isOuterIntakeClosed)
+ {
+   m_pouch->OuterIntakeOpen();
+   m_isOuterIntakeClosed = false;
+ }
 
 if(PouchRamp && !m_isRampActivated)
 {

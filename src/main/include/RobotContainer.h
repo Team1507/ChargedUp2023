@@ -18,6 +18,9 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/PowerDistribution.h>
+#include <frc2/command/button/JoystickButton.h>
+
+#define GAMEPADMAP_BUTTON_START 8
 
 //Autos
 #include "commands/AutoDoNothing.h"
@@ -77,4 +80,12 @@ class RobotContainer
   frc::SendableChooser<frc2::Command*> m_chooser;
 
   void ConfigureBindings();
+
+  frc2::JoystickButton m_botDriver_START {&m_botDriver, GAMEPADMAP_BUTTON_START};
+
+
+
+
+
+
 };

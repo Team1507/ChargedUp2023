@@ -71,6 +71,14 @@ bool Pouch::IntakeIsEnable(void)
 {
   return m_isIntaking;
 }
+void Pouch::OuterIntakeClose()
+{
+  m_outerIntakeClose.Set(frc::DoubleSolenoid::kForward);
+}
+void Pouch::OuterIntakeOpen()
+{
+  m_outerIntakeClose.Set(frc::DoubleSolenoid::kReverse);
+}
 
 // This method will be called once per scheduler run
 void Pouch::Periodic() {}

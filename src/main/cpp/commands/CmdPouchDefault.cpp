@@ -10,6 +10,7 @@ CmdPouchDefault::CmdPouchDefault(Pouch *pouch)
 {
   AddRequirements(pouch);
   m_pouch = pouch;
+  m_isIntaking = false;
 }
 
 // Called when the command is initially scheduled.
@@ -23,14 +24,24 @@ void CmdPouchDefault::Execute()
 {
   bool IntakeEnabled = m_pouch->IntakeIsEnable();
   
-  if (m_pouch->IntakeGetCurrent() > INNER_INTAKE_CURRENT_LIMIT)
+  
+  if (IntakeEnabled && !m_isIntaking) 
   {
-     m_pouch->IntakeSetPower(0.00, Pouch::WhatIntake::Inner);
-     m_pouch->IntakeEnable(false);
-  }
-  else if (IntakeEnabled) 
-  {
+    m_isIntaking = true;
     m_pouch->IntakeSetPower(INNER_INTAKE_POWER, Pouch::WhatIntake::Inner);
+  }
+  else if(!IntakeEnabled && m_isIntaking)
+  {
+    m_isIntaking = false;
+    m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Inner);
+  }
+  else if (m_pouch->IntakeGetCurrent() > INNER_INTAKE_CURRENT_LIMIT)
+  {
+    m_pouch->IntakeEnable(false);
+  }
+  else if (m_pouch->ReadSensorState())
+  {
+    m_pouch->IntakeEnable(false);
   }
 
 }

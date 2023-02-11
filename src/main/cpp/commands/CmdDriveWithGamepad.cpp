@@ -126,6 +126,7 @@ void CmdDriveWithGamepad::Execute()
 
   bool ludicrous = m_botDriver->GetLeftTriggerAxis()>0.5;
   bool comb      = m_botDriver->GetRightTriggerAxis()>0.5;
+  // bool resetGyro = m_botDriver->GetStartButtonPressed();
   if(comb)
   {
     xyScaleValue = combTranslation;
@@ -141,7 +142,10 @@ void CmdDriveWithGamepad::Execute()
     xyScaleValue = normalTranslation;
     rScaleValue  = normalRotational;
   }
-
+// if (resetGyro)
+// {
+//   m_drivetrain->ZeroGyro();
+// }
 
 
   yL *= -(xyMaxVelocity * xyScaleValue);    //Invert Axis, make positive forward

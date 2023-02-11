@@ -27,5 +27,9 @@ class CmdPouchDefault
 
   bool IsFinished() override;
   private:
+
+  bool m_isIntaking;
+
+
 Pouch *m_pouch;
 };

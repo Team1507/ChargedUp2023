@@ -4,7 +4,8 @@
 
 #include "RobotContainer.h"
 #include "commands/CmdDriverFeedbackDefault.h"
-#include <frc2/command/button/Trigger.h>
+#include <frc2/command/button/JoystickButton.h>
+
 
 #include "commands/ExampleCommand.h"
 #include "commands/CmdClawDefault.h"
@@ -19,6 +20,7 @@
 #include "commands/CmdDriveForceSteerAngle.h"
 #include "commands/GrpTest1.h"
 #include "commands/GrpTest2.h"
+#include "commands/CmdResetGyro.h"
 
 RobotContainer::RobotContainer() 
 {
@@ -64,9 +66,9 @@ RobotContainer::RobotContainer()
   ConfigureBindings();
 }
 
-void RobotContainer::ConfigureBindings() {
-  // Configure your trigger bindings here
-
+void RobotContainer::ConfigureBindings() 
+{
+  m_botDriver_START.OnTrue(new CmdResetGyro(&m_drivetrain));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() 
