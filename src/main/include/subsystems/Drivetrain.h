@@ -45,11 +45,11 @@ class Drivetrain : public frc2::SubsystemBase {
   double GetGyroYaw(void);            //yaw: Relative -180 to +180
   double GetGyroAngle(void);          //angle: absolute -inf to +inf
   double GetGyroRate(void);
-  void   ZeroGyro(void); 
+  void   ZeroGyro(); 
   bool   IsGyroBusy(void);            //Busy Calibrating
   float  GetGyroPitch(void);
   float  GetGyroRoll(void);
-  void   SetGyroOffset(float angle);
+  void   SetAngleOffset(float angle);
 
   //Odometry
   void   ResetOdometry(void);
@@ -72,6 +72,7 @@ class Drivetrain : public frc2::SubsystemBase {
 
   AHRS m_ahrs{frc::SPI::Port::kMXP};	    //NavX
 
+  double m_angleAdjust;
 
   //Module Odometry
   void  OdometryPeriodic(void);

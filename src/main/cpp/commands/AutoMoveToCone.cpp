@@ -19,9 +19,6 @@ AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera
       frc2::WaitCommand(0.1_s),
       //-------------------------------
 
-      CmdDriveClearAll(drivetrain),
-      frc2::WaitCommand(0.5_s),
-
       CmdDriveStraightGyro(drivetrain, .2, 0, 0, 224.0, false, true, 0.0),
       CmdDriveStraightGyro(drivetrain, .2, 180, 0, 224.0, false, true, 0.0),
 

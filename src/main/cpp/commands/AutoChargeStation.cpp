@@ -7,6 +7,7 @@
 #include "commands/CmdDriveStraightGyro.h"
 #include "commands/CmdDriveTurn2Angle.h"
 #include "commands/CmdAutoBalance.h"
+#include "commands/CmdGyroSetAngleOffset.h"
 
 
 AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) 
@@ -14,9 +15,10 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
     AddCommands
     (
 
-		  CmdPrintText("Auto AutoChargeStation"),
+	  CmdPrintText("Auto AutoChargeStation"),
       //Initial Setup
       CmdDriveClearAll(drivetrain),
+      CmdGyroSetAngleOffset(drivetrain, 0.0),
       frc2::WaitCommand(0.1_s),
       //-------------------------------
 

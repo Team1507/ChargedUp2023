@@ -22,6 +22,10 @@
 #include "commands/GrpTest2.h"
 #include "commands/CmdResetGyro.h"
 
+#include "commands/CmdDriveTurnTo90.h"
+#include "commands/CmdGyroSetAngleOffset.h"
+
+
 RobotContainer::RobotContainer() 
 {
 
@@ -52,8 +56,13 @@ RobotContainer::RobotContainer()
 
 
 
+
+
   frc::SmartDashboard::PutData( "CmdDriveClearAll",   new CmdDriveClearAll(&m_drivetrain));
   frc::SmartDashboard::PutData( "CmdDriveTypeToggle", new CmdDriveTypeToggle(&m_drivetrain));
+  frc::SmartDashboard::PutData( "CmdGyroSetAngleOffset", new CmdGyroSetAngleOffset(&m_drivetrain,90.0));
+
+
 
   //Smartdashboard SwerveDrive test/calibration buttons
   frc::SmartDashboard::PutData( "SteerAngle=0",       new CmdDriveForceSteerAngle(&m_drivetrain,0.0));

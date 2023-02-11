@@ -341,17 +341,22 @@ bool Drivetrain::IsGyroConnected(void)
 	return m_ahrs.IsConnected();
 }
 
-double Drivetrain::GetGyroYaw(void)
-{
-    //Returns Relative Yaw:  -180 to +180
-	return (double) m_ahrs.GetYaw();  
-}
 
 double Drivetrain::GetGyroAngle(void)
 {
     //returns total accumulated angle -inf to +inf  (continuous through 360deg)
 	return (double)m_ahrs.GetAngle();
 }
+
+double Drivetrain::GetGyroYaw(void)
+{
+    //Returns Relative Yaw:  -180 to +180
+    double yaw = m_ahrs.GetYaw() + m_angleAdjust;  
+    if (yaw>180)    yaw = yaw - 360;
+    if (yaw<-180)   yaw = yaw + 360;
+    return yaw;
+}
+
 
 double Drivetrain::GetGyroRate(void)
 {
@@ -363,6 +368,10 @@ void Drivetrain::ZeroGyro(void)
   	std::cout<<"ZeroGyro"<<std::endl;
 	//m_ahrs.ZeroYaw();
     m_ahrs.Reset();
+
+    //Clear Navx Yaw offset
+    m_angleAdjust = 0;
+
 }
 
 bool Drivetrain::IsGyroBusy(void)
@@ -381,9 +390,10 @@ float Drivetrain::GetGyroRoll(void)
     
 }
 
-void Drivetrain::SetGyroOffset(float angle)
+void Drivetrain::SetAngleOffset(float angle)
 {
-    m_ahrs.SetAngleAdjustment(angle);
+    m_angleAdjust = angle;
+    std::cout << "SetAngleOffset = " << angle << std::endl; 
 }
 
 

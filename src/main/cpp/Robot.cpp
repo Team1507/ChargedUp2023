@@ -21,7 +21,6 @@ void Robot::RobotInit()
   m_container.m_drivetrain.ResetSteerEncoders();
   m_container.m_drivetrain.ZeroGyro(); 
   m_container.m_drivetrain.ResetOdometry();
-  m_container.m_drivetrain.SetGyroOffset(0); // CHANGE LATER!!!
   m_container.m_drivetrain.SetDriveType(Drivetrain::driveType::FIELDCENTRIC); //default to fieldcentric mode
 
 
@@ -48,12 +47,14 @@ void Robot::AutonomousInit()
 {
    std::cout<<" **** Auto Init ******"<<std::endl;
 
+   //m_container.m_drivetrain.SetAngleOffset(90.0);
+
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand) {
     m_autonomousCommand->Schedule();
   }
-    m_container.m_drivetrain.SetGyroOffset(0); // CHANGE LATER!!!
+    m_container.m_drivetrain.SetAngleOffset(90); // NOT OFFICIAL!!!!!
 
 
 
@@ -64,6 +65,8 @@ void Robot::AutonomousPeriodic() {}
 void Robot::TeleopInit() 
 {
   std::cout<<"Teleop Init"<<std::endl;
+
+
   if (m_autonomousCommand) {
     m_autonomousCommand->Cancel();
   }

@@ -68,19 +68,16 @@ void CmdDriveToAprilTag::Execute()
       case MOVE_TO_YAW_ZERO:
       {
         m_tagAngle = m_Camera->TargetGetYaw();
-        if(m_tagAngle > 0)
+        if(m_tagAngle > 10)
         {
           m_drivetrain->RobotcentricDrive(-m_power, 0, 0);
         }
-        else if(m_tagAngle < 0)
+        else if(m_tagAngle < -10)
         {
           m_drivetrain->RobotcentricDrive(m_power, 0, 0);
         }
-        if(m_tagAngle > -2 && m_tagAngle < 2 && m_power > .1)
-        {
-          m_power = .1;
-        }
-        if(m_tagAngle < 0 + YAW_ERROR && m_tagAngle > 0 - YAW_ERROR)
+
+        if(m_tagAngle < 10 && m_tagAngle > -10)
         {
           m_drivetrain->RobotcentricDrive(0,0,0);
           m_currState = MOVE_TOWARDS_TARGET;

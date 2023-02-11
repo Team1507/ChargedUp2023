@@ -31,7 +31,7 @@ void CmdDriveTurnTo90::Execute()
   if( turn_power > MAX_POWER ) turn_power = MAX_POWER;
   if( turn_power < MIN_POWER ) turn_power = MIN_POWER;
 
-  if(m_currentAngle = 90)
+  if(m_currentAngle == 90)
     m_drivetrain->RobotcentricDrive(0,0,  -turn_power);
   else
     m_drivetrain->RobotcentricDrive(0,0,   turn_power);

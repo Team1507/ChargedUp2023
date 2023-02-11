@@ -4,7 +4,7 @@
 
 #include "commands/CmdDriveClearAll.h"
 
-CmdDriveClearAll::CmdDriveClearAll( Drivetrain *drivetrain ) 
+CmdDriveClearAll::CmdDriveClearAll( Drivetrain *drivetrain) 
 {
   m_drivetrain = drivetrain;
 }
