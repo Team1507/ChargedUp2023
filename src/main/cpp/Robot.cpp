@@ -22,7 +22,7 @@ void Robot::RobotInit()
   m_container.m_drivetrain.ZeroGyro(); 
   m_container.m_drivetrain.ResetOdometry();
   m_container.m_drivetrain.SetGyroOffset(0); // CHANGE LATER!!!
-
+  m_container.m_drivetrain.SetDriveType(Drivetrain::driveType::FIELDCENTRIC); //default to fieldcentric mode
 
 
 }
