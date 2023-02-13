@@ -28,7 +28,7 @@ void Arm::Periodic()
 void Arm::TurretTurn2Angle(float angle) 
 {
     
-        
+    //This makes sure we cant move when arm is all of the way down 
     if(m_elevationHomeLimitSwitch.Get() == true)
     {
         m_turret.Set(0);
@@ -43,7 +43,7 @@ void Arm::TurretTurn2Angle(float angle)
 }
 void Arm::TurretSetPower(float power) 
 {
-    
+    //This makes sure we cant move when arm is all of the way down   
     if(m_elevationHomeLimitSwitch.Get() == true)
     {
         m_turret.Set(0.0);
