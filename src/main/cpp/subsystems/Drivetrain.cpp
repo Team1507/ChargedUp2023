@@ -87,6 +87,8 @@ Drivetrain::Drivetrain()
 void Drivetrain::Periodic() 
 {
     OdometryPeriodic();
+    m_falcAvg = ((m_frontRight.GetFalconTemp() + m_frontLeft.GetFalconTemp() + m_rearRight.GetFalconTemp() + m_rearLeft.GetFalconTemp()) / 4.0 );
+
 }
 
 
@@ -334,6 +336,10 @@ void Drivetrain::ResetSteerEncoders(void)
 
 
 
+float Drivetrain::FalconTempGetAverage(void)
+{
+    return m_falcAvg;
+}
 
 //**************** AHRS (NavX) *********************
 bool Drivetrain::IsGyroConnected(void)

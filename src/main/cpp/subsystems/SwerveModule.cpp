@@ -258,6 +258,11 @@ void SwerveModule::SetDriveVelocity( float speed )
         m_driveMotor.Set(ControlMode::Velocity,  speed);
 }
 
+float SwerveModule::GetFalconTemp(void)
+{
+    return m_driveMotor.GetTemperature();
+}
+
 
 bool SwerveModule::GetDriveInvertion( void )
 {

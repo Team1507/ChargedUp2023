@@ -34,6 +34,7 @@ class Drivetrain : public frc2::SubsystemBase {
   void ForceSteerAngle( float angle );
   void ForcePark(void);
   
+  float FalconTempGetAverage(void);
 
   //Encoders
   void HardResetDriveEncoders(void);
@@ -73,6 +74,8 @@ class Drivetrain : public frc2::SubsystemBase {
   AHRS m_ahrs{frc::SPI::Port::kMXP};	    //NavX
 
   double m_angleAdjust;
+
+  float m_falcAvg;
 
   //Module Odometry
   void  OdometryPeriodic(void);
