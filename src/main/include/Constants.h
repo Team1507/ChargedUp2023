@@ -34,6 +34,8 @@
 #define CAN_POUCH_OUTER_LEFT_ID   16    //Left Collector
 #define CAN_POUCH_OUTER_RIGHT_ID  17    //Right Collector
 #define CAN_LED_UNDERGLOW         18    //LED Canifier
+#define CAN_LED_DRIVER         18    //LED Canifier
+
 
 #define CAN_PCM1_ID               19    //Belly Pan
 #define CAN_PCM2_ID               20    //Mast

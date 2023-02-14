@@ -10,6 +10,18 @@
 #include "Constants.h"
 #include "ctre/Phoenix.h"
 
+//*************COLORS***************
+
+#define COLOR_RED   255, 0, 0
+#define COLOR_GREEN 0, 255, 0
+#define COLOR_BLUE  0, 0, 255
+
+#define COLOR_YELLOW 255, 255, 0
+#define COLOR_PURPLE 128, 0, 128
+
+#define COLOR_CLEAR 0, 0, 0
+//**********************************
+
 class DriverFeedback : public frc2::SubsystemBase {
  public:
   DriverFeedback(frc::XboxController *topDriver);
@@ -23,10 +35,11 @@ class DriverFeedback : public frc2::SubsystemBase {
   void DriverFeedbackLED(int r, int g, int b);
 
 
+
   private:
   frc::XboxController *m_topDriver;
-  CANifier m_underGlow{CAN_LED_UNDERGLOW};
-  
+  // CANifier m_underGlow{CAN_LED_UNDERGLOW};
+  CANifier m_driverLED{CAN_LED_DRIVER};
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

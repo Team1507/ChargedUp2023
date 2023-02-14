@@ -19,6 +19,7 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/PowerDistribution.h>
 #include <frc2/command/button/JoystickButton.h>
+#include <frc/DriverStation.h>
 
 #define GAMEPADMAP_BUTTON_START 8
 #define GAMEPADMAP_BUTTON_A     1
@@ -28,7 +29,7 @@
 
 
 //Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
-#define DRIVETRAIN_ONLY
+// #define DRIVETRAIN_ONLY
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -45,7 +46,6 @@ class RobotContainer
 
   //****************Controllers*******************
   frc::XboxController m_botDriver{0};
-  frc::XboxController m_topDriver{1};
 
 #ifndef DRIVETRAIN_ONLY
   frc::XboxController m_topDriver{1};
@@ -85,8 +85,6 @@ class RobotContainer
 
   frc2::JoystickButton m_botDriver_START {&m_botDriver, GAMEPADMAP_BUTTON_START};
   frc2::JoystickButton m_botDriver_A     {&m_botDriver, GAMEPADMAP_BUTTON_A};
-
-  frc2::JoystickButton m_topDriver_RIN{&m_topDriver, GAMEPADMAP_BUTTON_A};
 
 
 

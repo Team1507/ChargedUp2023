@@ -6,6 +6,7 @@
 
 #include <frc2/command/CommandScheduler.h>
 #include <iostream>
+#include <frc/DriverStation.h>
 void Robot::RobotInit() 
 {
  //*************************** INIT ******************************
@@ -22,6 +23,29 @@ void Robot::RobotInit()
   m_container.m_drivetrain.ZeroGyro(); 
   m_container.m_drivetrain.ResetOdometry();
   m_container.m_drivetrain.SetDriveType(Drivetrain::driveType::FIELDCENTRIC); //default to fieldcentric mode
+  m_container.m_claw.ClawSetIntakePower(0.4);
+  m_container.m_claw.ClawSetOuttakePower(-0.4);
+  CheckAlliance();
+
+}
+
+void Robot::CheckAlliance( void )
+{
+
+  //Set Panel LEDs
+  if( frc::DriverStation::GetAlliance() == frc::DriverStation::kRed)
+  {
+      m_container.m_driverfeedback.DriverFeedbackLED(COLOR_RED);
+  }
+  else if(frc::DriverStation::GetAlliance() == frc::DriverStation::kBlue)
+  {
+      m_container.m_driverfeedback.DriverFeedbackLED(COLOR_BLUE);
+  }
+  else
+  {
+     m_container.m_driverfeedback.DriverFeedbackLED(COLOR_BLUE);
+  }
+
 
 
 }

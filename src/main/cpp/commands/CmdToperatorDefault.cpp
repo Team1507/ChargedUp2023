@@ -95,6 +95,7 @@ void CmdToperatorDefault::Execute()
           break;
         case 180: // down
           m_scoringHome->Schedule();
+          m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
           m_isDpadCenter = false;
           break;
         case 270: // left
@@ -117,6 +118,7 @@ void CmdToperatorDefault::Execute()
           break;
         case 180: // down
           m_scoringHome->Schedule();
+          m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
           m_isDpadCenter = false;
           break;
         case 270: // left
@@ -136,15 +138,18 @@ void CmdToperatorDefault::Execute()
         case 90: // right
           m_camera->PipelineSetIndex(CameraIndex::Cone);
           m_claw->ClawSetIntakePower( frc::SmartDashboard::GetNumber("CONE_INTAKE_POWER", CONE_INTAKE_POWER));
+          m_driverFeedback->DriverFeedbackLED(COLOR_YELLOW);
           m_isDpadCenter = false;
           break;
         case 180: // down
           m_scoringHome->Schedule();
+          m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
           m_isDpadCenter = false;
           break;
         case 270: // left
           m_camera->PipelineSetIndex(CameraIndex::Cube);
           m_claw->ClawSetIntakePower(  frc::SmartDashboard::GetNumber("CUBE_INTAKE_POWER", CUBE_INTAKE_POWER));
+          m_driverFeedback->DriverFeedbackLED(COLOR_PURPLE);
           m_isDpadCenter = false;
           break;
       }

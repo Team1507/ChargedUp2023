@@ -8,7 +8,8 @@
 DriverFeedback::DriverFeedback(frc::XboxController *topDriver) 
 {
     m_topDriver = topDriver;
-    m_underGlow.ConfigFactoryDefault();
+  //  m_underGlow.ConfigFactoryDefault();
+   m_driverLED.ConfigFactoryDefault();
 
 }
 
@@ -20,11 +21,13 @@ void DriverFeedback::Rumble(float power)
 }
 void DriverFeedback::UnderGlow(int r, int g, int b)
 {
-    m_underGlow.SetLEDOutput(r,CANifier::LEDChannelA);
-    m_underGlow.SetLEDOutput(g,CANifier::LEDChannelB);
-    m_underGlow.SetLEDOutput(b,CANifier::LEDChannelC);
+    // m_underGlow.SetLEDOutput(r,CANifier::LEDChannelA);
+    // m_underGlow.SetLEDOutput(g,CANifier::LEDChannelB);
+    // m_underGlow.SetLEDOutput(b,CANifier::LEDChannelC);
 }
 void DriverFeedback::DriverFeedbackLED(int r, int g, int b)
 {
-    
+    m_driverLED.SetLEDOutput(r,CANifier::LEDChannelA);
+    m_driverLED.SetLEDOutput(g,CANifier::LEDChannelB);
+    m_driverLED.SetLEDOutput(b,CANifier::LEDChannelC);
 }
