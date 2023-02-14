@@ -49,6 +49,22 @@ bool Claw::ClawIntakeGetEnable(void)
 {
     return m_intakeEnabled; 
 }
+void Claw::ClawSetIntakePower(float power)
+{
+    m_clawIntakePower = power;
+}
+float Claw::ClawGetIntakePower(void)
+{
+    return m_clawIntakePower;
+}
+void Claw::ClawSetOuttakePower(float power)
+{
+    m_clawOuttakePower = power;
+}
+float Claw::ClawGetOuttakePower(void)
+{
+    return m_clawOuttakePower;
+}
 //***********************************WRIST*******************************************
 
 void Claw::WristSetPosition(float position) 

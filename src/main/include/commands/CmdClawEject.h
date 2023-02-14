@@ -19,6 +19,6 @@ class CmdClawEject
 
   private:
     Claw *m_claw;
-
     int m_delay;
+    
 };

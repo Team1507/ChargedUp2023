@@ -11,8 +11,11 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/PowerDistribution.h>
 
-#define CLAW_INTAKE_POWER 0.0 //!!! CHANGE LATER !!!
 #define CLAW_EJECT_POWER 0.0 //!!! CHANGE LATER !!!
+
+
+#define CONE_INTAKE_POWER .6
+#define CUBE_INTAKE_POWER .3
 
 class Claw : public frc2::SubsystemBase {
  public:
@@ -28,6 +31,11 @@ class Claw : public frc2::SubsystemBase {
   float ClawGetCurrent(void);
   void ClawIntakeEnable(bool enable);
   bool ClawIntakeGetEnable(void);
+  void ClawSetIntakePower(float power);
+  float ClawGetIntakePower(void);
+
+  void ClawSetOuttakePower(float power);
+  float ClawGetOuttakePower(void);
 
 
   //***********************************Wrist*******************************************
@@ -52,6 +60,8 @@ class Claw : public frc2::SubsystemBase {
   bool m_intakeEnabled;
   frc::PowerDistribution *m_pdh;
 
+  float m_clawIntakePower;
+  float m_clawOuttakePower;
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

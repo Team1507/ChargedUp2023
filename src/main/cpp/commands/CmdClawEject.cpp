@@ -14,7 +14,7 @@ void CmdClawEject::Execute()
 {
   if(m_delay > 0)
   {
-    m_claw->ClawSetPower(.4);
+    m_claw->ClawSetPower(m_claw->ClawGetOuttakePower());
     m_delay--;
   }
   else

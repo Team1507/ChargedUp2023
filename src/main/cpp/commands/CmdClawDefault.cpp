@@ -17,7 +17,7 @@ CmdClawDefault::CmdClawDefault(Claw *claw)
 
 void CmdClawDefault::Initialize() 
 {
- std::cout<<"Claw :3"<<std::endl;
+ std::cout<<"Claw"<<std::endl;
  m_delay = 50; // To Be Changed
 }
 
@@ -26,7 +26,7 @@ void CmdClawDefault::Execute()
 {
   if(m_claw->ClawIntakeGetEnable() && !m_isIntaking) 
   {
-    m_claw->ClawSetPower(CLAW_INTAKE_POWER);
+    m_claw->ClawSetPower(m_claw->ClawGetIntakePower());
     m_isIntaking = true;
     m_delay = 50;
   }

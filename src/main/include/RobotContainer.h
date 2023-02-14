@@ -45,6 +45,7 @@ class RobotContainer
 
   //****************Controllers*******************
   frc::XboxController m_botDriver{0};
+  frc::XboxController m_topDriver{1};
 
 #ifndef DRIVETRAIN_ONLY
   frc::XboxController m_topDriver{1};
@@ -84,6 +85,8 @@ class RobotContainer
 
   frc2::JoystickButton m_botDriver_START {&m_botDriver, GAMEPADMAP_BUTTON_START};
   frc2::JoystickButton m_botDriver_A     {&m_botDriver, GAMEPADMAP_BUTTON_A};
+
+  frc2::JoystickButton m_topDriver_RIN{&m_topDriver, GAMEPADMAP_BUTTON_A};
 
 
 

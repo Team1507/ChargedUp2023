@@ -1,5 +1,6 @@
 #include "commands/CmdToperatorDefault.h"
 #include "Constants.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 
 #define POUCH_TURRET_LIMIT 5
 
@@ -42,7 +43,8 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
 // Called when the command is initially scheduled.
 void CmdToperatorDefault::Initialize() 
 {
-
+  frc::SmartDashboard::PutNumber("CONE_INTAKE_POWER", CONE_INTAKE_POWER);
+  frc::SmartDashboard::PutNumber("CUBE_INTAKE_POWER", CUBE_INTAKE_POWER);
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -59,7 +61,7 @@ void CmdToperatorDefault::Execute()
 
     bool  InnerIntake      = m_topDriver->GetLeftBumper();
     bool  OuterIntake      = m_topDriver->GetRightBumper();
-    bool  PouchRamp        = m_topDriver->GetRightStickButtonPressed();
+    bool  PouchRamp        = m_topDriver->GetRightStickButton();
 
     bool  ClawOutake       = m_topDriver->GetRightTriggerAxis() > .9;
     bool  ClawIntake       = m_topDriver->GetLeftTriggerAxis() < -.9;
@@ -133,6 +135,7 @@ void CmdToperatorDefault::Execute()
           break;
         case 90: // right
           m_camera->PipelineSetIndex(CameraIndex::Cone);
+          m_claw->ClawSetIntakePower( frc::SmartDashboard::GetNumber("CONE_INTAKE_POWER", CONE_INTAKE_POWER));
           m_isDpadCenter = false;
           break;
         case 180: // down
@@ -141,6 +144,7 @@ void CmdToperatorDefault::Execute()
           break;
         case 270: // left
           m_camera->PipelineSetIndex(CameraIndex::Cube);
+          m_claw->ClawSetIntakePower(  frc::SmartDashboard::GetNumber("CUBE_INTAKE_POWER", CUBE_INTAKE_POWER));
           m_isDpadCenter = false;
           break;
       }
@@ -239,7 +243,7 @@ if(PouchRamp && !m_isRampActivated)
   m_pouch->SetRampPosition(true);
   m_isRampActivated = true;
 }
-else if(PouchRamp && m_isRampActivated)
+else if(!PouchRamp && m_isRampActivated)
 {
   m_pouch->SetRampPosition(false);
   m_isRampActivated = false;
