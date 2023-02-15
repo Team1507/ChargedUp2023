@@ -42,6 +42,7 @@ void CmdPouchDefault::Execute()
   else if (m_pouch->ReadSensorState())
   {
     m_pouch->IntakeEnable(false);
+    m_pouch->SetRampPosition(false);
   }
 
 }

@@ -211,28 +211,32 @@ else if(ArmRetract)
 if(InnerIntake && !m_isInnerIntaking)
 {
   m_pouch->IntakeEnable(true);
+  m_pouch->SetRampPosition(true);
   m_isInnerIntaking = true;
 }
 else if(!InnerIntake && m_isInnerIntaking)
 {
   m_pouch->IntakeEnable(false);
+  m_pouch->SetRampPosition(false);
   m_isInnerIntaking = false;
 }
 if(OuterIntake && !m_isOuterIntaking)
 {
   m_pouch->IntakeDeploy();
+  m_pouch->SetRampPosition(true);
   m_pouch->IntakeSetPower(.3, Pouch::WhatIntake::Outer);
-  m_isOuterIntaking = false;
+  m_isOuterIntaking = true;
 }
 else if(!OuterIntake && m_isInnerIntaking)
 {
   m_pouch->IntakeRetract();
+  m_pouch->SetRampPosition(false);
   m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Outer);
-  m_isOuterIntaking = true;
+  m_isOuterIntaking = false;
 }
 
 
- if(CloseOuterIntake && !m_isOuterIntakeClosed)
+ if(CloseOuterIntake && !m_isOuterIntakeClosed && m_isOuterIntaking)
  {
    m_pouch->OuterIntakeClose();
    m_isOuterIntakeClosed = true;
