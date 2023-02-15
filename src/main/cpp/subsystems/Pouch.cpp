@@ -3,7 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "subsystems/Pouch.h"
-
+#include <frc/smartdashboard/SmartDashboard.h>
 Pouch::Pouch(frc::PowerDistribution *pdh) 
 {
   m_isIntaking = false;
@@ -81,4 +81,7 @@ void Pouch::OuterIntakeOpen()
 }
 
 // This method will be called once per scheduler run
-void Pouch::Periodic() {}
+void Pouch::Periodic() 
+{
+    frc::SmartDashboard::PutBoolean("Pouch Gamepiece Detect", ReadSensorState());
+}
