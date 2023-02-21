@@ -38,14 +38,17 @@ void Robot::CheckAlliance( void )
   if( frc::DriverStation::GetAlliance() == frc::DriverStation::kRed)
   {
       m_container.m_driverfeedback.DriverFeedbackLED(COLOR_RED);
+      std::cout << "RED" << std::endl;
   }
   else if(frc::DriverStation::GetAlliance() == frc::DriverStation::kBlue)
   {
       m_container.m_driverfeedback.DriverFeedbackLED(COLOR_BLUE);
+      std::cout << "BLUE" << std::endl;
   }
   else
   {
      m_container.m_driverfeedback.DriverFeedbackLED(COLOR_BLUE);
+     std::cout << "INVALID BLUE" << std::endl;
   }
 
 
