@@ -39,10 +39,28 @@ AutoTwoPieceRight::AutoTwoPieceRight(Drivetrain *drivetrain, Arm *arm, Claw *cla
       CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Inner, .3),
       CmdDriveStraightGyro(drivetrain, .3, 0, 0, 24, false, false, 0.0),
       frc2::WaitCommand(1.0_s),
+      CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, 0.0),
       CmdPouchIntakeRetract(pouch),
+      CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Inner, 0.0),
       CmdDriveStraightGyro(drivetrain, .3, 180, 90, 210, false, false, 0.0),
       CmdDriveToAprilTag(drivetrain, camera, .2),
-      GrpScoringSetPosition(arm, claw, ScoringPosition::HighShelf) //NOT DONE
+      GrpScoringSetPosition(arm, claw, ScoringPosition::HighShelf),
+      frc2::WaitCommand(0.5_s),
+      CmdClawEject(claw),
+      GrpScoringSetPosition(arm, claw, ScoringPosition::Home),
+      CmdDriveStraightGyro(drivetrain, .3, 0, 90, 224, false, false, 0.0),
+      CmdPouchIntakeDeploy(pouch),
+      CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, .6),
+      CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Inner, .3),
+      CmdDriveStraightGyro(drivetrain, .3, 90, 90, 48, false, false, 0.0),
+      frc2::WaitCommand(1.0_s),
+      CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, 0.0),
+      CmdPouchIntakeRetract(pouch),
+      CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Inner, 0.0)
+
+      
+
+      
 
     );
 }
