@@ -12,6 +12,7 @@
 
 
 #include "commands/GrpScoringSetPosition.h"
+#include "commands/GrpAllFindHome.h"
 #include "commands/CmdClawEject.h"
 #include "commands/CmdClawIntakeEnable.h"
 
@@ -65,6 +66,8 @@ class CmdToperatorDefault
     GrpScoringSetPosition *m_scoringMidLeft;
     GrpScoringSetPosition *m_scoringMidShelf;
     GrpScoringSetPosition *m_scoringMidRight;
+
+    GrpAllFindHome        *m_findHome;
 
     CmdClawEject          *m_clawEject;
 

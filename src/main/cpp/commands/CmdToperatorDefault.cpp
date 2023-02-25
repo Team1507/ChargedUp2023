@@ -37,6 +37,8 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_scoringMidShelf  = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, MidShelf );
   m_scoringMidRight  = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, MidRight );
 
+  m_findHome         = new GrpAllFindHome       (m_arm, m_pouch, m_claw);
+
   m_clawEject        = new CmdClawEject(m_claw);
 }
 
@@ -97,7 +99,7 @@ void CmdToperatorDefault::Execute()
           m_isDpadCenter = false;
           break;
         case 180: // down
-          m_scoringHome->Schedule();
+          m_findHome->Schedule();
           m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
           m_isDpadCenter = false;
           break;
@@ -120,7 +122,7 @@ void CmdToperatorDefault::Execute()
           m_isDpadCenter = false;
           break;
         case 180: // down
-          m_scoringHome->Schedule();
+          m_findHome->Schedule();
           m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
           m_isDpadCenter = false;
           break;
@@ -145,7 +147,7 @@ void CmdToperatorDefault::Execute()
           m_isDpadCenter = false;
           break;
         case 180: // down
-          m_scoringHome->Schedule();
+          m_findHome->Schedule();
           m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
           m_isDpadCenter = false;
           break;

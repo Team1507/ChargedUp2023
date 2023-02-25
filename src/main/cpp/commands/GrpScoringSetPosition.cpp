@@ -28,11 +28,22 @@ scoringPosition_t scoringPositionTable[] = {{0,           false,        0,      
  
 GrpScoringSetPosition::GrpScoringSetPosition(Arm *arm, Claw *claw, Pouch *pouch ,ScoringPosition scoringPosition) 
 {
-  AddCommands(
-  CmdArmLevelSetPosition(arm, scoringPositionTable[scoringPosition].armLevel,pouch),
-  CmdArmExtensionSetPosition(arm, scoringPositionTable[scoringPosition].extension),
-  CmdTurretTurn2Angle(arm, scoringPositionTable[scoringPosition].turretAngle),
-  CmdWristSetPosition(claw, scoringPositionTable[scoringPosition].wristAngle),
-  CmdClawSetOuttakePower(claw, scoringPositionTable[scoringPosition].outtakePower)
-  );
+  frc2::SequentialCommandGroup
+  {
+    CmdArmLevelSetPosition(arm, ArmLevel::Low, pouch),
+    frc2::ParallelCommandGroup
+    {
+      CmdArmLevelSetPosition(arm, scoringPositionTable[scoringPosition].armLevel, pouch),
+      CmdTurretTurn2Angle(arm, scoringPositionTable[scoringPosition].turretAngle),
+      CmdArmExtensionSetPosition(arm, scoringPositionTable[scoringPosition].extension),
+      CmdWristSetPosition(claw, scoringPositionTable[scoringPosition].wristAngle),
+      CmdClawSetOuttakePower(claw, scoringPositionTable[scoringPosition].outtakePower)
+    }
+  };
+  // CmdArmLevelSetPosition(arm, scoringPositionTable[scoringPosition].armLevel,pouch),
+  // CmdArmExtensionSetPosition(arm, scoringPositionTable[scoringPosition].extension),
+  // CmdTurretTurn2Angle(arm, scoringPositionTable[scoringPosition].turretAngle),
+  // CmdWristSetPosition(claw, scoringPositionTable[scoringPosition].wristAngle),
+  // CmdClawSetOuttakePower(claw, scoringPositionTable[scoringPosition].outtakePower)
+  
 }
