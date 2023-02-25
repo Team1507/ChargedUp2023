@@ -44,6 +44,11 @@ void Pouch::IntakeRetract(void)
   m_OuterIntake.Set(frc::DoubleSolenoid::kReverse);
 }
 
+bool Pouch::IntakeIsDeployed(void)
+{
+  return m_OuterIntake.Get() == frc::DoubleSolenoid::kForward;
+}
+
 void Pouch::SetRampPosition(bool deploy)
 {
   if( deploy == true )

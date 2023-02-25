@@ -25,10 +25,11 @@ AutoOverAndBack::AutoOverAndBack( Drivetrain *drivetrain, Arm *arm, Camera *came
       //-------------------------------
 
     // Score Cone
-      GrpScoringSetPosition(arm, claw, ScoringPosition::HighLeft),
+      GrpScoringSetPosition(arm, claw,pouch, ScoringPosition::HighLeft),
+
       frc2::WaitCommand(0.5_s),
       CmdClawEject(claw),
-      GrpScoringSetPosition(arm, claw, ScoringPosition::Home),
+      GrpScoringSetPosition(arm, claw, pouch, ScoringPosition::Home),
     // Move to Cube over Charge Station
       CmdDriveStraightGyro(drivetrain, .3, 0, 180, 160, false, false, 0.0),
       CmdDriveTurn2Angle(drivetrain,.3, -180),
@@ -39,10 +40,10 @@ AutoOverAndBack::AutoOverAndBack( Drivetrain *drivetrain, Arm *arm, Camera *came
       CmdDriveTurn2Angle(drivetrain, .3, 90),
       CmdDriveToAprilTag(drivetrain, camera, .3),
     // Score Cube
-      GrpScoringSetPosition(arm, claw, ScoringPosition::HighShelf),
+      GrpScoringSetPosition(arm, claw, pouch, ScoringPosition::HighShelf),
       frc2::WaitCommand(0.5_s),
       CmdClawEject(claw),
-      GrpScoringSetPosition(arm, claw, ScoringPosition::Home),
+      GrpScoringSetPosition(arm, claw, pouch, ScoringPosition::Home),
     // CHARGE
       CmdDriveStraightGyro(drivetrain, .3, 0, 180, 60, false, false, 0.0),
       CmdAutoBalance(drivetrain),

@@ -26,10 +26,10 @@ scoringPosition_t scoringPositionTable[] = {{0,           false,        0,      
                                             {90,          false,        0,                 0,              ArmLevel::Mid        },
                                             {135,         false,        0,                 0,              ArmLevel::Mid        }};
  
-GrpScoringSetPosition::GrpScoringSetPosition(Arm *arm, Claw *claw, ScoringPosition scoringPosition) 
+GrpScoringSetPosition::GrpScoringSetPosition(Arm *arm, Claw *claw, Pouch *pouch ,ScoringPosition scoringPosition) 
 {
   AddCommands(
-  CmdArmLevelSetPosition(arm, scoringPositionTable[scoringPosition].armLevel),
+  CmdArmLevelSetPosition(arm, scoringPositionTable[scoringPosition].armLevel,pouch),
   CmdArmExtensionSetPosition(arm, scoringPositionTable[scoringPosition].extension),
   CmdTurretTurn2Angle(arm, scoringPositionTable[scoringPosition].turretAngle),
   CmdWristSetPosition(claw, scoringPositionTable[scoringPosition].wristAngle),

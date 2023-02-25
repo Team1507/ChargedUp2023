@@ -13,18 +13,22 @@
 #include <frc/PowerDistribution.h>
 #define INNER_INTAKE_POWER 0.3
 #define INNER_INTAKE_CURRENT_LIMIT 2
+#define OUTER_INTAKE_RETRACT_DELAY 1000/20 //ms /20ms 
 
 class Pouch : public frc2::SubsystemBase {
  public:
   Pouch(frc::PowerDistribution *pdh);
   
   enum WhatIntake {Inner,Outer};
+
   void IntakeSetPower(float power,WhatIntake type);
   void IntakeEnable(bool enable);
   bool IntakeIsEnable(void);
 
   void IntakeDeploy(void);
   void IntakeRetract(void);
+
+  bool IntakeIsDeployed(void);
 
   void SetRampPosition(bool deploy);
   bool ReadSensorState(void);
@@ -33,6 +37,7 @@ class Pouch : public frc2::SubsystemBase {
   double IntakeGetCurrent(void);
   void OuterIntakeClose();
   void OuterIntakeOpen();
+
  private:
   WPI_VictorSPX m_outerLeft {CAN_POUCH_OUTER_LEFT_ID};
   WPI_VictorSPX m_outerRight {CAN_POUCH_OUTER_RIGHT_ID};

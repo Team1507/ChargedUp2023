@@ -43,6 +43,10 @@ RobotContainer::RobotContainer()
   //*************************************Auto**********************************************
 
   m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
+  m_chooser.AddOption("AutoChargeStation", &m_autoChargeStation);
+  m_chooser.AddOption("AutoTwoPieceLeft", &m_autoTwoPieceLeft);
+  m_chooser.AddOption("AutoTwoPieceRight", &m_autoTwoPieceRight);
+  m_chooser.AddOption("AutoScoreLink", &m_autoScoreLink);
 
   //m_chooser.AddOption("Auto Shoot Two Ball", &m_autoTwoBall);
 

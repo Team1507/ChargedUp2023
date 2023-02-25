@@ -26,16 +26,16 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_isTurret            = false;
 
 
-  m_scoringHome      = new GrpScoringSetPosition(m_arm, m_claw, Home     );
-  m_scoringReady     = new GrpScoringSetPosition(m_arm, m_claw, Ready    );
+  m_scoringHome      = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, Home     );
+  m_scoringReady     = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, Ready    );
 
-  m_scoringHighLeft  = new GrpScoringSetPosition(m_arm, m_claw, HighLeft );
-  m_scoringHighShelf = new GrpScoringSetPosition(m_arm, m_claw, HighShelf);
-  m_scoringHighRight = new GrpScoringSetPosition(m_arm, m_claw, HighRight);
+  m_scoringHighLeft  = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, HighLeft );
+  m_scoringHighShelf = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, HighShelf);
+  m_scoringHighRight = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, HighRight);
 
-  m_scoringMidLeft   = new GrpScoringSetPosition(m_arm, m_claw, MidLeft  );
-  m_scoringMidShelf  = new GrpScoringSetPosition(m_arm, m_claw, MidShelf );
-  m_scoringMidRight  = new GrpScoringSetPosition(m_arm, m_claw, MidRight );
+  m_scoringMidLeft   = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, MidLeft  );
+  m_scoringMidShelf  = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, MidShelf );
+  m_scoringMidRight  = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, MidRight );
 
   m_clawEject        = new CmdClawEject(m_claw);
 }
@@ -73,6 +73,9 @@ void CmdToperatorDefault::Execute()
     float TurretManual     = m_topDriver->GetRightX();
 
     int   DpadState        = m_topDriver->GetPOV();
+
+    ArmLevel armLevel = m_arm->ElevationArmGetPosition();
+
   //************************************************************
   //*******************SCORING POSITIONS************************
   if(DpadState == -1)
@@ -199,7 +202,7 @@ else if(BButtonPressed)
   m_arm->ElevationArmSetPosition(ArmLevel::Level_Pouch);
 }
 //*******************ARM EXTENSION MANUAL************************
-if(ArmExtention)
+if(ArmExtention && armLevel == ArmLevel::Level_Pouch)
 {
   m_arm->ExtensionSetPosition(true);
 }

@@ -9,7 +9,7 @@ GrpAllFindHome::GrpAllFindHome(Arm *arm, Pouch *pouch, Claw *claw)
 {
   frc2::SequentialCommandGroup
   {
-    CmdArmLevelSetPosition(arm, ArmLevel::Low),
+    CmdArmLevelSetPosition(arm, ArmLevel::Low,pouch),
     
     frc2::ParallelCommandGroup
     {
@@ -18,7 +18,7 @@ GrpAllFindHome::GrpAllFindHome(Arm *arm, Pouch *pouch, Claw *claw)
         CmdTurretSetPower(arm, -.2),
         frc2::SequentialCommandGroup
         {
-          CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch)
+          CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch,pouch)
         }
     }
   };

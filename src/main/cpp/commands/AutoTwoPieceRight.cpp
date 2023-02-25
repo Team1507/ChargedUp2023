@@ -27,10 +27,10 @@ AutoTwoPieceRight::AutoTwoPieceRight(Drivetrain *drivetrain, Arm *arm, Claw *cla
       //-------------------------------
 
     // Score Cone
-      GrpScoringSetPosition(arm, claw, ScoringPosition::HighLeft),
+      GrpScoringSetPosition(arm, claw,pouch, ScoringPosition::HighLeft),
       frc2::WaitCommand(0.5_s),
       CmdClawEject(claw),
-      GrpScoringSetPosition(arm, claw, ScoringPosition::Home),
+      GrpScoringSetPosition(arm, claw,pouch, ScoringPosition::Home),
 
       //Move to Cube
       CmdDriveStraightGyro(drivetrain, .3, 0, 0, 200, false, false, 0.0),
@@ -44,10 +44,10 @@ AutoTwoPieceRight::AutoTwoPieceRight(Drivetrain *drivetrain, Arm *arm, Claw *cla
       CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Inner, 0.0),
       CmdDriveStraightGyro(drivetrain, .3, 180, 90, 210, false, false, 0.0),
       CmdDriveToAprilTag(drivetrain, camera, .2),
-      GrpScoringSetPosition(arm, claw, ScoringPosition::HighShelf),
+      GrpScoringSetPosition(arm, claw,pouch, ScoringPosition::HighShelf),
       frc2::WaitCommand(0.5_s),
       CmdClawEject(claw),
-      GrpScoringSetPosition(arm, claw, ScoringPosition::Home),
+      GrpScoringSetPosition(arm, claw,pouch, ScoringPosition::Home),
       CmdDriveStraightGyro(drivetrain, .3, 0, 90, 224, false, false, 0.0),
       CmdPouchIntakeDeploy(pouch),
       CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, .6),
