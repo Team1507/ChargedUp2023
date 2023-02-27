@@ -23,10 +23,12 @@ void Robot::RobotInit()
   m_container.m_drivetrain.ZeroGyro(); 
   m_container.m_drivetrain.ResetOdometry();
   m_container.m_drivetrain.SetDriveType(Drivetrain::driveType::FIELDCENTRIC); //default to fieldcentric mode
+  #ifndef DRIVETRAIN_ONLY
   m_container.m_claw.ClawSetIntakePower(0.4);
   m_container.m_claw.ClawSetOuttakePower(-0.4);
   m_container.m_pouch.SetRampPosition(false);
   m_container.m_arm.ElevationArmSetPosition(ArmLevel::Level_Pouch);
+  #endif
   CheckAlliance();
 
 }
@@ -35,6 +37,7 @@ void Robot::CheckAlliance( void )
 {
 
   //Set Panel LEDs
+  #ifndef DRIVETRAIN_ONLY
   if( frc::DriverStation::GetAlliance() == frc::DriverStation::kRed)
   {
       m_container.m_driverfeedback.DriverFeedbackLED(COLOR_RED);
@@ -47,7 +50,7 @@ void Robot::CheckAlliance( void )
   {
      m_container.m_driverfeedback.DriverFeedbackLED(COLOR_BLUE);
   }
-
+  #endif
 
 
 }

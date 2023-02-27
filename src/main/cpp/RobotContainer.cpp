@@ -38,7 +38,7 @@ RobotContainer::RobotContainer()
   m_pouch.SetDefaultCommand(CmdPouchDefault(&m_pouch));
   m_toperator.SetDefaultCommand(CmdToperatorDefault(&m_toperator, &m_topDriver, &m_claw, &m_arm, &m_pouch, &m_camera, &m_driverfeedback));
   m_driverfeedback.SetDefaultCommand(CmdDriverFeedbackDefault(&m_driverfeedback, &m_topDriver, &m_claw));
-#endif
+
 
   //*************************************Auto**********************************************
 
@@ -47,7 +47,7 @@ RobotContainer::RobotContainer()
   m_chooser.AddOption("AutoTwoPieceLeft", &m_autoTwoPieceLeft);
   m_chooser.AddOption("AutoTwoPieceRight", &m_autoTwoPieceRight);
   m_chooser.AddOption("AutoScoreLink", &m_autoScoreLink);
-
+#endif
   //m_chooser.AddOption("Auto Shoot Two Ball", &m_autoTwoBall);
 
   frc::SmartDashboard::PutData("Auto",&m_chooser);
