@@ -23,8 +23,8 @@ Claw::Claw(frc::PowerDistribution *m_pdh)
 void Claw::Periodic() 
 {
     frc::SmartDashboard::PutNumber("Wrist Position", m_wristEncoder.GetPosition());
-    frc::SmartDashboard::PutBoolean("Forward Limit Switch", m_wristFWDLimit.Get());
-    frc::SmartDashboard::PutBoolean("Reverse Limit Switch", m_wristREVLimit.Get());
+    frc::SmartDashboard::PutBoolean("Wrist Fwrd Limit Switch", m_wristFWDLimit.Get());
+    frc::SmartDashboard::PutBoolean("Wrist Rev Limit Switch", m_wristREVLimit.Get());
 }
   
 //************************************CLAW******************************************

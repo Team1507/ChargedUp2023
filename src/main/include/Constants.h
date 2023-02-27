@@ -63,7 +63,7 @@
 #define PCM_AIR_SPRING_RETRACT_ID       7
 
 //********** DIO Ports **********
-#define DIO_CLAW_DETECT_ID                  0   //Cube
+#define DIO_CLAW_DETECT_ID                  1   //Cube
 //      DIO_CLAW_DETECT_ID                  1   //Cone?
 #define DIO_POUCH_DETECT_ID                 2
 #define DIO_ELEVATION_HOME_LIMIT_SWITCH_ID  3
