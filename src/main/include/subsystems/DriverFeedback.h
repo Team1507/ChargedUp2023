@@ -12,9 +12,9 @@
 
 //*************COLORS***************
 
-#define COLOR_RED   255, 0, 0
+#define COLOR_RED   50, 0, 0
 #define COLOR_GREEN 0, 255, 0
-#define COLOR_BLUE  0, 0, 255
+#define COLOR_BLUE  0, 0, 50
 
 #define COLOR_YELLOW 255, 255, 0
 #define COLOR_PURPLE 128, 0, 128

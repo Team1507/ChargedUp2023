@@ -45,8 +45,9 @@ class Claw : public frc2::SubsystemBase {
   void  WristSetPower(float power);     //for Debug use Only 
   float WristGetPower(void);            //for Debug use Only 
   bool  ReadSensorState(void);         //Change Return Type Later
-  bool  WristLimitSwitchForward(void);
-  bool  WristLimitSwitchReverse(void);
+  // bool  WristLimitSwitchForward(void);
+  // bool  WristLimitSwitchReverse(void);
+  bool  WristLimitTop(void);
 
 
  private:

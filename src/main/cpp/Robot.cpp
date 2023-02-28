@@ -7,6 +7,8 @@
 #include <frc2/command/CommandScheduler.h>
 #include <iostream>
 #include <frc/DriverStation.h>
+// #include <cstdlib>
+
 void Robot::RobotInit() 
 {
  //*************************** INIT ******************************
@@ -67,9 +69,23 @@ void Robot::RobotPeriodic()
 void Robot::DisabledInit() 
 {
   std::cout<<"Disabled Init"<<std::endl;
- }
+  // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);
+}
  
-void Robot::DisabledPeriodic() {}
+void Robot::DisabledPeriodic() 
+{
+  // switch (rand() %3)
+  // {
+  // case 0:
+  //   m_container.m_driverfeedback.DriverFeedbackLED(COLOR_RED);
+  //   break;
+  // case 1:
+  //   m_container.m_driverfeedback.DriverFeedbackLED(COLOR_GREEN);
+  //   break;
+  // case 2:
+  //   m_container.m_driverfeedback.DriverFeedbackLED(COLOR_BLUE);
+  // }
+}
 
 
 void Robot::AutonomousInit() 
@@ -127,8 +143,8 @@ void Robot::WriteToSmartDashboard(void)
 
 
 #ifndef DRIVETRAIN_ONLY
-  frc::SmartDashboard::PutBoolean("Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());
-  frc::SmartDashboard::PutBoolean("Left Limit Switch", m_container.m_arm.TurretGetLeftLimitSW());
+  frc::SmartDashboard::PutBoolean("Turret Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());
+  frc::SmartDashboard::PutBoolean("Turret Left Limit Switch", m_container.m_arm.TurretGetLeftLimitSW());
   frc::SmartDashboard::PutNumber("Turret Encoder", m_container.m_arm.TurretGetEncoder());
   frc::SmartDashboard::PutNumber("Turret Angle", m_container.m_arm.TurretGetAngle());
   frc::SmartDashboard::PutNumber("Arm Position", m_container.m_arm.ElevationArmGetPosition());

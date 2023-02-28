@@ -35,7 +35,7 @@
 
 
 //Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
-// #define DRIVETRAIN_ONLY
+//  #define DRIVETRAIN_ONLY
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -67,7 +67,7 @@ class RobotContainer
   Pouch          m_pouch{&m_pdh};
   Arm            m_arm{&m_pouch};
   Toperator      m_toperator;
-  Camera         m_camera;
+  //Camera         m_camera;
 #endif
 
   frc2::Command* GetAutonomousCommand();
@@ -75,11 +75,11 @@ class RobotContainer
 
 //*********************AUTO**********************
 #ifndef DRIVETRAIN_ONLY
- AutoDoNothing     m_autoDoNothing {&m_drivetrain};
- AutoTwoPieceLeft  m_autoTwoPieceLeft {&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
- AutoTwoPieceRight m_autoTwoPieceRight {&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
- AutoChargeStation m_autoChargeStation{&m_drivetrain, &m_arm,  &m_camera, &m_claw, &m_pouch};
- AutoScoreLink     m_autoScoreLink{&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
+ //AutoDoNothing     m_autoDoNothing {&m_drivetrain};
+ //AutoTwoPieceLeft  m_autoTwoPieceLeft {&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
+ //AutoTwoPieceRight m_autoTwoPieceRight {&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
+ //AutoChargeStation m_autoChargeStation{&m_drivetrain, &m_arm,  &m_camera, &m_claw, &m_pouch};
+ //AutoScoreLink     m_autoScoreLink{&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
 #endif
 
 

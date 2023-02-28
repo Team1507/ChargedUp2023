@@ -74,11 +74,11 @@ float Arm::TurretGetEncoder(void)
 }
 bool Arm::TurretGetLeftLimitSW(void)
 {
-    return m_turretREVLimit.Get();
+    return m_turretFWDLimit.Get();
 }
 bool Arm::TurretGetRightLimitSW(void)
 {
-    return m_turretFWDLimit.Get();
+    return m_turretREVLimit.Get();
 }
 
 //***********************************ARM*********************************

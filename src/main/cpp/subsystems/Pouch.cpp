@@ -88,5 +88,5 @@ void Pouch::OuterIntakeOpen()
 // This method will be called once per scheduler run
 void Pouch::Periodic() 
 {
-    frc::SmartDashboard::PutBoolean("Pouch Gamepiece Detect", ReadSensorState());
+  frc::SmartDashboard::PutBoolean("Pouch Gamepiece Detect", ReadSensorState());
 }
