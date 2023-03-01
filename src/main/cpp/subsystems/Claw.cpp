@@ -20,6 +20,7 @@ Claw::Claw(frc::PowerDistribution *pdh)
 
     m_claw.RestoreFactoryDefaults();
     m_claw.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
+    m_claw.SetInverted(true);
 }
 // This method will be called once per scheduler run
 void Claw::Periodic() 

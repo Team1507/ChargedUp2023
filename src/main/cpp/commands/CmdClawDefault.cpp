@@ -24,20 +24,23 @@ void CmdClawDefault::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void CmdClawDefault::Execute() 
 {
-  if(m_claw->ClawIntakeGetEnable() && !m_isIntaking) 
+  if(m_claw->ClawIntakeGetEnable() && !m_isIntaking && !m_claw->ReadSensorState()) 
   {
     m_claw->ClawSetPower(m_claw->ClawGetIntakePower());
     m_isIntaking = true;
     m_delay = 50;
+    std::cout<<"Claw Intake Power"<<m_claw->ClawGetIntakePower()<<std::endl;
   }
   else if(!m_claw->ClawIntakeGetEnable() && m_isIntaking)
   {
     m_claw->ClawSetPower(0.0);
     m_isIntaking = false;
+    std::cout<<"Claw A"<<std::endl;
   }
   else if(m_claw->ClawGetCurrent() > CLAW_STALL_CURRENT)
   {
     m_claw->ClawIntakeEnable(false);
+    std::cout<<"Claw B"<<std::endl;
   }
   else if(m_claw->ReadSensorState() && m_delay > 0)
   {
@@ -47,6 +50,7 @@ void CmdClawDefault::Execute()
   {
     m_claw->ClawSetPower(0.0);
     m_isIntaking = false;
+    std::cout<<"Claw C"<<std::endl;
   }
 }
 

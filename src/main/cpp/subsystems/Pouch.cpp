@@ -28,7 +28,7 @@ void Pouch::IntakeSetPower(float power,WhatIntake type)
   else if (WhatIntake::Outer == type)
   {
     m_outerLeft.Set(power);
-    m_outerRight.Set(power);
+    m_outerRight.Set(-power);
   }
 }
 void Pouch::InnerIntakeSetPosition(float position)
@@ -50,12 +50,12 @@ double Pouch::IntakeGetCurrent(void)
 }
 void Pouch::IntakeDeploy(void)
 {
-  m_OuterIntake.Set(frc::DoubleSolenoid::kForward);   
+  m_OuterIntake.Set(frc::DoubleSolenoid::kReverse);   
 }
 
 void Pouch::IntakeRetract(void)
 {
-  m_OuterIntake.Set(frc::DoubleSolenoid::kReverse);
+  m_OuterIntake.Set(frc::DoubleSolenoid::kForward);
 }
 
 bool Pouch::IntakeIsDeployed(void)

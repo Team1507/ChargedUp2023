@@ -1,21 +1,25 @@
 #include "commands/CmdClawEject.h"
+#include <iostream>
 
 CmdClawEject::CmdClawEject(Claw *claw) 
 {
+  AddRequirements(claw); 
   m_claw = claw;
 }
 
 void CmdClawEject::Initialize() 
 {
-  m_delay = 30;
+  m_delay = 100; 
+  m_claw->ClawSetPower(m_claw->ClawGetOuttakePower());
+  std::cout<<"Claw Eject Init "<<m_claw->ClawGetOuttakePower()<<std::endl;
 }
 
 void CmdClawEject::Execute() 
 {
   if(m_delay > 0)
   {
-    m_claw->ClawSetPower(m_claw->ClawGetOuttakePower());
     m_delay--;
+    std::cout<<m_delay<<std::endl;
   }
   else
   {
