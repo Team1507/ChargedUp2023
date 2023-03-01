@@ -19,7 +19,7 @@
 
 class Claw : public frc2::SubsystemBase {
  public:
-  Claw(frc::PowerDistribution *m_pdh);
+  Claw(frc::PowerDistribution *pdh);
   /**
   * Will be called periodically whenever the CommandScheduler runs.
   */

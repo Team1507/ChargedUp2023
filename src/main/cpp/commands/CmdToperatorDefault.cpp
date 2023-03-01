@@ -1,6 +1,7 @@
 #include "commands/CmdToperatorDefault.h"
 #include "Constants.h"
 #include <frc/smartdashboard/SmartDashboard.h>
+#include <iostream>
 
 #define POUCH_TURRET_LIMIT 5
 
@@ -54,17 +55,26 @@ void CmdToperatorDefault::Execute()
 {
   //**********************BUTTON MAPPINGS**********************
     bool  YButtonPressed   = m_topDriver->GetYButton();
+    frc::SmartDashboard::PutBoolean("YButtonPressed",YButtonPressed);
     bool  AButtonPressed   = m_topDriver->GetAButton();
+    frc::SmartDashboard::PutBoolean("AButtonPressed",AButtonPressed);
     bool  XButtonPressed   = m_topDriver->GetXButtonPressed();
+    frc::SmartDashboard::PutBoolean("XButtonPressed",XButtonPressed);
     bool  BButtonPressed   = m_topDriver->GetBButtonPressed();
+    frc::SmartDashboard::PutBoolean("BButtonPressed",BButtonPressed);
 
     bool  ArmExtention     = m_topDriver->GetLeftY() > .9;
     bool  ArmRetract       = m_topDriver->GetLeftY() < -.9;
 
     bool  InnerIntake      = m_topDriver->GetLeftBumper();
+    frc::SmartDashboard::PutBoolean("Inner Intake",InnerIntake);
     bool  OuterIntake      = m_topDriver->GetRightBumper();
+    frc::SmartDashboard::PutBoolean("Outer Intake",OuterIntake);
     bool  PouchRamp        = m_topDriver->GetRightStickButton();
+    frc::SmartDashboard::PutBoolean("Pouch Ramp",PouchRamp);
 
+
+    
     bool  ClawOutake       = m_topDriver->GetRightTriggerAxis() > .9;
     bool  ClawIntake       = m_topDriver->GetLeftTriggerAxis() < -.9;
 
@@ -218,11 +228,13 @@ if(InnerIntake && !m_isInnerIntaking)
   m_pouch->IntakeEnable(true);
   m_pouch->SetRampPosition(true);
   m_isInnerIntaking = true;
+  std::cout<<"IntakeEnable"<<std::endl;
 }
 else if(!InnerIntake && m_isInnerIntaking)
 {
   m_pouch->IntakeEnable(false);
   m_pouch->SetRampPosition(false);
+  std::cout<<"IntakeDisable"<<std::endl;
   m_isInnerIntaking = false;
 }
 if(OuterIntake && !m_isOuterIntaking)
@@ -230,6 +242,8 @@ if(OuterIntake && !m_isOuterIntaking)
   m_pouch->IntakeDeploy();
   m_pouch->SetRampPosition(true);
   m_pouch->IntakeSetPower(.3, Pouch::WhatIntake::Outer);
+  std::cout<<"Outer Intake on"<<std::endl;
+
   m_isOuterIntaking = true;
 }
 else if(!OuterIntake && m_isInnerIntaking)
@@ -237,6 +251,8 @@ else if(!OuterIntake && m_isInnerIntaking)
   m_pouch->IntakeRetract();
   m_pouch->SetRampPosition(false);
   m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Outer);
+  std::cout<<"Outer Intake off"<<std::endl;
+
   m_isOuterIntaking = false;
 }
 
@@ -256,11 +272,13 @@ if(PouchRamp && !m_isRampActivated)
 {
   m_pouch->SetRampPosition(true);
   m_isRampActivated = true;
+  std::cout<<"Pouch Ramp on"<<std::endl;
 }
 else if(!PouchRamp && m_isRampActivated)
 {
   m_pouch->SetRampPosition(false);
   m_isRampActivated = false;
+  std::cout<<"Pouch Ramp off"<<std::endl;
 }
   
 //***************************TURRET MANUAL*******************

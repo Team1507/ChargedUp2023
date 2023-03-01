@@ -4,7 +4,7 @@
 
 #include "subsystems/Claw.h"
 
-Claw::Claw(frc::PowerDistribution *m_pdh) 
+Claw::Claw(frc::PowerDistribution *pdh) 
 {
     m_intakeEnabled = false;
     
@@ -15,6 +15,8 @@ Claw::Claw(frc::PowerDistribution *m_pdh)
     m_wristPID.SetI(0.0); //!!! CHANGE LATER !!!
     m_wristPID.SetD(0.0); //!!! CHANGE LATER !!!
     m_wristPID.SetSmartMotionAllowedClosedLoopError(0.0); //!!! CHANGE LATER !!!
+
+    m_pdh = pdh;
 
     m_claw.RestoreFactoryDefaults();
     m_claw.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
