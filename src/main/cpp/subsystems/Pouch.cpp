@@ -8,12 +8,13 @@ Pouch::Pouch(frc::PowerDistribution *pdh)
 {
   m_isIntaking = false;
   m_inner.RestoreFactoryDefaults(); 
+  m_inner.SetInverted(true);
   m_innerEncoder.SetPosition(0.0); 
-  m_innerPIDController.SetP(0.0); // change later
+  m_innerPIDController.SetP(0.05); // change later
   m_innerPIDController.SetI(0.0); // change later
   m_innerPIDController.SetD(0.0); // change later
-  m_innerPIDController.SetSmartMotionAllowedClosedLoopError(0.0); // change later
-  m_inner.SetOpenLoopRampRate(0.0); // change later
+  m_innerPIDController.SetSmartMotionAllowedClosedLoopError(0.3); // change later
+  m_inner.SetOpenLoopRampRate(0.5); // change later
   m_pdh = pdh;
 
 }
@@ -29,6 +30,19 @@ void Pouch::IntakeSetPower(float power,WhatIntake type)
     m_outerLeft.Set(power);
     m_outerRight.Set(power);
   }
+}
+void Pouch::InnerIntakeSetPosition(float position)
+{
+  m_innerEncoder.SetPosition(position);  
+}
+void Pouch::InnerIntakeTurnToPosition(float position)
+{
+  
+  m_innerPIDController.SetReference(position,rev::CANSparkMax::ControlType::kPosition);
+}
+int  Pouch::InnerIntakeGetEncoder(void)
+{
+  return m_innerEncoder.GetPosition();
 }
 double Pouch::IntakeGetCurrent(void)
 {
@@ -89,4 +103,5 @@ void Pouch::OuterIntakeOpen()
 void Pouch::Periodic() 
 {
   frc::SmartDashboard::PutBoolean("Pouch Gamepiece Detect", ReadSensorState());
+  frc::SmartDashboard::PutNumber("Inner Intake Encoder",InnerIntakeGetEncoder());
 }

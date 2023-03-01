@@ -12,7 +12,7 @@
 #include "ctre/Phoenix.h"
 #include <frc/PowerDistribution.h>
 #define INNER_INTAKE_POWER 0.3
-#define INNER_INTAKE_CURRENT_LIMIT 2
+#define INNER_INTAKE_CURRENT_LIMIT 1.5
 #define OUTER_INTAKE_RETRACT_DELAY 1000/20 //ms /20ms 
 
 class Pouch : public frc2::SubsystemBase {
@@ -22,6 +22,9 @@ class Pouch : public frc2::SubsystemBase {
   enum WhatIntake {Inner,Outer};
 
   void IntakeSetPower(float power,WhatIntake type);
+  void InnerIntakeSetPosition(float position);
+  void InnerIntakeTurnToPosition(float position);
+  int  InnerIntakeGetEncoder(void);
   void IntakeEnable(bool enable);
   bool IntakeIsEnable(void);
 
