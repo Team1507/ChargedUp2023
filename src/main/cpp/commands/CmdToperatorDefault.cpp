@@ -22,6 +22,7 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_isOuttaking         = false;
   m_isDpadCenter        = false;
   m_isInnerIntaking     = false;
+  m_isOuterIntaking     = false;
   m_isOuterIntakeClosed = false;
   m_isRampActivated     = false;
   m_isTurret            = false;
@@ -75,8 +76,8 @@ void CmdToperatorDefault::Execute()
 
 
     
-    bool  ClawOutake       = m_topDriver->GetRightTriggerAxis() > .9;
-    bool  ClawIntake       = m_topDriver->GetLeftTriggerAxis() < -.9;
+    bool  ClawOutake       = m_topDriver->GetRightTriggerAxis() > .8;
+    bool  ClawIntake       = m_topDriver->GetLeftTriggerAxis() > .8;
 
     bool  ReadyPosition    = m_topDriver->GetBackButtonPressed();
     bool  CloseOuterIntake = m_topDriver->GetStartButton();
@@ -191,6 +192,10 @@ void CmdToperatorDefault::Execute()
     m_clawEject->Schedule();
     m_isOuttaking = true;
   }
+  else if(!ClawOutake && m_isOuttaking)
+  {
+    m_isOuttaking = false;
+  }
   //******************WRIST**********************
   const float WRIST_DELTA = 100;
   if(WristManual > .6)
@@ -240,16 +245,16 @@ else if(!InnerIntake && m_isInnerIntaking)
 if(OuterIntake && !m_isOuterIntaking)
 {
   m_pouch->IntakeDeploy();
-  m_pouch->SetRampPosition(true);
+  // m_pouch->SetRampPosition(true);
   m_pouch->IntakeSetPower(.3, Pouch::WhatIntake::Outer);
   std::cout<<"Outer Intake on"<<std::endl;
 
   m_isOuterIntaking = true;
 }
-else if(!OuterIntake && m_isInnerIntaking)
+else if(!OuterIntake && m_isOuterIntaking)
 {
   m_pouch->IntakeRetract();
-  m_pouch->SetRampPosition(false);
+  // m_pouch->SetRampPosition(false);
   m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Outer);
   std::cout<<"Outer Intake off"<<std::endl;
 

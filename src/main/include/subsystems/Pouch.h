@@ -39,8 +39,8 @@ class Pouch : public frc2::SubsystemBase {
   void OuterIntakeOpen();
 
  private:
-  WPI_VictorSPX m_outerLeft {CAN_POUCH_OUTER_LEFT_ID};
-  WPI_VictorSPX m_outerRight {CAN_POUCH_OUTER_RIGHT_ID};
+  rev::CANSparkMax m_outerLeft {CAN_POUCH_OUTER_LEFT_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
+  rev::CANSparkMax m_outerRight {CAN_POUCH_OUTER_RIGHT_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
 
   rev::CANSparkMax m_inner {CAN_POUCH_INNER_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
   rev::SparkMaxRelativeEncoder m_innerEncoder = m_inner.GetEncoder();
