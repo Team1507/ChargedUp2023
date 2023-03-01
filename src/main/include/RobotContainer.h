@@ -26,10 +26,16 @@
 
 //Autos
 #include "commands/AutoDoNothing.h"
+#include "commands/AutoTwoPieceLeft.h"
+#include "commands/AutoChargeStation.h"
+#include "commands/AutoFarConeAndDock.h"
+#include "commands/AutoOverAndBack.h"
+#include "commands/AutoScoreLink.h"
+#include "commands/AutoTwoPieceRight.h"
 
 
 //Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
-// #define DRIVETRAIN_ONLY
+//  #define DRIVETRAIN_ONLY
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -46,21 +52,21 @@ class RobotContainer
 
   //****************Controllers*******************
   frc::XboxController m_botDriver{0};
-
-#ifndef DRIVETRAIN_ONLY
   frc::XboxController m_topDriver{1};
   frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev};
+
+#ifndef DRIVETRAIN_ONLY
 #endif
 
   //****************Subsystems*******************
   Drivetrain     m_drivetrain;
-
-#ifndef DRIVETRAIN_ONLY
   DriverFeedback m_driverfeedback {&m_topDriver};
-  Arm            m_arm;
   Claw           m_claw{&m_pdh};
   Pouch          m_pouch{&m_pdh};
+  Arm            m_arm{&m_pouch};
   Toperator      m_toperator;
+
+#ifndef DRIVETRAIN_ONLY
   Camera         m_camera;
 #endif
 
@@ -68,10 +74,13 @@ class RobotContainer
 
 
 //*********************AUTO**********************
- AutoDoNothing m_autoDoNothing {&m_drivetrain};
-
-
-
+#ifndef DRIVETRAIN_ONLY
+ //AutoDoNothing     m_autoDoNothing {&m_drivetrain};
+ //AutoTwoPieceLeft  m_autoTwoPieceLeft {&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
+ //AutoTwoPieceRight m_autoTwoPieceRight {&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
+ //AutoChargeStation m_autoChargeStation{&m_drivetrain, &m_arm,  &m_camera, &m_claw, &m_pouch};
+ //AutoScoreLink     m_autoScoreLink{&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
+#endif
 
 
 

@@ -7,8 +7,9 @@
 #include <iostream>
 #define Ticks2Angle(ticks) (ticks) 
 #define Angle2Ticks(angle) (angle)
-Arm::Arm() 
+Arm::Arm(Pouch *pouch) 
 {
+    m_pouch = pouch;
     m_turret.RestoreFactoryDefaults(); 
     m_turretEncoder.SetPosition(0.0); 
     m_turretPID.SetP(0.0); // change later
@@ -73,11 +74,11 @@ float Arm::TurretGetEncoder(void)
 }
 bool Arm::TurretGetLeftLimitSW(void)
 {
-    return m_turretREVLimit.Get();
+    return m_turretFWDLimit.Get();
 }
 bool Arm::TurretGetRightLimitSW(void)
 {
-    return m_turretFWDLimit.Get();
+    return m_turretREVLimit.Get();
 }
 
 //***********************************ARM*********************************
@@ -87,21 +88,32 @@ void Arm::ElevationArmSetPosition(ArmLevel position)
     switch(position)
     {
         case ArmLevel::Level_Pouch :
-            m_lowerArm.Set(frc::DoubleSolenoid::kForward);
-            m_upperArm.Set(frc::DoubleSolenoid::kForward);
+            if(m_pouch->IntakeIsDeployed())
+            {
+                m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+                m_upperArm.Set(frc::DoubleSolenoid::kForward);
+            }
             break;
         case ArmLevel::Low : 
-            m_upperArm.Set(frc::DoubleSolenoid::kReverse);
-            m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+            if(m_pouch->IntakeIsDeployed() || ElevationArmGetPosition() != Level_Pouch)
+            {
+                m_upperArm.Set(frc::DoubleSolenoid::kReverse);
+                m_lowerArm.Set(frc::DoubleSolenoid::kForward);
+            }
             break;
         case ArmLevel::Mid :
-            m_lowerArm.Set(frc::DoubleSolenoid::kReverse);
-            m_upperArm.Set(frc::DoubleSolenoid::kForward);
+            if(m_pouch->IntakeIsDeployed() || ElevationArmGetPosition() != Level_Pouch)
+            {
+                m_lowerArm.Set(frc::DoubleSolenoid::kReverse);
+                m_upperArm.Set(frc::DoubleSolenoid::kForward);
+            }
             break;
-
-         case ArmLevel::High :
-            m_lowerArm.Set(frc::DoubleSolenoid::kReverse);
-            m_upperArm.Set(frc::DoubleSolenoid::kReverse);
+        case ArmLevel::High :
+            if(m_pouch->IntakeIsDeployed() || ElevationArmGetPosition() != Level_Pouch)
+            {
+                m_lowerArm.Set(frc::DoubleSolenoid::kReverse);
+                m_upperArm.Set(frc::DoubleSolenoid::kReverse);                
+            }
             break;
     }
 } 

@@ -31,27 +31,31 @@ RobotContainer::RobotContainer()
 
   //**************************** Subsystem Defaults****************************************
   m_drivetrain.SetDefaultCommand(CmdDriveWithGamepad(&m_drivetrain, &m_botDriver));
-  
-#ifndef DRIVETRAIN_ONLY
   m_claw.SetDefaultCommand(CmdClawDefault(&m_claw));
   m_arm.SetDefaultCommand(CmdArmDefault(&m_arm));
   m_pouch.SetDefaultCommand(CmdPouchDefault(&m_pouch));
-  m_toperator.SetDefaultCommand(CmdToperatorDefault(&m_toperator, &m_topDriver, &m_claw, &m_arm, &m_pouch, &m_camera, &m_driverfeedback));
   m_driverfeedback.SetDefaultCommand(CmdDriverFeedbackDefault(&m_driverfeedback, &m_topDriver, &m_claw));
-#endif
+
+#ifndef DRIVETRAIN_ONLY
+  m_toperator.SetDefaultCommand(CmdToperatorDefault(&m_toperator, &m_topDriver, &m_claw, &m_arm, &m_pouch, &m_camera, &m_driverfeedback));
+
 
   //*************************************Auto**********************************************
 
-  m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
-
+  //m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
+  //m_chooser.AddOption("AutoChargeStation", &m_autoChargeStation);
+  //m_chooser.AddOption("AutoTwoPieceLeft", &m_autoTwoPieceLeft);
+  //m_chooser.AddOption("AutoTwoPieceRight", &m_autoTwoPieceRight);
+  //m_chooser.AddOption("AutoScoreLink", &m_autoScoreLink);
+#endif
   //m_chooser.AddOption("Auto Shoot Two Ball", &m_autoTwoBall);
 
   frc::SmartDashboard::PutData("Auto",&m_chooser);
 
   //********************************Smart Dashboard Buttons**************************************
 #ifndef DRIVETRAIN_ONLY
-  frc::SmartDashboard::PutData( "GrpTest1", new GrpTest1(&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch));
-  frc::SmartDashboard::PutData( "GrpTest2", new GrpTest2(&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch));
+  // frc::SmartDashboard::PutData( "GrpTest1", new GrpTest1(&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch));
+  // frc::SmartDashboard::PutData( "GrpTest2", new GrpTest2(&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch));
 #endif
 
 

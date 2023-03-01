@@ -44,6 +44,11 @@ void Pouch::IntakeRetract(void)
   m_OuterIntake.Set(frc::DoubleSolenoid::kReverse);
 }
 
+bool Pouch::IntakeIsDeployed(void)
+{
+  return m_OuterIntake.Get() == frc::DoubleSolenoid::kForward;
+}
+
 void Pouch::SetRampPosition(bool deploy)
 {
   if( deploy == true )
@@ -83,5 +88,5 @@ void Pouch::OuterIntakeOpen()
 // This method will be called once per scheduler run
 void Pouch::Periodic() 
 {
-    frc::SmartDashboard::PutBoolean("Pouch Gamepiece Detect", ReadSensorState());
+  frc::SmartDashboard::PutBoolean("Pouch Gamepiece Detect", ReadSensorState());
 }

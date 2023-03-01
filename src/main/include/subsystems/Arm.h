@@ -11,12 +11,13 @@
 #include <frc/DoubleSolenoid.h>
 #include <frc/PneumaticsModuleType.h>
 #include <frc/DigitalInput.h>
+#include "subsystems/Pouch.h"
 
 enum ArmLevel{Level_Pouch, Low, Mid, High};
 class Arm : public frc2::SubsystemBase 
 {
  public:
-  Arm();
+  Arm(Pouch *pouch);
   void Periodic() override;
   
   //**********************************Turret******************************
@@ -53,4 +54,5 @@ class Arm : public frc2::SubsystemBase
 
   frc::DoubleSolenoid          m_airSpring {CAN_PCM2_ID, frc::PneumaticsModuleType::CTREPCM,  PCM_AIR_SPRING_EXTEND_ID, PCM_AIR_SPRING_RETRACT_ID}; // WRITE CODE FOR LATER THING
   
+  Pouch *m_pouch;
 };

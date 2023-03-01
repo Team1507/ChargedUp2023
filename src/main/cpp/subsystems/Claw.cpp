@@ -4,7 +4,7 @@
 
 #include "subsystems/Claw.h"
 
-Claw::Claw(frc::PowerDistribution *m_pdh) 
+Claw::Claw(frc::PowerDistribution *pdh) 
 {
     m_intakeEnabled = false;
     
@@ -16,6 +16,8 @@ Claw::Claw(frc::PowerDistribution *m_pdh)
     m_wristPID.SetD(0.0); //!!! CHANGE LATER !!!
     m_wristPID.SetSmartMotionAllowedClosedLoopError(0.0); //!!! CHANGE LATER !!!
 
+    m_pdh = pdh;
+
     m_claw.RestoreFactoryDefaults();
     m_claw.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
 }
@@ -23,8 +25,9 @@ Claw::Claw(frc::PowerDistribution *m_pdh)
 void Claw::Periodic() 
 {
     frc::SmartDashboard::PutNumber("Wrist Position", m_wristEncoder.GetPosition());
-    frc::SmartDashboard::PutBoolean("Forward Limit Switch", m_wristFWDLimit.Get());
-    frc::SmartDashboard::PutBoolean("Reverse Limit Switch", m_wristREVLimit.Get());
+    frc::SmartDashboard::PutBoolean("Wrist Up Limit Switch", WristLimitTop());
+    frc::SmartDashboard::PutBoolean("Claw Game Piece Photoeye",m_clawGamePiece.Get());
+    //frc::SmartDashboard::PutBoolean("Wrist Rev Limit Switch", m_wristREVLimit.Get());
 }
   
 //************************************CLAW******************************************
@@ -92,11 +95,15 @@ float Claw::WristGetPower(void)           //for Debug use Only
 {
     return m_wrist.Get();
 }
-bool  Claw::WristLimitSwitchForward(void)
-{
-    return m_wristFWDLimit.Get();
-}
-bool  Claw::WristLimitSwitchReverse(void)
+// bool  Claw::WristLimitSwitchForward(void)
+// {
+//     return m_wristFWDLimit.Get();
+// }
+// bool  Claw::WristLimitSwitchReverse(void)
+// {
+//     return m_wristREVLimit.Get();
+// }
+bool  Claw::WristLimitTop(void)
 {
     return m_wristREVLimit.Get();
 }
