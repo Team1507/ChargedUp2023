@@ -1,7 +1,7 @@
 
 #include "commands/CmdSetRampPosition.h"
 #include "subsystems/Pouch.h"
-CmdSetRampPosition::CmdSetRampPosition(Pouch *pouch, float position)
+CmdSetRampPosition::CmdSetRampPosition(Pouch *pouch, bool position)
 {
  m_pouch = pouch;
  m_position = position;

@@ -5,6 +5,7 @@
 #include "commands/CmdPouchDefault.h"
 #include "subsystems/Pouch.h"
 #include <iostream>
+#include <frc/smartdashboard/SmartDashboard.h>
 
 CmdPouchDefault::CmdPouchDefault(Pouch *pouch)
 {
@@ -17,13 +18,14 @@ CmdPouchDefault::CmdPouchDefault(Pouch *pouch)
 void CmdPouchDefault::Initialize() 
 {
   std::cout<<"Pouch"<<std::endl;
+  m_stallCount = 0;
 }
 
 // Called repeatedly when this Command is scheduled to run
 void CmdPouchDefault::Execute() 
 {
   bool IntakeEnabled = m_pouch->IntakeIsEnable();
-  
+  frc::SmartDashboard::PutNumber("Intake Current",m_pouch->IntakeGetCurrent());
   
   if (IntakeEnabled && !m_isIntaking) 
   {
@@ -33,16 +35,30 @@ void CmdPouchDefault::Execute()
   else if(!IntakeEnabled && m_isIntaking)
   {
     m_isIntaking = false;
-    m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Inner);
+    m_pouch->InnerIntakeTurnToPosition(0);
   }
   else if (m_pouch->IntakeGetCurrent() > INNER_INTAKE_CURRENT_LIMIT)
   {
-    m_pouch->IntakeEnable(false);
+    if(m_stallCount > 3)
+    {
+      m_pouch->IntakeEnable(false);
+      m_stallCount=0;
+      std::cout<<"Triped by Current"<<std::endl;
+    }
+    else
+    {
+      m_stallCount++;
+    }
   }
   else if (m_pouch->ReadSensorState())
   {
     m_pouch->IntakeEnable(false);
-    m_pouch->SetRampPosition(false);
+    std::cout<<"Triped by sensor"<<std::endl;
+    // m_pouch->SetRampPosition(false);
+  }
+  else
+  {
+    m_stallCount=0;
   }
 
 }

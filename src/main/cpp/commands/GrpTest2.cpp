@@ -11,7 +11,8 @@
 #include "commands/CmdDriveStraight.h"
 #include "commands/CmdDriveStraightGyro.h"
 #include "commands/CmdDriveTurn2Angle.h"
-
+#include "commands/CmdIntakeSetEnable.h"
+#include "commands/CmdSetRampPosition.h"
 
 GrpTest2::GrpTest2( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) {
   // AddCommands(FooCommand(), BarCommand());
@@ -25,7 +26,10 @@ GrpTest2::GrpTest2( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw
     CmdDriveClearAll(drivetrain),
     frc2::WaitCommand(0.5_s),
     //---------------------------------------
+    CmdSetRampPosition(pouch,true),
+    frc2::WaitCommand(1_s),
 
+    CmdIntakeSetEnable(pouch,true),
 
 
 

@@ -9,10 +9,10 @@ class CmdSetRampPosition
     : public frc2::CommandHelper<frc2::InstantCommand,
                                  CmdSetRampPosition> {
  public:
-  CmdSetRampPosition(Pouch *pouch, float position);
+  CmdSetRampPosition(Pouch *pouch, bool position);
 
   void Initialize() override;
 Pouch *m_pouch;
-float m_position;
+bool m_position;
 
 };
