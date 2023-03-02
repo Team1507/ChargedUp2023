@@ -12,9 +12,10 @@
 #include "commands/CmdDriveStraightGyro.h"
 #include "commands/CmdDriveTurn2Angle.h"
 #include "commands/CmdDriveStraightVelocity.h"
+//Camera *camera,
 
 
-GrpTest1::GrpTest1( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) {
+GrpTest1::GrpTest1( Drivetrain *drivetrain, Arm *arm,  Claw *claw, Pouch *pouch ) {
   // AddCommands(FooCommand(), BarCommand());
 
   AddCommands

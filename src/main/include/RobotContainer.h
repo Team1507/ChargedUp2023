@@ -67,7 +67,7 @@ class RobotContainer
   Toperator      m_toperator;
 
 #ifndef DRIVETRAIN_ONLY
-  Camera         m_camera;
+  //Camera         m_camera;
 #endif
 
   frc2::Command* GetAutonomousCommand();

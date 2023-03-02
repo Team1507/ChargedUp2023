@@ -4,9 +4,9 @@
 #include <iostream>
 
 #define POUCH_TURRET_LIMIT 5
+//Camera *camera,
 
-
-CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxController *topDriver, Claw *claw, Arm *arm, Pouch *pouch, Camera *camera, DriverFeedback *driverfeedback) 
+CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxController *topDriver, Claw *claw, Arm *arm, Pouch *pouch,  DriverFeedback *driverfeedback) 
 {
   AddRequirements(toperator);
   m_toperator      = toperator;
@@ -15,7 +15,7 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_arm            = arm;
   m_pouch          = pouch;
   m_driverFeedback = driverfeedback;
-  m_camera         = camera;
+  //m_camera         = camera;
 
 
   m_isIntaking          = false;
@@ -148,11 +148,11 @@ void CmdToperatorDefault::Execute()
       switch(DpadState)
       {
         case 0 : // up
-          m_camera->PipelineSetIndex(CameraIndex::AprilTag);
+          //m_camera->PipelineSetIndex(CameraIndex::AprilTag);
           m_isDpadCenter = false;
           break;
         case 90: // right
-          m_camera->PipelineSetIndex(CameraIndex::Cone);
+          //m_camera->PipelineSetIndex(CameraIndex::Cone);
           m_claw->ClawSetIntakePower( frc::SmartDashboard::GetNumber("CONE_INTAKE_POWER", CONE_INTAKE_POWER));
           m_driverFeedback->DriverFeedbackLED(COLOR_YELLOW);
           m_isDpadCenter = false;
@@ -163,7 +163,7 @@ void CmdToperatorDefault::Execute()
           m_isDpadCenter = false;
           break;
         case 270: // left
-          m_camera->PipelineSetIndex(CameraIndex::Cube);
+          //m_camera->PipelineSetIndex(CameraIndex::Cube);
           m_claw->ClawSetIntakePower(  frc::SmartDashboard::GetNumber("CUBE_INTAKE_POWER", CUBE_INTAKE_POWER));
           m_driverFeedback->DriverFeedbackLED(COLOR_PURPLE);
           m_isDpadCenter = false;
@@ -197,7 +197,7 @@ void CmdToperatorDefault::Execute()
     m_isOuttaking = false;
   }
   //******************WRIST**********************
-  const float WRIST_DELTA = 100;
+  //const float WRIST_DELTA = 100;
   if(WristManual > .6)
   {
     // float wristPosition = m_claw->WristGetPosition();
@@ -213,7 +213,7 @@ void CmdToperatorDefault::Execute()
   }
   else
   {
-    m_claw->WristSetPower(0.0);
+    m_claw->WristSetPower(-0.03);
   }
 //***********************ARM LEVEL MANUAL***********************
 if(XButtonPressed)
@@ -297,12 +297,12 @@ else if(!PouchRamp && m_isRampActivated)
 
 if(TurretManual > .5)
 {
-  m_arm->TurretSetPower(-.9); // High speed to make up for the large gear ratio on the Neo
+  m_arm->TurretSetPower(-.5); // High speed to make up for the large gear ratio on the Neo
   m_isTurret = true;
 }
 else if(TurretManual < -.5)
 {
-  m_arm->TurretSetPower(.9); // High speed to make up for the large gear ratio on the Neo
+  m_arm->TurretSetPower(.5); // High speed to make up for the large gear ratio on the Neo
   m_isTurret = true;
 }
 else if (TurretManual < .5 && TurretManual > -.5 && m_isTurret)

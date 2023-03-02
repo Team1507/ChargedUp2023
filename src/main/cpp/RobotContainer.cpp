@@ -37,9 +37,9 @@ RobotContainer::RobotContainer()
   m_driverfeedback.SetDefaultCommand(CmdDriverFeedbackDefault(&m_driverfeedback, &m_topDriver, &m_claw));
 
 #ifndef DRIVETRAIN_ONLY
-  m_toperator.SetDefaultCommand(CmdToperatorDefault(&m_toperator, &m_topDriver, &m_claw, &m_arm, &m_pouch, &m_camera, &m_driverfeedback));
+  m_toperator.SetDefaultCommand(CmdToperatorDefault(&m_toperator, &m_topDriver, &m_claw, &m_arm, &m_pouch,  &m_driverfeedback));
 
-
+//&m_camera,
   //*************************************Auto**********************************************
 
   //m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
@@ -54,10 +54,11 @@ RobotContainer::RobotContainer()
 
   //********************************Smart Dashboard Buttons**************************************
 #ifndef DRIVETRAIN_ONLY
-  frc::SmartDashboard::PutData( "GrpTest1", new GrpTest1(&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch));
-  frc::SmartDashboard::PutData( "GrpTest2", new GrpTest2(&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch));
+  frc::SmartDashboard::PutData( "GrpTest1", new GrpTest1(&m_drivetrain,&m_arm,&m_claw,&m_pouch));
+  frc::SmartDashboard::PutData( "GrpTest2", new GrpTest2(&m_drivetrain,&m_arm,&m_claw,&m_pouch));
 #endif
-
+//&m_camera,
+//&m_camera,
 
 
 

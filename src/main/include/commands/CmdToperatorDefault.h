@@ -23,10 +23,12 @@
  * directly; this is crucially important, or else the decorator functions in
  * Command will *not* work!
  */
+
+//Camera *camera,
 class CmdToperatorDefault
     : public frc2::CommandHelper<frc2::CommandBase, CmdToperatorDefault> {
  public:
-  CmdToperatorDefault(Toperator *toperator, frc::XboxController *topDriver, Claw *claw, Arm *arm, Pouch *pouch, Camera *camera, DriverFeedback *driverfeedback);
+  CmdToperatorDefault(Toperator *toperator, frc::XboxController *topDriver, Claw *claw, Arm *arm, Pouch *pouch,  DriverFeedback *driverfeedback);
 
   void Initialize() override;
 
@@ -43,7 +45,7 @@ class CmdToperatorDefault
     Arm *m_arm;
     Pouch *m_pouch;
     DriverFeedback *m_driverFeedback;
-    Camera *m_camera;
+    //Camera *m_camera;
 
     bool m_isIntaking;
     bool m_isOuttaking;
