@@ -40,6 +40,7 @@ class Claw : public frc2::SubsystemBase {
 
   //***********************************Wrist*******************************************
   void  WristSetPosition(float position);
+  void  WristHoldPosition(float position);
   float WristGetPosition(void);
   float WristGetCurrent(void);
   void  WristSetPower(float power);     //for Debug use Only 

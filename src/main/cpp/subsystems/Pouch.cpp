@@ -37,8 +37,9 @@ void Pouch::InnerIntakeSetPosition(float position)
 }
 void Pouch::InnerIntakeTurnToPosition(float position)
 {
-  
-  m_innerPIDController.SetReference(position,rev::CANSparkMax::ControlType::kPosition);
+  int wantedPosition = InnerIntakeGetEncoder() - (((int)InnerIntakeGetEncoder())%INNER_INTAKE_TICKS_TO_REV) + position;
+  frc::SmartDashboard::PutNumber("Wanted Position",wantedPosition);
+  m_innerPIDController.SetReference(wantedPosition,rev::CANSparkMax::ControlType::kPosition);
 }
 int  Pouch::InnerIntakeGetEncoder(void)
 {

@@ -55,4 +55,5 @@ class Arm : public frc2::SubsystemBase
   frc::DoubleSolenoid          m_airSpring {CAN_PCM2_ID, frc::PneumaticsModuleType::CTREPCM,  PCM_AIR_SPRING_EXTEND_ID, PCM_AIR_SPRING_RETRACT_ID}; // WRITE CODE FOR LATER THING
   
   Pouch *m_pouch;
+  int m_wanted_position;
 };

@@ -76,6 +76,10 @@ void Claw::WristSetPosition(float position)
 {
     m_wristEncoder.SetPosition(position);
 }
+void Claw::WristHoldPosition(float position)
+{
+    m_wristPID.SetReference(position,rev::ControlType::kPosition);
+}
 float Claw::WristGetPosition(void)
 {
     return m_wristEncoder.GetPosition();
