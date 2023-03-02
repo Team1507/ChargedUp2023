@@ -16,12 +16,19 @@ Arm::Arm(Pouch *pouch)
     m_turretPID.SetI(0.0); // change later
     m_turretPID.SetD(0.0); // change later
     m_turretPID.SetSmartMotionAllowedClosedLoopError(0.0); // change later
-    m_turret.SetOpenLoopRampRate(0.0); // change later
+    m_turret.SetOpenLoopRampRate(1.0); // change later
 }
 
 void Arm::Periodic() 
 {
     frc::SmartDashboard::PutBoolean("Elevation Home Limit Switch", ElevationHomeLimitSwitch());
+    frc::SmartDashboard::PutNumber("Turret Encoder Position",TurretGetEncoder());
+    frc::SmartDashboard::PutNumber("Turret Wanted Position",m_wanted_position);
+    if(TurretGetLeftLimitSW())
+    {
+        TurretSetEncoder(0.0);
+    }
+    
 }
 
 //**********************************Turret******************************
@@ -38,6 +45,7 @@ void Arm::TurretTurn2Angle(float angle)
     else
     {
         m_turretPID.SetReference(angle, rev::CANSparkMax::ControlType::kPosition);
+        m_wanted_position = angle;
     }
 
    
