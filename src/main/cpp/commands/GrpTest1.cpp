@@ -12,6 +12,8 @@
 #include "commands/CmdDriveStraightGyro.h"
 #include "commands/CmdDriveTurn2Angle.h"
 #include "commands/CmdDriveStraightVelocity.h"
+#include "commands/CmdTurretFindHome.h"
+#include "commands/CmdWristFindHome.h"
 //Camera *camera,
 
 
@@ -24,35 +26,38 @@ GrpTest1::GrpTest1( Drivetrain *drivetrain, Arm *arm,  Claw *claw, Pouch *pouch 
     CmdPrintText("GrpTest1 Start"),
         
 
-    CmdDriveClearAll(drivetrain),
-    frc2::WaitCommand(0.5_s),
-    //---------------------------------------
+  //   CmdDriveClearAll(drivetrain),
+  //   frc2::WaitCommand(0.5_s),
+  //   //---------------------------------------
 
 
 
-  //                               power, gyroHeading,  gyroYaw, distance,   ramp,    stop,    timeout)
-  CmdDriveStraightGyro( drivetrain,  0.2,      0.0,        0.0,     42,       false,   false,     5.0  ),
-  CmdDriveStraightGyro( drivetrain,  0.2,    -90.0,        0.0,     42,       false,   false,     5.0  ),
-  CmdDriveStraightGyro( drivetrain,  0.2,    180.0,        0.0,     42,       false,   false,     5.0  ),
-  CmdDriveStraightGyro( drivetrain,  0.2,     90.0,        0.0,     42,       false,   true,      5.0  ),
+  // //                               power, gyroHeading,  gyroYaw, distance,   ramp,    stop,    timeout)
+  // CmdDriveStraightGyro( drivetrain,  0.2,      0.0,        0.0,     42,       false,   false,     5.0  ),
+  // CmdDriveStraightGyro( drivetrain,  0.2,    -90.0,        0.0,     42,       false,   false,     5.0  ),
+  // CmdDriveStraightGyro( drivetrain,  0.2,    180.0,        0.0,     42,       false,   false,     5.0  ),
+  // CmdDriveStraightGyro( drivetrain,  0.2,     90.0,        0.0,     42,       false,   true,      5.0  ),
 
-  frc2::WaitCommand(0.5_s),
+  // frc2::WaitCommand(0.5_s),
 
-  //                                power, gyroHeading,  gyroYaw, distance,   ramp,    stop,    timeout)
-  CmdDriveStraightGyro( drivetrain,  0.2,      0.0,        0.0,     42,       false,   false,     5.0  ),
+  // //                                power, gyroHeading,  gyroYaw, distance,   ramp,    stop,    timeout)
+  // CmdDriveStraightGyro( drivetrain,  0.2,      0.0,        0.0,     42,       false,   false,     5.0  ),
 
-  //                                power    angle) 
-  CmdDriveTurn2Angle( drivetrain,    0.25,    -90.0 ),
-  CmdDriveStraightGyro( drivetrain,  0.2,     -90.0,      -90.0,     42,       false,   false,     5.0  ),
+  // //                                power    angle) 
+  // CmdDriveTurn2Angle( drivetrain,    0.25,    -90.0 ),
+  // CmdDriveStraightGyro( drivetrain,  0.2,     -90.0,      -90.0,     42,       false,   false,     5.0  ),
 
-  CmdDriveTurn2Angle( drivetrain,    0.25,   -90.0 ),
-  CmdDriveStraightGyro( drivetrain,  0.2,     180.0,     -180.0,     42,       false,   false,     5.0  ),
+  // CmdDriveTurn2Angle( drivetrain,    0.25,   -90.0 ),
+  // CmdDriveStraightGyro( drivetrain,  0.2,     180.0,     -180.0,     42,       false,   false,     5.0  ),
 
-  CmdDriveTurn2Angle( drivetrain,    0.25,    -90.0 ),
-  CmdDriveStraightGyro( drivetrain,  0.2,      90.0,     -270.0,     42,       false,   false,     5.0  ),
+  // CmdDriveTurn2Angle( drivetrain,    0.25,    -90.0 ),
+  // CmdDriveStraightGyro( drivetrain,  0.2,      90.0,     -270.0,     42,       false,   false,     5.0  ),
 
-  CmdDriveTurn2Angle( drivetrain,    0.25,    -90.0),
+  // CmdDriveTurn2Angle( drivetrain,    0.25,    -90.0),
 
+
+    CmdTurretFindHome(arm),
+    CmdWristFindHome(claw),
 
     //---------------------------------------
     //All Done
