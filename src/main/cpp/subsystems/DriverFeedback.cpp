@@ -27,7 +27,7 @@ void DriverFeedback::UnderGlow(int r, int g, int b)
 }
 void DriverFeedback::DriverFeedbackLED(int r, int g, int b)
 {
-    m_driverLED.SetLEDOutput(r,CANifier::LEDChannelA);
-    m_driverLED.SetLEDOutput(g,CANifier::LEDChannelB);
-    m_driverLED.SetLEDOutput(b,CANifier::LEDChannelC);
+    m_driverLED.SetLEDOutput(r,CANifier::LEDChannelB);
+    m_driverLED.SetLEDOutput(g,CANifier::LEDChannelC);
+    m_driverLED.SetLEDOutput(b,CANifier::LEDChannelA);
 }

@@ -48,9 +48,9 @@ void CmdDriveWithGamepad::Execute()
 
 
   //Get Gamepad Inputs
-  float yL = m_botDriver->GetLeftY();
-  float xL = m_botDriver->GetLeftX();
-  float xR = m_botDriver->GetRightX();
+  float yL = 0;//m_botDriver->GetLeftY();
+  float xL = 0;//m_botDriver->GetLeftX();
+  float xR = 0;//m_botDriver->GetRightX();
   bool  BrakeActivated = m_botDriver->GetBackButton();
   bool  BrakePressed   = m_botDriver->GetBButton();
 

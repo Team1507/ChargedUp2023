@@ -173,7 +173,7 @@ void CmdToperatorDefault::Execute()
   }
   if(ReadyPosition)
   {
-    m_scoringReady->Schedule();
+    m_arm->ElevationArmSetPosition(ArmLevel::Low);
   }
   //******************CLAW*******************
   if(ClawIntake && !m_isIntaking)
@@ -200,14 +200,20 @@ void CmdToperatorDefault::Execute()
   const float WRIST_DELTA = 100;
   if(WristManual > .6)
   {
-    float wristPosition = m_claw->WristGetPosition();
-    m_claw->WristSetPosition(wristPosition + WRIST_DELTA); 
+    // float wristPosition = m_claw->WristGetPosition();
+    // m_claw->WristSetPosition(wristPosition + WRIST_DELTA); 
+    m_claw->WristSetPower(-.2);
   }
 
-  if(WristManual < -.6)
+  else if(WristManual < -.6)
   {
-    float wristPosition = m_claw->WristGetPosition();
-    m_claw->WristSetPosition(wristPosition - WRIST_DELTA);
+    // float wristPosition = m_claw->WristGetPosition();
+    // m_claw->WristSetPosition(wristPosition - WRIST_DELTA);
+    m_claw->WristSetPower(.2);
+  }
+  else
+  {
+    m_claw->WristSetPower(0.0);
   }
 //***********************ARM LEVEL MANUAL***********************
 if(XButtonPressed)
@@ -231,21 +237,21 @@ else if(ArmRetract)
 if(InnerIntake && !m_isInnerIntaking)
 {
   m_pouch->IntakeEnable(true);
-  // m_pouch->SetRampPosition(true);
+  m_pouch->SetRampPosition(true);
   m_isInnerIntaking = true;
   std::cout<<"IntakeEnable"<<std::endl;
 }
 else if(!InnerIntake && m_isInnerIntaking)
 {
   m_pouch->IntakeEnable(false);
-  // m_pouch->SetRampPosition(false);
+  m_pouch->SetRampPosition(false);
   std::cout<<"IntakeDisable"<<std::endl;
   m_isInnerIntaking = false;
 }
 if(OuterIntake && !m_isOuterIntaking)
 {
   m_pouch->IntakeDeploy();
-  // m_pouch->SetRampPosition(true);
+  m_pouch->SetRampPosition(true);
   m_pouch->IntakeSetPower(.3, Pouch::WhatIntake::Outer);
   std::cout<<"Outer Intake on"<<std::endl;
 
@@ -254,7 +260,7 @@ if(OuterIntake && !m_isOuterIntaking)
 else if(!OuterIntake && m_isOuterIntaking)
 {
   m_pouch->IntakeRetract();
-  // m_pouch->SetRampPosition(false);
+  m_pouch->SetRampPosition(false);
   m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Outer);
   std::cout<<"Outer Intake off"<<std::endl;
 
@@ -275,13 +281,13 @@ else if(!OuterIntake && m_isOuterIntaking)
 
 if(PouchRamp && !m_isRampActivated)
 {
-  // m_pouch->SetRampPosition(true);
+  m_pouch->SetRampPosition(true);
   m_isRampActivated = true;
   std::cout<<"Pouch Ramp on"<<std::endl;
 }
 else if(!PouchRamp && m_isRampActivated)
 {
-  // m_pouch->SetRampPosition(false);
+  m_pouch->SetRampPosition(false);
   m_isRampActivated = false;
   std::cout<<"Pouch Ramp off"<<std::endl;
 }
@@ -291,12 +297,12 @@ else if(!PouchRamp && m_isRampActivated)
 
 if(TurretManual > .5)
 {
-  m_arm->TurretSetPower(.9); // High speed to make up for the large gear ratio on the Neo
+  m_arm->TurretSetPower(-.9); // High speed to make up for the large gear ratio on the Neo
   m_isTurret = true;
 }
 else if(TurretManual < -.5)
 {
-  m_arm->TurretSetPower(-.9); // High speed to make up for the large gear ratio on the Neo
+  m_arm->TurretSetPower(.9); // High speed to make up for the large gear ratio on the Neo
   m_isTurret = true;
 }
 else if (TurretManual < .5 && TurretManual > -.5 && m_isTurret)
