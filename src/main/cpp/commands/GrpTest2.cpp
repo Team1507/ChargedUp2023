@@ -13,8 +13,9 @@
 #include "commands/CmdDriveTurn2Angle.h"
 #include "commands/CmdIntakeSetEnable.h"
 #include "commands/CmdSetRampPosition.h"
+//Camera *camera,
 
-GrpTest2::GrpTest2( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) {
+GrpTest2::GrpTest2( Drivetrain *drivetrain, Arm *arm,  Claw *claw, Pouch *pouch ) {
   // AddCommands(FooCommand(), BarCommand());
 
   AddCommands

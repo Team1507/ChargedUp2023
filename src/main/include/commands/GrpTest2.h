@@ -12,10 +12,11 @@
 #include "subsystems/Camera.h"
 #include "subsystems/Claw.h"
 #include "subsystems/Pouch.h"
+//Camera *camera,
 
 class GrpTest2
     : public frc2::CommandHelper<frc2::SequentialCommandGroup,
                                  GrpTest2> {
  public:
-  GrpTest2( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch );
+  GrpTest2( Drivetrain *drivetrain, Arm *arm,  Claw *claw, Pouch *pouch );
 };

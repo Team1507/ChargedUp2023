@@ -9,7 +9,7 @@ CmdClawEject::CmdClawEject(Claw *claw)
 
 void CmdClawEject::Initialize() 
 {
-  m_delay = 100; 
+  m_delay = 30; 
   m_claw->ClawSetPower(m_claw->ClawGetOuttakePower());
   std::cout<<"Claw Eject Init "<<m_claw->ClawGetOuttakePower()<<std::endl;
 }
