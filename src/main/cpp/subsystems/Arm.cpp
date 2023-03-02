@@ -12,11 +12,12 @@ Arm::Arm(Pouch *pouch)
     m_pouch = pouch;
     m_turret.RestoreFactoryDefaults(); 
     m_turretEncoder.SetPosition(0.0); 
-    m_turretPID.SetP(0.0); // change later
+    m_turretPID.SetP(0.1); // change later
     m_turretPID.SetI(0.0); // change later
     m_turretPID.SetD(0.0); // change later
     m_turretPID.SetSmartMotionAllowedClosedLoopError(0.0); // change later
     m_turret.SetOpenLoopRampRate(1.0); // change later
+    m_turretPID.SetOutputRange(-0.7,0.7,0);
 }
 
 void Arm::Periodic() 
