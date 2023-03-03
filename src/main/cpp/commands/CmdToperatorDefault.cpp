@@ -197,23 +197,19 @@ void CmdToperatorDefault::Execute()
     m_isOuttaking = false;
   }
   //******************WRIST**********************
-  //const float WRIST_DELTA = 100;
+  const float WRIST_DELTA = .3;
   if(WristManual > .6)
   {
-    // float wristPosition = m_claw->WristGetPosition();
-    // m_claw->WristSetPosition(wristPosition + WRIST_DELTA); 
-    m_claw->WristSetPower(-.2);
+    float wristPosition = m_claw->WristGetPosition();
+    m_claw->WristSetPosition(wristPosition + WRIST_DELTA); 
+    // m_claw->WristSetPower(-.2);
   }
 
   else if(WristManual < -.6)
   {
-    // float wristPosition = m_claw->WristGetPosition();
-    // m_claw->WristSetPosition(wristPosition - WRIST_DELTA);
-    m_claw->WristSetPower(.2);
-  }
-  else
-  {
-    m_claw->WristSetPower(-0.03);
+    float wristPosition = m_claw->WristGetPosition();
+    m_claw->WristSetPosition(wristPosition - WRIST_DELTA);
+    // m_claw->WristSetPower(.2);
   }
 //***********************ARM LEVEL MANUAL***********************
 if(XButtonPressed)

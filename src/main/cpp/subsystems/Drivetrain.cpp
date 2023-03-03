@@ -22,8 +22,8 @@
 #define RR_INDEX 3
 
 
-#define DRIVEBASE_WIDTH     25.0  // size in X-axis in inches
-#define DRIVEBASE_HEIGHT    25.0  // size in Y-axis in inches
+#define DRIVEBASE_WIDTH     22.25  // size in X-axis in inches
+#define DRIVEBASE_HEIGHT    26.75  // size in Y-axis in inches
 
 #define W_DIV_2  (DRIVEBASE_WIDTH/2.0)
 #define H_DIV_2  (DRIVEBASE_HEIGHT/2.0)
@@ -33,7 +33,7 @@
 #define MINIMUM_NEEDED_POWER 0.025        //minimum power needed to move
 #define NORMALIZATION_POWER  0.9
 
-#define MINIMUM_NEEDED_SPEED 100 //<< FIXME!  units??
+#define MINIMUM_NEEDED_SPEED 500 //<< FIXME!  units??
 
 #define DEG2RAD(deg) ( deg*M_PI/180.0)
 #define RAD2DEG(rad) ( rad*180.0/M_PI)
