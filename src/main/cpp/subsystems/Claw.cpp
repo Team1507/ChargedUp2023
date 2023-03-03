@@ -11,17 +11,20 @@ Claw::Claw(frc::PowerDistribution *pdh)
     m_wrist.RestoreFactoryDefaults();
     m_wrist.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
     m_wristEncoder.SetPosition(0);
-    m_wristPID.SetP(0.0); //!!! CHANGE LATER !!!
+    m_wristPID.SetP(0.02); //!!! CHANGE LATER !!!
     m_wristPID.SetI(0.0); //!!! CHANGE LATER !!!
     m_wristPID.SetD(0.0); //!!! CHANGE LATER !!!
     m_wristPID.SetSmartMotionAllowedClosedLoopError(0.0); //!!! CHANGE LATER !!!
+    m_wristPID.SetOutputRange(-0.3,0.3,0);
+
+    m_wrist.SetInverted(true);
 
     m_pdh = pdh;
 
     m_claw.RestoreFactoryDefaults();
     m_claw.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
     m_claw.SetInverted(false);
-    m_wrist.SetInverted(true);
+
 }
 // This method will be called once per scheduler run
 void Claw::Periodic() 
@@ -29,6 +32,10 @@ void Claw::Periodic()
     frc::SmartDashboard::PutNumber("Wrist Position", m_wristEncoder.GetPosition());
     frc::SmartDashboard::PutBoolean("Wrist Up Limit Switch", WristLimitTop());
     frc::SmartDashboard::PutBoolean("Claw Game Piece Photoeye",m_clawGamePiece.Get());
+    if(WristLimitTop())
+    {
+        WristSetPosition(0.0);
+    }
     //frc::SmartDashboard::PutBoolean("Wrist Rev Limit Switch", m_wristREVLimit.Get());
 }
   

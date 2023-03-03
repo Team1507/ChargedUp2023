@@ -211,10 +211,10 @@ void CmdToperatorDefault::Execute()
     // m_claw->WristSetPosition(wristPosition - WRIST_DELTA);
     m_claw->WristSetPower(.2);
   }
-  else
-  {
-    m_claw->WristSetPower(-0.03);
-  }
+  // else
+  // {
+  //   m_claw->WristSetPower(-0.03);
+  // }
 //***********************ARM LEVEL MANUAL***********************
 if(XButtonPressed)
 {
