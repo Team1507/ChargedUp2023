@@ -13,5 +13,5 @@ CmdWristSetPosition::CmdWristSetPosition(Claw *claw, float position)
 // Called when the command is initially scheduled.
 void CmdWristSetPosition::Initialize() 
 {
-  m_claw->WristSetPosition(m_position);
+  m_claw->WristHoldPosition(m_position);
 }
