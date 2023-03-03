@@ -37,23 +37,23 @@ void CmdPouchDefault::Execute()
     m_isIntaking = false;
     m_pouch->InnerIntakeTurnToPosition(0);
   }
-  else if (m_pouch->IntakeGetCurrent() > INNER_INTAKE_CURRENT_LIMIT)
+  else if (m_pouch->IntakeGetCurrent() > INNER_INTAKE_CURRENT_LIMIT && IntakeEnabled)
   {
     if(m_stallCount > 3)
     {
       m_pouch->IntakeEnable(false);
       m_stallCount=0;
-      std::cout<<"Triped by Current"<<std::endl;
+      //std::cout<<"Triped by Current"<<std::endl;
     }
     else
     {
       m_stallCount++;
     }
   }
-  else if (m_pouch->ReadSensorState())
+  else if (m_pouch->ReadSensorState() && IntakeEnabled)
   {
     m_pouch->IntakeEnable(false);
-    std::cout<<"Triped by sensor"<<std::endl;
+    //std::cout<<"Triped by sensor"<<std::endl;
     // m_pouch->SetRampPosition(false);
   }
   else

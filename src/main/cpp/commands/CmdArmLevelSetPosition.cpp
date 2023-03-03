@@ -25,11 +25,11 @@ void CmdArmLevelSetPosition::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void CmdArmLevelSetPosition::Execute() 
 {
-  m_delay++;
-  if(m_delay >=OUTER_INTAKE_RETRACT_DELAY)
-  {
-    m_pouch->IntakeRetract();
-  }
+  // m_delay++;
+  // if(m_delay >=OUTER_INTAKE_RETRACT_DELAY)
+  // {
+  //   m_pouch->IntakeRetract();
+  // }
 }
 
 // Called once the command ends or is interrupted.
@@ -38,9 +38,9 @@ void CmdArmLevelSetPosition::End(bool interrupted) {}
 // Returns true when the command should end.
 bool CmdArmLevelSetPosition::IsFinished() 
 {  
-  if(!m_pouch->IntakeIsDeployed())
-  {
+  // if(!m_pouch->IntakeIsDeployed())
+  // {
     return true;
-  }
-  return false;
+ // }
+  //return false;
 }

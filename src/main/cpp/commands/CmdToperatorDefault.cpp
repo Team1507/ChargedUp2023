@@ -104,19 +104,23 @@ void CmdToperatorDefault::Execute()
         case 0 : // up
           m_scoringHighShelf->Schedule();
           m_isDpadCenter = false;
+          std::cout<<"High Shelf"<<std::endl;
           break;
         case 90: // right
           m_scoringHighRight->Schedule();
           m_isDpadCenter = false;
+          std::cout<<"High Right"<<std::endl;
           break;
         case 180: // down
           m_findHome->Schedule();
           m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
           m_isDpadCenter = false;
+          std::cout<<"Home"<<std::endl;
           break;
         case 270: // left
           m_scoringHighLeft->Schedule();
           m_isDpadCenter = false;
+          std::cout<<"High Left"<<std::endl;
           break;
       }
     }
@@ -197,18 +201,18 @@ void CmdToperatorDefault::Execute()
     m_isOuttaking = false;
   }
   //******************WRIST**********************
-  const float WRIST_DELTA = .3;
+  const float WRIST_DELTA = .7;
   if(WristManual > .6)
   {
     float wristPosition = m_claw->WristGetPosition();
-    m_claw->WristSetPosition(wristPosition + WRIST_DELTA); 
+    m_claw->WristHoldPosition(wristPosition - WRIST_DELTA); 
     // m_claw->WristSetPower(-.2);
   }
 
   else if(WristManual < -.6)
   {
     float wristPosition = m_claw->WristGetPosition();
-    m_claw->WristSetPosition(wristPosition - WRIST_DELTA);
+    m_claw->WristHoldPosition(wristPosition + WRIST_DELTA);
     // m_claw->WristSetPower(.2);
   }
 //***********************ARM LEVEL MANUAL***********************
@@ -221,7 +225,7 @@ else if(BButtonPressed)
   m_arm->ElevationArmSetPosition(ArmLevel::Level_Pouch);
 }
 //*******************ARM EXTENSION MANUAL************************
-if(ArmExtention && armLevel == ArmLevel::Level_Pouch)
+if(ArmExtention && (armLevel != ArmLevel::Level_Pouch))
 {
   m_arm->ExtensionSetPosition(true);
 }

@@ -48,7 +48,7 @@ void Arm::TurretTurn2Angle(float angle)
     }
     else
     {
-        m_turretPID.SetReference(angle, rev::CANSparkMax::ControlType::kPosition);
+        m_turretPID.SetReference(Angle2Ticks(angle), rev::CANSparkMax::ControlType::kPosition);
         m_wanted_position = angle;
     }
 
