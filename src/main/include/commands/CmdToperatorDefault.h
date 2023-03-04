@@ -57,6 +57,7 @@ class CmdToperatorDefault
     bool m_isTurret;
     bool m_wristManualOverride;
     bool m_isOuterIntakeDeployed;
+    bool m_wristHome;
 
   
 

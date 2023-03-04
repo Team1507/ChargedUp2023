@@ -29,7 +29,6 @@ void Robot::RobotInit()
   m_container.m_claw.ClawSetIntakePower(0.4);
   m_container.m_claw.ClawSetOuttakePower(-0.4);
   m_container.m_pouch.SetRampPosition(false);
-  m_container.m_claw.ClawSetPower(.2);
   m_container.m_pouch.InnerIntakeSetPosition(0.0);
   m_container.m_arm.AirSpringSetPosition(true);
   // m_container.m_arm.ElevationArmSetPosition(ArmLevel::Level_Pouch);
@@ -75,6 +74,7 @@ void Robot::RobotPeriodic()
 void Robot::DisabledInit() 
 {
   std::cout<<"Disabled Init"<<std::endl;
+  m_container.m_claw.WristSetPower(-.2);
   // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);
 }
  

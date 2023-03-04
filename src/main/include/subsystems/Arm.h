@@ -56,4 +56,5 @@ class Arm : public frc2::SubsystemBase
   
   Pouch *m_pouch;
   int m_wanted_position;
+  bool m_limitPressed;
 };

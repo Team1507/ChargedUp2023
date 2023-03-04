@@ -14,6 +14,7 @@
 Arm::Arm(Pouch *pouch) 
 {
     m_pouch = pouch;
+    m_limitPressed = false;
     m_turret.RestoreFactoryDefaults(); 
     m_turretEncoder.SetPosition(0.0); 
     m_turretPID.SetP(0.02); // change later
@@ -28,9 +29,14 @@ void Arm::Periodic()
 {
     frc::SmartDashboard::PutBoolean("Elevation Home Limit Switch", ElevationHomeLimitSwitch());
     frc::SmartDashboard::PutNumber("Turret Wanted Position",m_wanted_position);
-    if(TurretGetLeftLimitSW())
+    if(TurretGetLeftLimitSW() && !m_limitPressed)
     {
         TurretSetEncoder(0.0);
+        m_limitPressed = true;
+    }
+    else if(TurretGetLeftLimitSW() && m_limitPressed)
+    {
+        m_limitPressed = false;
     }
     
 }
@@ -144,14 +150,13 @@ void Arm::ExtensionSetPosition(bool position)
 
 void Arm::AirSpringSetPosition(bool position)
 {
-    if(position == true)
-    {
-        m_airSpring.Set(frc::DoubleSolenoid::kReverse);
-    }
-    if(position == false)
-    {
-        m_airSpring.Set(frc::DoubleSolenoid::kForward);
-    }
+
+    m_airSpring.Set(frc::DoubleSolenoid::kForward);
+
+    // if(position == false)
+    // {
+    //     m_airSpring.Set(frc::DoubleSolenoid::kReverse);
+    // }
 }
  
 

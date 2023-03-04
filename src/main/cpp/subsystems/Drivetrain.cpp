@@ -33,7 +33,7 @@
 #define MINIMUM_NEEDED_POWER 0.025        //minimum power needed to move
 #define NORMALIZATION_POWER  0.9
 
-#define MINIMUM_NEEDED_SPEED 500 //<< FIXME!  units??
+#define MINIMUM_NEEDED_SPEED 100 //<< FIXME!  units??
 
 #define DEG2RAD(deg) ( deg*M_PI/180.0)
 #define RAD2DEG(rad) ( rad*180.0/M_PI)

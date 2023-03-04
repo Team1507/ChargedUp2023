@@ -28,6 +28,7 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_isTurret              = false;
   m_wristManualOverride   = false;
   m_isOuterIntakeDeployed = false;
+  m_wristHome             = false;
 
 
   m_scoringHome      = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, Home     );
@@ -282,6 +283,7 @@ if(OuterIntakeRun && !m_isOuterIntaking)
   //m_pouch->IntakeDeploy();
   m_pouch->SetRampPosition(true);
   m_pouch->IntakeSetPower(.3, Pouch::WhatIntake::Outer);
+  m_claw->WristHoldPosition(13);
   std::cout<<"Outer Intake on"<<std::endl;
 
   m_isOuterIntaking = true;
@@ -296,7 +298,15 @@ else if(!OuterIntakeRun && m_isOuterIntaking)
   m_isOuterIntaking = false;
 }
 
-
+// if(m_claw->ReadSensorState() && !m_wristHome)
+// {
+//   m_claw->WristHoldPosition(0);
+//   m_wristHome = true;
+// }
+// else if(!m_claw->ReadSensorState() && m_wristHome)
+// {
+//   m_wristHome = false;
+// }
 
 
  if(CloseOuterIntake && !m_isOuterIntakeClosed && m_isOuterIntaking)

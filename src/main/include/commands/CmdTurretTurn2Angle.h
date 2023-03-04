@@ -4,19 +4,23 @@
 
 #pragma once
 
+#include <frc2/command/CommandBase.h>
 #include <frc2/command/CommandHelper.h>
-#include <frc2/command/InstantCommand.h>
 #include "subsystems/Arm.h"
 
 class CmdTurretTurn2Angle
-    : public frc2::CommandHelper<frc2::InstantCommand,
-                                 CmdTurretTurn2Angle> {
+    : public frc2::CommandHelper<frc2::CommandBase, CmdTurretTurn2Angle> {
  public:
   CmdTurretTurn2Angle(Arm *arm, double angle);
 
   void Initialize() override;
 
+  void Execute() override;
+
+  void End(bool interrupted) override;
+
+  bool IsFinished() override;
   private:
-    Arm *m_arm;
-    double m_angle;
+  Arm *m_arm;
+  double m_angle;
 };

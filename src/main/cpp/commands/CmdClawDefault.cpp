@@ -29,18 +29,18 @@ void CmdClawDefault::Execute()
     m_claw->ClawSetPower(m_claw->ClawGetIntakePower());
     m_isIntaking = true;
     m_delay = 50;
-    std::cout<<"Claw Intake Power"<<m_claw->ClawGetIntakePower()<<std::endl;
+    //std::cout<<"Claw Intake Power"<<m_claw->ClawGetIntakePower()<<std::endl;
   }
   else if(!m_claw->ClawIntakeGetEnable() && m_isIntaking)
   {
     m_claw->ClawSetPower(0.0);
     m_isIntaking = false;
-    std::cout<<"Claw A"<<std::endl;
+    //std::cout<<"Claw A"<<std::endl;
   }
   else if(m_claw->ClawGetCurrent() > CLAW_STALL_CURRENT)
   {
     m_claw->ClawIntakeEnable(false);
-    std::cout<<"Claw B"<<std::endl;
+    //std::cout<<"Claw B"<<std::endl;
   }
   else if(m_claw->ReadSensorState() && m_delay > 0)
   {
@@ -48,9 +48,9 @@ void CmdClawDefault::Execute()
   }
   else if(m_claw->ReadSensorState() && m_delay <= 0)
   {
-    m_claw->ClawSetPower(0.0);
+    m_claw->ClawSetPower(0.02);
     m_isIntaking = false;
-    std::cout<<"Claw C"<<std::endl;
+    //std::cout<<"Claw C"<<std::endl;
   }
 }
 
