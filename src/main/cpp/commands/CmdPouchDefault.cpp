@@ -50,11 +50,12 @@ void CmdPouchDefault::Execute()
       m_stallCount++;
     }
   }
-  else if (m_pouch->ReadSensorState() && IntakeEnabled)
+  else if (m_pouch->ReadSensorState())
   {
     m_pouch->IntakeEnable(false);
     //std::cout<<"Triped by sensor"<<std::endl;
-    // m_pouch->SetRampPosition(false);
+    m_pouch->SetRampPosition(false);
+    m_pouch->IntakeSetPower(0.0, Pouch::WhatIntake::Outer);
   }
   else
   {

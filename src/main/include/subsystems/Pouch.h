@@ -29,6 +29,7 @@ class Pouch : public frc2::SubsystemBase {
   void IntakeEnable(bool enable);
   bool IntakeIsEnable(void);
 
+
   void IntakeDeploy(void);
   void IntakeRetract(void);
 
