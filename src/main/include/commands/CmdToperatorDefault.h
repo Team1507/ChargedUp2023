@@ -55,6 +55,7 @@ class CmdToperatorDefault
     bool m_isOuterIntakeClosed;
     bool m_isRampActivated;
     bool m_isTurret;
+    bool m_wristManualOverride;
 
   
 

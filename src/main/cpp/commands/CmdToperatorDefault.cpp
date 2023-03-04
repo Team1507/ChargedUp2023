@@ -26,6 +26,7 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_isOuterIntakeClosed = false;
   m_isRampActivated     = false;
   m_isTurret            = false;
+  m_wristManualOverride = false;
 
 
   m_scoringHome      = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, Home     );
@@ -64,8 +65,8 @@ void CmdToperatorDefault::Execute()
     bool  BButtonPressed   = m_topDriver->GetBButtonPressed();
     frc::SmartDashboard::PutBoolean("BButtonPressed",BButtonPressed);
 
-    bool  ArmExtention     = m_topDriver->GetLeftY() > .9;
-    bool  ArmRetract       = m_topDriver->GetLeftY() < -.9;
+    bool  ArmExtention     = m_topDriver->GetLeftY() < -.9;
+    bool  ArmRetract       = m_topDriver->GetLeftY() > .9;
 
     bool  InnerIntake      = m_topDriver->GetLeftBumper();
     frc::SmartDashboard::PutBoolean("Inner Intake",InnerIntake);
@@ -201,19 +202,35 @@ void CmdToperatorDefault::Execute()
     m_isOuttaking = false;
   }
   //******************WRIST**********************
-  const float WRIST_DELTA = .7;
-  if(WristManual > .6)
-  {
-    float wristPosition = m_claw->WristGetPosition();
-    m_claw->WristHoldPosition(wristPosition - WRIST_DELTA); 
-    // m_claw->WristSetPower(-.2);
-  }
+  // const float WRIST_DELTA = .7;
+  // if(WristManual > .6)
+  // {
+  //   float wristPosition = m_claw->WristGetPosition();
+  //   m_claw->WristHoldPosition(wristPosition - WRIST_DELTA); 
+  //   // m_claw->WristSetPower(-.2);
+  // }
 
-  else if(WristManual < -.6)
+  // else if(WristManual < -.6)
+  // {
+  //   float wristPosition = m_claw->WristGetPosition();
+  //   m_claw->WristHoldPosition(wristPosition + WRIST_DELTA);
+  //   // m_claw->WristSetPower(.2);
+  // }
+  if(WristManual > .6 && !m_wristManualOverride)
   {
-    float wristPosition = m_claw->WristGetPosition();
-    m_claw->WristHoldPosition(wristPosition + WRIST_DELTA);
-    // m_claw->WristSetPower(.2);
+    m_claw->WristSetPower(-.2);
+    m_wristManualOverride = true;
+  }
+  else if(WristManual < -.6 && !m_wristManualOverride)
+  {
+    m_claw->WristSetPower(.2);
+    m_wristManualOverride = true;
+  }
+  else if((WristManual < .6 && WristManual > -.6) && m_wristManualOverride)
+  {
+    m_claw->WristSetPower(0.0);
+    m_claw->WristHoldPosition(m_claw->WristGetPosition());
+    m_wristManualOverride = false;
   }
 //***********************ARM LEVEL MANUAL***********************
 if(XButtonPressed)

@@ -4,6 +4,7 @@
 
 #include "subsystems/Claw.h"
 
+
 Claw::Claw(frc::PowerDistribution *pdh) 
 {
     m_intakeEnabled = false;
@@ -85,7 +86,7 @@ void Claw::WristSetPosition(float position)
 }
 void Claw::WristHoldPosition(float position)
 {
-    m_wristPID.SetReference(position,rev::ControlType::kPosition);
+    m_wristPID.SetReference(position,rev::CANSparkMax::ControlType::kPosition);
 }
 float Claw::WristGetPosition(void)
 {

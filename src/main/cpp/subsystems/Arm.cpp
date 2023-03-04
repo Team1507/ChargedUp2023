@@ -146,11 +146,11 @@ void Arm::AirSpringSetPosition(bool position)
 {
     if(position == true)
     {
-        m_airSpring.Set(frc::DoubleSolenoid::kForward);
+        m_airSpring.Set(frc::DoubleSolenoid::kReverse);
     }
     if(position == false)
     {
-        m_airSpring.Set(frc::DoubleSolenoid::kReverse);
+        m_airSpring.Set(frc::DoubleSolenoid::kForward);
     }
 }
  
