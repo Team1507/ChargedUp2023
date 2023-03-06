@@ -22,9 +22,12 @@ class CmdDriveToAprilTag
     float m_power;
 
     float m_tagAngle;
+    float m_tagDistance;
 
     float m_calcAngle;
-    int m_delay;
+    int m_count;
+
+    bool m_preformedCalc;
     // bool m_turnComplete;
     // bool m_sideMoveComplete;
     // bool m_fwrdMovementComplete;
