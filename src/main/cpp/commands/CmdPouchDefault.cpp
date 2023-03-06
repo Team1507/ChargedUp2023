@@ -18,7 +18,7 @@ CmdPouchDefault::CmdPouchDefault(Pouch *pouch)
 void CmdPouchDefault::Initialize() 
 {
   std::cout<<"Pouch"<<std::endl;
-  m_stallCount = 0;
+  m_sensorCount = 0;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -36,30 +36,38 @@ void CmdPouchDefault::Execute()
   {
     m_isIntaking = false;
     m_pouch->InnerIntakeTurnToPosition(0);
+    m_pouch->SetRampPosition(false);
+    m_pouch->IntakeSetPower(0.0, Pouch::WhatIntake::Outer);
   }
   else if (m_pouch->IntakeGetCurrent() > INNER_INTAKE_CURRENT_LIMIT && IntakeEnabled)
   {
-    if(m_stallCount > 3)
+    if(m_sensorCount > 3)
     {
-      m_pouch->IntakeEnable(false);
-      m_stallCount=0;
       //std::cout<<"Triped by Current"<<std::endl;
+      m_pouch->IntakeEnable(false);
+      m_sensorCount=0;
     }
     else
     {
-      m_stallCount++;
+      m_sensorCount++;
     }
   }
   else if (m_pouch->ReadSensorState())
   {
-    m_pouch->IntakeEnable(false);
-    //std::cout<<"Triped by sensor"<<std::endl;
-    m_pouch->SetRampPosition(false);
-    m_pouch->IntakeSetPower(0.0, Pouch::WhatIntake::Outer);
+    if(m_sensorCount > 3)
+    {    
+      //std::cout<<"Triped by sensor"<<std::endl;
+      m_pouch->IntakeEnable(false);
+      m_sensorCount=0;
+    }
+    else
+    {
+      m_sensorCount++;
+    }
   }
   else
   {
-    m_stallCount=0;
+    m_sensorCount=0;
   }
 
 }

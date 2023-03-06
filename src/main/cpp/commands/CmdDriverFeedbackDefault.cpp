@@ -27,7 +27,7 @@ void CmdDriverFeedbackDefault::Execute()
   bool XButton = m_xboxcontroller -> GetXButton();
   if(XButton == true)
   {
-    m_driverfeedback->Rumble(1.0);
+    // m_driverfeedback->Rumble(1.0);
     m_driverfeedback->UnderGlow(1,1,0);
   }
 
@@ -41,7 +41,7 @@ void CmdDriverFeedbackDefault::Execute()
 
   if(m_claw->ReadSensorState() == true && m_delay > 0)
   {
-    m_driverfeedback->Rumble(1.0);
+    // m_driverfeedback->Rumble(1.0);
     m_delay--;
   }
 

@@ -29,7 +29,7 @@ class CmdPouchDefault
   private:
 
   bool m_isIntaking;
-  int m_stallCount;
+  int m_sensorCount;
 
 Pouch *m_pouch;
 };

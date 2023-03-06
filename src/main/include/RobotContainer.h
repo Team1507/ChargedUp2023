@@ -23,6 +23,7 @@
 
 #define GAMEPADMAP_BUTTON_START 8
 #define GAMEPADMAP_BUTTON_A     1
+#define GAMEPADMAP_BUTTON_Y     4
 
 //Autos
 #include "commands/AutoDoNothing.h"
@@ -65,9 +66,9 @@ class RobotContainer
   Pouch          m_pouch{&m_pdh};
   Arm            m_arm{&m_pouch};
   Toperator      m_toperator;
+  Camera         m_camera;
 
 #ifndef DRIVETRAIN_ONLY
-  //Camera         m_camera;
 #endif
 
   frc2::Command* GetAutonomousCommand();
@@ -93,6 +94,7 @@ class RobotContainer
   void ConfigureBindings();
 
   frc2::JoystickButton m_botDriver_START {&m_botDriver, GAMEPADMAP_BUTTON_START};
+  frc2::JoystickButton m_botDriver_Y     {&m_botDriver, GAMEPADMAP_BUTTON_Y};
   frc2::JoystickButton m_botDriver_A     {&m_botDriver, GAMEPADMAP_BUTTON_A};
 
 

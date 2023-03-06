@@ -21,7 +21,7 @@ void CmdTurretTurn2Angle::End(bool interrupted) {}
 
 bool CmdTurretTurn2Angle::IsFinished() 
 {
-  std::cout<<((m_angle - m_arm->TurretGetAngle()))<<std::endl;
+  // std::cout<<((m_angle - m_arm->TurretGetAngle()))<<std::endl;
   if(fabs((m_angle - m_arm->TurretGetAngle())) < TOLORANCE )
   {
     return true;

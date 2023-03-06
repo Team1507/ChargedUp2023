@@ -20,7 +20,7 @@ void CmdTurretFindHome::Execute()
 
 void CmdTurretFindHome::End(bool interrupted) 
 {
-
+  m_arm->TurretTurn2Angle(0);
 }
 
 

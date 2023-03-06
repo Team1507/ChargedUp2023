@@ -5,6 +5,7 @@
 #include "commands/CmdArmExtensionSetPosition.h"
 #include "commands/CmdArmLevelSetPosition.h"
 #include "commands/CmdTurretTurn2Angle.h"
+#include "commands/CmdTurretFindHome.h"
 
 #include <frc2/command/WaitCommand.h>
 
@@ -23,11 +24,17 @@ GrpAllFindHome::GrpAllFindHome(Arm *arm, Pouch *pouch, Claw *claw)
     },
 
     frc2::WaitCommand(0.5_s),
+    frc2::ParallelCommandGroup
+    {
+        CmdArmLevelSetPosition(arm, ArmLevel::Low, pouch),
+        CmdTurretTurn2Angle(arm, 10),
+    },
+    frc2::WaitCommand(0.5_s),
 
     frc2::ParallelCommandGroup
     {
         CmdArmLevelSetPosition(arm, ArmLevel::Low, pouch),
-        CmdTurretTurn2Angle(arm, -1)
+        CmdTurretFindHome(arm),
     },
     frc2::WaitCommand(0.5_s),
 
