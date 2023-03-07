@@ -89,7 +89,7 @@ void RobotContainer::ConfigureBindings()
 {
   m_botDriver_START.OnTrue(new CmdResetGyro(&m_drivetrain));
   m_botDriver_Y.WhileTrue(new CmdDriveTurnTo90(&m_drivetrain, .3));
-  m_botDriver_A.WhileTrue(new CmdDriveToAprilTag(&m_drivetrain, &m_camera,.3));
+  m_botDriver_A.WhenPressed(new CmdDriveToAprilTag(&m_drivetrain, &m_camera,0.15));
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() 

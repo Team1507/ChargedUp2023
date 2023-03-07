@@ -32,10 +32,10 @@ class Camera : public frc2::SubsystemBase {
 
  photonlib::PhotonTrackedTarget target;
 
- const units::meter_t CAMERA_HEIGHT = 13_in;
+ const units::meter_t CAMERA_HEIGHT = 8.5_in;  //13_in;
  const units::meter_t TARGET_HEIGHT = 18.25_in;
 
   // Angle between horizontal and the camera.
- const units::radian_t CAMERA_PITCH = 6.2_deg;
+ const units::radian_t CAMERA_PITCH = 13.0_deg; //6.2_deg;
 
 };

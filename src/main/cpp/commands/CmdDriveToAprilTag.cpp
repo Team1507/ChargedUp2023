@@ -2,9 +2,9 @@
 #include <iostream>
 #include <math.h>
 
-#define YAW_ERROR 2
+#define YAW_ERROR 2.0
 #define X_BUFFER_DISTANCE 26.25
-#define ERROR_TOLORANCE 1
+#define ERROR_TOLORANCE 1.0
 
 #define DEG2RAD(deg) ( deg*M_PI/180.0)
 #define RAD2DEG(rad) ( rad*180.0/M_PI)
@@ -42,13 +42,14 @@ void CmdDriveToAprilTag::Initialize()
 void CmdDriveToAprilTag::Execute() 
 {
   m_tagAngle = m_Camera->TargetGetYaw();
-  m_tagDistance = m_Camera->TargetGetDistance();
+  m_tagDistance = m_Camera->TargetGetDistance()*39.37;//inches D
 
-  float xDistanceTotal   = m_tagDistance * cosf(DEG2RAD(m_tagAngle));
-  float xDistanceFromTag = xDistanceTotal - X_BUFFER_DISTANCE;
-  float yDistanceTotal   = sqrt(pow(m_tagDistance,2) - pow(m_tagDistance,2));
-  float angle2Target     = RAD2DEG(atanf(xDistanceFromTag/yDistanceTotal));
-
+  float xDistanceTotal   = m_tagDistance * cosf(DEG2RAD(m_tagAngle));//A
+  float xDistanceFromTag = xDistanceTotal - X_BUFFER_DISTANCE;//
+  float yDistanceTotal   = sqrt(pow(m_tagDistance,2) - pow(xDistanceTotal,2));
+  float angle2Target     = RAD2DEG(atan2(yDistanceTotal, xDistanceFromTag));
+  std::cout<<"m_tagAngle "<<m_tagAngle<<" m_tagDistance "<<m_tagDistance<<std::endl;
+  std::cout<<"xDistanceTotal "<<xDistanceTotal<<" xDistanceFromTag "<<xDistanceFromTag<<" yDistanceTotal "<<yDistanceTotal<<" angle2Target "<<angle2Target<<std::endl;
   const float MAX_POWER = m_power;
   const float MIN_POWER = 0.0625;       //Must be > MINIMUM_NEEDED_POWER in drivetrain
   const float TURN_Kp   = 0.005;
@@ -89,7 +90,9 @@ void CmdDriveToAprilTag::Execute()
           float x_power = m_power * sinf(DEG2RAD(angle2Target));
           float y_power = m_power * cosf(DEG2RAD(angle2Target));
 
-          m_drivetrain->RobotcentricDrive(x_power, y_power, 0);
+          std::cout<<"x_power: "<<x_power<<" y_power: "<<y_power<<std::endl;
+
+          m_drivetrain->RobotcentricDrive(y_power, x_power, 0);
           m_preformedCalc = true;
         }
         else if(xDistanceFromTag<ERROR_TOLORANCE)
@@ -98,7 +101,13 @@ void CmdDriveToAprilTag::Execute()
           m_drivetrain->RobotcentricDrive(0.0,0.0,0.0);
           std::cout<<"Moved to target complete"<<std::endl;
         }
+        std::cout<<"x Distance: "<<xDistanceFromTag<<std::endl;
       }
+
+
+
+
+
   //     case MOVE_TO_YAW_ZERO:
   //     {
   //       m_tagAngle = m_Camera->TargetGetYaw();
@@ -212,10 +221,6 @@ void CmdDriveToAprilTag::Execute()
       
     }    
   }
-  else if(!m_Camera->IsTarget())
-  {
-    m_currState = FINSHED;
-  }
 }
 
 
@@ -226,10 +231,17 @@ bool CmdDriveToAprilTag::IsFinished()
 {
   if(m_currState == FINSHED)
   {
+    std::cout<<"Finished itself"<<std::endl;
     return true;
   }
   else if(m_count > 250)//5 seconds
   {
+    std::cout<<"timeout"<<std::endl;
+    return true;
+  }
+  else if(!m_Camera->IsTarget())
+  {
+    std::cout<<"lost target"<<std::endl;
     return true;
   }
   else

@@ -43,12 +43,13 @@ void CmdPouchDefault::Execute()
   {
     if(m_sensorCount > 3)
     {
-      //std::cout<<"Triped by Current"<<std::endl;
+      // std::cout<<"Ended by Current"<<std::endl;
       m_pouch->IntakeEnable(false);
       m_sensorCount=0;
     }
     else
     {
+      // std::cout<<"Triped by Current"<<std::endl;
       m_sensorCount++;
     }
   }
@@ -56,7 +57,7 @@ void CmdPouchDefault::Execute()
   {
     if(m_sensorCount > 3)
     {    
-      //std::cout<<"Triped by sensor"<<std::endl;
+      // std::cout<<"Ended by sensor"<<std::endl;
       m_pouch->IntakeEnable(false);
       m_sensorCount=0;
     }
@@ -67,6 +68,7 @@ void CmdPouchDefault::Execute()
   }
   else
   {
+    // std::cout<<"Triped by sensor"<<std::endl;
     m_sensorCount=0;
   }
 
