@@ -48,7 +48,7 @@ void CmdClawDefault::Execute()
   }
   else if(m_claw->ReadSensorState() && m_delay <= 0)
   {
-    m_claw->ClawSetPower(0.02);
+    m_claw->ClawSetPower(0.04);
     m_isIntaking = false;
     //std::cout<<"Claw C"<<std::endl;
   }

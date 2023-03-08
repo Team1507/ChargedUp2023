@@ -41,7 +41,7 @@ void CmdDriverFeedbackDefault::Execute()
 
   if(m_claw->ReadSensorState() == true && m_delay > 0)
   {
-    // m_driverfeedback->Rumble(1.0);
+    m_driverfeedback->Rumble(1.0);
     m_delay--;
   }
 

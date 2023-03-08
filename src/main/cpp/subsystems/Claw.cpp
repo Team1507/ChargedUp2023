@@ -36,7 +36,7 @@ void Claw::Periodic()
     if(WristLimitTop())
     {
         WristSetPosition(0.0);
-        WristHoldPosition(12.0);
+        WristHoldPosition(10.0);
     }
     //frc::SmartDashboard::PutBoolean("Wrist Rev Limit Switch", m_wristREVLimit.Get());
 }

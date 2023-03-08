@@ -23,20 +23,20 @@ GrpAllFindHome::GrpAllFindHome(Arm *arm, Pouch *pouch, Claw *claw)
         CmdWristSetPosition(claw, 13),
     },
 
-    frc2::WaitCommand(0.5_s),
+    // frc2::WaitCommand(0.5_s),
     frc2::ParallelCommandGroup
     {
         CmdArmLevelSetPosition(arm, ArmLevel::Low, pouch),
-        CmdTurretTurn2Angle(arm, 10),
+        CmdTurretTurn2Angle(arm, 5),
     },
-    frc2::WaitCommand(0.5_s),
+//    frc2::WaitCommand(0.5_s),
 
     frc2::ParallelCommandGroup
     {
         CmdArmLevelSetPosition(arm, ArmLevel::Low, pouch),
         CmdTurretFindHome(arm),
     },
-    frc2::WaitCommand(0.5_s),
+    frc2::WaitCommand(0.25_s),
 
     CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch,pouch)
   

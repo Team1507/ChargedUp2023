@@ -26,6 +26,7 @@ class CmdDriveToAprilTag
 
     float m_calcAngle;
     int m_count;
+    int m_delay;
 
     bool m_preformedCalc;
     // bool m_turnComplete;

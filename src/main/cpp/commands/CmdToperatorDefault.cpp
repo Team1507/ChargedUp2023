@@ -179,9 +179,13 @@ void CmdToperatorDefault::Execute()
       }
     }
   }
-  if(ReadyPosition)
+  if(!YButtonPressed && ReadyPosition)
   {
     m_arm->ElevationArmSetPosition(ArmLevel::Low);
+  }
+  if(YButtonPressed && ReadyPosition)
+  {
+    m_arm->ElevationArmSetPosition(ArmLevel::Mid);
   }
   //******************CLAW*******************
   if(ClawIntake && !m_isIntaking)
@@ -283,8 +287,9 @@ if(OuterIntakeRun && !m_isOuterIntaking)
   //m_pouch->IntakeDeploy();
   // m_pouch->IntakeEnable(true);
   m_pouch->SetRampPosition(true);
-  m_pouch->IntakeSetPower(.3, Pouch::WhatIntake::Outer);
-  m_claw->WristHoldPosition(13);
+  m_pouch->IntakeSetPower(.7, Pouch::WhatIntake::Outer);
+  m_claw->WristHoldPosition(10);
+  m_claw->ClawIntakeEnable(true);
   std::cout<<"Outer Intake on"<<std::endl;
 
   m_isOuterIntaking = true;
@@ -296,6 +301,7 @@ else if(!OuterIntakeRun && m_isOuterIntaking)
   m_pouch->SetRampPosition(false);
   m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Outer);
   std::cout<<"Outer Intake off"<<std::endl;
+  m_claw->ClawIntakeEnable(false);
 
   m_isOuterIntaking = false;
 }

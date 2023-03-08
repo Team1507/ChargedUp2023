@@ -28,7 +28,7 @@ typedef struct
 scoringPosition_t scoringPositionTable[] = {{0,           false,        0,                 0,              ArmLevel::Level_Pouch},//Home
                                             {0,           false,        0,                 0,              ArmLevel::Low        },//Ready
                                             {71,          true,         24,                -0.4,           ArmLevel::High       },//HighLeft
-                                            {94,          true,         35,                -0.3,           ArmLevel::High       },//HighShelf
+                                            {94,          false,         2,                -0.6,           ArmLevel::Mid        },//HighShelf
                                             {113,         true,         24,                -0.4,           ArmLevel::High       },//HighRight
                                             {62,          false,        19.3,              -0.4,           ArmLevel::Mid        },//MidLeft
                                             {94,          false,        35,                -0.3,           ArmLevel::Mid        },//MidShelf

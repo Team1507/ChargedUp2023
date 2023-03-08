@@ -58,7 +58,8 @@ void CmdPouchDefault::Execute()
     if(m_sensorCount > 3)
     {    
       // std::cout<<"Ended by sensor"<<std::endl;
-      m_pouch->IntakeEnable(false);
+      // m_pouch->IntakeEnable(false);
+      m_pouch->SetRampPosition(false);
       m_sensorCount=0;
     }
     else

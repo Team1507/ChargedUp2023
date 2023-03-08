@@ -10,8 +10,8 @@
 #define RAD2DEG(rad) ( rad*180.0/M_PI)
 
 const int TURN_TO_ZERO = 1;
-// const int MOVE_TO_YAW_ZERO  = 2;
-const int MOVE_TOWARDS_TARGET  = 2;
+const int MOVE_TO_YAW_ZERO  = 2;
+const int MOVE_TOWARDS_TARGET  = 3;
 const int FINSHED = 3;
 
 
@@ -36,6 +36,7 @@ void CmdDriveToAprilTag::Initialize()
     // m_sideMoveComplete = false;
     // m_fwrdMovementComplete = false;
     m_count = 0;
+    m_delay = 0;
 }
 
 
@@ -59,7 +60,7 @@ void CmdDriveToAprilTag::Execute()
   {
     switch(m_currState)
     {
-      //Turning DriveTrain to 0 for Caculation
+      // //Turning DriveTrain to 0 for Calculation
       case TURN_TO_ZERO:
       {
         float m_currAngle = m_drivetrain->GetGyroYaw();
@@ -77,78 +78,79 @@ void CmdDriveToAprilTag::Execute()
         if(  fabs(m_currAngle) < .5 )
         {
           m_drivetrain->RobotcentricDrive(0,0,0);
-          m_currState = MOVE_TOWARDS_TARGET;
+          m_currState = MOVE_TO_YAW_ZERO;
           std::cout<<"turn move complete"<<std::endl;
         }
       }
       break;
-      //End of DriveTrain to 0 for Caculation
+      // //End of DriveTrain to 0 for Calculation
+      // case MOVE_TOWARDS_TARGET:
+      // {
+      //   if(!m_preformedCalc)
+      //   {
+      //     float x_power = m_power * sinf(DEG2RAD(angle2Target));
+      //     float y_power = m_power * cosf(DEG2RAD(angle2Target));
+
+      //     std::cout<<"x_power: "<<x_power<<" y_power: "<<y_power<<std::endl;
+
+      //     m_drivetrain->RobotcentricDrive(y_power, x_power, 0);
+      //     m_preformedCalc = true;
+      //   }
+      //   else if(xDistanceFromTag<ERROR_TOLORANCE)
+      //   {
+      //     m_currState = FINSHED;
+      //     m_drivetrain->RobotcentricDrive(0.0,0.0,0.0);
+      //     std::cout<<"Moved to target complete"<<std::endl;
+      //   }
+      //   std::cout<<"x Distance: "<<xDistanceFromTag<<std::endl;
+      // }
+
+
+
+
+
+      case MOVE_TO_YAW_ZERO:
+      {
+        m_tagAngle = m_Camera->TargetGetYaw();
+        if(m_tagAngle > 5)
+        {
+          m_drivetrain->RobotcentricDrive(-m_power, 0, 0);
+        }
+        else if(m_tagAngle < -5)
+        {
+          m_drivetrain->RobotcentricDrive(m_power, 0, 0);
+        }
+
+        if(m_tagAngle < 5 && m_tagAngle > -5)
+        {
+          m_drivetrain->RobotcentricDrive(0,0,0);
+          m_currState = MOVE_TOWARDS_TARGET;
+          std::cout<<"Side move complete"<<std::endl;
+          std::cout<<m_delay<<std::endl;
+          
+        }    
+      } 
+        break;
+
       case MOVE_TOWARDS_TARGET:
       {
-        if(!m_preformedCalc)
-        {
-          float x_power = m_power * sinf(DEG2RAD(angle2Target));
-          float y_power = m_power * cosf(DEG2RAD(angle2Target));
-
-          std::cout<<"x_power: "<<x_power<<" y_power: "<<y_power<<std::endl;
-
-          m_drivetrain->RobotcentricDrive(y_power, x_power, 0);
-          m_preformedCalc = true;
-        }
-        else if(xDistanceFromTag<ERROR_TOLORANCE)
-        {
-          m_currState = FINSHED;
-          m_drivetrain->RobotcentricDrive(0.0,0.0,0.0);
-          std::cout<<"Moved to target complete"<<std::endl;
-        }
-        std::cout<<"x Distance: "<<xDistanceFromTag<<std::endl;
+          float m_distance = m_Camera->TargetGetDistance();
+          if(m_distance > .7)
+          {
+            m_drivetrain->RobotcentricDrive(0,m_power,0);
+          }
+          else
+          {
+            m_drivetrain->RobotcentricDrive(0,0,0);
+            std::cout<<"fwd move complete"<<std::endl;
+            m_currState = FINSHED;
+          }   
       }
-
-
-
-
-
-  //     case MOVE_TO_YAW_ZERO:
-  //     {
-  //       m_tagAngle = m_Camera->TargetGetYaw();
-  //       if(m_tagAngle > 10)
-  //       {
-  //         m_drivetrain->RobotcentricDrive(-m_power, 0, 0);
-  //       }
-  //       else if(m_tagAngle < -10)
-  //       {
-  //         m_drivetrain->RobotcentricDrive(m_power, 0, 0);
-  //       }
-
-  //       if(m_tagAngle < 10 && m_tagAngle > -10)
-  //       {
-  //         m_drivetrain->RobotcentricDrive(0,0,0);
-  //         m_currState = MOVE_TOWARDS_TARGET;
-  //         std::cout<<"Side move complete"<<std::endl;
-  //         std::cout<<m_delay<<std::endl;
-          
-  //       }    
-  //     } 
-  //       break;
-
-  //     case MOVE_TOWARDS_TARGET:
-  //     {
-  //         float m_distance = m_Camera->TargetGetDistance();
-  //         if(m_distance > .53)
-  //         {
-  //           m_drivetrain->RobotcentricDrive(0,m_power,0);
-  //         }
-  //         else
-  //         {
-  //           m_drivetrain->RobotcentricDrive(0,0,0);
-  //           std::cout<<"fwd move complete"<<std::endl;
-  //           m_currState = FINSHED;
-  //         }   
-  //     }
-  //         break;
-  //   }
+          break;
+    }
+  }
     
-  //********************************TURN TO GYRO******************************
+  // //********************************TURN TO GYRO******************************
   //   if(!m_turnComplete)
   //   {
   //     float const MAX_POWER = m_power;
@@ -219,8 +221,8 @@ void CmdDriveToAprilTag::Execute()
   //     }
   //   }
       
-    }    
-  }
+  //   }    
+  // }
 }
 
 
