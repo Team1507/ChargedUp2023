@@ -66,7 +66,7 @@ class RobotContainer
   Pouch          m_pouch{&m_pdh};
   Arm            m_arm{&m_pouch};
   Toperator      m_toperator;
-  Camera         m_camera;
+  Camera         m_camera {&m_driverfeedback};
 
 #ifndef DRIVETRAIN_ONLY
 #endif

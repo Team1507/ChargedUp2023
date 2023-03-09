@@ -4,12 +4,28 @@
 #include <units/length.h>
 #include <iostream>
 
-Camera::Camera() = default;
+#define TARGET_WANTED_AREA 4.0
 
+Camera::Camera(DriverFeedback *driverfeedback)
+{
+    m_driverfeedback = driverfeedback;
+    m_cameradetect = false;
+}
 void Camera::Periodic() 
 {
+    if((TargetGetArea() > TARGET_WANTED_AREA) && IsTarget() && !m_cameradetect)
+    {
+        m_cameradetect = true;
+        m_driverfeedback->DriverFeedbackLED(COLOR_GREEN);
+    }
+    else if((TargetGetArea() < TARGET_WANTED_AREA) && m_cameradetect)
+    {
+        m_cameradetect = false;
+        m_driverfeedback->DriverFeedbackLED(COLOR_RED);
+    }
     result = camera.GetLatestResult(); //checks camera "result", how it gets information
     target = result.GetBestTarget();
+    // std::cout<<Camera::TargetGetYaw()<<std::endl;
 }
 
 double Camera::TargetGetDistance(void)

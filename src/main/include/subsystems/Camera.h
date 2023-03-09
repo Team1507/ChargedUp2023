@@ -1,6 +1,7 @@
 #pragma once
 #include <photonlib/PhotonCamera.h>
 #include <frc2/command/SubsystemBase.h>
+#include "subsystems/DriverFeedback.h"
 #include <units/angle.h>
 #include <units/length.h>
 
@@ -8,7 +9,7 @@ enum CameraIndex{AprilTag, Cube, Cone};
 
 class Camera : public frc2::SubsystemBase {
  public:
-  Camera();
+  Camera(DriverFeedback *driverfeedback);
 
   void Periodic() override;
 
@@ -25,6 +26,9 @@ class Camera : public frc2::SubsystemBase {
   int PipelineGetIndex(void);
 
  private:
+
+ DriverFeedback *m_driverfeedback;
+ bool m_cameradetect;
 
  photonlib::PhotonCamera camera{"Righty"};
 

@@ -28,10 +28,10 @@ class CmdDriveToAprilTag
     int m_count;
     int m_delay;
 
-    bool m_preformedCalc;
-    // bool m_turnComplete;
-    // bool m_sideMoveComplete;
-    // bool m_fwrdMovementComplete;
+    // bool m_preformedCalc;
+    bool m_turnComplete;
+    bool m_sideMoveComplete;
+    bool m_fwrdMovementComplete;
 
     int m_currState;
 
