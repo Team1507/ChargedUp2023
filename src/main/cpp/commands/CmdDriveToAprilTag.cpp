@@ -92,7 +92,7 @@ void CmdDriveToAprilTag::Execute()
       {
         if(!m_preformedCalc)
         {
-          float x_power = m_power * (xDistanceFromTag/e);
+          float x_power=0; //= m_power * (xDistanceFromTag/e);
           float y_power = -m_power * yDistanceTotal/e;//No touch
           //float x_power = m_power * sinf(DEG2RAD(angle2Target));
           //float y_power = m_power * cosf(DEG2RAD(angle2Target));
@@ -103,7 +103,7 @@ void CmdDriveToAprilTag::Execute()
           m_preformedCalc = true;
         }
         //else if(xDistanceFromTag<ERROR_TOLORANCE)
-        else if((fabs(m_tagAngle) < ERROR_TOLORANCE) && (xDistanceFromTag<ERROR_TOLORANCE))
+        else if((fabs(m_tagAngle) < ERROR_TOLORANCE))// && (xDistanceFromTag<ERROR_TOLORANCE))
         {
           m_currState = FINSHED;
           m_drivetrain->RobotcentricDrive(0.0,0.0,0.0);
