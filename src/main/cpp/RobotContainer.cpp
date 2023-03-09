@@ -25,6 +25,7 @@
 #include "commands/CmdDriveTurnTo90.h"
 #include "commands/CmdGyroSetAngleOffset.h"
 #include "commands/CmdDriveToAprilTag.h"
+#include "commands/CmdAutoBalance.h"
 
 
 RobotContainer::RobotContainer() 
@@ -43,8 +44,8 @@ RobotContainer::RobotContainer()
 //&m_camera,
   //*************************************Auto**********************************************
 
-  //m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
-  //m_chooser.AddOption("AutoChargeStation", &m_autoChargeStation);
+  m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
+  m_chooser.AddOption("AutoChargeStation", &m_autoChargeStation);
   //m_chooser.AddOption("AutoTwoPieceLeft", &m_autoTwoPieceLeft);
   //m_chooser.AddOption("AutoTwoPieceRight", &m_autoTwoPieceRight);
   //m_chooser.AddOption("AutoScoreLink", &m_autoScoreLink);
@@ -67,6 +68,7 @@ RobotContainer::RobotContainer()
   frc::SmartDashboard::PutData( "CmdDriveClearAll",   new CmdDriveClearAll(&m_drivetrain));
   frc::SmartDashboard::PutData( "CmdDriveTypeToggle", new CmdDriveTypeToggle(&m_drivetrain));
   frc::SmartDashboard::PutData( "CmdGyroSetAngleOffset", new CmdGyroSetAngleOffset(&m_drivetrain,90.0));
+  frc::SmartDashboard::PutData( "CmdAutoBalance", new CmdAutoBalance(&m_drivetrain));
 
   frc::SmartDashboard::PutData( "CmdDriveTurnTo90", new CmdDriveTurnTo90(&m_drivetrain,0.3));
 

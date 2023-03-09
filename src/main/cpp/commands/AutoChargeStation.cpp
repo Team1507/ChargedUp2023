@@ -18,13 +18,14 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
 	  CmdPrintText("Auto AutoChargeStation"),
       //Initial Setup
       CmdDriveClearAll(drivetrain),
-      CmdGyroSetAngleOffset(drivetrain, 0.0),
+      CmdGyroSetAngleOffset(drivetrain, 90.0),
       frc2::WaitCommand(0.1_s),
       //-------------------------------
 
 
 
-      CmdDriveStraightGyro(drivetrain, .3, 90, 90, 30, false, false, 0),
+      CmdDriveStraightGyro(drivetrain, .3, 0, 0, 26, false, false, 0),
+      CmdDriveStraightGyro(drivetrain, .3, 0, 0, 19, false, false, 0),
       CmdAutoBalance(drivetrain),
 
 
