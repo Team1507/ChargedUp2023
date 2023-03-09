@@ -25,7 +25,9 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
 
 
       CmdDriveStraightGyro(drivetrain, .3, 0, 0, 26, false, false, 0),
-      CmdDriveStraightGyro(drivetrain, .3, 0, 0, 19, false, false, 0),
+      CmdDriveStraightGyro(drivetrain, .2, 0, 0, 19, false, false, 0),
+      CmdDriveStraightGyro(drivetrain, .3, 0, 0, 106, false, false, 0),
+      CmdDriveStraightGyro(drivetrain, .2, 180, 0, 15, false, false, 0),
       CmdAutoBalance(drivetrain),
 
 
