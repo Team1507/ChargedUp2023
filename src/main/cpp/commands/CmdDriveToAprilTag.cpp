@@ -10,8 +10,8 @@
 #define RAD2DEG(rad) ( rad*180.0/M_PI)
 
 const int TURN_TO_ZERO = 1;
-const int MOVE_TO_YAW_ZERO  = 2;
-const int MOVE_TOWARDS_TARGET  = 3;
+//const int MOVE_TO_YAW_ZERO  = 2;
+const int MOVE_TOWARDS_TARGET  = 2;
 const int FINSHED = 3;
 
 
@@ -53,7 +53,7 @@ void CmdDriveToAprilTag::Execute()
   // float yDistanceTotal   = sqrt(pow(m_tagDistance,2) - pow(xDistanceTotal,2));//B
   // float angle2Target     = RAD2DEG(atan2(yDistanceTotal, xDistanceFromTag));
   std::cout<<"m_tagAngle "<<m_tagAngle<<" m_tagDistance "<<m_tagDistance<<std::endl;
-  std::cout<<"xDistanceTotal "<<xDistanceTotal<<" xDistanceFromTag "<<xDistanceFromTag<<" yDistanceTotal "<<yDistanceTotal<<std::endl;
+  std::cout<<"xDistanceTotal "<<xDistanceTotal<<" xDistanceFromTag "<<xDistanceFromTag<<" yDistanceTotal "<<yDistanceTotal<<" e "<<e<<std::endl;
   const float MAX_POWER = m_power;
   const float MIN_POWER = 0.0625;       //Must be > MINIMUM_NEEDED_POWER in drivetrain
   const float TURN_Kp   = 0.005;
@@ -81,7 +81,7 @@ void CmdDriveToAprilTag::Execute()
         if(  fabs(m_currAngle) < .5 )
         {
           m_drivetrain->RobotcentricDrive(0,0,0);
-          m_currState = MOVE_TO_YAW_ZERO;
+          m_currState = MOVE_TOWARDS_TARGET;
           std::cout<<"turn move complete"<<std::endl;
         }
       }
@@ -92,8 +92,8 @@ void CmdDriveToAprilTag::Execute()
       {
         if(!m_preformedCalc)
         {
-          float x_power = (xDistanceFromTag/e);
-          float y_power = yDistanceTotal/e;
+          float x_power = m_power * (xDistanceFromTag/e);
+          float y_power = -m_power * yDistanceTotal/e;//No touch
           //float x_power = m_power * sinf(DEG2RAD(angle2Target));
           //float y_power = m_power * cosf(DEG2RAD(angle2Target));
 
@@ -102,7 +102,8 @@ void CmdDriveToAprilTag::Execute()
           m_drivetrain->RobotcentricDrive(y_power, x_power, 0);
           m_preformedCalc = true;
         }
-        else if(xDistanceFromTag<ERROR_TOLORANCE)
+        //else if(xDistanceFromTag<ERROR_TOLORANCE)
+        else if((fabs(m_tagAngle) < ERROR_TOLORANCE) && (xDistanceFromTag<ERROR_TOLORANCE))
         {
           m_currState = FINSHED;
           m_drivetrain->RobotcentricDrive(0.0,0.0,0.0);
