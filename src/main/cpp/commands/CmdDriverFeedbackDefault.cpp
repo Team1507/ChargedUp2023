@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include "commands/CmdDriverFeedbackDefault.h"
+#include <iostream>
 
 CmdDriverFeedbackDefault::CmdDriverFeedbackDefault(DriverFeedback *driverfeedback, frc::XboxController *xboxcontroller, Claw *claw) 
 {
@@ -18,7 +19,7 @@ CmdDriverFeedbackDefault::CmdDriverFeedbackDefault(DriverFeedback *driverfeedbac
 // Called when the command is initially scheduled.
 void CmdDriverFeedbackDefault::Initialize() 
 {
-  
+    std::cout<<"DriverFeedback Default Init"<<std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -63,6 +64,7 @@ void CmdDriverFeedbackDefault::Execute()
 void CmdDriverFeedbackDefault::End(bool interrupted) 
 {
   m_driverfeedback->UnderGlow(0,0,0);
+  std::cout<<"DriverFeedback Default End"<<std::endl;
 }
 
 // Returns true when the command should end.

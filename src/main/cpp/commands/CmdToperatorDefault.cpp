@@ -52,6 +52,7 @@ void CmdToperatorDefault::Initialize()
 {
   frc::SmartDashboard::PutNumber("CONE_INTAKE_POWER", CONE_INTAKE_POWER);
   frc::SmartDashboard::PutNumber("CUBE_INTAKE_POWER", CUBE_INTAKE_POWER);
+  std::cout<<"Toperator Default Init"<<std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -363,7 +364,10 @@ else if (TurretManual < .5 && TurretManual > -.5 && m_isTurret)
 }
 
 // Called once the command ends or is interrupted.
-void CmdToperatorDefault::End(bool interrupted) {}
+void CmdToperatorDefault::End(bool interrupted) 
+{
+  std::cout<<"Toperator Default End"<<std::endl;  
+}
 
 // Returns true when the command should end.
 bool CmdToperatorDefault::IsFinished() 

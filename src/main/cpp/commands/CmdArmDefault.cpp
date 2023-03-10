@@ -14,7 +14,7 @@ CmdArmDefault::CmdArmDefault(Arm *arm)
 // Called when the command is initially scheduled.
 void CmdArmDefault::Initialize() 
 {
-  std::cout<<"Arm"<<std::endl;
+  std::cout<<"Arm Default Init"<<std::endl;
 }
 
 // Called repeatedly when this Command is scheduled to run
@@ -27,7 +27,10 @@ void CmdArmDefault::Execute()
 }
 
 // Called once the command ends or is interrupted.
-void CmdArmDefault::End(bool interrupted) {}
+void CmdArmDefault::End(bool interrupted) 
+{
+  std::cout<<"Arm Default End"<<std::endl;
+}
 
 // Returns true when the command should end.
 bool CmdArmDefault::IsFinished() 

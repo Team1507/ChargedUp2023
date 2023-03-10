@@ -17,7 +17,7 @@ CmdPouchDefault::CmdPouchDefault(Pouch *pouch)
 // Called when the command is initially scheduled.
 void CmdPouchDefault::Initialize() 
 {
-  std::cout<<"Pouch"<<std::endl;
+  std::cout<<"Pouch Default Init"<<std::endl;
   m_sensorCount = 0;
 }
 
@@ -76,7 +76,10 @@ void CmdPouchDefault::Execute()
 }
 
 // Called once the command ends or is interrupted.
-void CmdPouchDefault::End(bool interrupted) {}
+void CmdPouchDefault::End(bool interrupted) 
+{
+  std::cout<<"Pouch Default End"<<std::endl;
+}
 
 // Returns true when the command should end.
 bool CmdPouchDefault::IsFinished() 

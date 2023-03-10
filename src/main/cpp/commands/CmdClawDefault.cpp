@@ -17,7 +17,7 @@ CmdClawDefault::CmdClawDefault(Claw *claw)
 
 void CmdClawDefault::Initialize() 
 {
- std::cout<<"Claw"<<std::endl;
+ std::cout<<"Claw Default Init"<<std::endl;
  m_delay = 10; // To Be Changed
 }
 
@@ -55,7 +55,10 @@ void CmdClawDefault::Execute()
 }
 
 // Called once the command ends or is interrupted.
-void CmdClawDefault::End(bool interrupted) {}
+void CmdClawDefault::End(bool interrupted) 
+{
+  std::cout<<"Claw Default End"<<std::endl;
+}
 
 // Returns true when the command should end.
 bool CmdClawDefault::IsFinished() 
