@@ -9,6 +9,14 @@
 #include "commands/CmdAutoBalance.h"
 #include "commands/CmdGyroSetAngleOffset.h"
 
+#include "commands/CmdPouchIntakeDeploy.h"
+#include "commands/CmdArmLevelSetPosition.h"
+#include "commands/CmdArmExtensionSetPosition.h"
+#include "commands/CmdWristSetPosition.h"
+#include "commands/CmdClawEject.h"
+#include "commands/CmdClawSetOuttakePower.h"
+#include "commands/CmdPouchIntakeRetract.h"
+
 
 AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) 
 {
@@ -18,18 +26,41 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
 	  CmdPrintText("Auto AutoChargeStation"),
       //Initial Setup
       CmdDriveClearAll(drivetrain),
-      CmdGyroSetAngleOffset(drivetrain, 90.0),
+      CmdGyroSetAngleOffset(drivetrain, 180.0),
       frc2::WaitCommand(0.1_s),
       //-------------------------------
 
 
+    //Works
+    //   CmdDriveStraightGyro(drivetrain, .2,  0,   -90, 23,  false, false, 0),
+    //   CmdDriveStraightGyro(drivetrain, .2,  0,   -90, 19,  false, false, 0),
+    //   CmdDriveStraightGyro(drivetrain, .35, 0,   -90, 109, false, false, 0),
+    //   CmdDriveStraightGyro(drivetrain, .2,  180, -90, 21,  false, false, 0),
+    //   CmdAutoBalance(drivetrain),
 
-      CmdDriveStraightGyro(drivetrain, .3, 0, 0, 26, false, false, 0),
-      CmdDriveStraightGyro(drivetrain, .2, 0, 0, 19, false, false, 0),
-      CmdDriveStraightGyro(drivetrain, .3, 0, 0, 106, false, false, 0),
-      CmdDriveStraightGyro(drivetrain, .2, 180, 0, 15, false, false, 0),
+      CmdPouchIntakeDeploy(pouch),
+      frc2::WaitCommand(1.0_s),
+      CmdArmLevelSetPosition(arm, ArmLevel::High, pouch),
+      frc2::WaitCommand(0.5_s),
+      //CmdArmExtensionSetPosition(arm, true),
+      CmdWristSetPosition(claw, 8),
+      frc2::WaitCommand(1.0_s),
+      CmdClawSetOuttakePower(claw, -0.7),
+      CmdClawEject(claw),
+      //CmdArmExtensionSetPosition(arm, false),
+      //frc2::WaitCommand(0.5_s),
+      CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
+      frc2::WaitCommand(1.0_s),
+      CmdPouchIntakeRetract(pouch),
+
+
+      
+
+      CmdDriveStraightGyro(drivetrain, .2,  0,     0, 23,  false, false, 0),
+      CmdDriveStraightGyro(drivetrain, .2,  0,     0, 19,  false, false, 0),
+      CmdDriveStraightGyro(drivetrain, .35, 0,   -90, 105, false, false, 0),
+      CmdDriveStraightGyro(drivetrain, .2,  180, -90, 21,  false, false, 0),
       CmdAutoBalance(drivetrain),
-
 
       //-------------------------------
 		  CmdPrintText("Auto AutoChargeStation Finish")

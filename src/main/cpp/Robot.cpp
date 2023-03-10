@@ -75,6 +75,7 @@ void Robot::DisabledInit()
 {
   std::cout<<"Disabled Init"<<std::endl;
   m_container.m_claw.WristSetPower(-.2);
+  m_container.m_claw.ClawSetPower(.04);
   // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);
 }
  
