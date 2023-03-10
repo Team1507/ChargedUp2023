@@ -33,6 +33,7 @@
 #include "commands/AutoOverAndBack.h"
 #include "commands/AutoScoreLink.h"
 #include "commands/AutoTwoPieceRight.h"
+#include "commands/AutoMoveToCone.h"
 
 
 //Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
@@ -80,6 +81,7 @@ class RobotContainer
  //AutoTwoPieceLeft  m_autoTwoPieceLeft {&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
  //AutoTwoPieceRight m_autoTwoPieceRight {&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
  AutoChargeStation m_autoChargeStation{&m_drivetrain, &m_arm,  &m_camera, &m_claw, &m_pouch};
+ AutoMoveToCone    m_autoMoveToCone{&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  //AutoScoreLink     m_autoScoreLink{&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
 #endif
 

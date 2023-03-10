@@ -27,7 +27,7 @@ void Robot::RobotInit()
   m_container.m_drivetrain.SetDriveType(Drivetrain::driveType::FIELDCENTRIC); //default to fieldcentric mode
   #ifndef DRIVETRAIN_ONLY
   m_container.m_claw.ClawSetIntakePower(0.4);
-  m_container.m_claw.ClawSetOuttakePower(-0.4);
+  m_container.m_claw.ClawSetOuttakePower(-.4);
   m_container.m_pouch.SetRampPosition(false);
   m_container.m_pouch.InnerIntakeSetPosition(0.0);
   m_container.m_arm.AirSpringSetPosition(true);
