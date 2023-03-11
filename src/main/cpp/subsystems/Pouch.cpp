@@ -37,10 +37,21 @@ void Pouch::InnerIntakeSetPosition(float position)
 }
 void Pouch::InnerIntakeTurnToPosition(float position)
 {
-  int wantedPosition = InnerIntakeGetEncoder() - (((int)InnerIntakeGetEncoder())%INNER_INTAKE_TICKS_TO_REV) + position;
-  frc::SmartDashboard::PutNumber("Wanted Position",wantedPosition);
-  m_innerPIDController.SetReference(wantedPosition,rev::CANSparkMax::ControlType::kPosition);
+  // int wantedPosition = InnerIntakeGetEncoder() - (((int)InnerIntakeGetEncoder())%INNER_INTAKE_TICKS_TO_REV);
+  // frc::SmartDashboard::PutNumber("Wanted Position",wantedPosition);
+  // m_innerPIDController.SetReference(wantedPosition,rev::CANSparkMax::ControlType::kPosition);
 }
+// void Pouch::InnerIntakeTurnOnce(void) 
+// {
+//   // int wantedPosition = InnerIntakeGetEncoder() - (((int)InnerIntakeGetEncoder())%INNER_INTAKE_TICKS_TO_REV);
+
+//   int currentPosition =  InnerIntakeGetEncoder();
+//   int lastZero        =  currentPosition - ((int)currentPosition%INNER_INTAKE_TICKS_TO_REV);
+  
+
+//   frc::SmartDashboard::PutNumber("Wanted Position",wantedPosition);
+//   m_innerPIDController.SetReference(wantedPosition,rev::CANSparkMax::ControlType::kPosition);
+// }
 int  Pouch::InnerIntakeGetEncoder(void)
 {
   return m_innerEncoder.GetPosition();
