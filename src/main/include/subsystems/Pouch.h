@@ -11,7 +11,7 @@
 #include <frc/PneumaticsModuleType.h>
 #include "ctre/Phoenix.h"
 #include <frc/PowerDistribution.h>
-#define INNER_INTAKE_POWER 0.3
+#define INNER_INTAKE_POWER 0.5
 #define INNER_INTAKE_CURRENT_LIMIT 1.5
 #define INNER_INTAKE_TICKS_TO_REV  102
 #define OUTER_INTAKE_RETRACT_DELAY 1000/20 //ms /20ms 

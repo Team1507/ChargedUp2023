@@ -473,6 +473,7 @@ void Drivetrain::ForcePark(void)
         m_moduleList[i]->SetSteerAngle(j);
         j += 90;
     }
+    std::cout << "ForcePark " << std::endl; 
 }
 
 

@@ -19,6 +19,7 @@
 #include "commands/CmdPouchIntakeRetract.h"
 #include "commands/CmdDriveStop.h"
 #include "commands/CmdArmLevelSetPosition.h"
+#include "commands/CmdArmExtensionSetPosition.h"
 
 AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) 
 {
@@ -28,7 +29,7 @@ AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera
       //Initial Setup
       CmdDriveClearAll(drivetrain),
       CmdGyroSetAngleOffset(drivetrain, 180.0),
-      frc2::WaitCommand(1.0_s),
+      //frc2::WaitCommand(1.0_s),
       //-------------------------------
       CmdPouchIntakeDeploy(pouch),
       frc2::WaitCommand(1.0_s),
@@ -44,18 +45,31 @@ AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera
       CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
       frc2::WaitCommand(1.0_s),
       CmdPouchIntakeRetract(pouch),
-      CmdDriveStraightGyro(drivetrain, .6, 0, 0, 135, false, false, 0.0),
-      CmdDriveTurn2Angle(drivetrain, .3, -180),
+      CmdDriveStraightGyro(drivetrain, .6, 0, 0, 125, false, false, 0.0),
 
+      
+
+      //Deply intakes
       CmdPouchIntakeDeploy(pouch),
-      CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, .5),
-      CmdSetRampPosition(pouch, true),
       CmdClawIntakeEnable(claw, true),
       CmdWristSetPosition(claw, 11),
-      CmdDriveStraightGyro(drivetrain, .2, 90, -180, 3, false, true, 0.0),
-      frc2::WaitCommand(1.0_s),
-      CmdDriveStraightGyro(drivetrain, .2, 0, -180, 27, false, true, 0.0),
-      frc2::WaitCommand(1.0_s),
+
+      //Turn 180
+      CmdDriveTurn2Angle(drivetrain, .3, -180),    
+
+      //Drop Ramp
+      CmdSetRampPosition(pouch, true),
+      CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, .5),
+
+
+      // CmdDriveStraightGyro(drivetrain, .2, 90, -180, 3, false, true, 0.0),
+      // frc2::WaitCommand(1.0_s),
+      // CmdDriveStraightGyro(drivetrain, .2, 0, -180, 27, false, true, 0.0),
+
+      //Go Get that cube!
+      CmdDriveStraightGyro(drivetrain, .2, 2, -180, 27, false, true, 0.0),
+
+      frc2::WaitCommand(0.1_s),
       CmdPouchIntakeRetract(pouch),
       CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, 0),
       CmdSetRampPosition(pouch, false),
@@ -63,7 +77,30 @@ AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera
 
       CmdDriveTurn2Angle(drivetrain, .3, -180),
 
-      CmdDriveStraightGyro(drivetrain, .6, -180, -360, 100, false, true, 0.0),
+      CmdDriveStraightGyro(drivetrain, .6, -180, -360, 100, false, false, 0.0),
+
+      CmdDriveStraightGyro(drivetrain, .4, -180, -360, 20, false, false, 0.0),
+
+      CmdPouchIntakeDeploy(pouch),
+
+      CmdDriveStraightGyro(drivetrain, .2, -180, -360, 18, false, false, 0.0),
+
+      CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch),
+      CmdWristSetPosition(claw, 2),
+
+      CmdDriveStraightGyro(drivetrain, .2, -180, -360, 26, false, true, 0.0),
+      CmdArmExtensionSetPosition(arm, true),
+      frc2::WaitCommand(0.2_s),
+      CmdClawSetOuttakePower(claw, -.5),
+      CmdClawEject(claw),
+
+      CmdArmExtensionSetPosition(arm, false),
+      CmdDriveStraightGyro(drivetrain, .1, 0, -360, 10, false, false, 0.0),
+      CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
+      CmdDriveStraightGyro(drivetrain, .1, 0, -360, 10, false, true, 0.0),
+
+
+
 
       //E-Stop
       CmdDriveStop(drivetrain), // safety
