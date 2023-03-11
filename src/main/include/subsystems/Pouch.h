@@ -26,6 +26,7 @@ class Pouch : public frc2::SubsystemBase {
   void InnerIntakeSetPosition(float position);
   void InnerIntakeTurnToPosition(float position);
   int  InnerIntakeGetEncoder(void);
+  // void InnerIntakeTurnOnce(void);
   void IntakeEnable(bool enable);
   bool IntakeIsEnable(void);
 

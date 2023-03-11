@@ -25,7 +25,7 @@ void CmdPouchDefault::Initialize()
 void CmdPouchDefault::Execute() 
 {
   bool IntakeEnabled = m_pouch->IntakeIsEnable();
-  frc::SmartDashboard::PutNumber("Intake Current",m_pouch->IntakeGetCurrent());
+  // frc::SmartDashboard::PutNumber("Intake Current",m_pouch->IntakeGetCurrent());
   
   if (IntakeEnabled && !m_isIntaking) 
   {
@@ -35,24 +35,27 @@ void CmdPouchDefault::Execute()
   else if(!IntakeEnabled && m_isIntaking)
   {
     m_isIntaking = false;
-    m_pouch->InnerIntakeTurnToPosition(0);
+
     m_pouch->SetRampPosition(false);
     m_pouch->IntakeSetPower(0.0, Pouch::WhatIntake::Outer);
+  
+    // m_pouch->InnerIntakeTurnToPosition(0);
+
   }
-  else if (m_pouch->IntakeGetCurrent() > INNER_INTAKE_CURRENT_LIMIT && IntakeEnabled)
-  {
-    if(m_sensorCount > 3)
-    {
-      // std::cout<<"Ended by Current"<<std::endl;
-      m_pouch->IntakeEnable(false);
-      m_sensorCount=0;
-    }
-    else
-    {
-      // std::cout<<"Triped by Current"<<std::endl;
-      m_sensorCount++;
-    }
-  }
+  // else if (m_pouch->IntakeGetCurrent() > INNER_INTAKE_CURRENT_LIMIT && IntakeEnabled)
+  // {
+  //   if(m_sensorCount > 3)
+  //   {
+  //     // std::cout<<"Ended by Current"<<std::endl;
+  //     m_pouch->IntakeEnable(false);
+  //     m_sensorCount=0;
+  //   }
+  //   else
+  //   {
+  //     // std::cout<<"Triped by Current"<<std::endl;
+  //     m_sensorCount++;
+  //   }
+  // }
   else if (m_pouch->ReadSensorState())
   {
     if(m_sensorCount > 3)
