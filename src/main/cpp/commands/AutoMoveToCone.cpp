@@ -17,6 +17,7 @@
 #include "commands/CmdClawSetOuttakePower.h"
 #include "commands/CmdClawEject.h"
 #include "commands/CmdPouchIntakeRetract.h"
+#include "commands/CmdDriveStop.h"
 
 AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) 
 {
@@ -59,8 +60,8 @@ AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera
       CmdSetRampPosition(pouch, false),
 
       //E-Stop
-      CmdDriveStraightGyro(drivetrain, 0.0, -175, -355, 0, false, true, 0.0),
-
+      CmdDriveStop(drivetrain), // safety
+      
       //-------------------------------
 		  CmdPrintText("Auto AutoMoveToCone Finish")
   );

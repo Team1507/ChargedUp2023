@@ -16,6 +16,7 @@
 #include "commands/CmdClawEject.h"
 #include "commands/CmdClawSetOuttakePower.h"
 #include "commands/CmdPouchIntakeRetract.h"
+#include "commands/CmdDriveStop.h"
 
 
 AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) 
@@ -61,8 +62,10 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
       CmdDriveStraightGyro(drivetrain, .35, 0,   -90, 105, false, false, 0),
       CmdDriveStraightGyro(drivetrain, .2,  180, -90, 21,  false, false, 0),
       CmdAutoBalance(drivetrain),
+      
 
       //-------------------------------
+      CmdDriveStop(drivetrain), //SAFETY
 		  CmdPrintText("Auto AutoChargeStation Finish")
     );
 }
