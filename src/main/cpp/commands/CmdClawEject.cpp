@@ -19,7 +19,7 @@ void CmdClawEject::Execute()
   if(m_delay > 0)
   {
     m_delay--;
-    std::cout<<m_delay<<std::endl;
+    //std::cout<<m_delay<<std::endl;
   }
   else
   {
@@ -34,6 +34,7 @@ bool CmdClawEject::IsFinished()
   if(m_delay <= 0)
   {
     m_claw->ClawSetPower(0);
+    std::cout<<"Claw Eject Done "<<std::endl;
     return true;
   }
   else

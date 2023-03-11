@@ -20,7 +20,7 @@ GrpAllFindHome::GrpAllFindHome(Arm *arm, Pouch *pouch, Claw *claw)
     frc2::ParallelCommandGroup
     {
         CmdTurretTurn2Angle(arm, 60),
-        CmdWristSetPosition(claw, 13),
+        CmdWristSetPosition(claw, 2),
     },
 
     // frc2::WaitCommand(0.5_s),

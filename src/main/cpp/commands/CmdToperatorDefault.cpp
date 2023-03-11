@@ -117,10 +117,10 @@ void CmdToperatorDefault::Execute()
           std::cout<<"High Right"<<std::endl;
           break;
         case 180: // down
-          m_findHome->Schedule();
-          m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
-          m_isDpadCenter = false;
-          std::cout<<"Home"<<std::endl;
+          // m_findHome->Schedule();
+          // m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
+          // m_isDpadCenter = false;
+          // std::cout<<"Home"<<std::endl;
           break;
         case 270: // left
           m_scoringHighLeft->Schedule();
@@ -136,19 +136,22 @@ void CmdToperatorDefault::Execute()
         case 0 : // up
           m_scoringMidShelf->Schedule();
           m_isDpadCenter = false;
+          std::cout<<"Mid Shelf"<<std::endl;
           break;
         case 90: // right
           m_scoringMidRight->Schedule();
           m_isDpadCenter = false;
+          std::cout<<"Mid Right"<<std::endl;
           break;
         case 180: // down
-          m_findHome->Schedule();
-          m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
-          m_isDpadCenter = false;
+          // m_findHome->Schedule();
+          // m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
+          // m_isDpadCenter = false;
           break;
         case 270: // left
           m_scoringMidLeft->Schedule();
           m_isDpadCenter = false;
+          std::cout<<"Mid Left"<<std::endl;
           break;
       }
     }
@@ -165,17 +168,32 @@ void CmdToperatorDefault::Execute()
           m_claw->ClawSetIntakePower( frc::SmartDashboard::GetNumber("CONE_INTAKE_POWER", CONE_INTAKE_POWER));
           m_driverFeedback->DriverFeedbackLED(COLOR_YELLOW);
           m_isDpadCenter = false;
+          std::cout<<"Set Cone"<<std::endl;
           break;
         case 180: // down
-          m_findHome->Schedule();
-          m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
+
+          if( m_arm->ElevationHomeLimitSwitch() )
+          {
+            //On Limit switch - ignore commands
+            std::cout<<"Find Home ignored - on limit switch!!"<<std::endl;
+          }
+          else
+          {
+            //OK to schedule FindHome commands
+            m_findHome->Schedule();
+            m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
+            std::cout<<"Find Home"<<std::endl;
+          }
+
           m_isDpadCenter = false;
+
           break;
         case 270: // left
           //m_camera->PipelineSetIndex(CameraIndex::Cube);
           m_claw->ClawSetIntakePower(  frc::SmartDashboard::GetNumber("CUBE_INTAKE_POWER", CUBE_INTAKE_POWER));
           m_driverFeedback->DriverFeedbackLED(COLOR_PURPLE);
           m_isDpadCenter = false;
+          std::cout<<"Set Cube"<<std::endl;
           break;
       }
     }

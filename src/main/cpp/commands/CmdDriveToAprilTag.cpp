@@ -66,19 +66,24 @@ void CmdDriveToAprilTag::Execute()
       // //Turning DriveTrain to 0 for Calculation
       case TURN_TO_ZERO:
       {
+
+        const float targetAngle = 90.0;
+
         float m_currAngle = m_drivetrain->GetGyroYaw();
 
-        float turn_power = fabs( m_currAngle * TURN_Kp ) + MIN_POWER;
+        float errorAngle  = m_currAngle - targetAngle;
+
+        float turn_power  = fabs( errorAngle * TURN_Kp ) + MIN_POWER;
 
         if( turn_power > MAX_POWER ) turn_power = MAX_POWER;
         if( turn_power < MIN_POWER ) turn_power = MIN_POWER;
 
-        if( m_currAngle > 0)
-          m_drivetrain->RobotcentricDrive(0,0,  turn_power);
+        if( errorAngle > 0)
+          m_drivetrain->RobotcentricDrive(0,0, turn_power); // Error Positive, turn Left
         else
-          m_drivetrain->RobotcentricDrive(0,0, -turn_power);
+          m_drivetrain->RobotcentricDrive(0,0, -turn_power); // Error Negative, Turn Right
 
-        if(  fabs(m_currAngle) < .5 )
+        if(  fabs(errorAngle) < .5 )
         {
           m_drivetrain->RobotcentricDrive(0,0,0);
           m_currState = MOVE_TO_YAW_ZERO;
