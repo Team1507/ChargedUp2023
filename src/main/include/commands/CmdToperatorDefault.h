@@ -58,6 +58,7 @@ class CmdToperatorDefault
     bool m_wristManualOverride;
     bool m_isOuterIntakeDeployed;
     bool m_wristHome;
+    bool m_isLowShot;
 
   
 

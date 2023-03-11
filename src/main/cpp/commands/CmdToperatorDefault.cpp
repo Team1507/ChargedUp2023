@@ -188,6 +188,12 @@ void CmdToperatorDefault::Execute()
   {
     m_arm->ElevationArmSetPosition(ArmLevel::Mid);
   }
+  if(AButtonPressed && ReadyPosition)
+  {
+    m_claw->WristHoldPosition(2.0);
+    m_claw->ClawSetOuttakePower(-.8);
+    m_isLowShot = true;
+  }
   //******************CLAW*******************
   if(ClawIntake && !m_isIntaking)
   {
@@ -200,15 +206,23 @@ void CmdToperatorDefault::Execute()
     m_isIntaking = false;
   }
 
-  if(ClawOutake && !m_isOuttaking)
+  if(ClawOutake && !m_isOuttaking && !m_isLowShot)
   {
+    m_clawEject->Schedule();
+    m_isOuttaking = true;
+  }
+  else if(ClawOutake && !m_isOuttaking && m_isLowShot)
+  {
+    m_pouch->SetRampPosition(true);
     m_clawEject->Schedule();
     m_isOuttaking = true;
   }
   else if(!ClawOutake && m_isOuttaking)
   {
+    m_pouch->SetRampPosition(false);
     m_isOuttaking = false;
   }
+
   //******************WRIST**********************
   // const float WRIST_DELTA = .7;
   // if(WristManual > .6)
