@@ -3,7 +3,7 @@
 
 CmdClawEject::CmdClawEject(Claw *claw) 
 {
-  AddRequirements(claw); 
+  //AddRequirements(claw); 
   m_claw = claw;
 }
 

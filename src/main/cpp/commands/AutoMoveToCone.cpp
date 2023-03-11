@@ -17,6 +17,7 @@
 #include "commands/CmdClawSetOuttakePower.h"
 #include "commands/CmdClawEject.h"
 #include "commands/CmdPouchIntakeRetract.h"
+
 AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) 
 {
   AddCommands
@@ -35,21 +36,30 @@ AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera
       //CmdDriveStraightGyro(drivetrain, .4, 0, 0, 10, false, false, 0.0),
       CmdDriveStraightGyro(drivetrain, .6, 0, 0, 135, false, false, 0.0),
       CmdDriveTurn2Angle(drivetrain, .3, -180),
+
       CmdPouchIntakeDeploy(pouch),
       CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, .5),
       CmdSetRampPosition(pouch, true),
       CmdClawIntakeEnable(claw, true),
-      CmdWristSetPosition(claw, 10),
+      CmdWristSetPosition(claw, 11),
       CmdDriveStraightGyro(drivetrain, .2, 90, -180, 3, false, true, 0.0),
       frc2::WaitCommand(1.0_s),
-      CmdDriveStraightGyro(drivetrain, .2, 0, -180, 30, false, false, 0.0),
+      CmdDriveStraightGyro(drivetrain, .2, 0, -180, 30, false, true, 0.0),
+      frc2::WaitCommand(1.0_s),
       CmdPouchIntakeRetract(pouch),
       CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, 0),
       CmdSetRampPosition(pouch, false),
+      frc2::WaitCommand(1.0_s),
+
       CmdDriveTurn2Angle(drivetrain, .3, -175),
-      CmdDriveStraightGyro(drivetrain, .6, -175, 0, 100, false, false, 0.0),
+      CmdWristSetPosition(claw, 2),
+      CmdDriveStraightGyro(drivetrain, .6, -175, -355, 120, false, true, 0.0),
+      CmdSetRampPosition(pouch, true),
+      CmdClawEject(claw),
+      CmdSetRampPosition(pouch, false),
 
-
+      //E-Stop
+      CmdDriveStraightGyro(drivetrain, 0.0, -175, -355, 0, false, true, 0.0),
 
       //-------------------------------
 		  CmdPrintText("Auto AutoMoveToCone Finish")

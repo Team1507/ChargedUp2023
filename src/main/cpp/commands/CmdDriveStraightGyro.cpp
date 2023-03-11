@@ -15,7 +15,8 @@ CmdDriveStraightGyro::CmdDriveStraightGyro(Drivetrain *drivetrain, float power, 
   // Heading and yaw are referenced to the gyro angle 0
   //   Heading is the direction the robot is moving with respect gyro angle 0
   //   Yaw is the direction the robot is facing with respect gyro angle 0
-
+  //   Yaw is direction based on robot at power up because yaw calls the wrong function
+  //   Heading is based on offset if applicable
   // Set gyroHeading to direction robot should move
   // Set gyroYaw to yaw robot should maintain during move
 

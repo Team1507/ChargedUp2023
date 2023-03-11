@@ -28,7 +28,7 @@ void CmdClawDefault::Execute()
   {
     m_claw->ClawSetPower(m_claw->ClawGetIntakePower());
     m_isIntaking = true;
-    m_delay = 50;
+    m_delay = 10;
     //std::cout<<"Claw Intake Power"<<m_claw->ClawGetIntakePower()<<std::endl;
   }
   else if(!m_claw->ClawIntakeGetEnable() && m_isIntaking)
