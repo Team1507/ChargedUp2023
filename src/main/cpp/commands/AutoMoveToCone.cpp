@@ -34,11 +34,11 @@ AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera
       CmdPouchIntakeDeploy(pouch),
       frc2::WaitCommand(1.0_s),
       CmdArmLevelSetPosition(arm, ArmLevel::High, pouch),
-      frc2::WaitCommand(0.5_s),
+      frc2::WaitCommand(0.5_s),//was 1.0_s
       //CmdArmExtensionSetPosition(arm, true),
       CmdWristSetPosition(claw, 8),
-      frc2::WaitCommand(1.0_s),
-      CmdClawSetOuttakePower(claw, -0.7),
+      frc2::WaitCommand(0.5_s),
+      CmdClawSetOuttakePower(claw, -0.6),
       CmdClawEject(claw),
       //CmdArmExtensionSetPosition(arm, false),
       //frc2::WaitCommand(0.5_s),
@@ -73,7 +73,7 @@ AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera
       CmdPouchIntakeRetract(pouch),
       CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, 0),
       CmdSetRampPosition(pouch, false),
-      frc2::WaitCommand(1.0_s),
+      frc2::WaitCommand(0.1_s),
 
       CmdDriveTurn2Angle(drivetrain, .3, -180),
 
@@ -98,12 +98,12 @@ AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera
       CmdDriveStraightGyro(drivetrain, .1, 0, -360, 10, false, false, 0.0),
       CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
       CmdDriveStraightGyro(drivetrain, .1, 0, -360, 10, false, true, 0.0),
-
+      CmdPouchIntakeRetract(pouch),
 
 
 
       //E-Stop
-      CmdDriveStop(drivetrain), // safety
+      CmdDriveStop(drivetrain), // saftey
       
       //-------------------------------
 		  CmdPrintText("Auto AutoMoveToCone Finish")

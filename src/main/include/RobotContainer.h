@@ -34,6 +34,7 @@
 #include "commands/AutoScoreLink.h"
 #include "commands/AutoTwoPieceRight.h"
 #include "commands/AutoMoveToCone.h"
+#include "commands/AutoPowerStripBlue.h"
 
 
 //Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
@@ -83,6 +84,7 @@ class RobotContainer
  AutoChargeStation m_autoChargeStation{&m_drivetrain, &m_arm,  &m_camera, &m_claw, &m_pouch};
  AutoMoveToCone    m_autoMoveToCone{&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  //AutoScoreLink     m_autoScoreLink{&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
+ AutoPowerStripBlue m_autoPowerStripBlue{&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch};
 #endif
 
 
