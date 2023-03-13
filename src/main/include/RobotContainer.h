@@ -73,10 +73,10 @@ class RobotContainer
 
 //*********************AUTO**********************
 #ifndef DRIVETRAIN_ONLY
- AutoDoNothing     m_autoDoNothing {&m_drivetrain};
- AutoChargeStation m_autoChargeStation{&m_drivetrain, &m_arm,  &m_camera, &m_claw, &m_pouch};
- AutoTwoPieceBlue    m_autoTwoPieceBlue{&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
- AutoPowerStripBlue m_autoPowerStripBlue{&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch};
+ AutoDoNothing       m_autoDoNothing     {&m_drivetrain};
+ AutoChargeStation   m_autoChargeStation {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
+ AutoTwoPieceBlue    m_autoTwoPieceBlue  {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
+ AutoPowerStripBlue  m_autoPowerStripBlue{&m_drivetrain, &m_arm, &m_camera, &m_claw ,&m_pouch};
 #endif
 
 
