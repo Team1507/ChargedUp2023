@@ -1,5 +1,5 @@
 
-#include "commands/AutoMoveToCone.h"
+#include "commands/AutoTwoPieceBlue.h"
 
 #include "frc2/command/WaitCommand.h"
 #include "commands/CmdPrintText.h"
@@ -21,11 +21,11 @@
 #include "commands/CmdArmLevelSetPosition.h"
 #include "commands/CmdArmExtensionSetPosition.h"
 
-AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) 
+AutoTwoPieceBlue::AutoTwoPieceBlue( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) 
 {
   AddCommands
   (
-		  CmdPrintText("Auto AutoMoveToCone"),
+		  CmdPrintText("Auto AutoTwoPieceBlue"),
       //Initial Setup
       CmdDriveClearAll(drivetrain),
       CmdGyroSetAngleOffset(drivetrain, 180.0),
@@ -106,6 +106,6 @@ AutoMoveToCone::AutoMoveToCone( Drivetrain *drivetrain, Arm *arm, Camera *camera
       CmdDriveStop(drivetrain), // saftey
       
       //-------------------------------
-		  CmdPrintText("Auto AutoMoveToCone Finish")
+		  CmdPrintText("Auto TwoPieceBlue Finish")
   );
 }

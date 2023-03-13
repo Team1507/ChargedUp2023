@@ -27,13 +27,8 @@
 
 //Autos
 #include "commands/AutoDoNothing.h"
-#include "commands/AutoTwoPieceLeft.h"
 #include "commands/AutoChargeStation.h"
-#include "commands/AutoFarConeAndDock.h"
-#include "commands/AutoOverAndBack.h"
-#include "commands/AutoScoreLink.h"
-#include "commands/AutoTwoPieceRight.h"
-#include "commands/AutoMoveToCone.h"
+#include "commands/AutoTwoPieceBlue.h"
 #include "commands/AutoPowerStripBlue.h"
 
 
@@ -79,11 +74,8 @@ class RobotContainer
 //*********************AUTO**********************
 #ifndef DRIVETRAIN_ONLY
  AutoDoNothing     m_autoDoNothing {&m_drivetrain};
- //AutoTwoPieceLeft  m_autoTwoPieceLeft {&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
- //AutoTwoPieceRight m_autoTwoPieceRight {&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
  AutoChargeStation m_autoChargeStation{&m_drivetrain, &m_arm,  &m_camera, &m_claw, &m_pouch};
- AutoMoveToCone    m_autoMoveToCone{&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
- //AutoScoreLink     m_autoScoreLink{&m_drivetrain, &m_arm, &m_claw, &m_camera, &m_pouch};
+ AutoTwoPieceBlue    m_autoTwoPieceBlue{&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  AutoPowerStripBlue m_autoPowerStripBlue{&m_drivetrain,&m_arm,&m_camera,&m_claw,&m_pouch};
 #endif
 

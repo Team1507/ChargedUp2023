@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include <frc2/command/CommandHelper.h>
@@ -8,10 +9,9 @@
 #include "subsystems/Camera.h"
 #include "subsystems/Claw.h"
 #include "subsystems/Pouch.h"
-
-class AutoFarConeAndDock
+class AutoTwoPieceBlue
     : public frc2::CommandHelper<frc2::SequentialCommandGroup,
-                                 AutoFarConeAndDock> {
+                                 AutoTwoPieceBlue> {
  public:
-  AutoFarConeAndDock( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch );
+  AutoTwoPieceBlue( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch );
 };
