@@ -1,4 +1,5 @@
-#include "commands/AutoPowerStripBlue.h"
+#include "commands/AutoPowerStripRed.h"
+
 #include "commands/CmdDriveClearAll.h"
 #include "commands/CmdDriveStraight.h"
 #include "commands/CmdDriveStraightGyro.h"
@@ -19,9 +20,9 @@
 #include "commands/CmdPrintText.h"
 
 
-AutoPowerStripBlue::AutoPowerStripBlue(Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) 
+AutoPowerStripRed::AutoPowerStripRed(Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch) 
 {
-    AddCommands
+AddCommands
     (
       CmdPrintText("Auto AutoPowerStripBlue"),
       //Initial Setup
@@ -37,31 +38,28 @@ AutoPowerStripBlue::AutoPowerStripBlue(Drivetrain *drivetrain, Arm *arm, Camera 
       frc2::WaitCommand(0.5_s),
       CmdClawSetOuttakePower(claw, -0.6),
       CmdClawEject(claw),
-
       //Return Arm Home
       CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
       frc2::WaitCommand(1.0_s),
       CmdPouchIntakeRetract(pouch),
 
-
-      //Backup to Cube
       CmdDriveStraightGyro(drivetrain, .4, 0, 0, 145, false, true, 0.0),
 
 
-      //Deploy intakes
+      //Deeply intakes
       CmdPouchIntakeDeploy(pouch),
       CmdClawIntakeEnable(claw, true),
       CmdWristSetPosition(claw, 11),
 
       //Turn 180
-      CmdDriveTurn2Angle(drivetrain, .3, 180),    
+      CmdDriveTurn2Angle(drivetrain, .3, -180),    
 
-      //Turn On Intake
+      //Drop Ramp
       CmdSetRampPosition(pouch, true),
       CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, .5),
 
       // Pick Up Piece
-      CmdDriveStraightGyro(drivetrain, .2, 10, 190, 35, false, true, 0.0),
+      CmdDriveStraightGyro(drivetrain, .2, -10, -190, 35, false, true, 0.0),
 
       //Bring everything back in
       frc2::WaitCommand(0.1_s),
@@ -71,15 +69,14 @@ AutoPowerStripBlue::AutoPowerStripBlue(Drivetrain *drivetrain, Arm *arm, Camera 
       frc2::WaitCommand(0.1_s),
 
       //Driving Back
-      CmdDriveStraightGyro(drivetrain, .4, 180, 180, 155, false, false, 0.0),
+      CmdDriveStraightGyro(drivetrain, .4, -180, -180, 155, false, false, 0.0),
       
       //Swirly Part
-      CmdDriveTurn2Angle(drivetrain, .3, 180),    
-      
+      CmdDriveTurn2Angle(drivetrain, .3, -180),    
+      //
       CmdWristSetPosition(claw,2.0),
-
-      //Move to Score Low
-      CmdDriveStraightGyro(drivetrain, .3, 180, 360, 15, false, true, 0.0),
+      //Moving to April Tag 
+      CmdDriveStraightGyro(drivetrain, .3, -180, -360, 15, false, true, 0.0),
 
       //Score Low
       CmdSetRampPosition(pouch, true),

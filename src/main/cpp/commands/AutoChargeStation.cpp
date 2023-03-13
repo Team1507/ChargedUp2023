@@ -39,24 +39,24 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
     //   CmdDriveStraightGyro(drivetrain, .2,  180, -90, 21,  false, false, 0),
     //   CmdAutoBalance(drivetrain),
 
+      //Score Cube High
       CmdPouchIntakeDeploy(pouch),
       frc2::WaitCommand(1.0_s),
       CmdArmLevelSetPosition(arm, ArmLevel::High, pouch),
       frc2::WaitCommand(0.5_s),
-      //CmdArmExtensionSetPosition(arm, true),
       CmdWristSetPosition(claw, 8),
       frc2::WaitCommand(0.5_s),
       CmdClawSetOuttakePower(claw, -0.6),
       CmdClawEject(claw),
-      //CmdArmExtensionSetPosition(arm, false),
-      //frc2::WaitCommand(0.5_s),
+
+      //Return To Pouch
       CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
       frc2::WaitCommand(1.0_s),
       CmdPouchIntakeRetract(pouch),
 
 
       
-
+      //Charge Up!
       CmdDriveStraightGyro(drivetrain, .2,  0,     0, 23,  false, false, 0),
       CmdDriveStraightGyro(drivetrain, .2,  0,     0, 19,  false, false, 0),
       CmdDriveStraightGyro(drivetrain, .35, 0,   -90, 105, false, false, 0),

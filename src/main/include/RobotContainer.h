@@ -30,6 +30,8 @@
 #include "commands/AutoChargeStation.h"
 #include "commands/AutoTwoPieceBlue.h"
 #include "commands/AutoPowerStripBlue.h"
+#include "commands/AutoTwoPieceRed.h"
+#include "commands/AutoPowerStripRed.h"
 
 
 //Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
@@ -77,6 +79,8 @@ class RobotContainer
  AutoChargeStation   m_autoChargeStation {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  AutoTwoPieceBlue    m_autoTwoPieceBlue  {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  AutoPowerStripBlue  m_autoPowerStripBlue{&m_drivetrain, &m_arm, &m_camera, &m_claw ,&m_pouch};
+ AutoTwoPieceRed     m_autoTwoPieceRed   {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
+ AutoPowerStripRed   m_autoPowerStripRed {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
 #endif
 
 

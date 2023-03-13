@@ -75,7 +75,6 @@ void Robot::DisabledInit()
 {
   std::cout<<"Disabled Init"<<std::endl;
   m_container.m_claw.WristSetPower(-.2);
-  m_container.m_claw.ClawSetPower(.04);
   // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);
 }
  
@@ -100,6 +99,7 @@ void Robot::AutonomousInit()
    std::cout<<" **** Auto Init ******"<<std::endl;
 
    //m_container.m_drivetrain.SetAngleOffset(90.0);
+  m_container.m_claw.ClawSetPower(.04);
 
   m_autonomousCommand = m_container.GetAutonomousCommand();
 

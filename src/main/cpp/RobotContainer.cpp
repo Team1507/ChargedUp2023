@@ -44,10 +44,12 @@ RobotContainer::RobotContainer()
 //&m_camera,
   //*************************************Auto**********************************************
 
-  m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing);
-  m_chooser.AddOption("AutoChargeStation", &m_autoChargeStation);
-  m_chooser.AddOption("AutoTwoPieceBlue", &m_autoTwoPieceBlue);
-  m_chooser.AddOption("AutoPowerStripBlue",&m_autoPowerStripBlue);
+  m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing     );
+  m_chooser.AddOption("AutoChargeStation"     , &m_autoChargeStation );
+  m_chooser.AddOption("AutoTwoPieceBlue"      , &m_autoTwoPieceBlue  );
+  m_chooser.AddOption("AutoPowerStripBlue"    , &m_autoPowerStripBlue);
+  m_chooser.AddOption("AutoTwoPieceRed"       , &m_autoTwoPieceRed   );
+  m_chooser.AddOption("AutoPowerStripRed"     , &m_autoPowerStripRed );
 
 #endif
   //m_chooser.AddOption("Auto Shoot Two Ball", &m_autoTwoBall);
