@@ -59,7 +59,7 @@ AddCommands
       CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, .5),
 
       // Pick Up Piece
-      CmdDriveStraightGyro(drivetrain, .2, -10, -190, 35, false, true, 0.0),
+      CmdDriveStraightGyro(drivetrain, .2, 0, -180, 35, false, true, 0.0),
 
       //Bring everything back in
       frc2::WaitCommand(0.1_s),

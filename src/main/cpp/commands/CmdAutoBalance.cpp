@@ -104,8 +104,6 @@ void CmdAutoBalance::Execute()
     if(m_offDelayCount <= 0)
     {
         m_drivetrain->RobotcentricDrive(0 ,0 ,0.0);
-        m_drivetrain->ForcePark();
-        m_drivetrain->ForcePark();
         m_check = true;
     }
   }
@@ -123,8 +121,9 @@ void CmdAutoBalance::End(bool interrupted) {}
 bool CmdAutoBalance::IsFinished() 
 {
     float currRoll  = m_drivetrain->GetGyroRoll();
-    if(m_rev && (m_offDelayCount < 0)) //&& (fabs(currRoll) < .5 ))
+    if(m_rev && (m_offDelayCount <= 0)) //&& (fabs(currRoll) < .5 ))
     {
+        m_drivetrain->ForcePark();
         return true;
     }
     // else if(m_rev && (m_offDelayCount < 0) && !(fabs(currRoll) < .5 ) && (m_checkDelay < 0))

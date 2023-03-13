@@ -180,6 +180,7 @@ void CmdToperatorDefault::Execute()
           else
           {
             //OK to schedule FindHome commands
+            m_arm->ExtensionSetPosition(false),
             m_findHome->Schedule();
             m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
             std::cout<<"Find Home"<<std::endl;

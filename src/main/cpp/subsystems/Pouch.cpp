@@ -16,6 +16,10 @@ Pouch::Pouch(frc::PowerDistribution *pdh)
   m_innerPIDController.SetSmartMotionAllowedClosedLoopError(0.3); // change later
   m_inner.SetOpenLoopRampRate(0.5); // change later
   m_pdh = pdh;
+  // m_outerLeft.RestoreFactoryDefaults();
+  m_outerLeft.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+  // m_outerRight.RestoreFactoryDefaults();
+  m_outerLeft.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 
 }
 // Crocs
