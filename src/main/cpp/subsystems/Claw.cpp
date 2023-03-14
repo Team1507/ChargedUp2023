@@ -8,6 +8,7 @@
 Claw::Claw(frc::PowerDistribution *pdh) 
 {
     m_intakeEnabled = false;
+    m_clawManualOverride = false;
     
     m_wrist.RestoreFactoryDefaults();
     m_wrist.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
@@ -25,6 +26,8 @@ Claw::Claw(frc::PowerDistribution *pdh)
     m_claw.RestoreFactoryDefaults();
     m_claw.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
     m_claw.SetInverted(false);
+
+
 
 }
 // This method will be called once per scheduler run
@@ -78,6 +81,15 @@ void Claw::ClawSetOuttakePower(float power)
 float Claw::ClawGetOuttakePower(void)
 {
     return m_clawOuttakePower;
+}
+
+void Claw::ClawSetManualOverride(bool override)
+{
+    m_clawManualOverride = override;
+}
+bool Claw::ClawGetManualOverride(void)
+{
+    return m_clawManualOverride;
 }
 //***********************************WRIST*******************************************
 

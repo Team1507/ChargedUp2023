@@ -13,6 +13,7 @@ CmdClawDefault::CmdClawDefault(Claw *claw)
   AddRequirements(claw); 
   m_claw = claw;
   m_isIntaking = false;
+  m_isOverride = false;
 }
 
 void CmdClawDefault::Initialize() 
@@ -24,6 +25,7 @@ void CmdClawDefault::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void CmdClawDefault::Execute() 
 {
+  bool ManualOverride = m_claw->ClawGetManualOverride();
   if(m_claw->ClawIntakeGetEnable() && !m_isIntaking && !m_claw->ReadSensorState()) 
   {
     m_claw->ClawSetPower(m_claw->ClawGetIntakePower());
@@ -42,7 +44,17 @@ void CmdClawDefault::Execute()
     m_claw->ClawIntakeEnable(false);
     //std::cout<<"Claw B"<<std::endl;
   }
-  else if(m_claw->ReadSensorState() && m_delay > 0)
+  else if(ManualOverride && !m_isOverride)
+  {
+    m_claw->ClawSetPower(m_claw->ClawGetIntakePower());
+    m_isOverride = true;
+  }
+  else if(!ManualOverride && m_isOverride)
+  {
+    m_claw->ClawSetPower(0.0);
+    m_isOverride = false;
+  }
+  else if(m_claw->ReadSensorState() && m_delay > 0 && !ManualOverride)
   {
     m_delay--;
     if(m_delay <= 0)

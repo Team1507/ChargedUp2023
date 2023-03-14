@@ -33,6 +33,8 @@ class Claw : public frc2::SubsystemBase {
   bool ClawIntakeGetEnable(void);
   void ClawSetIntakePower(float power);
   float ClawGetIntakePower(void);
+  void ClawSetManualOverride(bool override);
+  bool ClawGetManualOverride(void);
 
   void ClawSetOuttakePower(float power);
   float ClawGetOuttakePower(void);
@@ -64,6 +66,8 @@ class Claw : public frc2::SubsystemBase {
 
   float m_clawIntakePower;
   float m_clawOuttakePower;
+
+  bool m_clawManualOverride;
 
   // Components (e.g. motor controllers and sensors) should generally be
   // declared private and exposed only through public methods.

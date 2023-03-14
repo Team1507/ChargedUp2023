@@ -207,7 +207,7 @@ void CmdToperatorDefault::Execute()
       }
     }
   }
-  if(!YButtonPressed && ReadyPosition)
+  if(!YButtonPressed && !AButtonPressed && ReadyPosition)
   {
     m_arm->ElevationArmSetPosition(ArmLevel::Low);
   }
@@ -224,12 +224,12 @@ void CmdToperatorDefault::Execute()
   //******************CLAW*******************
   if(ClawIntake && !m_isIntaking)
   {
-    m_claw->ClawIntakeEnable(true);
+    m_claw->ClawSetManualOverride(true);
     m_isIntaking = true;
   }
   else if(!ClawIntake && m_isIntaking)
   {
-    m_claw->ClawIntakeEnable(false);
+    m_claw->ClawSetManualOverride(false);
     m_isIntaking = false;
   }
 
@@ -243,6 +243,7 @@ void CmdToperatorDefault::Execute()
     m_pouch->SetRampPosition(true);
     m_clawEject->Schedule();
     m_isOuttaking = true;
+    m_isLowShot = false;
   }
   else if(!ClawOutake && m_isOuttaking)
   {
