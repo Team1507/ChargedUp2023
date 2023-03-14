@@ -42,9 +42,16 @@ CmdToperatorDefault::CmdToperatorDefault(Toperator *toperator, frc::XboxControll
   m_scoringMidShelf  = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, MidShelf );
   m_scoringMidRight  = new GrpScoringSetPosition(m_arm, m_claw,m_pouch, MidRight );
 
+  m_scoringHighCone  = new GrpScoringStraightOn(m_arm, m_claw, m_pouch, HighCone);
+  m_scoringHighCube  = new GrpScoringStraightOn(m_arm, m_claw, m_pouch, HighCube);
+  m_scoringMidCone   = new GrpScoringStraightOn(m_arm, m_claw, m_pouch, MidCone );
+  m_scoringMidCube   = new GrpScoringStraightOn(m_arm, m_claw, m_pouch, MidCube );
+
   m_findHome         = new GrpAllFindHome       (m_arm, m_pouch, m_claw);
 
-  m_clawEject        = new CmdClawEject(m_claw);
+  m_returnToPouch    = new GrpReturnToPouch     (m_arm, m_pouch, m_claw);
+
+  m_clawEject        = new CmdClawEject         (m_claw);
 }
 
 // Called when the command is initially scheduled.
@@ -107,12 +114,12 @@ void CmdToperatorDefault::Execute()
       switch(DpadState)
       {
         case 0 : // up
-          m_scoringHighShelf->Schedule();
+          //m_scoringHighShelf->Schedule();
           m_isDpadCenter = false;
           std::cout<<"High Shelf"<<std::endl;
           break;
         case 90: // right
-          m_scoringHighRight->Schedule();
+          m_scoringHighCone->Schedule();
           m_isDpadCenter = false;
           std::cout<<"High Right"<<std::endl;
           break;
@@ -123,7 +130,7 @@ void CmdToperatorDefault::Execute()
           // std::cout<<"Home"<<std::endl;
           break;
         case 270: // left
-          m_scoringHighLeft->Schedule();
+          m_scoringHighCube->Schedule();
           m_isDpadCenter = false;
           std::cout<<"High Left"<<std::endl;
           break;
@@ -134,12 +141,12 @@ void CmdToperatorDefault::Execute()
       switch(DpadState)
       {
         case 0 : // up
-          m_scoringMidShelf->Schedule();
+          //m_scoringMidShelf->Schedule();
           m_isDpadCenter = false;
           std::cout<<"Mid Shelf"<<std::endl;
           break;
         case 90: // right
-          m_scoringMidRight->Schedule();
+          m_scoringMidCone->Schedule();
           m_isDpadCenter = false;
           std::cout<<"Mid Right"<<std::endl;
           break;
@@ -149,7 +156,7 @@ void CmdToperatorDefault::Execute()
           // m_isDpadCenter = false;
           break;
         case 270: // left
-          m_scoringMidLeft->Schedule();
+          m_scoringMidCube->Schedule();
           m_isDpadCenter = false;
           std::cout<<"Mid Left"<<std::endl;
           break;
@@ -181,9 +188,9 @@ void CmdToperatorDefault::Execute()
           {
             //OK to schedule FindHome commands
             m_arm->ExtensionSetPosition(false),
-            m_findHome->Schedule();
+            m_returnToPouch->Schedule();
             m_driverFeedback->DriverFeedbackLED(COLOR_CLEAR);
-            std::cout<<"Find Home"<<std::endl;
+            std::cout<<"Find Pouch"<<std::endl;
           }
 
           m_isDpadCenter = false;
@@ -192,6 +199,7 @@ void CmdToperatorDefault::Execute()
         case 270: // left
           //m_camera->PipelineSetIndex(CameraIndex::Cube);
           m_claw->ClawSetIntakePower(  frc::SmartDashboard::GetNumber("CUBE_INTAKE_POWER", CUBE_INTAKE_POWER));
+          //m_claw->ClawSetOuttakePower();
           m_driverFeedback->DriverFeedbackLED(COLOR_PURPLE);
           m_isDpadCenter = false;
           std::cout<<"Set Cube"<<std::endl;
