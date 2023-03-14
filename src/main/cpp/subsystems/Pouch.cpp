@@ -19,7 +19,7 @@ Pouch::Pouch(frc::PowerDistribution *pdh)
   // m_outerLeft.RestoreFactoryDefaults();
   m_outerLeft.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
   // m_outerRight.RestoreFactoryDefaults();
-  m_outerLeft.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
+  m_outerRight.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 
 }
 // Crocs

@@ -51,7 +51,7 @@ void CmdClawDefault::Execute()
   }
   else if(!ManualOverride && m_isOverride)
   {
-    m_claw->ClawSetPower(0.0);
+    m_claw->ClawSetPower(0.04);
     m_isOverride = false;
   }
   else if(m_claw->ReadSensorState() && m_delay > 0 && !ManualOverride)
