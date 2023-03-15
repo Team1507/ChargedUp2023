@@ -3,7 +3,7 @@
 #include "frc2/command/WaitCommand.h"
 #include <iostream>
 #define ERROR 2
-#define DELAY 50
+#define DELAY 55
 #define CHECK_DELAY 50
 
 float prevRoll = 0;
@@ -120,9 +120,10 @@ void CmdAutoBalance::End(bool interrupted) {}
 
 bool CmdAutoBalance::IsFinished() 
 {
-    float currRoll  = m_drivetrain->GetGyroRoll();
+    //float currRoll  = m_drivetrain->GetGyroRoll();
     if(m_rev && (m_offDelayCount <= 0)) //&& (fabs(currRoll) < .5 ))
     {
+        m_drivetrain->ForcePark();
         m_drivetrain->ForcePark();
         return true;
     }

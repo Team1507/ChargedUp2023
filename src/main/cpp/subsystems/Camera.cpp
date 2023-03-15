@@ -4,6 +4,7 @@
 #include <units/length.h>
 #include <iostream>
 
+#define PI 3.1415
 #define TARGET_WANTED_AREA 4.0
 
 Camera::Camera(DriverFeedback *driverfeedback)
@@ -72,3 +73,41 @@ int Camera::PipelineGetIndex(void)
     return camera.GetPipelineIndex(); //Cube = 1  AprilTag = 0  Cone = 2
 }
 
+//*********************LIMELIGHT*********************
+
+double Camera::GetLimelightHAngle(void)
+{
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0);
+}
+double Camera::GetLimelightVAngle(void)
+{
+
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0);    
+}
+double Camera::GetLimelightDistance(void)
+{
+    const double a1 = 32;//angle of limelight 32 off of vertical
+    const double h1 = 35.5;//height of limelight from ground
+    const double h2 = 103.50;//height of target
+
+    double a2 = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0);
+    
+    return (h2-h1)/tan((a1+a2)*(PI/180));
+}
+bool Camera::GetLimelightTargetValid(void)
+{
+    return (bool)nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tv", 0);
+}
+
+
+// void Shooter::LimeLight3xMode(bool is3xMode)
+// {
+//     if(is3xMode)
+//     {
+//         nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("pipeline", 1);
+//     }
+//     else
+//     {
+//         nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("pipeline", 0);
+//     }
+// }

@@ -25,6 +25,17 @@ class Camera : public frc2::SubsystemBase {
   void PipelineSetIndex(CameraIndex index);
   int PipelineGetIndex(void);
 
+  //*********************LIMELIGHT*********************
+  double GetLimelightHAngle(void);
+  double GetLimelightVAngle(void);
+  double GetLimelightDistance(void);
+  bool   GetLimelightTargetValid(void);
+  
+  //void   LimeLight3xMode(bool is3XMode);
+
+  const double LIMELIGHT_ANGLE_TOLERANCE = 1; //CHANGE LATER
+
+
  private:
 
  DriverFeedback *m_driverfeedback;

@@ -23,6 +23,9 @@ Arm::Arm(Pouch *pouch)
     m_turretPID.SetSmartMotionAllowedClosedLoopError(0.5); // change later
     m_turret.SetOpenLoopRampRate(1.0); // change later
     m_turretPID.SetOutputRange(-0.7,0.7,0);
+    //Turret 0 to not assume that it start at 0
+    m_turretPID.SetReference(0, rev::CANSparkMax::ControlType::kPosition);
+
 }
 
 void Arm::Periodic() 
@@ -45,18 +48,18 @@ void Arm::Periodic()
 
 void Arm::TurretTurn2Angle(float angle) 
 {
-    
+    return;
     //This makes sure we cant move when arm is all of the way down 
-    if(m_elevationHomeLimitSwitch.Get() == true)
-    {
-        m_turret.Set(0);
-        std::cout <<"elevation home limit swtich is pressed"<< std::endl;
-    }
-    else
-    {
-        m_turretPID.SetReference(Angle2Ticks(angle), rev::CANSparkMax::ControlType::kPosition);
-        m_wanted_position = angle;
-    }
+    // if(m_elevationHomeLimitSwitch.Get() == true)
+    // {
+    //     // m_turret.Set(0);
+    //     std::cout <<"elevation home limit swtich is pressed"<< std::endl;
+    // }
+    // else
+    // {
+    //     // m_turretPID.SetReference(0, rev::CANSparkMax::ControlType::kPosition);
+    //     m_wanted_position = angle;
+    // }
 
    
 }

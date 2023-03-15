@@ -65,7 +65,7 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
       
 
       //-------------------------------
-      CmdDriveStop(drivetrain), //SAFETY
+      //CmdDriveStop(drivetrain), //SAFETY
 		  CmdPrintText("Auto AutoChargeStation Finish")
     );
 }

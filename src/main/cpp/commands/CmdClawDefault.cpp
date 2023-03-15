@@ -18,8 +18,10 @@ CmdClawDefault::CmdClawDefault(Claw *claw)
 
 void CmdClawDefault::Initialize() 
 {
- std::cout<<"Claw Default Init"<<std::endl;
- m_delay = 10; // To Be Changed
+  std::cout<<"Claw Default Init"<<std::endl;
+  m_delay = 10; // To Be Changed
+  m_isIntaking = false;
+  m_isOverride = false;
 }
 
 // Called repeatedly when this Command is scheduled to run

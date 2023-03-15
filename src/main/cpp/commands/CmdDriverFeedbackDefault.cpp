@@ -13,7 +13,6 @@ CmdDriverFeedbackDefault::CmdDriverFeedbackDefault(DriverFeedback *driverfeedbac
   m_xboxcontroller   =xboxcontroller;
   m_claw             =claw          ;
   m_isPieceCollected = false        ;
-  m_delay = 150;
 }
 
 // Called when the command is initially scheduled.
@@ -34,28 +33,26 @@ void CmdDriverFeedbackDefault::Execute()
 
   else
   {
-    m_driverfeedback->Rumble(0.0);
+    // m_driverfeedback->Rumble(0.0);
     m_driverfeedback->UnderGlow(0,0,1);
   }
 
   
-
-  if(m_claw->ReadSensorState() == true && m_delay > 0)
+  //Tyler made me do this == 
+  if(m_claw->ReadSensorState() == true  && m_isPieceCollected == false)
   {
     m_driverfeedback->Rumble(1.0);
     m_driverfeedback->DriverFeedbackLED(COLOR_GREEN);
-    m_delay--;
+    m_isPieceCollected = true;
   }
 
-  else if(m_delay < 0)
+  if(m_claw->ReadSensorState() == false  && m_isPieceCollected == true)
   {
     m_driverfeedback->Rumble(0.0);
     m_driverfeedback->DriverFeedbackLED(COLOR_CLEAR);
+    m_isPieceCollected = false;
   }
-  else if(m_delay < 0 && m_claw->ReadSensorState() == false)
-  {
-    m_delay = 150;
-  }
+  
 
 
 } 

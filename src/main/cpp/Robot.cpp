@@ -147,9 +147,15 @@ void Robot::WriteToSmartDashboard(void)
   frc::SmartDashboard::PutNumber("odo_Y",         m_container.m_drivetrain.GetOdometryY()    );
   frc::SmartDashboard::PutNumber( "Average Drive Falcon Tempature", m_container.m_drivetrain.FalconTempGetAverage());
   //Camera
-  frc::SmartDashboard::PutNumber("Target Distance",m_container.m_camera.TargetGetDistance());
-  frc::SmartDashboard::PutNumber("Angle to Target",m_container.m_camera.TargetGetYaw());
+  frc::SmartDashboard::PutNumber("Camera Target Distance",m_container.m_camera.TargetGetDistance());
+  frc::SmartDashboard::PutNumber("Camera Angle to Target",m_container.m_camera.TargetGetYaw());
 
+  //LimeLight
+  frc::SmartDashboard::PutNumber("LimeLight Distance", m_container.m_camera.GetLimelightDistance());
+  frc::SmartDashboard::PutNumber("LimeLight VAngle", m_container.m_camera.GetLimelightVAngle());
+  frc::SmartDashboard::PutNumber("LimeLight HAngle", m_container.m_camera.GetLimelightHAngle());
+  frc::SmartDashboard::PutBoolean("LimeLight Target Valid", m_container.m_camera.GetLimelightTargetValid());
+  
 
 #ifndef DRIVETRAIN_ONLY
   frc::SmartDashboard::PutBoolean("Turret Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());

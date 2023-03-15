@@ -68,7 +68,7 @@ AutoTwoPieceRed::AutoTwoPieceRed(Drivetrain *drivetrain, Arm *arm, Camera *camer
       // CmdDriveStraightGyro(drivetrain, .2, 0, -180, 27, false, true, 0.0),
 
       //Go Get that cube!
-      CmdDriveStraightGyro(drivetrain, .2, -2, -180, 27, false, true, 0.0),
+      CmdDriveStraightGyro(drivetrain, .2, 0, 180, 27, false, true, 0.0),
 
       frc2::WaitCommand(0.1_s),
       CmdPouchIntakeRetract(pouch),

@@ -28,7 +28,6 @@ class CmdDriverFeedbackDefault
 
   void End(bool interrupted) override;
 
-  int m_delay;
   bool m_isPieceCollected;
  
   bool IsFinished() override;
