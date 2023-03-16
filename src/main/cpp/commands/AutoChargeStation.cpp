@@ -62,6 +62,7 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
       CmdDriveStraightGyro(drivetrain, .35, 0,   -90, 105, false, false, 0),
       CmdDriveStraightGyro(drivetrain, .2,  180, -90, 21,  false, false, 0),
       CmdAutoBalance(drivetrain),
+      frc2::WaitCommand(5.0_s),
       
 
       //-------------------------------

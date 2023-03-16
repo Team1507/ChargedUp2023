@@ -77,12 +77,12 @@ int Camera::PipelineGetIndex(void)
 
 double Camera::GetLimelightHAngle(void)
 {
-    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx", 0);
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->GetNumber("tx", 0);
 }
 double Camera::GetLimelightVAngle(void)
 {
 
-    return nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0);    
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->GetNumber("ty", 0);    
 }
 double Camera::GetLimelightDistance(void)
 {
@@ -90,13 +90,24 @@ double Camera::GetLimelightDistance(void)
     const double h1 = 35.5;//height of limelight from ground
     const double h2 = 103.50;//height of target
 
-    double a2 = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("ty", 0);
+    double a2 = nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->GetNumber("ty", 0);
     
     return (h2-h1)/tan((a1+a2)*(PI/180));
 }
 bool Camera::GetLimelightTargetValid(void)
 {
-    return (bool)nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tv", 0);
+    return (bool)nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->GetNumber("tv", 0);
+}
+void Camera::LimeLightEnable(bool state)
+{
+    if(state)
+    {
+        nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->PutNumber("ledMode",3);
+    }
+    else if(!state)
+    {
+        nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->PutNumber("ledMode",1);
+    }
 }
 
 
@@ -105,7 +116,7 @@ bool Camera::GetLimelightTargetValid(void)
 //     if(is3xMode)
 //     {
 //         nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("pipeline", 1);
-//     }
+//     }1
 //     else
 //     {
 //         nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("pipeline", 0);

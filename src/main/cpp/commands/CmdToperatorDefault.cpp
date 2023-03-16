@@ -330,7 +330,7 @@ if(OuterIntakeRun && !m_isOuterIntaking)
   //m_pouch->IntakeDeploy();
   // m_pouch->IntakeEnable(true);
   m_pouch->SetRampPosition(true);
-  m_pouch->IntakeSetPower(.7, Pouch::WhatIntake::Outer);
+  m_pouch->IntakeSetPower(.5, Pouch::WhatIntake::Outer);
   m_claw->WristHoldPosition(12.5);
   m_claw->ClawIntakeEnable(true);
   std::cout<<"Outer Intake on"<<std::endl;

@@ -30,7 +30,8 @@ class Camera : public frc2::SubsystemBase {
   double GetLimelightVAngle(void);
   double GetLimelightDistance(void);
   bool   GetLimelightTargetValid(void);
-  
+  void   LimeLightEnable(bool state);
+
   //void   LimeLight3xMode(bool is3XMode);
 
   const double LIMELIGHT_ANGLE_TOLERANCE = 1; //CHANGE LATER

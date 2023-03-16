@@ -73,6 +73,7 @@ void Robot::RobotPeriodic()
 
 void Robot::DisabledInit() 
 {
+  m_container.m_camera.LimeLightEnable(false);
   std::cout<<"Disabled Init"<<std::endl;
   m_container.m_claw.WristSetPower(-.2);
   // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);
@@ -97,9 +98,11 @@ void Robot::DisabledPeriodic()
 void Robot::AutonomousInit() 
 {
    std::cout<<" **** Auto Init ******"<<std::endl;
+  m_container.m_camera.LimeLightEnable(true);
 
    //m_container.m_drivetrain.SetAngleOffset(90.0);
   m_container.m_claw.ClawSetPower(.04);
+  m_container.m_claw.WristSetPower(-.2);
 
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
@@ -117,6 +120,8 @@ void Robot::AutonomousPeriodic() {}
 void Robot::TeleopInit() 
 {
   std::cout<<"Teleop Init"<<std::endl;
+  m_container.m_camera.LimeLightEnable(true);
+  m_container.m_claw.WristSetPower(-.2);
 
 
   if (m_autonomousCommand) {
