@@ -8,7 +8,7 @@ CmdTurretFindHome::CmdTurretFindHome(Arm *arm)
 
 void CmdTurretFindHome::Initialize() 
 {
-  m_arm->TurretSetPower(.2);
+  m_arm->TurretSetPower(.05);
 }
 
 
