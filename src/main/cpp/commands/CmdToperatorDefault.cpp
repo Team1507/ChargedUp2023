@@ -389,12 +389,12 @@ else if(!OuterIntakeRun && m_isOuterIntaking)
 
   if(TurretManual > .9)
   {
-    m_arm->TurretSetPower(-.5); // High speed to make up for the large gear ratio on the Neo
+    m_arm->TurretSetPower(-.1); // High speed to make up for the large gear ratio on the Neo
     m_isTurret = true;
   }
   else if(TurretManual < -.9)
   {
-    m_arm->TurretSetPower(.5); // High speed to make up for the large gear ratio on the Neo
+    m_arm->TurretSetPower(.1); // High speed to make up for the large gear ratio on the Neo
     m_isTurret = true;
   }
   else if (TurretManual < .9 && TurretManual > -.9 && m_isTurret)
