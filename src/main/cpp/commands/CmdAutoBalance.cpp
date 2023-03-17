@@ -3,7 +3,7 @@
 #include "frc2/command/WaitCommand.h"
 #include <iostream>
 #define ERROR 2
-#define DELAY 55
+#define DELAY 52
 #define CHECK_DELAY 50
 
 float prevRoll = 0;
