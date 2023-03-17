@@ -24,9 +24,9 @@ typedef struct
 } scoringStraightPosition_t;
                                                                             //(Encoder)
                                                             // extension,    wristAngle,        outtakePower,   armLevel
-scoringStraightPosition_t scoringStraightPositionTable[] = {{false,        15.0,                -1.0,           ArmLevel::Mid         }, //MidCone
+scoringStraightPosition_t scoringStraightPositionTable[] = {{false,        15.0,                -0.8,           ArmLevel::Mid         }, //MidCone
                                                             {false,        15.0,                -0.4,           ArmLevel::Mid         }, //MidCube
-                                                            {true ,        17.5,                -1.0,           ArmLevel::High        }, //HighCone
+                                                            {true ,        17.5,                -0.8,           ArmLevel::High        }, //HighCone
                                                             {true,        20.0,                -0.4,           ArmLevel::High        }};//HighCube
                 
 GrpScoringStraightOn::GrpScoringStraightOn(Arm *arm, Claw *claw, Pouch *pouch ,ScoringStraightPosition scoringStraightPosition) 
