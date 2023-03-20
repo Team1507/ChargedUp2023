@@ -20,7 +20,7 @@ void CmdAutoBalance::Initialize()
 {
   prevRoll = 0;
   prevPitch = 0;
-  m_speed = .2;
+  m_speed = .3;
   m_timer.Reset();
   m_offDelayCount = DELAY;
   m_checkDelay = CHECK_DELAY;

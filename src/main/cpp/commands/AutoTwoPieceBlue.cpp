@@ -7,6 +7,7 @@
 #include "commands/CmdDriveClearAll.h"
 #include "commands/CmdDriveStraight.h"
 #include "commands/CmdDriveStraightGyro.h"
+#include "commands/CmdDriveStraightVelocity.h"
 #include "commands/CmdDriveTurn2Angle.h"
 #include "commands/CmdGyroSetAngleOffset.h"
 #include "commands/CmdPouchIntakeDeploy.h"
@@ -45,7 +46,7 @@ AutoTwoPieceBlue::AutoTwoPieceBlue( Drivetrain *drivetrain, Arm *arm, Camera *ca
       CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
       frc2::WaitCommand(1.0_s),
       CmdPouchIntakeRetract(pouch),
-      CmdDriveStraightGyro(drivetrain, .6, 0, 0, 125, false, false, 0.0),
+      CmdDriveStraightVelocity(drivetrain, .6, 0, 0, 125, false, false, 0.0),
 
       
 
@@ -67,7 +68,7 @@ AutoTwoPieceBlue::AutoTwoPieceBlue( Drivetrain *drivetrain, Arm *arm, Camera *ca
       // CmdDriveStraightGyro(drivetrain, .2, 0, -180, 27, false, true, 0.0),
 
       //Go Get that cube!
-      CmdDriveStraightGyro(drivetrain, .2, 2, -180, 27, false, true, 0.0),
+      CmdDriveStraightVelocity(drivetrain, .2, 2, -180, 27, false, true, 0.0),
 
       frc2::WaitCommand(0.1_s),
       CmdPouchIntakeRetract(pouch),
@@ -77,27 +78,27 @@ AutoTwoPieceBlue::AutoTwoPieceBlue( Drivetrain *drivetrain, Arm *arm, Camera *ca
 
       CmdDriveTurn2Angle(drivetrain, .3, -180),
 
-      CmdDriveStraightGyro(drivetrain, .6, -180, -360, 100, false, false, 0.0),
+      CmdDriveStraightVelocity(drivetrain, .6, -180, -360, 100, false, false, 0.0),
 
-      CmdDriveStraightGyro(drivetrain, .4, -180, -360, 20, false, false, 0.0),
+      CmdDriveStraightVelocity(drivetrain, .4, -180, -360, 20, false, false, 0.0),
 
       CmdPouchIntakeDeploy(pouch),
 
-      CmdDriveStraightGyro(drivetrain, .2, -180, -360, 18, false, false, 0.0),
+      CmdDriveStraightVelocity(drivetrain, .2, -180, -360, 18, false, false, 0.0),
 
       CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch),
       CmdWristSetPosition(claw, 2),
 
-      CmdDriveStraightGyro(drivetrain, .2, -180, -360, 26, false, true, 0.0),
+      CmdDriveStraightVelocity(drivetrain, .2, -180, -360, 26, false, true, 0.0),
       CmdArmExtensionSetPosition(arm, true),
       frc2::WaitCommand(0.2_s),
       CmdClawSetOuttakePower(claw, -.5),
       CmdClawEject(claw),
 
       CmdArmExtensionSetPosition(arm, false),
-      CmdDriveStraightGyro(drivetrain, .1, 0, -360, 10, false, false, 0.0),
+      CmdDriveStraightVelocity(drivetrain, .1, 0, -360, 10, false, false, 0.0),
       CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
-      CmdDriveStraightGyro(drivetrain, .1, 0, -360, 10, false, true, 0.0),
+      CmdDriveStraightVelocity(drivetrain, .1, 0, -360, 10, false, true, 0.0),
       CmdPouchIntakeRetract(pouch),
 
 

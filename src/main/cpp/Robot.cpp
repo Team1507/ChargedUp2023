@@ -73,9 +73,11 @@ void Robot::RobotPeriodic()
 
 void Robot::DisabledInit() 
 {
+  #ifndef DRIVETRAIN_ONLY
   m_container.m_camera.LimeLightEnable(false);
-  std::cout<<"Disabled Init"<<std::endl;
   m_container.m_claw.WristSetPower(-.2);
+  #endif
+  std::cout<<"Disabled Init"<<std::endl;
   // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);
 }
  
@@ -98,11 +100,13 @@ void Robot::DisabledPeriodic()
 void Robot::AutonomousInit() 
 {
    std::cout<<" **** Auto Init ******"<<std::endl;
+   #ifndef DRIVETRAIN_ONLY
   m_container.m_camera.LimeLightEnable(true);
 
    //m_container.m_drivetrain.SetAngleOffset(90.0);
   m_container.m_claw.ClawSetPower(.04);
   m_container.m_claw.WristSetPower(-.2);
+  #endif
 
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
@@ -120,8 +124,10 @@ void Robot::AutonomousPeriodic() {}
 void Robot::TeleopInit() 
 {
   std::cout<<"Teleop Init"<<std::endl;
+  #ifndef DRIVETRAIN_ONLY
   m_container.m_camera.LimeLightEnable(true);
   m_container.m_claw.WristSetPower(-.2);
+  #endif
 
 
   if (m_autonomousCommand) {
@@ -151,6 +157,7 @@ void Robot::WriteToSmartDashboard(void)
   frc::SmartDashboard::PutNumber("odo_X",         m_container.m_drivetrain.GetOdometryX()    );
   frc::SmartDashboard::PutNumber("odo_Y",         m_container.m_drivetrain.GetOdometryY()    );
   frc::SmartDashboard::PutNumber( "Average Drive Falcon Tempature", m_container.m_drivetrain.FalconTempGetAverage());
+ #ifndef DRIVETRAIN_ONLY 
   //Camera
   frc::SmartDashboard::PutNumber("Camera Target Distance",m_container.m_camera.TargetGetDistance());
   frc::SmartDashboard::PutNumber("Camera Angle to Target",m_container.m_camera.TargetGetYaw());
@@ -162,7 +169,7 @@ void Robot::WriteToSmartDashboard(void)
   frc::SmartDashboard::PutBoolean("LimeLight Target Valid", m_container.m_camera.GetLimelightTargetValid());
   
 
-#ifndef DRIVETRAIN_ONLY
+
   frc::SmartDashboard::PutBoolean("Turret Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());
   frc::SmartDashboard::PutBoolean("Turret Left Limit Switch", m_container.m_arm.TurretGetLeftLimitSW());
   frc::SmartDashboard::PutNumber("Turret Encoder", m_container.m_arm.TurretGetEncoder());

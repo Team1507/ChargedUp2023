@@ -32,10 +32,11 @@
 #include "commands/AutoPowerStripBlue.h"
 #include "commands/AutoTwoPieceRed.h"
 #include "commands/AutoPowerStripRed.h"
+#include "commands/AutoTest.h"
 
 
 //Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
-//  #define DRIVETRAIN_ONLY
+#define DRIVETRAIN_ONLY
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -52,21 +53,22 @@ class RobotContainer
 
   //****************Controllers*******************
   frc::XboxController m_botDriver{0};
-  frc::XboxController m_topDriver{1};
-  frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev};
+  
 
+  Drivetrain     m_drivetrain;
 #ifndef DRIVETRAIN_ONLY
-#endif
+
 
   //****************Subsystems*******************
-  Drivetrain     m_drivetrain;
+frc::XboxController m_topDriver{1};  
+frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev};
   DriverFeedback m_driverfeedback {&m_topDriver};
   Claw           m_claw{&m_pdh};
   Pouch          m_pouch{&m_pdh};
   Arm            m_arm{&m_pouch};
   Toperator      m_toperator;
   Camera         m_camera {&m_driverfeedback};
-
+#endif
 #ifndef DRIVETRAIN_ONLY
 #endif
 
@@ -74,15 +76,16 @@ class RobotContainer
 
 
 //*********************AUTO**********************
-#ifndef DRIVETRAIN_ONLY
+
  AutoDoNothing       m_autoDoNothing     {&m_drivetrain};
+ #ifndef DRIVETRAIN_ONLY
  AutoChargeStation   m_autoChargeStation {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  AutoTwoPieceBlue    m_autoTwoPieceBlue  {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  AutoPowerStripBlue  m_autoPowerStripBlue{&m_drivetrain, &m_arm, &m_camera, &m_claw ,&m_pouch};
  AutoTwoPieceRed     m_autoTwoPieceRed   {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  AutoPowerStripRed   m_autoPowerStripRed {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
 #endif
-
+AutoTest            m_autoTest{&m_drivetrain};
 
 
 

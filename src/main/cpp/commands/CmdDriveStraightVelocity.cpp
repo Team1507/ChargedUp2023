@@ -8,7 +8,7 @@
 #include <iostream>
 #include <math.h>
 
-CmdDriveStraightVelocity::CmdDriveStraightVelocity(Drivetrain *drivetrain, float speed, float heading, float distance, bool ramp, bool stop, float timeout)
+CmdDriveStraightVelocity::CmdDriveStraightVelocity(Drivetrain *drivetrain, float speed, float heading, float yaw, float distance, bool ramp, bool stop, float timeout)
 {
 
   // ** ROBOT CENTRIC **
@@ -17,6 +17,7 @@ CmdDriveStraightVelocity::CmdDriveStraightVelocity(Drivetrain *drivetrain, float
 
   m_speed    = speed;
   m_heading  = heading * M_PI/180.0;  //Convert to radians
+  m_yaw      = yaw;
   m_distance = distance;
   m_stop     = stop;
   m_timeout  = timeout;
@@ -49,12 +50,32 @@ void CmdDriveStraightVelocity::Initialize()
 void CmdDriveStraightVelocity::Execute() 
 {
 
+  //-------------------------------------
+  //  Rotational correction
+
+  //Min turn power is 0.0625.
+  //  Set Kp to reach min turn power at 2 deg error  (Kp = min/error = 0.0625/2  )
+  float const TURN_MAX_POWER = 0.3;
+  float const TURN_Kp        = 0.02;
+
+  float delta_angle = m_yaw - m_drivetrain->GetGyroAngle();
+
+  float turn_speed = abs( delta_angle * TURN_Kp );
+
+  //Limit max drive
+  if( turn_speed > TURN_MAX_POWER ) turn_speed = TURN_MAX_POWER;
+
   float drive_speed = m_speed;
   
   float y_speed = drive_speed * cosf(m_heading);
   float x_speed = drive_speed * sinf(m_heading);
 
-  m_drivetrain->RobotcentricDriveVelocity(y_speed,x_speed,0.0);
+  if( delta_angle > 0)
+    m_drivetrain->FieldcentricDrive( y_speed, x_speed, -turn_speed);
+  else
+    m_drivetrain->FieldcentricDrive( y_speed, x_speed,  turn_speed);
+
+ // m_drivetrain->RobotcentricDriveVelocity(y_speed,x_speed,0.0);
 
 }
 
