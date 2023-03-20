@@ -31,6 +31,7 @@ void Robot::RobotInit()
   m_container.m_pouch.SetRampPosition(false);
   m_container.m_pouch.InnerIntakeSetPosition(0.0);
   m_container.m_arm.AirSpringSetPosition(true);
+  m_container.m_claw.WristSetReadyPoaition(12);
   // m_container.m_arm.ElevationArmSetPosition(ArmLevel::Level_Pouch);
   #endif
   CheckAlliance();
