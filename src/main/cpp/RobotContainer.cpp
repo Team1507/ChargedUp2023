@@ -32,13 +32,15 @@ RobotContainer::RobotContainer()
 {
 
   //**************************** Subsystem Defaults****************************************
+
   m_drivetrain.SetDefaultCommand(CmdDriveWithGamepad(&m_drivetrain, &m_botDriver));
+  #ifndef DRIVETRAIN_ONLY  
   m_claw.SetDefaultCommand(CmdClawDefault(&m_claw));
   m_arm.SetDefaultCommand(CmdArmDefault(&m_arm));
   m_pouch.SetDefaultCommand(CmdPouchDefault(&m_pouch));
   m_driverfeedback.SetDefaultCommand(CmdDriverFeedbackDefault(&m_driverfeedback, &m_topDriver, &m_claw));
 
-#ifndef DRIVETRAIN_ONLY
+
   m_toperator.SetDefaultCommand(CmdToperatorDefault(&m_toperator, &m_topDriver, &m_claw, &m_arm, &m_pouch,  &m_driverfeedback));
 
 //&m_camera,
@@ -64,9 +66,6 @@ RobotContainer::RobotContainer()
 //&m_camera,
 //&m_camera,
 
-
-
-
   frc::SmartDashboard::PutData( "CmdDriveClearAll",   new CmdDriveClearAll(&m_drivetrain));
   frc::SmartDashboard::PutData( "CmdDriveTypeToggle", new CmdDriveTypeToggle(&m_drivetrain));
   frc::SmartDashboard::PutData( "CmdGyroSetAngleOffset", new CmdGyroSetAngleOffset(&m_drivetrain,90.0));
@@ -81,10 +80,6 @@ RobotContainer::RobotContainer()
   frc::SmartDashboard::PutData( "CmdCalSwerveEnc_1",  new CmdCalibrateSwerveEncoders(&m_drivetrain,1));
   frc::SmartDashboard::PutData( "CmdCalSwerveEnc_2",  new CmdCalibrateSwerveEncoders(&m_drivetrain,2));
 
-
-  
-
-
   // Configure the button bindings
   ConfigureBindings();
 }
@@ -93,7 +88,9 @@ void RobotContainer::ConfigureBindings()
 {
   m_botDriver_START.OnTrue(new CmdResetGyro(&m_drivetrain));
   m_botDriver_Y.WhileTrue(new CmdDriveTurnTo90(&m_drivetrain, .3));
+  #ifndef DRIVETRAIN_ONLY
   m_botDriver_A.OnTrue(new CmdDriveToAprilTag(&m_drivetrain, &m_camera,0.06));
+  #endif
 }
 
 frc2::Command* RobotContainer::GetAutonomousCommand() 

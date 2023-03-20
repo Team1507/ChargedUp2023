@@ -12,7 +12,9 @@ CmdTurretTurn2Angle::CmdTurretTurn2Angle(Arm *arm, double angle)
 
 void CmdTurretTurn2Angle::Initialize() 
 {
+  #ifdef TURRET
   m_arm->TurretTurn2Angle(m_angle);
+  #endif
 }
 
 void CmdTurretTurn2Angle::Execute() {}
@@ -21,6 +23,7 @@ void CmdTurretTurn2Angle::End(bool interrupted) {}
 
 bool CmdTurretTurn2Angle::IsFinished() 
 {
+  #ifdef TURRET
   // std::cout<<((m_angle - m_arm->TurretGetAngle()))<<std::endl;
   if(fabs((m_angle - m_arm->TurretGetAngle())) < TOLORANCE )
   {
@@ -30,4 +33,8 @@ bool CmdTurretTurn2Angle::IsFinished()
   {
     return false;
   }
+  #endif
+  #ifndef TURRET
+  return true;
+  #endif
 }

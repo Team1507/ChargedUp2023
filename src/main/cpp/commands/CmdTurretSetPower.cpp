@@ -9,5 +9,7 @@ CmdTurretSetPower::CmdTurretSetPower(Arm *arm, float power)
 
 void CmdTurretSetPower::Initialize() 
 {
+  #ifdef TURRET
   m_arm->TurretSetPower(m_power);
+  #endif
 }

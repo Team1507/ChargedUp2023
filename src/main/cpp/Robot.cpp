@@ -20,11 +20,11 @@ void Robot::RobotInit()
   //Subsystem Initialization
   m_container.m_drivetrain.Stop();
   m_container.m_drivetrain.HardResetDriveEncoders();
-  //m_container.m_drivetrain.ResetDriveEncoders();
   m_container.m_drivetrain.ResetSteerEncoders();
   m_container.m_drivetrain.ZeroGyro(); 
   m_container.m_drivetrain.ResetOdometry();
   m_container.m_drivetrain.SetDriveType(Drivetrain::driveType::FIELDCENTRIC); //default to fieldcentric mode
+
   #ifndef DRIVETRAIN_ONLY
   m_container.m_claw.ClawSetIntakePower(0.4);
   m_container.m_claw.ClawSetOuttakePower(-.8);
@@ -67,42 +67,30 @@ void Robot::RobotPeriodic()
  {
   frc2::CommandScheduler::GetInstance().Run();
   WriteToSmartDashboard();
-
 }
 
 
 void Robot::DisabledInit() 
 {
-  m_container.m_camera.LimeLightEnable(false);
   std::cout<<"Disabled Init"<<std::endl;
+  #ifndef DRIVETRAIN_ONLY
   m_container.m_claw.WristSetPower(-.2);
-  // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);
+  m_container.m_camera.LimeLightEnable(false);
+  #endif
 }
  
-void Robot::DisabledPeriodic() 
-{
-  // switch (rand() %3)
-  // {
-  // case 0:
-  //   m_container.m_driverfeedback.DriverFeedbackLED(COLOR_RED);
-  //   break;
-  // case 1:
-  //   m_container.m_driverfeedback.DriverFeedbackLED(COLOR_GREEN);
-  //   break;
-  // case 2:
-  //   m_container.m_driverfeedback.DriverFeedbackLED(COLOR_BLUE);
-  // }
-}
-
+void Robot::DisabledPeriodic() {}
 
 void Robot::AutonomousInit() 
 {
-   std::cout<<" **** Auto Init ******"<<std::endl;
+  std::cout<<" **** Auto Init ******"<<std::endl;
+  #ifndef DRIVETRAIN_ONLY
   m_container.m_camera.LimeLightEnable(true);
 
    //m_container.m_drivetrain.SetAngleOffset(90.0);
   m_container.m_claw.ClawSetPower(.04);
   m_container.m_claw.WristSetPower(-.2);
+  #endif
 
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
@@ -120,9 +108,11 @@ void Robot::AutonomousPeriodic() {}
 void Robot::TeleopInit() 
 {
   std::cout<<"Teleop Init"<<std::endl;
+  #ifndef DRIVETRAIN_ONLY
+
   m_container.m_camera.LimeLightEnable(true);
   m_container.m_claw.WristSetPower(-.2);
-
+  #endif
 
   if (m_autonomousCommand) {
     m_autonomousCommand->Cancel();
@@ -137,10 +127,10 @@ void Robot::WriteToSmartDashboard(void)
 {
 
   //XBox Controllers
-  frc::SmartDashboard::PutNumber("Xbox Left-Y",   (double)m_container.m_botDriver.GetLeftY()    ); 
-  frc::SmartDashboard::PutNumber("Xbox Left-X",   (double)m_container.m_botDriver.GetLeftX()    ); 
-  frc::SmartDashboard::PutNumber("Xbox Right-X",  (double)m_container.m_botDriver.GetRightX()   ); 
-  frc::SmartDashboard::PutBoolean("DriveType",    (bool)m_container.m_drivetrain.GetDriveType() ); 
+  frc::SmartDashboard::PutNumber("Xbox Left-Y",   m_container.m_botDriver.GetLeftY()    ); 
+  frc::SmartDashboard::PutNumber("Xbox Left-X",   m_container.m_botDriver.GetLeftX()    ); 
+  frc::SmartDashboard::PutNumber("Xbox Right-X",  m_container.m_botDriver.GetRightX()   ); 
+  frc::SmartDashboard::PutBoolean("DriveType",    m_container.m_drivetrain.GetDriveType() ); 
   //Nax-X
   frc::SmartDashboard::PutBoolean("navx_IsConn",  m_container.m_drivetrain.IsGyroConnected() );
   frc::SmartDashboard::PutNumber("navx_Yaw",      m_container.m_drivetrain.GetGyroYaw()      );
@@ -151,6 +141,8 @@ void Robot::WriteToSmartDashboard(void)
   frc::SmartDashboard::PutNumber("odo_X",         m_container.m_drivetrain.GetOdometryX()    );
   frc::SmartDashboard::PutNumber("odo_Y",         m_container.m_drivetrain.GetOdometryY()    );
   frc::SmartDashboard::PutNumber( "Average Drive Falcon Tempature", m_container.m_drivetrain.FalconTempGetAverage());
+  #ifndef DRIVETRAIN_ONLY
+  
   //Camera
   frc::SmartDashboard::PutNumber("Camera Target Distance",m_container.m_camera.TargetGetDistance());
   frc::SmartDashboard::PutNumber("Camera Angle to Target",m_container.m_camera.TargetGetYaw());
@@ -160,15 +152,20 @@ void Robot::WriteToSmartDashboard(void)
   frc::SmartDashboard::PutNumber("LimeLight VAngle", m_container.m_camera.GetLimelightVAngle());
   frc::SmartDashboard::PutNumber("LimeLight HAngle", m_container.m_camera.GetLimelightHAngle());
   frc::SmartDashboard::PutBoolean("LimeLight Target Valid", m_container.m_camera.GetLimelightTargetValid());
-  
-
-#ifndef DRIVETRAIN_ONLY
-  frc::SmartDashboard::PutBoolean("Turret Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());
-  frc::SmartDashboard::PutBoolean("Turret Left Limit Switch", m_container.m_arm.TurretGetLeftLimitSW());
-  frc::SmartDashboard::PutNumber("Turret Encoder", m_container.m_arm.TurretGetEncoder());
-  frc::SmartDashboard::PutNumber("Turret Angle", m_container.m_arm.TurretGetAngle());
   frc::SmartDashboard::PutNumber("Arm Position", m_container.m_arm.ElevationArmGetPosition());
-#endif
+
+    #ifdef TURRET
+
+    frc::SmartDashboard::PutBoolean("Turret Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());
+    frc::SmartDashboard::PutBoolean("Turret Left Limit Switch", m_container.m_arm.TurretGetLeftLimitSW());
+    frc::SmartDashboard::PutNumber("Turret Encoder", m_container.m_arm.TurretGetEncoder());
+    frc::SmartDashboard::PutNumber("Turret Angle", m_container.m_arm.TurretGetAngle());
+    #endif
+    
+  #endif
+
+
+
 }
 
 

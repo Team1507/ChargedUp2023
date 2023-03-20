@@ -95,8 +95,9 @@ void CmdToperatorDefault::Execute()
     bool  CloseOuterIntake = m_topDriver->GetStartButton();
 
     float WristManual      = m_topDriver->GetRightY();
+    #ifdef TURRET
     float TurretManual     = m_topDriver->GetRightX();
-
+    #endif
     int   DpadState        = m_topDriver->GetPOV();
 
     ArmLevel armLevel = m_arm->ElevationArmGetPosition();
@@ -386,7 +387,7 @@ else if(!OuterIntakeRun && m_isOuterIntaking)
   
 //***************************TURRET MANUAL*******************
 
-
+#ifdef TURRET
   if(TurretManual > .9)
   {
     m_arm->TurretSetPower(-.1); // High speed to make up for the large gear ratio on the Neo
@@ -402,6 +403,7 @@ else if(!OuterIntakeRun && m_isOuterIntaking)
     m_arm->TurretSetPower(0);
     m_isTurret = false;
   }
+#endif
 }
 
 // Called once the command ends or is interrupted.

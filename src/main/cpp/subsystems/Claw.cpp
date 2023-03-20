@@ -1,9 +1,6 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 #include "subsystems/Claw.h"
 
+#define WRIST_RESET_POSITION 2.0
 
 Claw::Claw(frc::PowerDistribution *pdh) 
 {
@@ -11,12 +8,12 @@ Claw::Claw(frc::PowerDistribution *pdh)
     m_clawManualOverride = false;
     
     m_wrist.RestoreFactoryDefaults();
-    m_wrist.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
+    m_wrist.SetClosedLoopRampRate(0.0);
     m_wristEncoder.SetPosition(0);
-    m_wristPID.SetP(0.02); //!!! CHANGE LATER !!!
-    m_wristPID.SetI(0.0); //!!! CHANGE LATER !!!
-    m_wristPID.SetD(0.0); //!!! CHANGE LATER !!!
-    m_wristPID.SetSmartMotionAllowedClosedLoopError(0.0); //!!! CHANGE LATER !!!
+    m_wristPID.SetP(0.02);
+    m_wristPID.SetI(0.0);
+    m_wristPID.SetD(0.0);
+    m_wristPID.SetSmartMotionAllowedClosedLoopError(0.0);
     m_wristPID.SetOutputRange(-0.3,0.3,0);
 
     m_wrist.SetInverted(true);
@@ -24,13 +21,13 @@ Claw::Claw(frc::PowerDistribution *pdh)
     m_pdh = pdh;
 
     m_claw.RestoreFactoryDefaults();
-    m_claw.SetClosedLoopRampRate(0.0); //!!! CHANGE LATER !!!
+    m_claw.SetClosedLoopRampRate(0.0);
     m_claw.SetInverted(false);
 
 
 
 }
-// This method will be called once per scheduler run
+
 void Claw::Periodic() 
 {
     frc::SmartDashboard::PutNumber("Wrist Position", m_wristEncoder.GetPosition());
@@ -39,9 +36,8 @@ void Claw::Periodic()
     if(WristLimitTop())
     {
         WristSetPosition(0.0);
-        WristHoldPosition(2.0);
+        WristHoldPosition(WRIST_RESET_POSITION);
     }
-    //frc::SmartDashboard::PutBoolean("Wrist Rev Limit Switch", m_wristREVLimit.Get());
 }
   
 //************************************CLAW******************************************

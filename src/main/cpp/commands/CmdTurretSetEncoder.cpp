@@ -1,4 +1,3 @@
-
 #include "commands/CmdTurretSetEncoder.h"
 #include "subsystems/Arm.h"
 
@@ -11,5 +10,7 @@ CmdTurretSetEncoder::CmdTurretSetEncoder(Arm *arm, float encoder)
 
 void CmdTurretSetEncoder::Initialize() 
 {
- m_arm->TurretSetEncoder(m_encoder);
+  #ifdef TURRET
+    m_arm->TurretSetEncoder(m_encoder);
+  #endif
 }

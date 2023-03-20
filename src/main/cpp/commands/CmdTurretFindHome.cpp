@@ -8,7 +8,9 @@ CmdTurretFindHome::CmdTurretFindHome(Arm *arm)
 
 void CmdTurretFindHome::Initialize() 
 {
-  m_arm->TurretSetPower(.05);
+  #ifdef TURRET
+    m_arm->TurretSetPower(.05);
+  #endif
 }
 
 
@@ -20,15 +22,22 @@ void CmdTurretFindHome::Execute()
 
 void CmdTurretFindHome::End(bool interrupted) 
 {
+  #ifdef TURRET
   m_arm->TurretTurn2Angle(0);
+  #endif
 }
 
 
 bool CmdTurretFindHome::IsFinished() 
 {
+  #ifdef TURRET
   if(m_arm->TurretGetLeftLimitSW())
   {
     return true;
   }
   else return false;
+  #endif
+  #ifndef TURRET
+    return true;
+  #endif
 }

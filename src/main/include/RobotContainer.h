@@ -4,15 +4,14 @@
 
 #pragma once
 
+#define GAMEPADMAP_BUTTON_START 8
+#define GAMEPADMAP_BUTTON_A     1
+#define GAMEPADMAP_BUTTON_Y     4
+
+#define DRIVETRAIN_ONLY
+ #define TURRET
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
-#include "subsystems/DriverFeedback.h"
-#include "subsystems/Arm.h"
-#include "subsystems/Claw.h"
-#include "subsystems/Pouch.h"
-#include "subsystems/Toperator.h"
-#include "subsystems/Drivetrain.h"
-#include "subsystems/Camera.h"
 #include "Constants.h"
 #include <frc/XboxController.h>
 #include <frc/smartdashboard/SmartDashboard.h>
@@ -20,10 +19,16 @@
 #include <frc/PowerDistribution.h>
 #include <frc2/command/button/JoystickButton.h>
 #include <frc/DriverStation.h>
+#include "subsystems/Drivetrain.h"
 
-#define GAMEPADMAP_BUTTON_START 8
-#define GAMEPADMAP_BUTTON_A     1
-#define GAMEPADMAP_BUTTON_Y     4
+#ifndef DRIVETRAIN_ONLY
+
+#include "subsystems/DriverFeedback.h"
+#include "subsystems/Arm.h"
+#include "subsystems/Claw.h"
+#include "subsystems/Pouch.h"
+#include "subsystems/Toperator.h"
+#include "subsystems/Camera.h"
 
 //Autos
 #include "commands/AutoDoNothing.h"
@@ -33,17 +38,10 @@
 #include "commands/AutoTwoPieceRed.h"
 #include "commands/AutoPowerStripRed.h"
 
+#endif
 
-//Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
-//  #define DRIVETRAIN_ONLY
 
-/**
- * This class is where the bulk of the robot should be declared.  Since
- * Command-based is a "declarative" paradigm, very little robot logic should
- * actually be handled in the {@link Robot} periodic methods (other than the
- * scheduler calls).  Instead, the structure of the robot (including subsystems,
- * commands, and trigger mappings) should be declared here.
- */
+
 class RobotContainer 
 {
  public:
@@ -55,20 +53,17 @@ class RobotContainer
   frc::XboxController m_topDriver{1};
   frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev};
 
-#ifndef DRIVETRAIN_ONLY
-#endif
-
   //****************Subsystems*******************
   Drivetrain     m_drivetrain;
+
+  #ifndef DRIVETRAIN_ONLY
   DriverFeedback m_driverfeedback {&m_topDriver};
   Claw           m_claw{&m_pdh};
   Pouch          m_pouch{&m_pdh};
   Arm            m_arm{&m_pouch};
   Toperator      m_toperator;
   Camera         m_camera {&m_driverfeedback};
-
-#ifndef DRIVETRAIN_ONLY
-#endif
+  #endif
 
   frc2::Command* GetAutonomousCommand();
 
