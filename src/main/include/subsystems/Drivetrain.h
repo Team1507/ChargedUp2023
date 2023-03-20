@@ -5,7 +5,6 @@
 #pragma once
 
 #include <frc2/command/SubsystemBase.h>
-// #include <frc/
 
 #include "subsystems/SwerveModule.h"
 #include "AHRS.h"
@@ -59,14 +58,9 @@ class Drivetrain : public frc2::SubsystemBase {
   float  GetOdometryY(void);           //inches
   float  GetOdometryHeading(void);     //degrees
 
-
-
-
-
   //Absolute Encoder calibration
   void   CalibrateSteerEncoderAbsoutePositionStart(void);
   void   CalibrateSteerEncoderAbsoutePositionOffset(void);
-
 
  private:
 
@@ -82,7 +76,6 @@ class Drivetrain : public frc2::SubsystemBase {
   void  OdometryPeriodic(void);
   float m_curr_x;   //inches
   float m_curr_y;   //inches
-
 
   //Swerve Modules
   //    FL^FR

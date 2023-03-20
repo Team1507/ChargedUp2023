@@ -68,10 +68,4 @@ class Claw : public frc2::SubsystemBase {
   float m_clawOuttakePower;
 
   bool m_clawManualOverride;
-
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
-
-  // Socks
-
 };

@@ -27,9 +27,6 @@ class DriverFeedback : public frc2::SubsystemBase {
  public:
   DriverFeedback(frc::XboxController *topDriver);
 
- /**
-   * Will be called periodically whenever the CommandScheduler runs.
-   */
   void Periodic() override;
   void Rumble(float power);
   void UnderGlow(int r, int g, int b);
@@ -41,7 +38,4 @@ class DriverFeedback : public frc2::SubsystemBase {
   frc::XboxController *m_topDriver;
   // CANifier m_underGlow{CAN_LED_UNDERGLOW};
   CANifier m_driverLED{CAN_LED_DRIVER};
-
-  // Components (e.g. motor controllers and sensors) should generally be
-  // declared private and exposed only through public methods.
 };

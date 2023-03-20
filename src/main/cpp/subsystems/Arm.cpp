@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 #include "subsystems/Arm.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <iostream>
@@ -14,6 +10,7 @@
 Arm::Arm(Pouch *pouch) 
 {
     m_pouch = pouch;
+    #ifdef TURRET
     m_limitPressed = false;
     m_turret.RestoreFactoryDefaults(); 
     m_turretEncoder.SetPosition(0.0); 
@@ -25,12 +22,14 @@ Arm::Arm(Pouch *pouch)
     m_turretPID.SetOutputRange(-0.7,0.7,0);
     //Turret 0 to not assume that it start at 0
     m_turretPID.SetReference(0, rev::CANSparkMax::ControlType::kPosition);
-
+    #endif
 }
 
 void Arm::Periodic() 
-{
+{    
     frc::SmartDashboard::PutBoolean("Elevation Home Limit Switch", ElevationHomeLimitSwitch());
+
+    #ifdef TURRET
     frc::SmartDashboard::PutNumber("Turret Wanted Position",m_wanted_position);
     if(TurretGetLeftLimitSW() && !m_limitPressed)
     {
@@ -41,11 +40,11 @@ void Arm::Periodic()
     {
         m_limitPressed = false;
     }
-    
+    #endif
 }
 
 //**********************************Turret******************************
-
+#ifdef TURRET
 void Arm::TurretTurn2Angle(float angle) 
 {
     return;
@@ -101,7 +100,7 @@ bool Arm::TurretGetRightLimitSW(void)
 {
     return m_turretREVLimit.Get();
 }
-
+#endif
 //***********************************ARM*********************************
 
 void Arm::ElevationArmSetPosition(ArmLevel position) 
@@ -153,13 +152,7 @@ void Arm::ExtensionSetPosition(bool position)
 
 void Arm::AirSpringSetPosition(bool position)
 {
-
     m_airSpring.Set(frc::DoubleSolenoid::kForward);
-
-    // if(position == false)
-    // {
-    //     m_airSpring.Set(frc::DoubleSolenoid::kReverse);
-    // }
 }
  
 
