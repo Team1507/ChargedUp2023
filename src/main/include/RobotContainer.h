@@ -8,8 +8,8 @@
 #define GAMEPADMAP_BUTTON_A     1
 #define GAMEPADMAP_BUTTON_Y     4
 
-#define DRIVETRAIN_ONLY
- #define TURRET
+// #define DRIVETRAIN_ONLY
+// #define TURRET
 #include <frc2/command/CommandPtr.h>
 #include <frc2/command/button/CommandXboxController.h>
 #include "Constants.h"

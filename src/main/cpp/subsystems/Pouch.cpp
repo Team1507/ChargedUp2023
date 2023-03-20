@@ -6,7 +6,7 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 Pouch::Pouch(frc::PowerDistribution *pdh) 
 {
-  m_isIntaking = false;
+  #ifdef INNER_INTAKE
   m_inner.RestoreFactoryDefaults(); 
   m_inner.SetInverted(true);
   m_innerEncoder.SetPosition(0.0); 
@@ -15,6 +15,9 @@ Pouch::Pouch(frc::PowerDistribution *pdh)
   m_innerPIDController.SetD(0.0); // change later
   m_innerPIDController.SetSmartMotionAllowedClosedLoopError(0.3); // change later
   m_inner.SetOpenLoopRampRate(0.5); // change later
+  #endif
+
+  m_isIntaking = false;  
   m_pdh = pdh;
   // m_outerLeft.RestoreFactoryDefaults();
   m_outerLeft.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
@@ -22,19 +25,7 @@ Pouch::Pouch(frc::PowerDistribution *pdh)
   m_outerRight.SetIdleMode(rev::CANSparkMax::IdleMode::kCoast);
 
 }
-// Crocs
-void Pouch::IntakeSetPower(float power,WhatIntake type)
-{
-  if(WhatIntake::Inner == type)
-  {
-    m_inner.Set(power);  
-  } 
-  else if (WhatIntake::Outer == type)
-  {
-    m_outerLeft.Set(power);
-    m_outerRight.Set(-power);
-  }
-}
+#ifdef INNER_INTAKE
 void Pouch::InnerIntakeSetPosition(float position)
 {
   m_innerEncoder.SetPosition(position);  
@@ -59,6 +50,21 @@ void Pouch::InnerIntakeTurnToPosition(float position)
 int  Pouch::InnerIntakeGetEncoder(void)
 {
   return m_innerEncoder.GetPosition();
+}
+#endif
+void Pouch::IntakeSetPower(float power,WhatIntake type)
+{
+  if(WhatIntake::Inner == type)
+  {
+    #ifdef INNER_INTAKE
+    m_inner.Set(power);
+    #endif  
+  } 
+  else if (WhatIntake::Outer == type)
+  {
+    m_outerLeft.Set(power);
+    m_outerRight.Set(-power);
+  }
 }
 double Pouch::IntakeGetCurrent(void)
 {
@@ -119,5 +125,7 @@ void Pouch::OuterIntakeOpen()
 void Pouch::Periodic() 
 {
   frc::SmartDashboard::PutBoolean("Pouch Gamepiece Detect", ReadSensorState());
+  #ifdef INNER_INTAKE
   frc::SmartDashboard::PutNumber("Inner Intake Encoder",InnerIntakeGetEncoder());
+  #endif
 }

@@ -30,7 +30,9 @@ void CmdPouchDefault::Execute()
   if (IntakeEnabled && !m_isIntaking) 
   {
     m_isIntaking = true;
+    #ifdef INNER_INTAKE
     m_pouch->IntakeSetPower(INNER_INTAKE_POWER, Pouch::WhatIntake::Inner);
+    #endif
   }
   else if(!IntakeEnabled && m_isIntaking)
   {

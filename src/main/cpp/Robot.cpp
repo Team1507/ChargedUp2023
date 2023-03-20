@@ -29,8 +29,10 @@ void Robot::RobotInit()
   m_container.m_claw.ClawSetIntakePower(0.4);
   m_container.m_claw.ClawSetOuttakePower(-.8);
   m_container.m_pouch.SetRampPosition(false);
-  m_container.m_pouch.InnerIntakeSetPosition(0.0);
   m_container.m_arm.AirSpringSetPosition(true);
+  #ifdef INNER_INTAKE
+  m_container.m_pouch.InnerIntakeSetPosition(0.0);
+  #endif
   // m_container.m_arm.ElevationArmSetPosition(ArmLevel::Level_Pouch);
   #endif
   CheckAlliance();

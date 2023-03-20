@@ -3,7 +3,9 @@
 CmdPouchInnerIntakeRotate::CmdPouchInnerIntakeRotate(Pouch *pouch) 
 {
   m_pouch = pouch;
+  #ifdef INNER_INTAKE
   m_startingPosition = m_pouch->InnerIntakeGetEncoder();
+  #endif
 }
 
 // Called when the command is initially scheduled.
