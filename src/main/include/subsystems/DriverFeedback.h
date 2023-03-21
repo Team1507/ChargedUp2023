@@ -21,13 +21,16 @@
 
 class DriverFeedback : public frc2::SubsystemBase {
  public:
-  DriverFeedback(frc::XboxController *topDriver);
+  DriverFeedback(frc::XboxController *botDriver,frc::XboxController *topDriver);
 
   void Periodic() override;
-  void Rumble(float power);
+  void RumbleBot(float power);
+  void RumbleTop(float power);
+
   void DriverFeedbackLED(int r, int g, int b);
 
   private:
+  frc::XboxController *m_botDriver;
   frc::XboxController *m_topDriver;
   CANifier m_driverLED{CAN_LED_DRIVER};
 };

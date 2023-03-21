@@ -1,15 +1,21 @@
 #include "subsystems/DriverFeedback.h"
 
-DriverFeedback::DriverFeedback(frc::XboxController *topDriver) 
+DriverFeedback::DriverFeedback(frc::XboxController *botDriver,frc::XboxController *topDriver) 
 {
-    m_topDriver = topDriver;
+   m_topDriver = topDriver;    
+   m_topDriver = topDriver;
+
    m_driverLED.ConfigFactoryDefault();
 
 }
 
 void DriverFeedback::Periodic() {}
 
-void DriverFeedback::Rumble(float power) 
+void DriverFeedback::RumbleBot(float power) 
+{
+    m_botDriver->SetRumble(frc::GenericHID::RumbleType::kBothRumble,power);
+}
+void DriverFeedback::RumbleTop(float power) 
 {
     m_topDriver->SetRumble(frc::GenericHID::RumbleType::kBothRumble,power);
 }

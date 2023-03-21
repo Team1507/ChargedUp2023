@@ -58,7 +58,7 @@ class RobotContainer
   Drivetrain     m_drivetrain;
 
   #ifndef DRIVETRAIN_ONLY
-  DriverFeedback m_driverfeedback {&m_topDriver};
+  DriverFeedback m_driverfeedback {&m_botDriver,&m_topDriver};
   Claw           m_claw{&m_pdh};
   Pouch          m_pouch{&m_pdh};
   Arm            m_arm{&m_pouch};

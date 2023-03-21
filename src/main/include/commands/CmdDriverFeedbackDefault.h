@@ -32,6 +32,8 @@ class CmdDriverFeedbackDefault
  
   bool IsFinished() override;
   private:
+  bool m_isRumble;
+  int  m_delay;
   DriverFeedback *m_driverfeedback;
   frc::XboxController *m_xboxcontroller;
   Claw *m_claw;
