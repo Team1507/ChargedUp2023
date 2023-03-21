@@ -1,5 +1,6 @@
 #include "subsystems/Camera.h"
 #include <photonlib/PhotonUtils.h>
+#include <frc/smartdashboard/SmartDashboard.h>
 #include <units/angle.h>
 #include <units/length.h>
 #include <iostream>
@@ -11,6 +12,9 @@ Camera::Camera(DriverFeedback *driverfeedback)
 {
     m_driverfeedback = driverfeedback;
     m_cameradetect = false;
+
+    frc::SmartDashboard::PutNumber("limelight ERROR_TOLORANCE",1.0);
+    frc::SmartDashboard::PutNumber("limelight ANGLE_OFFSET",   0.0);
 }
 void Camera::Periodic() 
 {
@@ -77,12 +81,12 @@ int Camera::PipelineGetIndex(void)
 
 double Camera::GetLimelightHAngle(void)
 {
-    return nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->GetNumber("tx", 0);
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight-a")->GetNumber("tx", 0);
 }
 double Camera::GetLimelightVAngle(void)
 {
 
-    return nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->GetNumber("ty", 0);    
+    return nt::NetworkTableInstance::GetDefault().GetTable("limelight-a")->GetNumber("ty", 0);    
 }
 double Camera::GetLimelightDistance(void)
 {
@@ -90,23 +94,23 @@ double Camera::GetLimelightDistance(void)
     const double h1 = 35.5;//height of limelight from ground
     const double h2 = 103.50;//height of target
 
-    double a2 = nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->GetNumber("ty", 0);
+    double a2 = nt::NetworkTableInstance::GetDefault().GetTable("limelight-a")->GetNumber("ty", 0);
     
     return (h2-h1)/tan((a1+a2)*(PI/180));
 }
 bool Camera::GetLimelightTargetValid(void)
 {
-    return (bool)nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->GetNumber("tv", 0);
+    return (bool)nt::NetworkTableInstance::GetDefault().GetTable("limelight-a")->GetNumber("tv", 0);
 }
 void Camera::LimeLightEnable(bool state)
 {
     if(state)
     {
-        nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->PutNumber("ledMode",3);
+        nt::NetworkTableInstance::GetDefault().GetTable("limelight-a")->PutNumber("ledMode",3);
     }
     else if(!state)
     {
-        nt::NetworkTableInstance::GetDefault().GetTable("limelight-")->PutNumber("ledMode",1);
+        nt::NetworkTableInstance::GetDefault().GetTable("limelight-a")->PutNumber("ledMode",1);
     }
 }
 

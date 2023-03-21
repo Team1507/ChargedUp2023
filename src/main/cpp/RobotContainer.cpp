@@ -24,7 +24,7 @@
 
 #include "commands/CmdDriveTurnTo90.h"
 #include "commands/CmdGyroSetAngleOffset.h"
-#include "commands/CmdDriveToAprilTag.h"
+#include "commands/CmdDriveToLimeLight.h"
 #include "commands/CmdAutoBalance.h"
 
 
@@ -59,23 +59,23 @@ RobotContainer::RobotContainer()
 
   //********************************Smart Dashboard Buttons**************************************
 #ifndef DRIVETRAIN_ONLY
-  frc::SmartDashboard::PutData( "GrpTest1", new GrpTest1(&m_drivetrain,&m_arm,&m_claw,&m_pouch));
-  frc::SmartDashboard::PutData( "GrpTest2", new GrpTest2(&m_drivetrain,&m_arm,&m_claw,&m_pouch));
+  frc::SmartDashboard::PutData( "GrpTest1",              new GrpTest1(&m_drivetrain,&m_arm,&m_claw,&m_pouch));
+  frc::SmartDashboard::PutData( "GrpTest2",              new GrpTest2(&m_drivetrain,&m_arm,&m_claw,&m_pouch));
 #endif
 
-  frc::SmartDashboard::PutData( "CmdDriveClearAll",   new CmdDriveClearAll(&m_drivetrain));
-  frc::SmartDashboard::PutData( "CmdDriveTypeToggle", new CmdDriveTypeToggle(&m_drivetrain));
+  frc::SmartDashboard::PutData( "CmdDriveClearAll",      new CmdDriveClearAll(&m_drivetrain));
+  frc::SmartDashboard::PutData( "CmdDriveTypeToggle",    new CmdDriveTypeToggle(&m_drivetrain));
   frc::SmartDashboard::PutData( "CmdGyroSetAngleOffset", new CmdGyroSetAngleOffset(&m_drivetrain,90.0));
-  frc::SmartDashboard::PutData( "CmdAutoBalance", new CmdAutoBalance(&m_drivetrain));
+  frc::SmartDashboard::PutData( "CmdAutoBalance",        new CmdAutoBalance(&m_drivetrain));
 
-  frc::SmartDashboard::PutData( "CmdDriveTurnTo90", new CmdDriveTurnTo90(&m_drivetrain,0.3));
+  frc::SmartDashboard::PutData( "CmdDriveTurnTo90",      new CmdDriveTurnTo90(&m_drivetrain,0.3));
 
 
   //Smartdashboard SwerveDrive test/calibration buttons
-  frc::SmartDashboard::PutData( "SteerAngle=0",       new CmdDriveForceSteerAngle(&m_drivetrain,0.0));
-  frc::SmartDashboard::PutData( "SteerAngle=90",      new CmdDriveForceSteerAngle(&m_drivetrain,90.0));
-  frc::SmartDashboard::PutData( "CmdCalSwerveEnc_1",  new CmdCalibrateSwerveEncoders(&m_drivetrain,1));
-  frc::SmartDashboard::PutData( "CmdCalSwerveEnc_2",  new CmdCalibrateSwerveEncoders(&m_drivetrain,2));
+  frc::SmartDashboard::PutData( "SteerAngle=0",          new CmdDriveForceSteerAngle(&m_drivetrain,0.0));
+  frc::SmartDashboard::PutData( "SteerAngle=90",         new CmdDriveForceSteerAngle(&m_drivetrain,90.0));
+  frc::SmartDashboard::PutData( "CmdCalSwerveEnc_1",     new CmdCalibrateSwerveEncoders(&m_drivetrain,1));
+  frc::SmartDashboard::PutData( "CmdCalSwerveEnc_2",     new CmdCalibrateSwerveEncoders(&m_drivetrain,2));
 
   // Configure the button bindings
   ConfigureBindings();
@@ -84,9 +84,9 @@ RobotContainer::RobotContainer()
 void RobotContainer::ConfigureBindings() 
 {
   m_botDriver_START.OnTrue(new CmdResetGyro(&m_drivetrain));
-  m_botDriver_Y.WhileTrue(new CmdDriveTurnTo90(&m_drivetrain, .3));
+  m_botDriver_Y.WhileTrue( new CmdDriveTurnTo90(&m_drivetrain, .3));
   #ifndef DRIVETRAIN_ONLY
-  m_botDriver_A.OnTrue(new CmdDriveToAprilTag(&m_drivetrain, &m_camera,0.06));
+  m_botDriver_A.OnTrue(    new CmdDriveToLimeLight(&m_drivetrain, &m_camera,&m_botDriver,0.06));
   #endif
 }
 
