@@ -55,8 +55,8 @@ void CmdDriveStraightVelocity::Execute()
 
   //Min turn power is 0.0625.
   //  Set Kp to reach min turn power at 2 deg error  (Kp = min/error = 0.0625/2  )
-  float const TURN_MAX_POWER = 0.3;
-  float const TURN_Kp        = 0.02;
+  float const TURN_MAX_POWER = 0.25;
+  float const TURN_Kp        = 0.0175;
 
   float delta_angle = m_yaw - m_drivetrain->GetGyroAngle();
 
