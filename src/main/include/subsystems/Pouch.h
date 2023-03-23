@@ -38,6 +38,9 @@ class Pouch : public frc2::SubsystemBase {
   void IntakeDeploy(void);
   void IntakeRetract(void);
 
+  void IntakeDeployHalf(void);
+  void IntakeRetractHalf(void);
+
   bool IntakeIsDeployed(void);
 
   void SetRampPosition(bool deploy);
@@ -61,6 +64,7 @@ class Pouch : public frc2::SubsystemBase {
   frc::DoubleSolenoid m_OuterIntake {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_OUTER_INTAKE_DEPLOY_ID, PCM_OUTER_INTAKE_RETRACT_ID};
   frc::DoubleSolenoid m_ramp        {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_RAMP_DEPLOY_ID, PCM_RAMP_RETRACT_ID};
   frc::DoubleSolenoid m_outerIntakeClose {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_OUTER_INTAKE_CLOSE_ID, PCM_OUTER_INTAKE_OPEN_ID};
+  frc::DoubleSolenoid m_outerIntakeHalf {CAN_PCM1_ID, frc::PneumaticsModuleType::CTREPCM, PCM_OUTER_INTAKE_HALF_EXTEND_ID, PCM_OUTER_INTAKE_HALF_RETRACT_ID};
 
   frc::DigitalInput m_gamePieceDetect{DIO_POUCH_DETECT_ID};
   frc::PowerDistribution *m_pdh;

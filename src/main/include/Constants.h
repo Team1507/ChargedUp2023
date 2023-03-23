@@ -45,12 +45,14 @@
 
 
 //********** PCM 1 Ports **********
-#define PCM_RAMP_DEPLOY_ID              0
-#define PCM_RAMP_RETRACT_ID             1
-#define PCM_OUTER_INTAKE_DEPLOY_ID      2
-#define PCM_OUTER_INTAKE_RETRACT_ID     3
-#define PCM_OUTER_INTAKE_CLOSE_ID       4
-#define PCM_OUTER_INTAKE_OPEN_ID       5
+#define PCM_RAMP_DEPLOY_ID               0
+#define PCM_RAMP_RETRACT_ID              1
+#define PCM_OUTER_INTAKE_DEPLOY_ID       2
+#define PCM_OUTER_INTAKE_RETRACT_ID      3
+#define PCM_OUTER_INTAKE_CLOSE_ID        4
+#define PCM_OUTER_INTAKE_OPEN_ID         5
+#define PCM_OUTER_INTAKE_HALF_EXTEND_ID  6
+#define PCM_OUTER_INTAKE_HALF_RETRACT_ID 6
 
 //********** PCM 2 Ports **********
 #define PCM_ARM_EXTENSION_EXTEND_ID     0

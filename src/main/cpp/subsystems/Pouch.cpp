@@ -121,6 +121,16 @@ void Pouch::OuterIntakeOpen()
   m_outerIntakeClose.Set(frc::DoubleSolenoid::kReverse);
 }
 
+void Pouch::IntakeDeployHalf(void)
+{
+  m_outerIntakeHalf.Set(frc::DoubleSolenoid::kForward);
+}
+
+void Pouch::IntakeRetractHalf(void)
+{
+  m_outerIntakeHalf.Set(frc::DoubleSolenoid::kReverse);
+}
+
 // This method will be called once per scheduler run
 void Pouch::Periodic() 
 {
