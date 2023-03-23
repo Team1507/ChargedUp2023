@@ -32,5 +32,5 @@ class DriverFeedback : public frc2::SubsystemBase {
   private:
   frc::XboxController *m_botDriver;
   frc::XboxController *m_topDriver;
-  CANifier m_driverLED{CAN_LED_DRIVER};
+  CANifier             m_driverLED{CAN_LED_DRIVER};
 };

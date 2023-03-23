@@ -61,14 +61,15 @@ class RobotContainer
 
 
   //****************Subsystems*******************
-frc::XboxController m_topDriver{1};  
-frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev};
-  DriverFeedback m_driverfeedback {&m_topDriver};
-  Claw           m_claw{&m_pdh};
-  Pouch          m_pouch{&m_pdh};
-  Arm            m_arm{&m_pouch};
-  Toperator      m_toperator;
-  Camera         m_camera {&m_driverfeedback};
+  frc::XboxController    m_topDriver{1};
+
+  frc::PowerDistribution m_pdh            {CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev};
+  DriverFeedback         m_driverfeedback {&m_botDriver,&m_topDriver};
+  Claw                   m_claw           {&m_pdh};
+  Pouch                  m_pouch          {&m_pdh};
+  Arm                    m_arm            {&m_pouch};
+  Camera                 m_camera         {&m_driverfeedback};
+  Toperator              m_toperator;
   #endif
 
   frc2::Command* GetAutonomousCommand();
@@ -83,8 +84,8 @@ frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev
  AutoPowerStripBlue  m_autoPowerStripBlue{&m_drivetrain, &m_arm, &m_camera, &m_claw ,&m_pouch};
  AutoTwoPieceRed     m_autoTwoPieceRed   {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  AutoPowerStripRed   m_autoPowerStripRed {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
+ AutoTest            m_autoTest          {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
 #endif
-AutoTest            m_autoTest{&m_drivetrain, &m_pouch, &m_arm, &m_claw};
 
 
 

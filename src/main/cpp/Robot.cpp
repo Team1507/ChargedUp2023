@@ -77,7 +77,8 @@ void Robot::DisabledInit()
   #ifndef DRIVETRAIN_ONLY
   m_container.m_camera.LimeLightEnable(false);
   m_container.m_claw.WristSetPower(-.2);
-  m_container.m_driverfeedback.Rumble(0.0);
+  m_container.m_driverfeedback.RumbleBot(0.0);
+  m_container.m_driverfeedback.RumbleTop(0.0);
   #endif
   std::cout<<"Disabled Init"<<std::endl;
   // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);
@@ -148,22 +149,22 @@ void Robot::WriteToSmartDashboard(void)
   #ifndef DRIVETRAIN_ONLY
   
   //Camera
-  frc::SmartDashboard::PutNumber("Camera Target Distance",m_container.m_camera.TargetGetDistance());
-  frc::SmartDashboard::PutNumber("Camera Angle to Target",m_container.m_camera.TargetGetYaw());
+  frc::SmartDashboard::PutNumber("Camera Target Distance",  m_container.m_camera.TargetGetDistance());
+  frc::SmartDashboard::PutNumber("Camera Angle to Target",  m_container.m_camera.TargetGetYaw());
 
   //LimeLight
-  frc::SmartDashboard::PutNumber("LimeLight Distance", m_container.m_camera.GetLimelightDistance());
-  frc::SmartDashboard::PutNumber("LimeLight VAngle", m_container.m_camera.GetLimelightVAngle());
-  frc::SmartDashboard::PutNumber("LimeLight HAngle", m_container.m_camera.GetLimelightHAngle());
+  frc::SmartDashboard::PutNumber("LimeLight Distance",      m_container.m_camera.GetLimelightDistance());
+  frc::SmartDashboard::PutNumber("LimeLight VAngle",        m_container.m_camera.GetLimelightVAngle());
+  frc::SmartDashboard::PutNumber("LimeLight HAngle",        m_container.m_camera.GetLimelightHAngle());
   frc::SmartDashboard::PutBoolean("LimeLight Target Valid", m_container.m_camera.GetLimelightTargetValid());
-  frc::SmartDashboard::PutNumber("Arm Position", m_container.m_arm.ElevationArmGetPosition());
+  frc::SmartDashboard::PutNumber("Arm Position",            m_container.m_arm.ElevationArmGetPosition());
 
     #ifdef TURRET
 
     frc::SmartDashboard::PutBoolean("Turret Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());
-    frc::SmartDashboard::PutBoolean("Turret Left Limit Switch", m_container.m_arm.TurretGetLeftLimitSW());
-    frc::SmartDashboard::PutNumber("Turret Encoder", m_container.m_arm.TurretGetEncoder());
-    frc::SmartDashboard::PutNumber("Turret Angle", m_container.m_arm.TurretGetAngle());
+    frc::SmartDashboard::PutBoolean("Turret Left Limit Switch",  m_container.m_arm.TurretGetLeftLimitSW());
+    frc::SmartDashboard::PutNumber("Turret Encoder",             m_container.m_arm.TurretGetEncoder());
+    frc::SmartDashboard::PutNumber("Turret Angle",               m_container.m_arm.TurretGetAngle());
     #endif
     
   #endif
