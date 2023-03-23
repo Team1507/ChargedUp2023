@@ -55,7 +55,7 @@ RobotContainer::RobotContainer()
   m_chooser.AddOption("AutoPowerStripRed"     , &m_autoPowerStripRed );
 
 #endif
-m_chooser.AddOption("AutoTest", &m_autoTest);
+  m_chooser.AddOption("AutoTwoHighBlue", &m_autoTwoHighBlue);
   //m_chooser.AddOption("Auto Shoot Two Ball", &m_autoTwoBall);
 
   frc::SmartDashboard::PutData("Auto",&m_chooser);

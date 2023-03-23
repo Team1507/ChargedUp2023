@@ -7,9 +7,9 @@
 #include "subsystems/Arm.h"
 #include "subsystems/Pouch.h"
 #include "subsystems/Claw.h"
-class AutoTest
+class AutoTwoHighBlue
     : public frc2::CommandHelper<frc2::SequentialCommandGroup,
-                                 AutoTest> {
+                                 AutoTwoHighBlue> {
  public:
-  AutoTest(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw);
+  AutoTwoHighBlue(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw);
 };

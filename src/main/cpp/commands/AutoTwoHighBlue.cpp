@@ -1,4 +1,4 @@
-#include "commands/AutoTest.h"
+#include "commands/AutoTwoHighBlue.h"
 #include "frc2/command/WaitCommand.h"
 #include "commands/CmdPrintText.h"
 
@@ -23,7 +23,7 @@
 #include "commands/GrpReturnToPouch.h"
 
 
-AutoTest::AutoTest(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw) 
+AutoTwoHighBlue::AutoTwoHighBlue(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw) 
 {
     AddCommands
     (
