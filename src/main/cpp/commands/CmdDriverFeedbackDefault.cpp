@@ -25,27 +25,27 @@ void CmdDriverFeedbackDefault::Execute()
   //Tyler made me do this == 
   if(m_claw->ReadSensorState() == true  && m_isPieceCollected == false)
   {
-    m_driverfeedback->RumbleTop(1.0);
-    m_delay=200;
+    // m_driverfeedback->RumbleTop(1.0);
+    // m_delay=200;
     m_driverfeedback->DriverFeedbackLED(COLOR_GREEN);
     m_isPieceCollected = true;
-    m_isRumble = true;
+    // m_isRumble = true;
   }
-  else if(m_delay<=0 && m_isRumble)
-  {
-    m_driverfeedback->RumbleBot(0.0);
-    m_isRumble = false;
-  }
-  else
-  {
-    m_delay--;
-  }
+  // else if(m_delay<=0 && m_isRumble)
+  // {
+  //   m_driverfeedback->RumbleBot(0.0);
+  //   m_isRumble = false;
+  // }
+  // else
+  // {
+  //   m_delay--;
+  // }
 
   if(m_claw->ReadSensorState() == false  && m_isPieceCollected == true)
   {
-    m_driverfeedback->RumbleTop(0.0);
-    m_driverfeedback->RumbleBot(0.0);
-    m_isRumble=false;
+    // m_driverfeedback->RumbleTop(0.0);
+    // m_driverfeedback->RumbleBot(0.0);
+    // m_isRumble=false;
 
     m_driverfeedback->DriverFeedbackLED(COLOR_CLEAR);
     m_isPieceCollected = false;

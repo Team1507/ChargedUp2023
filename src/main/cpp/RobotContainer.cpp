@@ -86,7 +86,7 @@ void RobotContainer::ConfigureBindings()
   m_botDriver_START.OnTrue(new CmdResetGyro(&m_drivetrain));
   m_botDriver_Y.WhileTrue( new CmdDriveTurnTo90(&m_drivetrain, .3));
   #ifndef DRIVETRAIN_ONLY
-  m_botDriver_A.OnTrue(    new CmdDriveToLimeLight(&m_drivetrain, &m_camera,&m_botDriver,0.06));
+  m_botDriver_A.WhileTrue( new CmdDriveToLimeLight(&m_drivetrain,&m_driverfeedback, &m_camera,0.04));
   #endif
 }
 

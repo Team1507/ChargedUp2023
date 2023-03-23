@@ -2,7 +2,7 @@
 
 DriverFeedback::DriverFeedback(frc::XboxController *botDriver,frc::XboxController *topDriver) 
 {
-   m_topDriver = topDriver;    
+   m_botDriver = botDriver;    
    m_topDriver = topDriver;
 
    m_driverLED.ConfigFactoryDefault();

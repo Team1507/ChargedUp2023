@@ -9,11 +9,12 @@
 #include <frc/XboxController.h>
 #include "subsystems/Camera.h"
 #include "subsystems/Drivetrain.h"
+#include "subsystems/DriverFeedback.h"
 
 class CmdDriveToLimeLight
     : public frc2::CommandHelper<frc2::CommandBase, CmdDriveToLimeLight> {
  public:
-  CmdDriveToLimeLight(Drivetrain *drivetrain, Camera *Camera,frc::XboxController *driver, float power);
+  CmdDriveToLimeLight(Drivetrain *drivetrain,DriverFeedback *driverFeedback, Camera *Camera, float power);
 
   void Initialize() override;
 
@@ -25,8 +26,9 @@ class CmdDriveToLimeLight
   private:
   float m_power;
   int m_count;
+  int m_totalMiss;
 
   Drivetrain *m_drivetrain;
   Camera *m_camera;
-  frc::XboxController *m_driver;
+  DriverFeedback *m_driverFeedback;
 };

@@ -62,6 +62,7 @@ void CmdClawDefault::Execute()
     if(m_delay <= 0)
     {
       m_claw->ClawSetPower(0.04);
+      m_claw->WristHoldPosition(2);
       m_isIntaking = false;
       //std::cout<<"Claw C"<<std::endl;
     }

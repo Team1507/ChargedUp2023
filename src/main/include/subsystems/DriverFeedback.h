@@ -14,7 +14,7 @@
 
 #define COLOR_YELLOW 255, 255, 0
 #define COLOR_PURPLE 128, 0, 128
-#define COLOR_ORANGE 255, 160, 0
+#define COLOR_ORANGE 255, 160, 0 //NO Used looks like yellow
 
 #define COLOR_CLEAR 0, 0, 0
 //**********************************

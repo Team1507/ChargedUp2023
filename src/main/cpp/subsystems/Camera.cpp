@@ -13,8 +13,8 @@ Camera::Camera(DriverFeedback *driverfeedback)
     m_driverfeedback = driverfeedback;
     m_cameradetect = false;
 
-    frc::SmartDashboard::PutNumber("limelight ERROR_TOLORANCE",1.0);
-    frc::SmartDashboard::PutNumber("limelight ANGLE_OFFSET",   0.0);
+    frc::SmartDashboard::PutNumber("limelight ERROR_TOLORANCE",0.5);
+    frc::SmartDashboard::PutNumber("limelight ANGLE_OFFSET",   4.2);
 }
 void Camera::Periodic() 
 {

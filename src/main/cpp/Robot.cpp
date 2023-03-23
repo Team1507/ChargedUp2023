@@ -35,7 +35,6 @@ void Robot::RobotInit()
   #endif
   // m_container.m_arm.ElevationArmSetPosition(ArmLevel::Level_Pouch);
   #endif
-  CheckAlliance();
 
 }
 
@@ -77,7 +76,7 @@ void Robot::DisabledInit()
   std::cout<<"Disabled Init"<<std::endl;
   #ifndef DRIVETRAIN_ONLY
   m_container.m_claw.WristSetPower(-.2);
-  m_container.m_camera.LimeLightEnable(false);
+  m_container.m_camera.LimeLightEnable(true);
   #endif
 }
  
@@ -93,7 +92,7 @@ void Robot::AutonomousInit()
   m_container.m_claw.ClawSetPower(.04);
   m_container.m_claw.WristSetPower(-.2);
   #endif
-
+  CheckAlliance();
   m_autonomousCommand = m_container.GetAutonomousCommand();
 
   if (m_autonomousCommand) {
