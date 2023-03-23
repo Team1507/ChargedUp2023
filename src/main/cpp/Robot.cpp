@@ -31,7 +31,7 @@ void Robot::RobotInit()
   m_container.m_pouch.SetRampPosition(false);
   m_container.m_pouch.InnerIntakeSetPosition(0.0);
   m_container.m_arm.AirSpringSetPosition(true);
-  m_container.m_claw.WristSetReadyPoaition(12);
+  m_container.m_claw.WristSetReadyPosition(12);
   // m_container.m_arm.ElevationArmSetPosition(ArmLevel::Level_Pouch);
   #endif
   CheckAlliance();
@@ -77,6 +77,7 @@ void Robot::DisabledInit()
   #ifndef DRIVETRAIN_ONLY
   m_container.m_camera.LimeLightEnable(false);
   m_container.m_claw.WristSetPower(-.2);
+  m_container.m_driverfeedback.Rumble(0.0);
   #endif
   std::cout<<"Disabled Init"<<std::endl;
   // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);

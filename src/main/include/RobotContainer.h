@@ -36,7 +36,7 @@
 
 
 //Compile Drivetrain ONLY duringg development so we can use the test swerve base. 
-#define DRIVETRAIN_ONLY
+//#define DRIVETRAIN_ONLY
 
 /**
  * This class is where the bulk of the robot should be declared.  Since
@@ -85,7 +85,7 @@ frc::PowerDistribution m_pdh{CAN_PDH_ID,frc::PowerDistribution::ModuleType::kRev
  AutoTwoPieceRed     m_autoTwoPieceRed   {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  AutoPowerStripRed   m_autoPowerStripRed {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
 #endif
-AutoTest            m_autoTest{&m_drivetrain};
+AutoTest            m_autoTest{&m_drivetrain, &m_pouch, &m_arm, &m_claw};
 
 
 
