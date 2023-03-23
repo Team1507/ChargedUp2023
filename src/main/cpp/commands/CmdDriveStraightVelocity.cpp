@@ -8,15 +8,16 @@
 #include <iostream>
 #include <math.h>
 
-CmdDriveStraightVelocity::CmdDriveStraightVelocity(Drivetrain *drivetrain, float speed, float heading, float distance, bool ramp, bool stop, float timeout)
+CmdDriveStraightVelocity::CmdDriveStraightVelocity(Drivetrain *drivetrain, float velocity, float heading, float yaw, float distance, bool ramp, bool stop, float timeout)
 {
 
   // ** ROBOT CENTRIC **
   // Heading is referenced to the front of the robot
   //   Heading is the direction the robot is moving with respect to the front of the robot
 
-  m_speed    = speed;
+  m_velocity = velocity;
   m_heading  = heading * M_PI/180.0;  //Convert to radians
+  m_yaw      = yaw;
   m_distance = distance;
   m_stop     = stop;
   m_timeout  = timeout;
@@ -49,12 +50,33 @@ void CmdDriveStraightVelocity::Initialize()
 void CmdDriveStraightVelocity::Execute() 
 {
 
-  float drive_speed = m_speed;
-  
-  float y_speed = drive_speed * cosf(m_heading);
-  float x_speed = drive_speed * sinf(m_heading);
+  //-------------------------------------
+  //  Rotational correction
 
-  m_drivetrain->RobotcentricDriveVelocity(y_speed,x_speed,0.0);
+  //Min turn power is 0.0625.
+  //  Set Kp to reach min turn power at 2 deg error  (Kp = min/error = 0.0625/2  )
+  float const TURN_MAX_VELOCITY = 5300; // .25 power
+  float const TURN_Kp        = 300 ;//0.0175;
+
+  float delta_angle = m_yaw - m_drivetrain->GetGyroAngle();
+
+  float turn_velocity = abs( delta_angle * TURN_Kp );
+
+  //Limit max drive
+  if( turn_velocity > TURN_MAX_VELOCITY ) turn_velocity = TURN_MAX_VELOCITY;
+
+  float drive_velocity = m_velocity;
+  
+  float y_velocity = drive_velocity * cosf(m_heading);
+  float x_velocity = drive_velocity * sinf(m_heading);
+
+  if( delta_angle > 0)
+    m_drivetrain->FieldcentricDriveVelocity( y_velocity, x_velocity, -turn_velocity);
+  else
+    m_drivetrain->FieldcentricDriveVelocity( y_velocity, x_velocity,  turn_velocity);
+
+
+ // m_drivetrain->RobotcentricDriveVelocity(y_speed,x_speed,0.0);
 
 }
 

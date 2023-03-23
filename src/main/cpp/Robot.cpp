@@ -30,6 +30,7 @@ void Robot::RobotInit()
   m_container.m_claw.ClawSetOuttakePower(-.8);
   m_container.m_pouch.SetRampPosition(false);
   m_container.m_arm.AirSpringSetPosition(true);
+  m_container.m_claw.WristSetReadyPosition(12);  
   #ifdef INNER_INTAKE
   m_container.m_pouch.InnerIntakeSetPosition(0.0);
   #endif
@@ -73,11 +74,13 @@ void Robot::RobotPeriodic()
 
 void Robot::DisabledInit() 
 {
-  std::cout<<"Disabled Init"<<std::endl;
   #ifndef DRIVETRAIN_ONLY
+  m_container.m_camera.LimeLightEnable(false);
   m_container.m_claw.WristSetPower(-.2);
-  m_container.m_camera.LimeLightEnable(true);
+  m_container.m_driverfeedback.Rumble(0.0);
   #endif
+  std::cout<<"Disabled Init"<<std::endl;
+  // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);
 }
  
 void Robot::DisabledPeriodic() {}

@@ -19,7 +19,7 @@
 class CmdDriveStraightVelocity
     : public frc2::CommandHelper<frc2::CommandBase, CmdDriveStraightVelocity> {
  public:
-  CmdDriveStraightVelocity(Drivetrain *drivetrain, float power, float heading, float distance, bool ramp, bool stop, float timeout);
+  CmdDriveStraightVelocity(Drivetrain *drivetrain, float velocity, float heading, float yaw, float distance, bool ramp, bool stop, float timeout);
 
   void Initialize() override;
 
@@ -34,8 +34,9 @@ class CmdDriveStraightVelocity
   frc::Timer m_timer;
   Drivetrain *m_drivetrain;
   
-  float m_speed;
+  float m_velocity;
   float m_heading;
+  float m_yaw;
   float m_distance;
   bool  m_stop;
   bool  m_ramp;

@@ -52,6 +52,9 @@ class Claw : public frc2::SubsystemBase {
   // bool  WristLimitSwitchReverse(void);
   bool  WristLimitTop(void);
 
+  void WristSetReadyPosition(float position);
+  float WristGetReadyPosition(void);
+
 
  private:
   rev::CANSparkMax m_claw {CAN_CLAW_ID, rev::CANSparkMaxLowLevel::MotorType::kBrushless};
@@ -66,6 +69,8 @@ class Claw : public frc2::SubsystemBase {
 
   float m_clawIntakePower;
   float m_clawOuttakePower;
+
+  float m_wristReadyPos;
 
   bool m_clawManualOverride;
 };

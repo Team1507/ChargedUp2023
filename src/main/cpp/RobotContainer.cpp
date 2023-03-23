@@ -42,10 +42,12 @@ RobotContainer::RobotContainer()
 
 
   m_toperator.SetDefaultCommand(CmdToperatorDefault(&m_toperator, &m_topDriver, &m_claw, &m_arm, &m_pouch,  &m_driverfeedback));
-
+  #endif
+//&m_camera,
   //*************************************Auto**********************************************
 
   m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing     );
+  #ifndef DRIVETRAIN_ONLY
   m_chooser.AddOption("AutoChargeStation"     , &m_autoChargeStation );
   m_chooser.AddOption("AutoTwoPieceBlue"      , &m_autoTwoPieceBlue  );
   m_chooser.AddOption("AutoPowerStripBlue"    , &m_autoPowerStripBlue);
@@ -53,6 +55,7 @@ RobotContainer::RobotContainer()
   m_chooser.AddOption("AutoPowerStripRed"     , &m_autoPowerStripRed );
 
 #endif
+m_chooser.AddOption("AutoTest", &m_autoTest);
   //m_chooser.AddOption("Auto Shoot Two Ball", &m_autoTwoBall);
 
   frc::SmartDashboard::PutData("Auto",&m_chooser);

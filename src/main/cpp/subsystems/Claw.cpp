@@ -118,6 +118,14 @@ float Claw::WristGetPower(void)           //for Debug use Only
 {
     return m_wrist.Get();
 }
+void Claw::WristSetReadyPosition(float position)
+{
+    m_wristReadyPos = position;
+}
+float Claw::WristGetReadyPosition(void)
+{
+    return m_wristReadyPos;
+}
 // bool  Claw::WristLimitSwitchForward(void)
 // {
 //     return m_wristFWDLimit.Get();
