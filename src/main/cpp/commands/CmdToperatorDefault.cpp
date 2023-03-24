@@ -320,18 +320,19 @@ else if(!InnerIntake && m_isInnerIntaking)
 }
 if(OuterIntakeDeploy && !m_isOuterIntakeDeployed)
 {
-  m_pouch->IntakeDeploy();
+  m_pouch->IntakeDeployHalf();
   m_isOuterIntakeDeployed = true;
 }
 else if(!OuterIntakeDeploy && m_isOuterIntakeDeployed)
 {
-  m_pouch->IntakeRetract();
+  m_pouch->IntakeRetractHalf();
   m_isOuterIntakeDeployed = false;
 }
 if(OuterIntakeRun && !m_isOuterIntaking)
 {
   //m_pouch->IntakeDeploy();
   // m_pouch->IntakeEnable(true);
+  m_pouch->IntakeDeploy();
   m_pouch->SetRampPosition(true);
   m_pouch->IntakeSetPower(.5, Pouch::WhatIntake::Outer);
   m_claw->WristHoldPosition(m_claw->WristGetReadyPosition());
@@ -344,6 +345,7 @@ else if(!OuterIntakeRun && m_isOuterIntaking)
 {
   //m_pouch->IntakeRetract();
   // m_pouch->IntakeEnable(false);
+  m_pouch->IntakeRetract();
   m_pouch->SetRampPosition(false);
   m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Outer);
   std::cout<<"Outer Intake off"<<std::endl;

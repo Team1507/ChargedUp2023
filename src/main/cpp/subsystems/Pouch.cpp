@@ -85,6 +85,11 @@ bool Pouch::IntakeIsDeployed(void)
   return m_OuterIntake.Get() == frc::DoubleSolenoid::kReverse;
 }
 
+bool Pouch::IntakeIsDeployedHalf(void)
+{
+  return m_outerIntakeHalf.Get() == frc::DoubleSolenoid::kForward;
+}
+
 void Pouch::SetRampPosition(bool deploy)
 {
   if( deploy == true )

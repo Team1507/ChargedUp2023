@@ -56,7 +56,7 @@ void CmdClawDefault::Execute()
     m_claw->ClawSetPower(0.04);
     m_isOverride = false;
   }
-  else if(m_claw->ReadSensorState() && m_delay > 0 && !ManualOverride)
+  else if(m_claw->ReadSensorState() && m_delay > 0 && !ManualOverride && m_claw->WristGetHomed())
   {
     m_delay--;
     if(m_delay <= 0)

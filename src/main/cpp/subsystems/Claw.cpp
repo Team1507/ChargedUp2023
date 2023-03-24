@@ -37,6 +37,7 @@ void Claw::Periodic()
     {
         WristSetPosition(0.0);
         WristHoldPosition(WRIST_RESET_POSITION);
+        WristSetHomed(true);
     }
 }
   
@@ -125,6 +126,14 @@ void Claw::WristSetReadyPosition(float position)
 float Claw::WristGetReadyPosition(void)
 {
     return m_wristReadyPos;
+}
+bool Claw::WristGetHomed(void)
+{
+    return m_isWristHomed;
+}
+void Claw::WristSetHomed(bool homed)
+{
+    m_isWristHomed = homed;
 }
 // bool  Claw::WristLimitSwitchForward(void)
 // {

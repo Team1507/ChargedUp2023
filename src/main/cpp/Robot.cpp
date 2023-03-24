@@ -31,6 +31,7 @@ void Robot::RobotInit()
   m_container.m_pouch.SetRampPosition(false);
   m_container.m_arm.AirSpringSetPosition(true);
   m_container.m_claw.WristSetReadyPosition(12);  
+  m_container.m_pouch.IntakeRetractHalf();
   #ifdef INNER_INTAKE
   m_container.m_pouch.InnerIntakeSetPosition(0.0);
   #endif
@@ -76,9 +77,10 @@ void Robot::DisabledInit()
 {
   #ifndef DRIVETRAIN_ONLY
   m_container.m_camera.LimeLightEnable(false);
-  m_container.m_claw.WristSetPower(-.2);
+  //m_container.m_claw.WristSetPower(-.3);
   m_container.m_driverfeedback.RumbleBot(0.0);
   m_container.m_driverfeedback.RumbleTop(0.0);
+  m_container.m_claw.WristSetHomed(false);
   #endif
   std::cout<<"Disabled Init"<<std::endl;
   // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);
@@ -94,7 +96,7 @@ void Robot::AutonomousInit()
 
    //m_container.m_drivetrain.SetAngleOffset(90.0);
   m_container.m_claw.ClawSetPower(.04);
-  m_container.m_claw.WristSetPower(-.2);
+  m_container.m_claw.WristSetPower(-.3);
   #endif
   CheckAlliance();
   m_autonomousCommand = m_container.GetAutonomousCommand();
@@ -116,7 +118,7 @@ void Robot::TeleopInit()
   #ifndef DRIVETRAIN_ONLY
 
   m_container.m_camera.LimeLightEnable(true);
-  m_container.m_claw.WristSetPower(-.2);
+  m_container.m_claw.WristSetPower(-.3);
   #endif
 
   if (m_autonomousCommand) {

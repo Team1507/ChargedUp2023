@@ -52,6 +52,9 @@ class Claw : public frc2::SubsystemBase {
   // bool  WristLimitSwitchReverse(void);
   bool  WristLimitTop(void);
 
+  bool  WristGetHomed(void);
+  void  WristSetHomed(bool homed);
+
   void WristSetReadyPosition(float position);
   float WristGetReadyPosition(void);
 
@@ -69,6 +72,8 @@ class Claw : public frc2::SubsystemBase {
 
   float m_clawIntakePower;
   float m_clawOuttakePower;
+
+  bool m_isWristHomed;
 
   float m_wristReadyPos;
 

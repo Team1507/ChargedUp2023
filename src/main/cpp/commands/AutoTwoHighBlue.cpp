@@ -21,46 +21,75 @@
 #include "commands/CmdArmExtensionSetPosition.h"
 #include "commands/GrpScoringStraightOn.h"
 #include "commands/GrpReturnToPouch.h"
+#include "commands/CmdPouchIntakeDeployHalf.h"
+#include "commands/CmdPouchIntakeRetractHalf.h"
 
 
 AutoTwoHighBlue::AutoTwoHighBlue(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw) 
 {
     AddCommands
     (
+        //Score Cone High
         CmdDriveClearAll(drivetrain),
         CmdGyroSetAngleOffset(drivetrain, 180),
-        CmdPouchIntakeDeploy(pouch),
+        CmdPouchIntakeDeployHalf(pouch),
         frc2::WaitCommand(.75_s),
         GrpScoringStraightOn(arm, claw, pouch, ScoringStraightPosition::HighCone),
         CmdWristSetPosition(claw, 17.5),
         frc2::WaitCommand(1.5_s), 
         CmdClawEject(claw),
+
+        //Return to Home
         CmdArmExtensionSetPosition(arm, false),
         GrpReturnToPouch(arm, pouch, claw),
-        frc2::WaitCommand(1.0_s),
-        CmdPouchIntakeRetract(pouch),
+        frc2::WaitCommand(0.75_s),
+        CmdPouchIntakeRetractHalf(pouch),
 
-              
-        CmdDriveStraightVelocity(drivetrain, 6400, 10, 0, 24, false, false, 0.0),
+        // Drive and Spin to Cube
+        CmdDriveStraightVelocity(drivetrain, 6400, 7, 0, 24, false, false, 0.0),
         CmdDriveStraightVelocity(drivetrain, 8600, 0, 180, 128, false, false, 0.0),
+
+        //Deploy & Run Intakes
         CmdPouchIntakeDeploy(pouch),
         CmdDriveStraightVelocity(drivetrain, 6400, 0, 180, 12, false, true, 0.0),
         frc2::WaitCommand(.25_s),
         CmdSetRampPosition(pouch, true),
         CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, .5),
-        CmdWristSetPosition(claw, 13.5),
+        CmdWristSetPosition(claw, 11),
         CmdClawIntakeEnable(claw, true),
-        CmdDriveStraightVelocity(drivetrain, 4200, 0, 180, 24, false, true, 0.0),
+
+        //Pick Cube Up
+        CmdDriveStraightVelocity(drivetrain, 4200, 0, 180, 26, false, true, 0.0),
         frc2::WaitCommand(0.5_s),
+
+        //Stop Intakes and bring it in
         CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, 0),
         CmdPouchIntakeRetract(pouch),
         CmdSetRampPosition(pouch, false),
+
+        //Drive and Spin back to Shelf
         CmdDriveStraightVelocity(drivetrain, 6400, -165, 180, 20, false, false, 0.0),
         CmdDriveStraightVelocity(drivetrain, 8600, -172.5, 0, 128, false, false, 0.0),
-        CmdPouchIntakeDeploy(pouch),
-        CmdDriveStraightVelocity(drivetrain, 4200, 178, 0, 15, false, false, 0.0),
-        CmdArmLevelSetPosition(arm, ArmLevel::High, pouch),
-        CmdDriveStraightVelocity(drivetrain, 4200, 178, 0, 12, false, true, 0.0),
+
+        //Get Ready to Score
+        CmdPouchIntakeDeployHalf(pouch),
+        CmdDriveStraightVelocity(drivetrain, 4200, 176, 0, 25, false, true, 0.0),
+        CmdWristSetPosition(claw, 2),
+        frc2::WaitCommand(.5_s),
+        //Score that Cube
+        CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch),
+        CmdDriveStraightVelocity(drivetrain, 4200, 176, 0, 17, false, true, 0.0),
+
+        //CmdArmExtensionSetPosition(arm, true),
+        
+        CmdClawSetOuttakePower(claw, -0.7),
+        frc2::WaitCommand(0.25_s),
+        CmdClawEject(claw),
+        CmdArmExtensionSetPosition(arm, false),
+        //frc2::WaitCommand(0.3_s),
+        CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
+        CmdDriveStraightVelocity(drivetrain, 6400, 0, 0, 25, false, false, 0.0),
+        CmdDriveStraightVelocity(drivetrain, 13000, 0, 0, 75, false, true, 0.0),
         // frc2::WaitCommand(0.5_s),//was 1.0_s
         // CmdArmExtensionSetPosition(arm, true),
         // CmdWristSetPosition(claw, 8),

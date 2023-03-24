@@ -43,6 +43,8 @@ class Pouch : public frc2::SubsystemBase {
 
   bool IntakeIsDeployed(void);
 
+  bool IntakeIsDeployedHalf(void);
+
   void SetRampPosition(bool deploy);
   bool ReadSensorState(void);
   

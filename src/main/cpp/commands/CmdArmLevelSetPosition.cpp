@@ -10,13 +10,13 @@ CmdArmLevelSetPosition::CmdArmLevelSetPosition(Arm *arm, ArmLevel armLevel,Pouch
 // Called when the command is initially scheduled.
 void CmdArmLevelSetPosition::Initialize() 
 {
-  if(m_arm->ElevationArmGetPosition() == ArmLevel::Level_Pouch && m_pouch->IntakeIsDeployed() && m_armLevel != ArmLevel::Level_Pouch)
+  if(m_arm->ElevationArmGetPosition() == ArmLevel::Level_Pouch && m_pouch->IntakeIsDeployedHalf() && m_armLevel != ArmLevel::Level_Pouch)
   {
-    m_pouch->IntakeDeploy();
+    m_pouch->IntakeDeployHalf();
   }
-  else if(m_arm->ElevationArmGetPosition() != ArmLevel::Level_Pouch && m_pouch->IntakeIsDeployed() && m_armLevel == ArmLevel::Level_Pouch)
+  else if(m_arm->ElevationArmGetPosition() != ArmLevel::Level_Pouch && m_pouch->IntakeIsDeployedHalf() && m_armLevel == ArmLevel::Level_Pouch)
   {
-    m_pouch->IntakeDeploy();
+    m_pouch->IntakeDeployHalf();
   }
   m_delay = 0;
   m_arm->ElevationArmSetPosition(m_armLevel);
