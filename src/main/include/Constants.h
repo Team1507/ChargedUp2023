@@ -72,8 +72,8 @@
 
 
 //********** PDH Ports **********
-#define PDH_CLAW_PORT            5      //Gripper
-#define PDH_WRIST_PORT           6
+#define PDH_CLAW_PORT            6      //Gripper
+#define PDH_WRIST_PORT           5
 #define PDH_INNER_INTAKE_PORT    9      
 namespace OperatorConstants 
 {

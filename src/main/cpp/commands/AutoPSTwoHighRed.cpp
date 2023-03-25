@@ -68,6 +68,7 @@ AddCommands
         CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, 0),
         CmdPouchIntakeRetract(pouch),
         CmdSetRampPosition(pouch, false),
+        CmdClawIntakeEnable(claw, false),
 
         //Drive and Spin back to Shelf
         CmdDriveStraightVelocity(drivetrain, 6400, -165, 180, 20, false, false, 0.0),
@@ -75,16 +76,16 @@ AddCommands
 
         //Get Ready to Score
         CmdPouchIntakeDeployHalf(pouch),
-        CmdDriveStraightVelocity(drivetrain, 4200, 176, 0, 25, false, true, 0.0),
+        CmdDriveStraightVelocity(drivetrain, 4200, 178, 0, 25, false, true, 0.0),
         CmdWristSetPosition(claw, 2),
-        frc2::WaitCommand(.5_s),
+        frc2::WaitCommand(.1_s),
         //Score that Cube
         CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch, claw),
-        CmdDriveStraightVelocity(drivetrain, 4200, 176, 0, 17, false, true, 0.0),
+        CmdDriveStraightVelocity(drivetrain, 4200, 178, 0, 17, false, true, 0.0),
 
         //CmdArmExtensionSetPosition(arm, true),
         
-        CmdClawSetOuttakePower(claw, -0.7),
+        CmdClawSetOuttakePower(claw, -0.5),
         frc2::WaitCommand(0.25_s),
         CmdClawEject(claw),
         CmdArmExtensionSetPosition(arm, false),

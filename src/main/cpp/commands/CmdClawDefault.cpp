@@ -28,8 +28,6 @@ void CmdClawDefault::Initialize()
 void CmdClawDefault::Execute() 
 {
 
-  frc::SmartDashboard::PutNumber("Wrist Current", m_claw->WristGetCurrent());
-  frc::SmartDashboard::PutNumber("Wrist Temp"   , m_claw->WristGetTemp());
 
   bool ManualOverride = m_claw->ClawGetManualOverride();
   if(m_claw->ClawIntakeGetEnable() && !m_isIntaking && !m_claw->ReadSensorState()) 
@@ -45,11 +43,11 @@ void CmdClawDefault::Execute()
     m_isIntaking = false;
     //std::cout<<"Claw A"<<std::endl;
   }
-  else if(m_claw->ClawGetCurrent() > CLAW_STALL_CURRENT)
-  {
-    m_claw->ClawIntakeEnable(false);
-    //std::cout<<"Claw B"<<std::endl;
-  }
+  // else if(m_claw->ClawGetCurrent() > CLAW_STALL_CURRENT)
+  // {
+  //   m_claw->ClawIntakeEnable(false);
+  //   //std::cout<<"Claw B"<<std::endl;
+  // }
   else if(ManualOverride && !m_isOverride)
   {
     m_claw->ClawSetPower(m_claw->ClawGetIntakePower());

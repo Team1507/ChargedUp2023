@@ -162,6 +162,10 @@ void Robot::WriteToSmartDashboard(void)
   frc::SmartDashboard::PutBoolean("LimeLight Target Valid", m_container.m_camera.GetLimelightTargetValid());
   frc::SmartDashboard::PutNumber("Arm Position",            m_container.m_arm.ElevationArmGetPosition());
 
+  //Claw/Wrist
+  frc::SmartDashboard::PutNumber("Wrist Current", m_container.m_claw.WristGetCurrent());
+  frc::SmartDashboard::PutNumber("Wrist Temp"   , m_container.m_claw.WristGetTemp());
+
     #ifdef TURRET
 
     frc::SmartDashboard::PutBoolean("Turret Right Limit Switch", m_container.m_arm.TurretGetRightLimitSW());
