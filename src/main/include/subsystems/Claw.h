@@ -52,6 +52,8 @@ class Claw : public frc2::SubsystemBase {
   // bool  WristLimitSwitchReverse(void);
   bool  WristLimitTop(void);
 
+  float WristGetTemp(void);
+
   bool  WristGetHomed(void);
   void  WristSetHomed(bool homed);
 

@@ -39,12 +39,12 @@ GrpScoringSetPosition::GrpScoringSetPosition(Arm *arm, Claw *claw, Pouch *pouch 
   AddCommands(
   frc2::SequentialCommandGroup
     {
-      CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch),
+      CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch, claw),
       CmdPrintText("Group Scoring"),
       frc2::WaitCommand(1.0_s),
       frc2::ParallelCommandGroup
       {
-        CmdArmLevelSetPosition(arm, scoringPositionTable[scoringPosition].armLevel, pouch),
+        CmdArmLevelSetPosition(arm, scoringPositionTable[scoringPosition].armLevel, pouch, claw),
         CmdArmExtensionSetPosition(arm, false),
         CmdWristSetPosition(claw, 13),
         CmdClawSetOuttakePower(claw, scoringPositionTable[scoringPosition].outtakePower),

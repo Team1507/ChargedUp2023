@@ -34,7 +34,7 @@ AutoTwoPieceBlue::AutoTwoPieceBlue( Drivetrain *drivetrain, Arm *arm, Camera *ca
       //-------------------------------
       CmdPouchIntakeDeploy(pouch),
       frc2::WaitCommand(1.0_s),
-      CmdArmLevelSetPosition(arm, ArmLevel::High, pouch),
+      CmdArmLevelSetPosition(arm, ArmLevel::High, pouch, claw),
       frc2::WaitCommand(0.5_s),//was 1.0_s
       //CmdArmExtensionSetPosition(arm, true),
       CmdWristSetPosition(claw, 8),
@@ -43,7 +43,7 @@ AutoTwoPieceBlue::AutoTwoPieceBlue( Drivetrain *drivetrain, Arm *arm, Camera *ca
       CmdClawEject(claw),
       //CmdArmExtensionSetPosition(arm, false),
       //frc2::WaitCommand(0.5_s),
-      CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
+      CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch, claw),
       frc2::WaitCommand(1.0_s),
       CmdPouchIntakeRetract(pouch),
       CmdDriveStraightVelocity(drivetrain, .6, 0, 0, 125, false, false, 0.0),
@@ -86,7 +86,7 @@ AutoTwoPieceBlue::AutoTwoPieceBlue( Drivetrain *drivetrain, Arm *arm, Camera *ca
 
       CmdDriveStraightVelocity(drivetrain, .2, -180, -360, 18, false, false, 0.0),
 
-      CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch),
+      CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch, claw),
       CmdWristSetPosition(claw, 2),
 
       CmdDriveStraightVelocity(drivetrain, .2, -180, -360, 26, false, true, 0.0),
@@ -97,7 +97,7 @@ AutoTwoPieceBlue::AutoTwoPieceBlue( Drivetrain *drivetrain, Arm *arm, Camera *ca
 
       CmdArmExtensionSetPosition(arm, false),
       CmdDriveStraightVelocity(drivetrain, .1, 0, -360, 10, false, false, 0.0),
-      CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
+      CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch, claw),
       CmdDriveStraightVelocity(drivetrain, .1, 0, -360, 10, false, true, 0.0),
       CmdPouchIntakeRetract(pouch),
 

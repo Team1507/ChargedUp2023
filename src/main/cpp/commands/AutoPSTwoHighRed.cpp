@@ -1,4 +1,5 @@
-#include "commands/AutoTwoHighBlue.h"
+#include "commands/AutoPSTwoHighRed.h"
+
 #include "frc2/command/WaitCommand.h"
 #include "commands/CmdPrintText.h"
 
@@ -25,9 +26,10 @@
 #include "commands/CmdPouchIntakeRetractHalf.h"
 
 
-AutoTwoHighBlue::AutoTwoHighBlue(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw) 
+
+AutoPSTwoHighRed::AutoPSTwoHighRed(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw) 
 {
-    AddCommands
+AddCommands
     (
         //Score Cone High
         CmdDriveClearAll(drivetrain),

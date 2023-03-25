@@ -212,10 +212,12 @@ void CmdToperatorDefault::Execute()
   }
   if(!YButtonPressed && !AButtonPressed && ReadyPosition)
   {
+    m_claw->WristHoldPosition(2);
     m_arm->ElevationArmSetPosition(ArmLevel::Low);
   }
   if(YButtonPressed && ReadyPosition)
   {
+    m_claw->WristHoldPosition(2);
     m_arm->ElevationArmSetPosition(ArmLevel::Mid);
   }
   if(AButtonPressed && ReadyPosition)
@@ -288,10 +290,12 @@ void CmdToperatorDefault::Execute()
 //***********************ARM LEVEL MANUAL***********************
 if(XButtonPressed)
 {
+  m_claw->WristHoldPosition(2);
   m_arm->ElevationArmSetPosition(ArmLevel::High);
 }
 else if(BButtonPressed)
 {
+  m_claw->WristHoldPosition(2);
   m_arm->ElevationArmSetPosition(ArmLevel::Level_Pouch);
 }
 //*******************ARM EXTENSION MANUAL************************
@@ -318,7 +322,7 @@ else if(!InnerIntake && m_isInnerIntaking)
   std::cout<<"IntakeDisable"<<std::endl;
   m_isInnerIntaking = false;
 }
-if(OuterIntakeDeploy && !m_isOuterIntakeDeployed)
+if(OuterIntakeDeploy && !m_isOuterIntakeDeployed && !m_isOuterIntaking)
 {
   m_pouch->IntakeDeployHalf();
   m_isOuterIntakeDeployed = true;
@@ -348,6 +352,7 @@ else if(!OuterIntakeRun && m_isOuterIntaking)
   m_pouch->IntakeRetract();
   m_pouch->SetRampPosition(false);
   m_pouch->IntakeSetPower(0, Pouch::WhatIntake::Outer);
+  m_pouch->IntakeRetractHalf();
   std::cout<<"Outer Intake off"<<std::endl;
   m_claw->ClawIntakeEnable(false);
 

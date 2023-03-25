@@ -81,6 +81,7 @@ void Robot::DisabledInit()
   m_container.m_driverfeedback.RumbleBot(0.0);
   m_container.m_driverfeedback.RumbleTop(0.0);
   m_container.m_claw.WristSetHomed(false);
+  m_container.m_pouch.IntakeRetractHalf();
   #endif
   std::cout<<"Disabled Init"<<std::endl;
   // m_container.m_driverfeedback.DriverFeedbackLED(COLOR_CLEAR);

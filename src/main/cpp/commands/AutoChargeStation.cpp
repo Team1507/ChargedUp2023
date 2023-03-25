@@ -42,7 +42,7 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
       //Score Cube High
       CmdPouchIntakeDeploy(pouch),
       frc2::WaitCommand(1.0_s),
-      CmdArmLevelSetPosition(arm, ArmLevel::High, pouch),
+      CmdArmLevelSetPosition(arm, ArmLevel::High, pouch, claw),
       frc2::WaitCommand(0.5_s),
       CmdWristSetPosition(claw, 8),
       frc2::WaitCommand(0.5_s),
@@ -50,7 +50,7 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
       CmdClawEject(claw),
 
       //Return To Pouch
-      CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch),
+      CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch, claw),
       frc2::WaitCommand(1.0_s),
       CmdPouchIntakeRetract(pouch),
 

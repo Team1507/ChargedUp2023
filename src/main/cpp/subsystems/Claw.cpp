@@ -25,7 +25,6 @@ Claw::Claw(frc::PowerDistribution *pdh)
     m_claw.SetInverted(false);
 
 
-
 }
 
 void Claw::Periodic() 
@@ -134,6 +133,11 @@ bool Claw::WristGetHomed(void)
 void Claw::WristSetHomed(bool homed)
 {
     m_isWristHomed = homed;
+}
+
+float Claw::WristGetTemp(void)
+{
+    return m_wrist.GetMotorTemperature();
 }
 // bool  Claw::WristLimitSwitchForward(void)
 // {

@@ -1,15 +1,17 @@
 #include "commands/CmdArmLevelSetPosition.h"
 
-CmdArmLevelSetPosition::CmdArmLevelSetPosition(Arm *arm, ArmLevel armLevel,Pouch *pouch)
+CmdArmLevelSetPosition::CmdArmLevelSetPosition(Arm *arm, ArmLevel armLevel,Pouch *pouch, Claw *claw)
 {
   m_pouch = pouch;
   m_arm = arm;
   m_armLevel = armLevel;
+  m_claw = claw;
 }
 
 // Called when the command is initially scheduled.
 void CmdArmLevelSetPosition::Initialize() 
 {
+  m_claw->WristHoldPosition(2);
   if(m_arm->ElevationArmGetPosition() == ArmLevel::Level_Pouch && m_pouch->IntakeIsDeployedHalf() && m_armLevel != ArmLevel::Level_Pouch)
   {
     m_pouch->IntakeDeployHalf();

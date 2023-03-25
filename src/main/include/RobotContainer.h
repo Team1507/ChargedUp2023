@@ -39,6 +39,7 @@
 #include "commands/AutoTwoPieceRed.h"
 #include "commands/AutoPowerStripRed.h"
 #include "commands/AutoTwoHighBlue.h"
+#include "commands/AutoPSTwoHighRed.h"
 
 #endif
 
@@ -85,6 +86,7 @@ class RobotContainer
  AutoTwoPieceRed     m_autoTwoPieceRed   {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  AutoPowerStripRed   m_autoPowerStripRed {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
  AutoTwoHighBlue     m_autoTwoHighBlue   {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
+ AutoPSTwoHighRed    m_autoPSTwoHighRed  {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
 #endif
 
 

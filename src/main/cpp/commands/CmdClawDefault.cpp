@@ -27,6 +27,10 @@ void CmdClawDefault::Initialize()
 // Called repeatedly when this Command is scheduled to run
 void CmdClawDefault::Execute() 
 {
+
+  frc::SmartDashboard::PutNumber("Wrist Current", m_claw->WristGetCurrent());
+  frc::SmartDashboard::PutNumber("Wrist Temp"   , m_claw->WristGetTemp());
+
   bool ManualOverride = m_claw->ClawGetManualOverride();
   if(m_claw->ClawIntakeGetEnable() && !m_isIntaking && !m_claw->ReadSensorState()) 
   {

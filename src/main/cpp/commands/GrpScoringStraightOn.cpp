@@ -32,7 +32,8 @@ scoringStraightPosition_t scoringStraightPositionTable[] = {{false,        15.0,
 GrpScoringStraightOn::GrpScoringStraightOn(Arm *arm, Claw *claw, Pouch *pouch ,ScoringStraightPosition scoringStraightPosition) 
 {
   AddCommands(
-    CmdArmLevelSetPosition(arm, scoringStraightPositionTable[scoringStraightPosition].armLevel, pouch),
+    CmdArmLevelSetPosition(arm, scoringStraightPositionTable[scoringStraightPosition].armLevel, pouch, claw),
+    CmdWristSetPosition(claw, 2),
     frc2::WaitCommand(1.0_s),
     CmdWristSetPosition(claw, scoringStraightPositionTable[scoringStraightPosition].wristAngle),
     CmdArmExtensionSetPosition(arm, scoringStraightPositionTable[scoringStraightPosition].extension),
