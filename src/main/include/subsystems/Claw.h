@@ -36,6 +36,8 @@ class Claw : public frc2::SubsystemBase {
   void ClawSetManualOverride(bool override);
   bool ClawGetManualOverride(void);
 
+  float ClawGetTemp(void);
+
   void ClawSetOuttakePower(float power);
   float ClawGetOuttakePower(void);
 

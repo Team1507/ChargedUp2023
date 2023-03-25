@@ -174,7 +174,7 @@ void CmdToperatorDefault::Execute()
         case 90: // right
           //m_camera->PipelineSetIndex(CameraIndex::Cone);
           m_claw->ClawSetIntakePower( frc::SmartDashboard::GetNumber("CONE_INTAKE_POWER", CONE_INTAKE_POWER));
-          m_claw->WristSetReadyPosition(13.5);
+          m_claw->WristSetReadyPosition(13);
           m_driverFeedback->DriverFeedbackLED(COLOR_YELLOW);
           m_isDpadCenter = false;
           std::cout<<"Set Cone"<<std::endl;

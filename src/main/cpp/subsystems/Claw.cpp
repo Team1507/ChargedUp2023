@@ -87,6 +87,11 @@ bool Claw::ClawGetManualOverride(void)
 {
     return m_clawManualOverride;
 }
+
+float Claw::ClawGetTemp(void)
+{
+    return m_claw.GetMotorTemperature();
+}
 //***********************************WRIST*******************************************
 
 void Claw::WristSetPosition(float position) 

@@ -48,15 +48,15 @@ RobotContainer::RobotContainer()
 
   m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing     );
   #ifndef DRIVETRAIN_ONLY
-  m_chooser.AddOption("AutoChargeStation"     , &m_autoChargeStation );
-  m_chooser.AddOption("AutoTwoPieceBlue"      , &m_autoTwoPieceBlue  );
-  m_chooser.AddOption("AutoPowerStripBlue"    , &m_autoPowerStripBlue);
-  m_chooser.AddOption("AutoTwoPieceRed"       , &m_autoTwoPieceRed   );
-  m_chooser.AddOption("AutoPowerStripRed"     , &m_autoPowerStripRed );
-  m_chooser.AddOption("AutoPSTwoHighRed"     , &m_autoPSTwoHighRed  );
-
+  m_chooser.AddOption("AutoChargeStation"         , &m_autoChargeStation );
+  m_chooser.AddOption("OLD AutoTwoPieceBlue"      , &m_autoTwoPieceBlue  );
+  m_chooser.AddOption("OLD AutoPowerStripBlue"    , &m_autoPowerStripBlue);
+  m_chooser.AddOption("OLD AutoTwoPieceRed"       , &m_autoTwoPieceRed   );
+  m_chooser.AddOption("OLD AutoPowerStripRed"     , &m_autoPowerStripRed );
+  m_chooser.AddOption("AutoPSTwoHighRed"          , &m_autoPSTwoHighRed  );
+  m_chooser.AddOption("AutoTwoHighBlue"           , &m_autoTwoHighBlue   );
 #endif
-  m_chooser.AddOption("AutoTwoHighBlue", &m_autoTwoHighBlue);
+
   //m_chooser.AddOption("Auto Shoot Two Ball", &m_autoTwoBall);
 
   frc::SmartDashboard::PutData("Auto",&m_chooser);

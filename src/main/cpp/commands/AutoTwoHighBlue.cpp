@@ -27,7 +27,7 @@
 
 AutoTwoHighBlue::AutoTwoHighBlue(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw) 
 {
-    AddCommands
+AddCommands
     (
         //Score Cone High
         CmdDriveClearAll(drivetrain),
@@ -59,13 +59,14 @@ AutoTwoHighBlue::AutoTwoHighBlue(Drivetrain *drivetrain, Pouch *pouch, Arm *arm,
         CmdClawIntakeEnable(claw, true),
 
         //Pick Cube Up
-        CmdDriveStraightVelocity(drivetrain, 4200, 0, 180, 26, false, true, 0.0),
+        CmdDriveStraightVelocity(drivetrain, 4200, 0, 180, 22, false, true, 0.0),
         frc2::WaitCommand(0.5_s),
 
         //Stop Intakes and bring it in
         CmdPouchIntakeSetPower(pouch, Pouch::WhatIntake::Outer, 0),
         CmdPouchIntakeRetract(pouch),
         CmdSetRampPosition(pouch, false),
+        CmdClawIntakeEnable(claw, false),
 
         //Drive and Spin back to Shelf
         CmdDriveStraightVelocity(drivetrain, 6400, -165, 180, 20, false, false, 0.0),
@@ -73,16 +74,16 @@ AutoTwoHighBlue::AutoTwoHighBlue(Drivetrain *drivetrain, Pouch *pouch, Arm *arm,
 
         //Get Ready to Score
         CmdPouchIntakeDeployHalf(pouch),
-        CmdDriveStraightVelocity(drivetrain, 4200, 176, 0, 25, false, true, 0.0),
+        CmdDriveStraightVelocity(drivetrain, 4200, 178, 0, 21, false, true, 0.0),
         CmdWristSetPosition(claw, 2),
-        frc2::WaitCommand(.5_s),
+        frc2::WaitCommand(0.1_s), 
         //Score that Cube
         CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch, claw),
-        CmdDriveStraightVelocity(drivetrain, 4200, 176, 0, 17, false, true, 0.0),
-
+        CmdDriveStraightVelocity(drivetrain, 4200, 178, 0, 21, false, true, 0.0), // distance was 17
+        //frc2::WaitCommand(.25_s), //Added for arm to settle 3-15 @1:29
         //CmdArmExtensionSetPosition(arm, true),
         
-        CmdClawSetOuttakePower(claw, -0.7),
+        CmdClawSetOuttakePower(claw, -0.5),
         frc2::WaitCommand(0.25_s),
         CmdClawEject(claw),
         CmdArmExtensionSetPosition(arm, false),

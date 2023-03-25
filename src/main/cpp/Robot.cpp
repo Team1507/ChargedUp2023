@@ -76,6 +76,8 @@ void Robot::RobotPeriodic()
 void Robot::DisabledInit() 
 {
   #ifndef DRIVETRAIN_ONLY
+  std::cout<<"CLAW TEMP: "<<m_container.m_claw.ClawGetTemp()<<std::endl;
+  std::cout<<"WRIST TEMP: "<<m_container.m_claw.WristGetTemp()<<std::endl;
   m_container.m_camera.LimeLightEnable(false);
   //m_container.m_claw.WristSetPower(-.3);
   m_container.m_driverfeedback.RumbleBot(0.0);
@@ -165,6 +167,8 @@ void Robot::WriteToSmartDashboard(void)
   //Claw/Wrist
   frc::SmartDashboard::PutNumber("Wrist Current", m_container.m_claw.WristGetCurrent());
   frc::SmartDashboard::PutNumber("Wrist Temp"   , m_container.m_claw.WristGetTemp());
+
+  frc::SmartDashboard::PutNumber("Claw Temp"   , m_container.m_claw.ClawGetTemp());
 
     #ifdef TURRET
 
