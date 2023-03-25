@@ -55,6 +55,8 @@ RobotContainer::RobotContainer()
   m_chooser.AddOption("OLD AutoPowerStripRed"     , &m_autoPowerStripRed );
   m_chooser.AddOption("AutoPSTwoHighRed"          , &m_autoPSTwoHighRed  );
   m_chooser.AddOption("AutoTwoHighBlue"           , &m_autoTwoHighBlue   );
+  m_chooser.AddOption("AutoTwoHighRed"            , &m_autoTwoHighRed    );
+  m_chooser.AddOption("AutoPSTwoHighBlue"         , &m_autoPSTwoHighBlue );
 #endif
 
   //m_chooser.AddOption("Auto Shoot Two Ball", &m_autoTwoBall);

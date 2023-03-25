@@ -8,9 +8,10 @@
 #include "subsystems/Pouch.h"
 #include "subsystems/Claw.h"
 
-class AutoTwoHighRed
+
+class AutoPSTwoHighBlue
     : public frc2::CommandHelper<frc2::SequentialCommandGroup,
-                                 AutoTwoHighRed> {
+                                 AutoPSTwoHighBlue> {
  public:
-  AutoTwoHighRed(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw);
+  AutoPSTwoHighBlue(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw);
 };

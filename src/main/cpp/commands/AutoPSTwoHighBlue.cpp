@@ -1,5 +1,4 @@
-
-#include "commands/AutoTwoHighRed.h"
+#include "commands/AutoPSTwoHighBlue.h"
 
 #include "frc2/command/WaitCommand.h"
 #include "commands/CmdPrintText.h"
@@ -26,8 +25,7 @@
 #include "commands/CmdPouchIntakeDeployHalf.h"
 #include "commands/CmdPouchIntakeRetractHalf.h"
 
-
-AutoTwoHighRed::AutoTwoHighRed(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw) 
+AutoPSTwoHighBlue::AutoPSTwoHighBlue(Drivetrain *drivetrain, Pouch *pouch, Arm *arm, Claw *claw) 
 {
 AddCommands
     (
@@ -61,7 +59,7 @@ AddCommands
         CmdClawIntakeEnable(claw, true),
 
         //Pick Cube Up
-        CmdDriveStraightVelocity(drivetrain, 4200, 0, -180, 22, false, true, 0.0),
+        CmdDriveStraightVelocity(drivetrain, 4200, 0, -180, 26, false, true, 0.0), //was 22
         frc2::WaitCommand(0.5_s),
 
         //Stop Intakes and bring it in
@@ -76,12 +74,12 @@ AddCommands
 
         //Get Ready to Score
         CmdPouchIntakeDeployHalf(pouch),
-        CmdDriveStraightVelocity(drivetrain, 4200, -176, 0, 21, false, true, 0.0),
+        CmdDriveStraightVelocity(drivetrain, 4200, -176, 0, 23, false, true, 0.0),
         CmdWristSetPosition(claw, 2),
         frc2::WaitCommand(0.1_s), 
         //Score that Cube
         CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch, claw),
-        CmdDriveStraightVelocity(drivetrain, 4200, -176, 0, 18, false, true, 0.0), // distance was 17
+        CmdDriveStraightVelocity(drivetrain, 4200, -176, 0, 18, false, true, 0.0), // DONT CHANGE DISTANCE< NEEDED TO THROW THE PIECE
         //frc2::WaitCommand(.25_s), //Added for arm to settle 3-15 @1:29
         //CmdArmExtensionSetPosition(arm, true),
         
