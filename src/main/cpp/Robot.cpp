@@ -169,6 +169,7 @@ void Robot::WriteToSmartDashboard(void)
   frc::SmartDashboard::PutNumber("Wrist Temp"   , m_container.m_claw.WristGetTemp());
 
   frc::SmartDashboard::PutNumber("Claw Temp"   , m_container.m_claw.ClawGetTemp());
+    frc::SmartDashboard::PutNumber("Claw Current", m_container.m_claw.ClawGetCurrent());
 
     #ifdef TURRET
 

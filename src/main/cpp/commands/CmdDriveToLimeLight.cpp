@@ -62,6 +62,7 @@ bool CmdDriveToLimeLight::IsFinished()
   {
     std::cout<<"Finished Line UP"<<std::endl;
     m_driverFeedback->DriverFeedbackLED(COLOR_RED);
+    m_driverFeedback->RumbleBot(1.0);
     return true;    
   }    
   else if(m_count > 250)

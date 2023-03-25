@@ -39,14 +39,15 @@ void CmdClawDefault::Execute()
   }
   else if(!m_claw->ClawIntakeGetEnable() && m_isIntaking)
   {
-    m_claw->ClawSetPower(0.0);
+    m_claw->ClawSetPower(0.04);
     m_isIntaking = false;
     //std::cout<<"Claw A"<<std::endl;
   }
   // else if(m_claw->ClawGetCurrent() > CLAW_STALL_CURRENT)
   // {
   //   m_claw->ClawIntakeEnable(false);
-  //   //std::cout<<"Claw B"<<std::endl;
+  //   m_claw->ClawSetPower(0.04);
+  //   std::cout<<"Claw killed by current"<<std::endl;
   // }
   else if(ManualOverride && !m_isOverride)
   {
