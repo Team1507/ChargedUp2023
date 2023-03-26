@@ -17,6 +17,8 @@
 #include "commands/CmdClawSetOuttakePower.h"
 #include "commands/CmdPouchIntakeRetract.h"
 #include "commands/CmdDriveStop.h"
+#include "commands/CmdPouchIntakeDeployHalf.h"
+#include "commands/CmdPouchIntakeRetractHalf.h"
 
 
 AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *camera, Claw *claw, Pouch *pouch ) 
@@ -40,8 +42,8 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
     //   CmdAutoBalance(drivetrain),
 
       //Score Cube High
-      CmdPouchIntakeDeploy(pouch),
-      frc2::WaitCommand(1.0_s),
+      CmdPouchIntakeDeployHalf(pouch),
+      frc2::WaitCommand(0.75_s),
       CmdArmLevelSetPosition(arm, ArmLevel::High, pouch, claw),
       frc2::WaitCommand(0.5_s),
       CmdWristSetPosition(claw, 8),
@@ -52,7 +54,7 @@ AutoChargeStation::AutoChargeStation( Drivetrain *drivetrain, Arm *arm, Camera *
       //Return To Pouch
       CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch, claw),
       frc2::WaitCommand(1.0_s),
-      CmdPouchIntakeRetract(pouch),
+      CmdPouchIntakeRetractHalf(pouch),
 
 
       
