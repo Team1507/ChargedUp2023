@@ -48,7 +48,7 @@ AddCommands
         CmdPouchIntakeRetractHalf(pouch),
 
         // Drive and Spin to Cube
-        CmdDriveStraightVelocity(drivetrain, 6400, -12, 0, 24, false, false, 0.0), // was -10
+        CmdDriveStraightVelocity(drivetrain, 6400, -12, 0, 24, false, false, 0.0), // was -12
         CmdDriveStraightVelocity(drivetrain, 8600, 4, -180, 128, false, false, 0.0), // was 6
 
         //Deploy & Run Intakes
