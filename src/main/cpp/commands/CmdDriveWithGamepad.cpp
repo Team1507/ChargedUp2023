@@ -21,7 +21,7 @@ CmdDriveWithGamepad::CmdDriveWithGamepad(Drivetrain *drivetrain, frc::XboxContro
   frc::SmartDashboard::PutNumber("Normal Translation Speed Max",0.5);
   frc::SmartDashboard::PutNumber("Normal Rotational Speed Max",0.5);
 
-  frc::SmartDashboard::PutNumber("Ludicrous Translation Speed Max",0.8);
+  frc::SmartDashboard::PutNumber("Ludicrous Translation Speed Max",0.9);
   frc::SmartDashboard::PutNumber("Ludicrous Rotational Speed Max",0.7);
 
   AddRequirements({ drivetrain });

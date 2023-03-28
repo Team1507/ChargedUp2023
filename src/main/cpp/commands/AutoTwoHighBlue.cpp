@@ -73,12 +73,12 @@ AddCommands
 
         //Get Ready to Score
         CmdPouchIntakeDeployHalf(pouch),
-        CmdDriveStraightVelocity(drivetrain, 4200, 176, 0, 21, false, true, 0.0),
+        CmdDriveStraightVelocity(drivetrain, 4200, 172, 0, 21, false, true, 0.0),
         CmdWristSetPosition(claw, 2),
         frc2::WaitCommand(0.1_s), 
         //Score that Cube
         CmdArmLevelSetPosition(arm, ArmLevel::Mid, pouch, claw),
-        CmdDriveStraightVelocity(drivetrain, 4200, 176, 0, 18, false, true, 0.0), // distance was 21
+        CmdDriveStraightVelocity(drivetrain, 4200, 172, 0, 18, false, true, 0.0), // distance was 21
         //frc2::WaitCommand(.25_s), //Added for arm to settle 3-15 @1:29
         //CmdArmExtensionSetPosition(arm, true),
         
@@ -88,8 +88,8 @@ AddCommands
         CmdArmExtensionSetPosition(arm, false),
         //frc2::WaitCommand(0.3_s),
         CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch, claw),
-        CmdDriveStraightVelocity(drivetrain, 6400, -2, 0, 25, false, false, 0.0),
-        CmdDriveStraightVelocity(drivetrain, 13000, -2, 0, 75, false, true, 0.0),
+        CmdDriveStraightVelocity(drivetrain, 6400, -4, 0, 25, false, false, 0.0),
+        CmdDriveStraightVelocity(drivetrain, 13000, -4, 0, 75, false, true, 0.0),
         // frc2::WaitCommand(0.5_s),//was 1.0_s
         // CmdArmExtensionSetPosition(arm, true),
         // CmdWristSetPosition(claw, 8),

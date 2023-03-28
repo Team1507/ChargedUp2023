@@ -20,7 +20,7 @@ GrpReturnToPouch::GrpReturnToPouch(Arm *arm, Pouch *pouch, Claw *claw)
     // CmdTurretFindHome(arm),
     frc2::WaitCommand(0.5_s),
     CmdArmLevelSetPosition(arm, ArmLevel::Level_Pouch, pouch, claw),
-    CmdWristSetPosition(claw, 2),
+    CmdWristSetPosition(claw, -1),
     CmdPrintText("ReturnToPouch Done")
   );
 }
