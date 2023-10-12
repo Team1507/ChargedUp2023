@@ -14,7 +14,8 @@ Camera::Camera(DriverFeedback *driverfeedback)
     m_cameradetect = false;
 
     frc::SmartDashboard::PutNumber("limelight ERROR_TOLORANCE",0.1);
-    frc::SmartDashboard::PutNumber("limelight ANGLE_OFFSET",   6.0);
+    //Changed Angle Offset from 6.0 to 0.0 for Ruckus
+    frc::SmartDashboard::PutNumber("limelight ANGLE_OFFSET",   0.0);
 }
 void Camera::Periodic() 
 {

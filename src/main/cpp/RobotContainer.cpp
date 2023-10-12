@@ -46,17 +46,14 @@ RobotContainer::RobotContainer()
 //&m_camera,
   //*************************************Auto**********************************************
 
-  m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing     );
+  m_chooser.SetDefaultOption("Auto Do Nothing", &m_autoDoNothing             );
   #ifndef DRIVETRAIN_ONLY
-  m_chooser.AddOption("AutoChargeStation"         , &m_autoChargeStation );
-  m_chooser.AddOption("OLD AutoTwoPieceBlue"      , &m_autoTwoPieceBlue  );
-  m_chooser.AddOption("OLD AutoPowerStripBlue"    , &m_autoPowerStripBlue);
-  m_chooser.AddOption("OLD AutoTwoPieceRed"       , &m_autoTwoPieceRed   );
-  m_chooser.AddOption("OLD AutoPowerStripRed"     , &m_autoPowerStripRed );
-  m_chooser.AddOption("AutoPSTwoHighRed"          , &m_autoPSTwoHighRed  );
-  m_chooser.AddOption("AutoTwoHighBlue"           , &m_autoTwoHighBlue   );
-  m_chooser.AddOption("AutoTwoHighRed"            , &m_autoTwoHighRed    );
-  m_chooser.AddOption("AutoPSTwoHighBlue"         , &m_autoPSTwoHighBlue );
+  m_chooser.AddOption("AutoChargeStation"         , &m_autoChargeStation     );
+  m_chooser.AddOption("AutoChargeStationNoMob"    , &m_autoChargeStationNoMob);
+  m_chooser.AddOption("AutoPSTwoHighRed"          , &m_autoPSTwoHighRed      );
+  m_chooser.AddOption("AutoTwoHighBlue"           , &m_autoTwoHighBlue       );
+  m_chooser.AddOption("AutoTwoHighRed"            , &m_autoTwoHighRed        );
+  m_chooser.AddOption("AutoPSTwoHighBlue"         , &m_autoPSTwoHighBlue     );
 #endif
 
   //m_chooser.AddOption("Auto Shoot Two Ball", &m_autoTwoBall);

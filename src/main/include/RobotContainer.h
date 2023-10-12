@@ -34,6 +34,7 @@
 //Autos
 #include "commands/AutoDoNothing.h"
 #include "commands/AutoChargeStation.h"
+#include "commands/AutoChargeStationNoMob.h"
 #include "commands/AutoTwoPieceBlue.h"
 #include "commands/AutoPowerStripBlue.h"
 #include "commands/AutoTwoPieceRed.h"
@@ -82,15 +83,16 @@ class RobotContainer
 
  AutoDoNothing       m_autoDoNothing     {&m_drivetrain};
  #ifndef DRIVETRAIN_ONLY
- AutoChargeStation   m_autoChargeStation {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
- AutoTwoPieceBlue    m_autoTwoPieceBlue  {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
- AutoPowerStripBlue  m_autoPowerStripBlue{&m_drivetrain, &m_arm, &m_camera, &m_claw ,&m_pouch};
- AutoTwoPieceRed     m_autoTwoPieceRed   {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
- AutoPowerStripRed   m_autoPowerStripRed {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
- AutoTwoHighBlue     m_autoTwoHighBlue   {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
- AutoPSTwoHighRed    m_autoPSTwoHighRed  {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
- AutoTwoHighRed      m_autoTwoHighRed    {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
- AutoPSTwoHighBlue   m_autoPSTwoHighBlue {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
+ AutoChargeStation        m_autoChargeStation      {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
+ AutoChargeStationNoMob   m_autoChargeStationNoMob {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
+ AutoTwoPieceBlue         m_autoTwoPieceBlue       {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
+ AutoPowerStripBlue       m_autoPowerStripBlue     {&m_drivetrain, &m_arm, &m_camera, &m_claw ,&m_pouch};
+ AutoTwoPieceRed          m_autoTwoPieceRed        {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
+ AutoPowerStripRed        m_autoPowerStripRed      {&m_drivetrain, &m_arm, &m_camera, &m_claw, &m_pouch};
+ AutoTwoHighBlue          m_autoTwoHighBlue        {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
+ AutoPSTwoHighRed         m_autoPSTwoHighRed       {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
+ AutoTwoHighRed           m_autoTwoHighRed         {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
+ AutoPSTwoHighBlue        m_autoPSTwoHighBlue      {&m_drivetrain, &m_pouch, &m_arm, &m_claw};
 #endif
 
 
