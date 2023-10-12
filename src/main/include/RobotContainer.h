@@ -7,6 +7,7 @@
 #define GAMEPADMAP_BUTTON_START 8
 #define GAMEPADMAP_BUTTON_A     1
 #define GAMEPADMAP_BUTTON_Y     4
+#define GAMEPADMAP_BUTTON_RBUMP 6
 
 // #define DRIVETRAIN_ONLY
 // #define TURRET
@@ -105,7 +106,7 @@ class RobotContainer
   frc2::JoystickButton m_botDriver_START {&m_botDriver, GAMEPADMAP_BUTTON_START};
   frc2::JoystickButton m_botDriver_Y     {&m_botDriver, GAMEPADMAP_BUTTON_Y};
   frc2::JoystickButton m_botDriver_A     {&m_botDriver, GAMEPADMAP_BUTTON_A};
-
+  frc2::JoystickButton m_botDriver_RightBumper{&m_botDriver,GAMEPADMAP_BUTTON_RBUMP};
 
 
 

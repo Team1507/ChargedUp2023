@@ -21,7 +21,7 @@ class Pouch : public frc2::SubsystemBase {
  public:
   Pouch(frc::PowerDistribution *pdh);
   
-  enum WhatIntake {Inner,Outer};
+  enum WhatIntake {Inner,Outer,Inverse};
 
   #ifdef INNER_INTAKE
   void InnerIntakeSetPosition(float position);
@@ -31,9 +31,12 @@ class Pouch : public frc2::SubsystemBase {
   #endif
 
   void IntakeSetPower(float power,WhatIntake type);
+  double IntakeGetPower(WhatIntake type);
   void IntakeEnable(bool enable);
   bool IntakeIsEnable(void);
 
+  void IntakeEnable2(bool enable);
+  bool IntakeIsEnable2(void);
 
   void IntakeDeploy(void);
   void IntakeRetract(void);
@@ -71,4 +74,5 @@ class Pouch : public frc2::SubsystemBase {
   frc::DigitalInput m_gamePieceDetect{DIO_POUCH_DETECT_ID};
   frc::PowerDistribution *m_pdh;
   bool m_isIntaking;
+  bool m_isIntaking2;
 };

@@ -17,6 +17,7 @@ Pouch::Pouch(frc::PowerDistribution *pdh)
   m_inner.SetOpenLoopRampRate(0.5); // change later
   #endif
 
+  frc::SmartDashboard::PutNumber("Inverse Intake Power",0.1);
   m_isIntaking = false;  
   m_pdh = pdh;
   // m_outerLeft.RestoreFactoryDefaults();
@@ -31,7 +32,7 @@ void Pouch::InnerIntakeSetPosition(float position)
   m_innerEncoder.SetPosition(position);  
 }
 void Pouch::InnerIntakeTurnToPosition(float position)
-{
+{```1
   // int wantedPosition = InnerIntakeGetEncoder() - (((int)InnerIntakeGetEncoder())%INNER_INTAKE_TICKS_TO_REV);
   // frc::SmartDashboard::PutNumber("Wanted Position",wantedPosition);
   // m_innerPIDController.SetReference(wantedPosition,rev::CANSparkMax::ControlType::kPosition);
@@ -65,6 +66,26 @@ void Pouch::IntakeSetPower(float power,WhatIntake type)
     m_outerLeft.Set(power);
     m_outerRight.Set(-power);
   }
+  else if(WhatIntake::Inverse == type)
+  {
+    m_outerLeft.Set(power);
+    m_outerRight.Set(power);  
+  }
+}
+double Pouch::IntakeGetPower(WhatIntake type)
+{
+  if(WhatIntake::Inner == type)
+  {
+    #ifdef INNER_INTAKE
+    m_inner.Get(power);
+    #endif  
+  } 
+  else if (WhatIntake::Outer == type)
+  {
+    return m_outerLeft.Get();
+    //  m_outerRight.Set(-power);
+  }
+  return 0;
 }
 double Pouch::IntakeGetCurrent(void)
 {
@@ -117,6 +138,18 @@ bool Pouch::IntakeIsEnable(void)
 {
   return m_isIntaking;
 }
+
+/// New
+void Pouch::IntakeEnable2(bool enable)
+{
+  m_isIntaking2=enable;
+}
+
+bool Pouch::IntakeIsEnable2(void)
+{
+  return m_isIntaking2;
+}
+////////
 void Pouch::OuterIntakeClose()
 {
   m_outerIntakeClose.Set(frc::DoubleSolenoid::kForward);
