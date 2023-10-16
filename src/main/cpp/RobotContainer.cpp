@@ -27,6 +27,8 @@
 #include "commands/CmdDriveToLimeLight.h"
 #include "commands/CmdAutoBalance.h"
 
+#include "commands/CmdPouchIntakeInverse.h"
+
 
 RobotContainer::RobotContainer() 
 {
@@ -88,6 +90,7 @@ void RobotContainer::ConfigureBindings()
 {
   m_botDriver_START.OnTrue(new CmdResetGyro(&m_drivetrain));
   m_botDriver_Y.WhileTrue( new CmdDriveTurnTo90(&m_drivetrain, .3));
+  m_botDriver_RightBumper.WhileTrue(new CmdPouchIntakeInverse(&m_pouch,  frc::SmartDashboard::GetNumber("Inverse Intake Power",0.1)));
   #ifndef DRIVETRAIN_ONLY
   m_botDriver_A.WhileTrue( new CmdDriveToLimeLight(&m_drivetrain,&m_driverfeedback, &m_camera,0.04));
   #endif
