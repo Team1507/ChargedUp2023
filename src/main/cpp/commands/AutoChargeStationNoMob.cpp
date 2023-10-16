@@ -6,7 +6,7 @@
 #include "commands/CmdDriveClearAll.h"
 #include "commands/CmdDriveStraightGyro.h"
 #include "commands/CmdDriveTurn2Angle.h"
-#include "commands/CmdAutoBalance.h"
+#include "commands/CmdAutoBalanceAlt.h"
 #include "commands/CmdGyroSetAngleOffset.h"
 
 #include "commands/CmdPouchIntakeDeploy.h"
@@ -61,15 +61,16 @@ AutoChargeStationNoMob::AutoChargeStationNoMob( Drivetrain *drivetrain, Arm *arm
       //Charge Up!
       CmdDriveStraightGyro(drivetrain, .2,  0,     0, 23,  false, false, 0),
       CmdDriveStraightGyro(drivetrain, .2,  0,     0, 19 + 40.5,  false, false, 0),
-
+      CmdDriveStop(drivetrain),
       //CmdDriveStraightGyro(drivetrain, .35, 0,     0, 105, false, false, 0),
       //CmdDriveStraightGyro(drivetrain, .2,  180, -90, 21,  false, false, 0),
       //CmdAutoBalance(drivetrain),
      // frc2::WaitCommand(5.0_s),
+      CmdAutoBalanceAlt(drivetrain),
       
 
       //-------------------------------
-      CmdDriveStop(drivetrain), //SAFETY
+      //CmdDriveStop(drivetrain), //SAFETY
 		  CmdPrintText("Auto AutoChargeStationNoMob Finish")
     );
 }
