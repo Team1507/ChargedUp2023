@@ -27,12 +27,12 @@ typedef struct
                                            //TurretAngle, extension,    wristAngle,        outtakePower,   armLevel
 scoringPosition_t scoringPositionTable[] = {{0,           false,        0,                 0,              ArmLevel::Level_Pouch},//Home
                                             {0,           false,        0,                 0,              ArmLevel::Low        },//Ready
-                                            {71,          true,         24,                -0.4,           ArmLevel::High       },//HighLeft
+                                            {71,          true,         24,                -0.6,           ArmLevel::High       },//HighLeft
                                             {91,          false,         2,                -0.6,           ArmLevel::Mid        },//HighShelf
-                                            {115,         true,         24,                -0.4,           ArmLevel::High       },//HighRight
-                                            {63,          false,        19.3,              -0.4,           ArmLevel::Mid        },//MidLeft
+                                            {115,         true,         24,                -0.6,           ArmLevel::High       },//HighRight
+                                            {63,          false,        19.3,              -0.6,           ArmLevel::Mid        },//MidLeft
                                             {91,          false,        35,                -0.3,           ArmLevel::Mid        },//MidShelf
-                                            {126,         false,        19.3,              -0.4,           ArmLevel::Mid        }};//MidRigft
+                                            {126,         false,        19.3,              -0.6,           ArmLevel::Mid        }};//MidRigft
  
 GrpScoringSetPosition::GrpScoringSetPosition(Arm *arm, Claw *claw, Pouch *pouch ,ScoringPosition scoringPosition) 
 {
